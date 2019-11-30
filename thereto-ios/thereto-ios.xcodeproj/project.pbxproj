@@ -10,14 +10,18 @@
 		6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */; };
 		6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD82392325D00BF2E59 /* Assets.xcassets */; };
 		6EE8DFDC2392325D00BF2E59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */; };
+		D71D31FC5004D9FFA07D8F89 /* Pods_thereto_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_thereto_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.debug.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		6EE8DFCF2392325C00BF2E59 /* thereto-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "thereto-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE8DFD82392325D00BF2E59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6EE8DFE02392325D00BF2E59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.release.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,17 +29,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D71D31FC5004D9FFA07D8F89 /* Pods_thereto_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F263710AAEB407CEFD85169 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6EE8DFC62392325B00BF2E59 = {
 			isa = PBXGroup;
 			children = (
 				6EE8DFD12392325C00BF2E59 /* thereto-ios */,
 				6EE8DFD02392325C00BF2E59 /* Products */,
+				84CA88D1F6DA64F9D9F77448 /* Pods */,
+				4F263710AAEB407CEFD85169 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +81,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		84CA88D1F6DA64F9D9F77448 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */,
+				D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -73,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EE8DFE32392325D00BF2E59 /* Build configuration list for PBXNativeTarget "thereto-ios" */;
 			buildPhases = (
+				1254A5A4006CD43323CAD75D /* [CP] Check Pods Manifest.lock */,
 				6EE8DFCB2392325B00BF2E59 /* Sources */,
 				6EE8DFCC2392325B00BF2E59 /* Frameworks */,
 				6EE8DFCD2392325B00BF2E59 /* Resources */,
+				2FF8D755798B9022D2A140DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1254A5A4006CD43323CAD75D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-thereto-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FF8D755798B9022D2A140DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thereto-ios/Pods-thereto-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-thereto-ios/Pods-thereto-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-thereto-ios/Pods-thereto-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6EE8DFCB2392325B00BF2E59 /* Sources */ = {
@@ -259,6 +328,7 @@
 		};
 		6EE8DFE42392325D00BF2E59 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -279,6 +349,7 @@
 		};
 		6EE8DFE52392325D00BF2E59 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
