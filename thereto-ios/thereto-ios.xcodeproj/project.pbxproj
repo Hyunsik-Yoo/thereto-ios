@@ -10,9 +10,11 @@
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
+		6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6A2392395800C4CFA7 /* SplashView.swift */; };
+		6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */; };
+		6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */; };
 		6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */; };
 		6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD82392325D00BF2E59 /* Assets.xcassets */; };
-		6EE8DFDC2392325D00BF2E59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */; };
 		D71D31FC5004D9FFA07D8F89 /* Pods_thereto_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,10 +24,12 @@
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		6EE72F6A2392395800C4CFA7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		6EE8DFCF2392325C00BF2E59 /* thereto-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "thereto-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE8DFD82392325D00BF2E59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6EE8DFE02392325D00BF2E59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.release.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +57,7 @@
 		6EE72F602392369000C4CFA7 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				6EE72F69239238E500C4CFA7 /* splash */,
 				6EE72F61239236A200C4CFA7 /* base */,
 			);
 			path = features;
@@ -71,8 +76,18 @@
 			isa = PBXGroup;
 			children = (
 				6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */,
+				6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */,
 			);
 			path = extension;
+			sourceTree = "<group>";
+		};
+		6EE72F69239238E500C4CFA7 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				6EE72F6A2392395800C4CFA7 /* SplashView.swift */,
+				6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */,
+			);
+			path = splash;
 			sourceTree = "<group>";
 		};
 		6EE8DFC62392325B00BF2E59 = {
@@ -101,17 +116,8 @@
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
 				6EE8DFD82392325D00BF2E59 /* Assets.xcassets */,
 				6EE8DFE02392325D00BF2E59 /* Info.plist */,
-				6EE8DFDA2392325D00BF2E59 /* Preview Content */,
 			);
 			path = "thereto-ios";
-			sourceTree = "<group>";
-		};
-		6EE8DFDA2392325D00BF2E59 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		84CA88D1F6DA64F9D9F77448 /* Pods */ = {
@@ -183,7 +189,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE8DFDC2392325D00BF2E59 /* Preview Assets.xcassets in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,9 +243,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
+				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
+				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
+				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,10 +375,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"thereto-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +387,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgongmon.thereto-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -388,10 +397,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"thereto-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -399,7 +409,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgongmon.thereto-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
