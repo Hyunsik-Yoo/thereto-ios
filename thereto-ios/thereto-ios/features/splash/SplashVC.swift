@@ -18,16 +18,17 @@ class SplashVC: BaseVC {
     override func viewDidLoad() {
         view = splashView
         
-        let delay = Single<Void>.create { (observable) -> Disposable in
-            observable(.success(()))
+        let disposable = Completable.create { (event) -> Disposable in
+            event(.completed)
             
             return Disposables.create()
         }
         
         
-        delay.delay(.seconds(2), scheduler: MainScheduler.instance)
-            .subscribe { (void) in
-                // TODO: 다음 화면으로 넘어가기
-        }
+        let _ = compositDisposable.insert(
+            disposable.delay(.seconds(2), scheduler: MainScheduler.instance)
+                .subscribe { (void) in
+                    // TODO: 다음 화면으로 넘어가기
+        })
     }
 }
