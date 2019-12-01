@@ -14,5 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         return true
     }
+    
+    func goToSignIn() {
+        window?.rootViewController = SignInVC.instance()
+        window?.makeKeyAndVisible()
+    }
 }
 

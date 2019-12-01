@@ -30,4 +30,8 @@ extension UIColor {
         
         return nil
     }
+    
+    class var themeColor: UIColor? {
+        return UIColor.init(hex: "#fffff8ef")
+    }
 }

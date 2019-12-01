@@ -3,7 +3,7 @@ import RxSwift
 
 class BaseVC: UIViewController {
     
-    let compositDisposable: CompositeDisposable = CompositeDisposable()
+    let disposeBag: DisposeBag = DisposeBag()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -11,11 +11,5 @@ class BaseVC: UIViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        if(!compositDisposable.isDisposed) {
-            compositDisposable.dispose()
-        }
     }
 }

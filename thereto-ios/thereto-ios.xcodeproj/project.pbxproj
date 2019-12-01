@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
+		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
@@ -21,6 +23,9 @@
 /* Begin PBXFileReference section */
 		3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_thereto_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.debug.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -54,9 +59,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6EA738CC23939423002176F6 /* membership */ = {
+			isa = PBXGroup;
+			children = (
+				6EA738CD2393947B002176F6 /* SignInView.swift */,
+				6EA738CF2393982F002176F6 /* SignInVC.swift */,
+			);
+			path = membership;
+			sourceTree = "<group>";
+		};
 		6EE72F602392369000C4CFA7 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				6EA738CC23939423002176F6 /* membership */,
 				6EE72F69239238E500C4CFA7 /* splash */,
 				6EE72F61239236A200C4CFA7 /* base */,
 			);
@@ -118,6 +133,7 @@
 		6EE8DFD12392325C00BF2E59 /* thereto-ios */ = {
 			isa = PBXGroup;
 			children = (
+				6EA738D12393A573002176F6 /* thereto-ios.entitlements */,
 				6EE72F70239258DC00C4CFA7 /* util */,
 				6EE72F66239237B000C4CFA7 /* extension */,
 				6EE72F602392369000C4CFA7 /* features */,
@@ -252,10 +268,12 @@
 			files = (
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
+				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
+				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +400,7 @@
 			baseConfigurationReference = 4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
@@ -404,6 +423,7 @@
 			baseConfigurationReference = D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;

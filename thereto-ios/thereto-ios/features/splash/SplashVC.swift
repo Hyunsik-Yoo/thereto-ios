@@ -18,12 +18,16 @@ class SplashVC: BaseVC {
     override func viewDidLoad() {
         view = splashView
         
-        let _ = compositDisposable.insert(
-            Observable<Void>.empty()
-                .delay(.seconds(2), scheduler: MainScheduler.instance)
-                .subscribe { (event) in
-                    // TODO: 다음 화면으로 넘어가기
-            }
-        )
+        Observable<Void>.empty()
+            .delay(.seconds(2), scheduler: MainScheduler.instance)
+            .subscribe { (event) in
+                self.goToSignIn()
+        }.disposed(by: disposeBag)
+    }
+    
+    private func goToSignIn() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        delegate.goToSignIn()
     }
 }
