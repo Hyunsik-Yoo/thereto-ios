@@ -9,6 +9,13 @@ target 'thereto-ios' do
 
   pod 'RxSwift', '~> 5'
   pod 'RxCocoa', '~> 5'
-  # Pods for thereto-ios
+  
+  # Firebase
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  
+  # Facebook auth
+  pod 'FBSDKLoginKit'
+  
 
 end

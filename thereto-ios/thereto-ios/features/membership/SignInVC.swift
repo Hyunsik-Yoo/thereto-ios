@@ -3,6 +3,9 @@ import RxSwift
 import RxRelay
 import RxCocoa
 import AuthenticationServices
+import FBSDKCoreKit
+import FBSDKLoginKit
+import FirebaseAuth
 
 class SignInVC: BaseVC {
     
@@ -20,6 +23,7 @@ class SignInVC: BaseVC {
     override func viewDidLoad() {
         view = signInView
         
+        signInView.fbBtn.delegate = self
         signInView.appleBtn.rx.controlEvent(.touchUpInside)
             .subscribe { (event) in
                 self.onTapAppleBtn()
@@ -50,4 +54,31 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
             print("full name: \(crenditial.fullName)")
         }
     }
+}
+
+extension SignInVC: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        } else {
+            if let token = AccessToken.current?.tokenString {
+                let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                
+                Auth.auth().signIn(with: credential) { (result, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        // Success
+                        AlertUtil.show(vc: self, message: "인증 성공")
+                    }
+                }
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("logout")
+    }
+    
+    
 }
