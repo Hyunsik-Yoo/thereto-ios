@@ -16,11 +16,14 @@ class SignInVC: BaseVC {
     }()
     
     
-    static func instance() -> SignInVC {
-        return SignInVC(nibName: nil, bundle: nil)
+    static func instance() -> UINavigationController {
+        let controller = SignInVC(nibName: nil, bundle: nil)
+        let navi = UINavigationController(rootViewController: controller)
+        return navi
     }
     
     override func viewDidLoad() {
+        self.navigationController?.isNavigationBarHidden = true
         view = signInView
         
         signInView.fbBtn.delegate = self
@@ -65,7 +68,7 @@ extension SignInVC: LoginButtonDelegate {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 
                 FirebaseUtil.auth(credential: credential) {
-                    // onSuccess auth
+                    self.navigationController?.pushViewController(ProfileVC.instance(), animated: true)
                 }
             }
         }
