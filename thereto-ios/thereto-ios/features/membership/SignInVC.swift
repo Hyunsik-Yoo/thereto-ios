@@ -59,18 +59,13 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
 extension SignInVC: LoginButtonDelegate {
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if let error = error {
-            print(error.localizedDescription)
+            AlertUtil.show(message: error.localizedDescription)
         } else {
             if let token = AccessToken.current?.tokenString {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 
-                Auth.auth().signIn(with: credential) { (result, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        // Success
-                        AlertUtil.show(vc: self, message: "인증 성공")
-                    }
+                FirebaseUtil.auth(credential: credential) {
+                    // onSuccess auth
                 }
             }
         }
@@ -79,6 +74,4 @@ extension SignInVC: LoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("logout")
     }
-    
-    
 }
