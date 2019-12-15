@@ -34,6 +34,13 @@ class ProfileView: BaseView {
         return field
     }()
     
+    private let nicknameUnderLine: UIView = {
+        let view = UIView(frame: .zero)
+        
+        view.backgroundColor = UIColor.init(r: 66, g: 40, b: 15)
+        return view
+    }()
+    
     private let descLabel: UILabel = {
         let label = UILabel()
         
@@ -56,7 +63,7 @@ class ProfileView: BaseView {
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubViews(logoImage, profileImage, nameLabel,
+        addSubViews(logoImage, profileImage, nameLabel, nicknameUnderLine,
                     nicknameField, descLabel, okBtn)
     }
     
@@ -65,7 +72,7 @@ class ProfileView: BaseView {
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(112)
-            make.top.equalToSuperview().offset(87)
+            make.top.equalToSuperview().offset(200)
         }
         
         okBtn.snp.makeConstraints { (make) in
@@ -80,10 +87,17 @@ class ProfileView: BaseView {
             make.bottom.equalTo(okBtn.snp.top).offset(-76)
         }
         
-        nicknameField.snp.makeConstraints { (make) in
+        nicknameUnderLine.snp.makeConstraints { (make) in
             make.left.equalTo(descLabel.snp.left)
             make.right.equalToSuperview().offset(-32)
             make.bottom.equalTo(descLabel.snp.top).offset(-13.5)
+            make.height.equalTo(1)
+        }
+        
+        nicknameField.snp.makeConstraints { (make) in
+            make.left.equalTo(descLabel.snp.left)
+            make.right.equalTo(nicknameUnderLine.snp.right)
+            make.bottom.equalTo(nicknameUnderLine.snp.top)
         }
         
         profileImage.snp.makeConstraints { (make) in
