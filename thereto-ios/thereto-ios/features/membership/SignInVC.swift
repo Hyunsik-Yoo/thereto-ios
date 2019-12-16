@@ -34,7 +34,6 @@ class SignInVC: BaseVC {
     }
     
     func onTapAppleBtn() {
-        self.navigationController?.pushViewController(ProfileVC.instance(), animated: true)
 //        let request = ASAuthorizationAppleIDProvider().createRequest()
 //
 //        request.requestedScopes = [.email, .fullName]
@@ -65,11 +64,12 @@ extension SignInVC: LoginButtonDelegate {
         if let error = error {
             AlertUtil.show(message: error.localizedDescription)
         } else {
-            if let token = AccessToken.current?.tokenString {
+            if let token = AccessToken.current?.tokenString,
+                let id = result?.token?.userID {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 
                 FirebaseUtil.auth(credential: credential) {
-                    self.navigationController?.pushViewController(ProfileVC.instance(), animated: true)
+                    self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
                 }
             }
         }

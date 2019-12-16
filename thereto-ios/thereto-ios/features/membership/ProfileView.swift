@@ -14,7 +14,7 @@ class ProfileView: BaseView {
         return image
     }()
     
-    private let profileImage: UIImageView = {
+    let profileImage: UIImageView = {
         let image = UIImageView()
         
         image.backgroundColor = .red
@@ -23,7 +23,7 @@ class ProfileView: BaseView {
         return image
     }()
     
-    private let nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         
         label.text = "박은지"

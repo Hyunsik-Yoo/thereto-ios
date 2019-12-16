@@ -17,5 +17,6 @@ target 'thereto-ios' do
   # Facebook auth
   pod 'FBSDKLoginKit'
   
-
+  # Kingfisher
+  pod 'Kingfisher', '~> 5.0'
 end
