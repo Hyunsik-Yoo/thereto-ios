@@ -34,14 +34,14 @@ class SignInVC: BaseVC {
     }
     
     func onTapAppleBtn() {
-//        let request = ASAuthorizationAppleIDProvider().createRequest()
-//
-//        request.requestedScopes = [.email, .fullName]
-//
-//        let controller = ASAuthorizationController(authorizationRequests: [request])
-//        controller.delegate = self
-//        controller.presentationContextProvider = self
-//        controller.performRequests()
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+
+        request.requestedScopes = [.email, .fullName]
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
     }
 }
 
@@ -53,8 +53,7 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
         if let crenditial = authorization.credential as? ASAuthorizationAppleIDCredential {
-            print("email: \(crenditial.email)")
-            print("full name: \(crenditial.fullName)")
+            AlertUtil.show(message: "email: \(String(describing: crenditial.email))\nfull name: \(String(describing: crenditial.fullName))")
         }
     }
 }
