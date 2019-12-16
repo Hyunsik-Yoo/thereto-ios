@@ -33,5 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = SignInVC.instance()
         window?.makeKeyAndVisible()
     }
+    
+    func goToMain() {
+        window?.rootViewController = LetterBoxVC.instance()
+        window?.makeKeyAndVisible()
+    }
 }
 

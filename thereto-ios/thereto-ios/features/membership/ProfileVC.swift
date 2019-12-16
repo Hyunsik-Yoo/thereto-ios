@@ -61,6 +61,12 @@ class ProfileVC: BaseVC {
         }
         connection.start()
     }
+    
+    private func goToMain() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToMain()
+        }
+    }
 }
 
 extension ProfileVC: ProfileDelegate, UITextFieldDelegate {
@@ -78,7 +84,7 @@ extension ProfileVC: ProfileDelegate, UITextFieldDelegate {
                         AlertUtil.show(message: "중복된 닉네임입니다.\n다른 닉네임을 적어주세요.")
                     } else {
                         UserService.saveUser(user: user) {
-                            AlertUtil.show(message: "입력 성공!")
+                            self.goToMain()
                         }
                     }
                 }

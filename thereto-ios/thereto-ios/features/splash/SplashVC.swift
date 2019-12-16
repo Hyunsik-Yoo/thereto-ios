@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import RxSwift
+import Firebase
 
 class SplashVC: BaseVC {
     
@@ -21,13 +22,31 @@ class SplashVC: BaseVC {
         Observable<Void>.empty()
             .delay(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe { (event) in
-                self.goToSignIn()
+                if (self.isSessionExisted()) {
+                    self.goToMain()
+                } else {
+                    self.goToSignIn()
+                }
         }.disposed(by: disposeBag)
     }
     
+    private func isSessionExisted() -> Bool {
+        if let _ = Auth.auth().currentUser {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     private func goToSignIn() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        
-        delegate.goToSignIn()
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToSignIn()
+        }
+    }
+    
+    private func goToMain() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToMain()
+        }
     }
 }
