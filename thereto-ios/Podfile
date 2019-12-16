@@ -13,6 +13,7 @@ target 'thereto-ios' do
   # Firebase
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   
   # Facebook auth
   pod 'FBSDKLoginKit'

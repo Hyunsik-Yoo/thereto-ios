@@ -65,7 +65,25 @@ class ProfileVC: BaseVC {
 
 extension ProfileVC: ProfileDelegate, UITextFieldDelegate {
     func onTapOk() {
-        AlertUtil.show(message: "\(try? self.viewModel.profileImageUrl.value())")
+        let nickname = self.profileView.nicknameField.text!
+        
+        if !nickname.isEmpty {
+            if let name = try? self.viewModel.name.value(),
+                let profileURL = try? self.viewModel.profileImageUrl.value() {
+                let user = User(nickname: nickname, name: name, social: self.viewModel.social,
+                                id: self.viewModel.userId, profileURL: profileURL)
+                
+                UserService.isExistingUser(nickname: nickname) { (isExisted) in
+                    if (isExisted) {
+                        AlertUtil.show(message: "중복된 닉네임입니다.\n다른 닉네임을 적어주세요.")
+                    } else {
+                        UserService.saveUser(user: user) {
+                            AlertUtil.show(message: "입력 성공!")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

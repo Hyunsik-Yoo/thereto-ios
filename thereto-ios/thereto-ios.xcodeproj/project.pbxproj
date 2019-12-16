@@ -13,6 +13,8 @@
 		6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */; };
 		6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */; };
 		6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */; };
+		6E2A08A423A758B000A13F92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A323A758B000A13F92 /* User.swift */; };
+		6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A623A75BC600A13F92 /* UserService.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
@@ -36,6 +38,8 @@
 		6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
+		6E2A08A323A758B000A13F92 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6E2A08A623A75BC600A13F92 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
@@ -80,6 +84,22 @@
 				6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */,
 			);
 			path = util;
+			sourceTree = "<group>";
+		};
+		6E2A08A223A758A300A13F92 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A08A323A758B000A13F92 /* User.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		6E2A08A523A75BAE00A13F92 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A08A623A75BC600A13F92 /* UserService.swift */,
+			);
+			path = services;
 			sourceTree = "<group>";
 		};
 		6EA738CC23939423002176F6 /* membership */ = {
@@ -133,13 +153,6 @@
 			path = splash;
 			sourceTree = "<group>";
 		};
-		6EE72F70239258DC00C4CFA7 /* util */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = util;
-			sourceTree = "<group>";
-		};
 		6EE8DFC62392325B00BF2E59 = {
 			isa = PBXGroup;
 			children = (
@@ -161,9 +174,10 @@
 		6EE8DFD12392325C00BF2E59 /* thereto-ios */ = {
 			isa = PBXGroup;
 			children = (
+				6E2A08A523A75BAE00A13F92 /* services */,
+				6E2A08A223A758A300A13F92 /* model */,
 				6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */,
 				6EA738D12393A573002176F6 /* thereto-ios.entitlements */,
-				6EE72F70239258DC00C4CFA7 /* util */,
 				6EE72F66239237B000C4CFA7 /* extension */,
 				6EE72F602392369000C4CFA7 /* features */,
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
@@ -300,7 +314,9 @@
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
+				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
 				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
+				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,

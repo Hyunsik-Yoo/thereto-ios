@@ -1,5 +1,6 @@
 import FirebaseAuth
 
+
 struct FirebaseUtil {
     
     static func auth(credential: AuthCredential, onSuccess completion: @escaping () -> Void) {
