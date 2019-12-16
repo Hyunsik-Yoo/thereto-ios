@@ -3,7 +3,7 @@ import UIKit
 class ProfileView: BaseView {
     
     private let logoImage: UIImageView = {
-        let image = UIImageView(image: UIImage.init(named: "LogoImage"))
+        let image = UIImageView(image: UIImage.init(named: "image_logo"))
         
         return image
     }()
@@ -11,7 +11,7 @@ class ProfileView: BaseView {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         
-        image.backgroundColor = .white
+        image.backgroundColor = .red
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
         return image
@@ -97,7 +97,7 @@ class ProfileView: BaseView {
         nicknameField.snp.makeConstraints { (make) in
             make.left.equalTo(descLabel.snp.left)
             make.right.equalTo(nicknameUnderLine.snp.right)
-            make.bottom.equalTo(nicknameUnderLine.snp.top)
+            make.bottom.equalTo(nicknameUnderLine.snp.top).offset(-5)
         }
         
         profileImage.snp.makeConstraints { (make) in

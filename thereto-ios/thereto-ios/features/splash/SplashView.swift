@@ -4,7 +4,7 @@ import SnapKit
 class SplashView: BaseView {
     
     private let splashImage: UIImageView = {
-        let image = UIImageView(image: UIImage.init(named: "SplashImage"))
+        let image = UIImageView(image: UIImage.init(named: "image_splash"))
         
         return image
     }()

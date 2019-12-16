@@ -14,6 +14,6 @@ class ProfileVC: BaseVC {
     }
     
     override func viewDidLoad() {
-       view = profileView
+        view = profileView
     }
 }

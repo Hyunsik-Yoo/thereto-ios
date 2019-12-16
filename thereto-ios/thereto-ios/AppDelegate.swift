@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .clear
+        window?.backgroundColor = UIColor.themeColor
         window?.rootViewController = SplashVC.instance()
         window?.makeKeyAndVisible()
         return true

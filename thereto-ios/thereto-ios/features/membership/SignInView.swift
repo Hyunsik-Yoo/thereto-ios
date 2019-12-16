@@ -6,7 +6,7 @@ import FBSDKLoginKit
 class SignInView: BaseView {
     
     private let splashImage: UIImageView = {
-        let image = UIImageView(image: UIImage.init(named: "SplashImage"))
+        let image = UIImageView(image: UIImage.init(named: "image_logo"))
         
         return image
     }()

@@ -34,14 +34,15 @@ class SignInVC: BaseVC {
     }
     
     func onTapAppleBtn() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        
-        request.requestedScopes = [.email, .fullName]
-        
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
+        self.navigationController?.pushViewController(ProfileVC.instance(), animated: true)
+//        let request = ASAuthorizationAppleIDProvider().createRequest()
+//
+//        request.requestedScopes = [.email, .fullName]
+//
+//        let controller = ASAuthorizationController(authorizationRequests: [request])
+//        controller.delegate = self
+//        controller.presentationContextProvider = self
+//        controller.performRequests()
     }
 }
 
