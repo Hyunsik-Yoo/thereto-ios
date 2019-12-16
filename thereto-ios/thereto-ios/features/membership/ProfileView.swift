@@ -1,6 +1,12 @@
 import UIKit
 
+protocol ProfileDelegate {
+    func onTapOk()
+}
+
 class ProfileView: BaseView {
+    
+    var delegate: ProfileDelegate?
     
     private let logoImage: UIImageView = {
         let image = UIImageView(image: UIImage.init(named: "image_logo"))
@@ -26,7 +32,7 @@ class ProfileView: BaseView {
         return label
     }()
     
-    private let nicknameField: UITextField = {
+    let nicknameField: UITextField = {
         let field = UITextField()
         
         field.placeholder = "닉네임을 설정해주세요. (5자이내)"
@@ -58,10 +64,12 @@ class ProfileView: BaseView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
+        button.addTarget(self, action: #selector(onTapOk), for: .touchUpInside)
         return button
     }()
     
     override func setup() {
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapOutofTextField)))
         backgroundColor = UIColor.themeColor
         addSubViews(logoImage, profileImage, nameLabel, nicknameUnderLine,
                     nicknameField, descLabel, okBtn)
@@ -72,37 +80,12 @@ class ProfileView: BaseView {
             make.centerX.equalToSuperview()
             make.width.equalTo(160)
             make.height.equalTo(112)
-            make.top.equalToSuperview().offset(200)
-        }
-        
-        okBtn.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(32)
-            make.right.equalToSuperview().offset(-32)
-            make.bottom.equalToSuperview().offset(-58)
-            make.height.equalTo(56)
-        }
-        
-        descLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(32)
-            make.bottom.equalTo(okBtn.snp.top).offset(-76)
-        }
-        
-        nicknameUnderLine.snp.makeConstraints { (make) in
-            make.left.equalTo(descLabel.snp.left)
-            make.right.equalToSuperview().offset(-32)
-            make.bottom.equalTo(descLabel.snp.top).offset(-13.5)
-            make.height.equalTo(1)
-        }
-        
-        nicknameField.snp.makeConstraints { (make) in
-            make.left.equalTo(descLabel.snp.left)
-            make.right.equalTo(nicknameUnderLine.snp.right)
-            make.bottom.equalTo(nicknameUnderLine.snp.top).offset(-5)
+            make.top.equalToSuperview().offset(150)
         }
         
         profileImage.snp.makeConstraints { (make) in
-            make.left.equalTo(descLabel.snp.left)
-            make.bottom.equalTo(nicknameField.snp.top).offset(-33)
+            make.left.equalToSuperview().offset(32)
+            make.top.equalTo(logoImage.snp.bottom).offset(30)
             make.width.height.equalTo(40)
         }
         
@@ -110,5 +93,36 @@ class ProfileView: BaseView {
             make.left.equalTo(profileImage.snp.right).offset(10)
             make.centerY.equalTo(profileImage)
         }
+        
+        nicknameField.snp.makeConstraints { (make) in
+            make.left.equalTo(profileImage.snp.left)
+            make.right.equalToSuperview().offset(-32)
+            make.top.equalTo(profileImage.snp.bottom).offset(20)
+        }
+        
+        nicknameUnderLine.snp.makeConstraints { (make) in
+            make.left.right.equalTo(nicknameField)
+            make.top.equalTo(nicknameField.snp.bottom).offset(5)
+            make.height.equalTo(1)
+        }
+        
+        descLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(32)
+            make.top.equalTo(nicknameUnderLine.snp.bottom).offset(13.5)
+        }
+        
+        okBtn.snp.makeConstraints { (make) in
+            make.left.right.equalTo(nicknameField)
+            make.bottom.equalTo(descLabel.snp.bottom).offset(76)
+            make.height.equalTo(56)
+        }
+    }
+    
+    @objc func onTapOk() {
+        delegate?.onTapOk()
+    }
+    
+    @objc func onTapOutofTextField() {
+        endEditing(true)
     }
 }
