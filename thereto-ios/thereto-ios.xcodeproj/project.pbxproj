@@ -7,26 +7,71 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */; };
+		6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4F23A540740026BCD7 /* ProfileVC.swift */; };
+		6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E13207623A8BC1400D868D6 /* DrawerView.swift */; };
+		6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */; };
+		6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */; };
+		6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */; };
+		6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */; };
+		6E2A08A423A758B000A13F92 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A323A758B000A13F92 /* User.swift */; };
+		6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A623A75BC600A13F92 /* UserService.swift */; };
+		6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */; };
+		6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */; };
+		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
+		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
+		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
+		6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */; };
+		6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025023A8E61D00328C08 /* LetterCell.swift */; };
+		6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */; };
+		6EC1025523A8E7D400328C08 /* Spoqa Han Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */; };
+		6EC1025723A8E84900328C08 /* Spoqa Han Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
+		6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6A2392395800C4CFA7 /* SplashView.swift */; };
+		6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */; };
+		6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */; };
 		6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */; };
 		6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD82392325D00BF2E59 /* Assets.xcassets */; };
-		6EE8DFDC2392325D00BF2E59 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */; };
+		6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */; };
 		D71D31FC5004D9FFA07D8F89 /* Pods_thereto_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3DB4F88E444243244E717D69 /* Pods_thereto_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_thereto_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.debug.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		6E10BC4F23A540740026BCD7 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		6E13207623A8BC1400D868D6 /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
+		6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
+		6E2A08A323A758B000A13F92 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6E2A08A623A75BC600A13F92 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxView.swift; sourceTree = "<group>"; };
+		6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxVC.swift; sourceTree = "<group>"; };
+		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
+		6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FrankRuhlLibre-Black.ttf"; sourceTree = "<group>"; };
+		6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationBar.swift; sourceTree = "<group>"; };
+		6EC1025023A8E61D00328C08 /* LetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCell.swift; sourceTree = "<group>"; };
+		6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Bold.ttf"; sourceTree = "<group>"; };
+		6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Regular.ttf"; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		6EE72F6A2392395800C4CFA7 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		6EE8DFCF2392325C00BF2E59 /* thereto-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "thereto-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE8DFD82392325D00BF2E59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6EE8DFE02392325D00BF2E59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.release.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -50,9 +95,88 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6E1EBD9623A4A0600062C2F9 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */,
+				6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		6E2A08A223A758A300A13F92 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A08A323A758B000A13F92 /* User.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		6E2A08A523A75BAE00A13F92 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A08A623A75BC600A13F92 /* UserService.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
+		6E2A08A823A7685300A13F92 /* letterbox */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */,
+				6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */,
+				6EC1025023A8E61D00328C08 /* LetterCell.swift */,
+			);
+			path = letterbox;
+			sourceTree = "<group>";
+		};
+		6EA738CC23939423002176F6 /* membership */ = {
+			isa = PBXGroup;
+			children = (
+				6EA738CD2393947B002176F6 /* SignInView.swift */,
+				6EA738CF2393982F002176F6 /* SignInVC.swift */,
+				6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */,
+				6E10BC4F23A540740026BCD7 /* ProfileVC.swift */,
+				6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */,
+			);
+			path = membership;
+			sourceTree = "<group>";
+		};
+		6EBF6BE023A88CF100182078 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */,
+				6E13207623A8BC1400D868D6 /* DrawerView.swift */,
+			);
+			path = shared;
+			sourceTree = "<group>";
+		};
+		6EBF6BE323A8921B00182078 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				6EBF6BE423A8922300182078 /* font */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		6EBF6BE423A8922300182078 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */,
+				6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */,
+				6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */,
+			);
+			path = font;
+			sourceTree = "<group>";
+		};
 		6EE72F602392369000C4CFA7 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF6BE023A88CF100182078 /* shared */,
+				6E2A08A823A7685300A13F92 /* letterbox */,
+				6E1EBD9623A4A0600062C2F9 /* util */,
+				6EA738CC23939423002176F6 /* membership */,
+				6EE72F69239238E500C4CFA7 /* splash */,
 				6EE72F61239236A200C4CFA7 /* base */,
 			);
 			path = features;
@@ -63,6 +187,7 @@
 			children = (
 				6EE72F62239236AD00C4CFA7 /* BaseView.swift */,
 				6EE72F642392372D00C4CFA7 /* BaseVC.swift */,
+				6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -71,8 +196,19 @@
 			isa = PBXGroup;
 			children = (
 				6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */,
+				6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */,
+				6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */,
 			);
 			path = extension;
+			sourceTree = "<group>";
+		};
+		6EE72F69239238E500C4CFA7 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				6EE72F6A2392395800C4CFA7 /* SplashView.swift */,
+				6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */,
+			);
+			path = splash;
 			sourceTree = "<group>";
 		};
 		6EE8DFC62392325B00BF2E59 = {
@@ -96,22 +232,18 @@
 		6EE8DFD12392325C00BF2E59 /* thereto-ios */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF6BE323A8921B00182078 /* resource */,
+				6E2A08A523A75BAE00A13F92 /* services */,
+				6E2A08A223A758A300A13F92 /* model */,
+				6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */,
+				6EA738D12393A573002176F6 /* thereto-ios.entitlements */,
 				6EE72F66239237B000C4CFA7 /* extension */,
 				6EE72F602392369000C4CFA7 /* features */,
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
 				6EE8DFD82392325D00BF2E59 /* Assets.xcassets */,
 				6EE8DFE02392325D00BF2E59 /* Info.plist */,
-				6EE8DFDA2392325D00BF2E59 /* Preview Content */,
 			);
 			path = "thereto-ios";
-			sourceTree = "<group>";
-		};
-		6EE8DFDA2392325D00BF2E59 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6EE8DFDB2392325D00BF2E59 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		84CA88D1F6DA64F9D9F77448 /* Pods */ = {
@@ -183,8 +315,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE8DFDC2392325D00BF2E59 /* Preview Assets.xcassets in Resources */,
+				6EC1025523A8E7D400328C08 /* Spoqa Han Sans Bold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
+				6EC1025723A8E84900328C08 /* Spoqa Han Sans Regular.ttf in Resources */,
+				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
+				6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,10 +372,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
+				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
+				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
+				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
+				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
+				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
+				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
+				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
+				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
+				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
+				6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */,
+				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
+				6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
+				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
+				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
+				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
+				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
+				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
+				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +455,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -354,6 +509,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -366,11 +522,13 @@
 			baseConfigurationReference = 4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"thereto-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -378,7 +536,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgongmon.thereto-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -387,11 +545,13 @@
 			baseConfigurationReference = D251EA072B84669A29651F4A /* Pods-thereto-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"thereto-ios/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -399,7 +559,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.macgongmon.thereto-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
