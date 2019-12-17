@@ -43,8 +43,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>FrankRuhlLibre-Black.ttf</string>
-		<string>Spoqa Han Sans Bold.ttf</string>
-		<string>Spoqa Han Sans Regular.ttf</string>
+		<string>SpoqaHanSansBold.ttf</string>
+		<string>SpoqaHanSansRegular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
