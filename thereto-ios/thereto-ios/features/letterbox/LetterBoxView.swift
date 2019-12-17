@@ -23,10 +23,19 @@ class LetterBoxView: BaseView {
         return view
     }()
     
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.allowsSelection = false
+        tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
+    
     override func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.themeColor
-        addSubViews(topBar, rightWhiteView, drawer)
+        addSubViews(topBar, rightWhiteView, drawer, tableView)
     }
     
     override func bindConstraints() {
@@ -46,6 +55,11 @@ class LetterBoxView: BaseView {
             make.top.equalTo(safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
             make.width.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(topBar.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
         }
     }
     
