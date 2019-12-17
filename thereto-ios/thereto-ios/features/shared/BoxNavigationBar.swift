@@ -12,14 +12,14 @@ class BoxNavigationBar: BaseView {
         return label
     }()
     
-    private let searchBtn: UIButton = {
+    let searchBtn: UIButton = {
         let button = UIButton()
         
         button.setImage(UIImage.init(named: "ic_search"), for: .normal)
         return button
     }()
     
-    private let hambugerBtn: UIButton = {
+    let hambugerBtn: UIButton = {
         let button = UIButton()
         
         button.setImage(UIImage.init(named: "ic_hamburger"), for: .normal)
