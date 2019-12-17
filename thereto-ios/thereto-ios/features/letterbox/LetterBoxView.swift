@@ -64,6 +64,7 @@ class LetterBoxView: BaseView {
     }
     
     func showMenu() {
+        bringSubviewToFront(drawer)
         drawer.snp.remakeConstraints { (make) in
             make.edges.equalTo(0)
         }

@@ -17,6 +17,11 @@ class LetterBoxVC: BaseVC {
     override func viewDidLoad() {
         view = letterBoxView
         initDrawer()
+        
+        self.letterBoxView.tableView.separatorStyle = .none
+        self.letterBoxView.tableView.delegate = self
+        self.letterBoxView.tableView.dataSource = self
+        self.letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
     }
     
     private func initDrawer() {
@@ -41,4 +46,20 @@ class LetterBoxVC: BaseVC {
     override func bindViewModel() {
         
     }
+}
+
+extension LetterBoxVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = self.letterBoxView.tableView.dequeueReusableCell(withIdentifier: LetterCell.registerId, for: indexPath) as? LetterCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
 }

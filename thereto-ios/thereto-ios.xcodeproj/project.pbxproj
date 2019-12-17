@@ -22,6 +22,10 @@
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
 		6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */; };
+		6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025023A8E61D00328C08 /* LetterCell.swift */; };
+		6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */; };
+		6EC1025523A8E7D400328C08 /* Spoqa Han Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */; };
+		6EC1025723A8E84900328C08 /* Spoqa Han Sans Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
@@ -53,6 +57,10 @@
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
 		6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FrankRuhlLibre-Black.ttf"; sourceTree = "<group>"; };
 		6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationBar.swift; sourceTree = "<group>"; };
+		6EC1025023A8E61D00328C08 /* LetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCell.swift; sourceTree = "<group>"; };
+		6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Bold.ttf"; sourceTree = "<group>"; };
+		6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Spoqa Han Sans Regular.ttf"; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -117,6 +125,7 @@
 			children = (
 				6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */,
 				6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */,
+				6EC1025023A8E61D00328C08 /* LetterCell.swift */,
 			);
 			path = letterbox;
 			sourceTree = "<group>";
@@ -153,6 +162,8 @@
 		6EBF6BE423A8922300182078 /* font */ = {
 			isa = PBXGroup;
 			children = (
+				6EC1025423A8E7D400328C08 /* Spoqa Han Sans Bold.ttf */,
+				6EC1025623A8E84900328C08 /* Spoqa Han Sans Regular.ttf */,
 				6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */,
 			);
 			path = font;
@@ -176,6 +187,7 @@
 			children = (
 				6EE72F62239236AD00C4CFA7 /* BaseView.swift */,
 				6EE72F642392372D00C4CFA7 /* BaseVC.swift */,
+				6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -303,7 +315,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EC1025523A8E7D400328C08 /* Spoqa Han Sans Bold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
+				6EC1025723A8E84900328C08 /* Spoqa Han Sans Regular.ttf in Resources */,
 				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
 				6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */,
 			);
@@ -369,6 +383,7 @@
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
+				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */,
 				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
@@ -377,6 +392,7 @@
 				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
+				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 			);
