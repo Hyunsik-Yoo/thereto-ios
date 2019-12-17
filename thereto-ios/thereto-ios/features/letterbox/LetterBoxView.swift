@@ -2,21 +2,30 @@ import UIKit
 
 class LetterBoxView: BaseView {
     
-    private let label: UILabel = {
-        let label = UILabel()
+    private let topBar = BoxNavigationBar()
+
+    private let rightWhiteView: UIView = {
+        let view = UIView()
         
-        label.text = "Hello"
-        return label
+        view.backgroundColor = .white
+        return view
     }()
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubview(label)
+        addSubViews(topBar, rightWhiteView)
     }
     
     override func bindConstraints() {
-        label.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+        topBar.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide)
+        }
+        
+        rightWhiteView.snp.makeConstraints { (make) in
+            make.top.equalTo(topBar.snp.bottom)
+            make.bottom.right.equalToSuperview()
+            make.width.equalTo(70)
         }
     }
 }

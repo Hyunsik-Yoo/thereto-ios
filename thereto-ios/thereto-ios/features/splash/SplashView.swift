@@ -11,7 +11,7 @@ class SplashView: BaseView {
     
     
     override func setup() {
-        backgroundColor = UIColor.init(hex: "#fffff8ef")
+        backgroundColor = UIColor.themeColor
         addSubViews(splashImage)
     }
     
