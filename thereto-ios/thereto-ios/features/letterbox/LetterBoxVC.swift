@@ -16,8 +16,7 @@ class LetterBoxVC: BaseVC {
     
     override func viewDidLoad() {
         view = letterBoxView
-        
-        
+        initDrawer()
     }
     
     private func initDrawer() {
