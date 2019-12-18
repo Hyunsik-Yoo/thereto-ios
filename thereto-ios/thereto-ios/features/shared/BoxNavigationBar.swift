@@ -15,7 +15,7 @@ class BoxNavigationBar: BaseView {
     let addFriendBtn: UIButton = {
         let button = UIButton()
         
-        button.setImage(UIImage.init(named: "ic_search"), for: .normal)
+        button.setImage(UIImage.init(named: "ic_add_friend"), for: .normal)
         return button
     }()
     
