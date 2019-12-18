@@ -25,6 +25,15 @@ class FriendListVC: BaseVC {
         }
         navigationController?.isNavigationBarHidden = true
         friendListView.topBar.setFriendListMode()
+        
+        // TODO: UserDefaults 만들어서 내 정보 저장해야함
+        UserService.findFriend(id: "facebook2574917595938223") { (friendList) in
+            if friendList.isEmpty {
+                print("friendList is empty")
+            } else {
+                print("friendList is not empty")
+            }
+        }
     }
     
     override func bindViewModel() {
