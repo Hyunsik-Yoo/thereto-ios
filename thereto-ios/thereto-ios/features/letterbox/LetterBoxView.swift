@@ -32,10 +32,20 @@ class LetterBoxView: BaseView {
         return tableView
     }()
     
+    let writeBtn: UIButton = {
+        let button = UIButton()
+        
+        button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        button.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
+        button.setImage(UIImage.init(named: "ic_write"), for: .normal)
+        return button
+    }()
+    
     override func setup() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.themeColor
-        addSubViews(topBar, rightWhiteView, drawer, tableView)
+        addSubViews(topBar, rightWhiteView, drawer, tableView, writeBtn)
     }
     
     override func bindConstraints() {
@@ -60,6 +70,12 @@ class LetterBoxView: BaseView {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(topBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
+        }
+        
+        writeBtn.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-30)
+            make.right.equalToSuperview().offset(-30)
+            make.width.height.equalTo(60)
         }
     }
     
@@ -91,5 +107,23 @@ class LetterBoxView: BaseView {
         }) { (_) in
             completion()
         }
+    }
+    
+    func hideWriteBtn() {
+        let originalTransform = self.writeBtn.transform
+        
+        UIView.animateKeyframes(withDuration: 0.2, delay: 0, animations: {
+            self.writeBtn.transform = originalTransform.translatedBy(x: 0.0, y: 90)
+            self.writeBtn.alpha = 0
+        })
+    }
+    
+    func showWrieBtn() {
+        let originalTransform = self.writeBtn.transform
+        
+        UIView.animateKeyframes(withDuration: 0.2, delay: 0, animations: {
+            self.writeBtn.transform = originalTransform.translatedBy(x: 0.0, y: -90)
+            self.writeBtn.alpha = 1
+        })
     }
 }

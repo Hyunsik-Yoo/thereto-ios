@@ -62,4 +62,22 @@ extension LetterBoxVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.letterBoxView.hideWriteBtn()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            stoppedScrolling()
+        }
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        stoppedScrolling()
+    }
+
+    func stoppedScrolling() {
+        self.letterBoxView.showWrieBtn()
+    }
+    
 }
