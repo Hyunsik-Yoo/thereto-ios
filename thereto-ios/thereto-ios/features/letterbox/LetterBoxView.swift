@@ -110,20 +110,19 @@ class LetterBoxView: BaseView {
     }
     
     func hideWriteBtn() {
-//        writeBtn.alpha = 0
-//        writeBtn.snp.remakeConstraints { (make) in
-//            make.top.equalTo(self.snp.bottom)
-//            make.right.equalToSuperview().offset(-30)
-//            make.width.height.equalTo(60)
-//        }
+        let originalTransform = self.writeBtn.transform
         
         UIView.animateKeyframes(withDuration: 0.2, delay: 0, animations: {
+            self.writeBtn.transform = originalTransform.translatedBy(x: 0.0, y: 90)
             self.writeBtn.alpha = 0
         })
     }
     
     func showWrieBtn() {
+        let originalTransform = self.writeBtn.transform
+        
         UIView.animateKeyframes(withDuration: 0.2, delay: 0, animations: {
+            self.writeBtn.transform = originalTransform.translatedBy(x: 0.0, y: -90)
             self.writeBtn.alpha = 1
         })
     }

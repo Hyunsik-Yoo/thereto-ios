@@ -146,7 +146,7 @@ DEPENDENCIES:
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -206,4 +206,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 7cea5d33b6e40d1584f2b58b224e0261601e3f0f
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.8.4
