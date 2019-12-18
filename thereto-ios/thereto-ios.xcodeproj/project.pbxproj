@@ -18,6 +18,8 @@
 		6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A623A75BC600A13F92 /* UserService.swift */; };
 		6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */; };
 		6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */; };
+		6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271A23A9A74A00AEBD93 /* FriendListView.swift */; };
+		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
@@ -52,6 +54,8 @@
 		6E2A08A623A75BC600A13F92 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxView.swift; sourceTree = "<group>"; };
 		6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxVC.swift; sourceTree = "<group>"; };
+		6E43271A23A9A74A00AEBD93 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
+		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
@@ -130,6 +134,15 @@
 			path = letterbox;
 			sourceTree = "<group>";
 		};
+		6E43271923A9A71800AEBD93 /* friends */ = {
+			isa = PBXGroup;
+			children = (
+				6E43271A23A9A74A00AEBD93 /* FriendListView.swift */,
+				6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */,
+			);
+			path = friends;
+			sourceTree = "<group>";
+		};
 		6EA738CC23939423002176F6 /* membership */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +185,7 @@
 		6EE72F602392369000C4CFA7 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				6E43271923A9A71800AEBD93 /* friends */,
 				6EBF6BE023A88CF100182078 /* shared */,
 				6E2A08A823A7685300A13F92 /* letterbox */,
 				6E1EBD9623A4A0600062C2F9 /* util */,
@@ -386,6 +400,7 @@
 				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */,
+				6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */,
 				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
 				6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
@@ -393,6 +408,7 @@
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
+				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 			);

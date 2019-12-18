@@ -30,44 +30,49 @@ class DrawerView: BaseView {
         return view
     }()
     
-    private let letterboxLabel: UILabel = {
+    let letterboxLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Letterbox."
         label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
         label.textColor = UIColor.init(r: 60, g: 46, b: 42)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
-    private let sentletterLabel: UILabel = {
+    let sentletterLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Sent letter."
         label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
         label.textColor = UIColor.init(r: 60, g: 46, b: 42)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
-    private let friendLabel: UILabel = {
+    let friendLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Friend."
         label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
         label.textColor = UIColor.init(r: 60, g: 46, b: 42)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
-    private let setupLabel: UILabel = {
+    let setupLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Setup."
         label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
         label.textColor = UIColor.init(r: 60, g: 46, b: 42)
+        label.isUserInteractionEnabled = true
         return label
     }()
     
     
     override func setup() {
+        isUserInteractionEnabled = true
         addSubViews(bgView, closeBtn, logoImage, middleLine, letterboxLabel,
                     sentletterLabel, friendLabel, setupLabel)
     }

@@ -12,6 +12,13 @@ class BoxNavigationBar: BaseView {
         return label
     }()
     
+    let addFriendBtn: UIButton = {
+        let button = UIButton()
+        
+        button.setImage(UIImage.init(named: "ic_search"), for: .normal)
+        return button
+    }()
+    
     let searchBtn: UIButton = {
         let button = UIButton()
         
@@ -37,7 +44,7 @@ class BoxNavigationBar: BaseView {
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubViews(titleLabel, searchBtn, hambugerBtn, bottomLine)
+        addSubViews(titleLabel, addFriendBtn, searchBtn, hambugerBtn, bottomLine)
     }
     
     override func bindConstraints() {
@@ -57,11 +64,26 @@ class BoxNavigationBar: BaseView {
             make.right.equalTo(hambugerBtn.snp.left).offset(-10)
         }
         
+        addFriendBtn.snp.makeConstraints { (make) in
+            make.centerY.equalTo(titleLabel)
+            make.right.equalTo(searchBtn.snp.left).offset(-10)
+        }
+        
         bottomLine.snp.makeConstraints { (make) in
             make.right.equalToSuperview()
             make.left.equalToSuperview().offset(20)
             make.height.equalTo(1)
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
         }
+    }
+    
+    func setLetterBoxMode() {
+        titleLabel.text = "Letterbox."
+        addFriendBtn.isHidden = true
+    }
+    
+    func setFriendListMode() {
+        titleLabel.text = "Friend."
+        addFriendBtn.isHidden = false
     }
 }

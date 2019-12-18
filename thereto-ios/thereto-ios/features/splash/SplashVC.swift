@@ -46,7 +46,7 @@ class SplashVC: BaseVC {
     
     private func goToMain() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            delegate.goToMain()
+            delegate.goToLetterbox()
         }
     }
 }

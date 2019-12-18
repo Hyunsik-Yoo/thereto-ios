@@ -18,10 +18,12 @@ class LetterBoxVC: BaseVC {
         view = letterBoxView
         initDrawer()
         
-        self.letterBoxView.tableView.separatorStyle = .none
-        self.letterBoxView.tableView.delegate = self
-        self.letterBoxView.tableView.dataSource = self
-        self.letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
+        letterBoxView.topBar.setLetterBoxMode()
+        
+        letterBoxView.tableView.separatorStyle = .none
+        letterBoxView.tableView.delegate = self
+        letterBoxView.tableView.dataSource = self
+        letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
     }
     
     private func initDrawer() {
@@ -33,11 +35,19 @@ class LetterBoxVC: BaseVC {
             self.letterBoxView.hideMenu { }
         }.disposed(by: disposeBag)
         
+        
+        let friendLabelTap = UITapGestureRecognizer()
+        
+        letterBoxView.drawer.friendLabel.addGestureRecognizer(friendLabelTap)
+        friendLabelTap.rx.event.bind { (_) in
+            self.letterBoxView.hideMenu {
+                self.goToFriend()
+            }
+        }.disposed(by: disposeBag)
+        
         let tapGesture = UITapGestureRecognizer()
         
-        letterBoxView.drawer.isUserInteractionEnabled = true
         letterBoxView.drawer.addGestureRecognizer(tapGesture)
-        
         tapGesture.rx.event.bind { _ in
             self.letterBoxView.hideMenu { }
         }.disposed(by: disposeBag)
@@ -45,6 +55,12 @@ class LetterBoxVC: BaseVC {
     
     override func bindViewModel() {
         
+    }
+    
+    private func goToFriend() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToFriend()
+        }
     }
 }
 
