@@ -15,7 +15,7 @@ class AddFriendView: BaseView {
     
     let nicknameField = UITextField().then {
         $0.placeholder = "닉네임을 입력하세요."
-        $0.font = UIFont.init(name: "SpoqaHanSansRegular", size: 14)
+        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
     }
     
@@ -28,14 +28,24 @@ class AddFriendView: BaseView {
     }
     
     private let descLabel = UILabel().then {
-        $0.text = "아직 가입하지 않은\n친구에게 thereto를 공유해주세요."
+        let attributedString =
+            NSMutableAttributedString(string: "아직 가입하지 않은\n친구에게 ",
+                                      attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!])
+        attributedString
+            .append(NSMutableAttributedString(string: "thereto",
+                                              attributes: [.font: UIFont.init(name: "SpoqaHanSans-Bold", size: 17)!]))
+        attributedString
+            .append(NSMutableAttributedString(string: "를 공유해주세요.",
+                                              attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!]))
+        
+        $0.attributedText = attributedString
         $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
         $0.numberOfLines = 0
-        $0.font = UIFont.init(name: "SpoqaHanSansLight", size: 17)
     }
     
     private let linkBtn = UIButton().then {
         $0.setTitle("친구에게 초대링크 보내기", for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
         $0.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
         $0.setTitleColor(.white, for: .normal)
     }

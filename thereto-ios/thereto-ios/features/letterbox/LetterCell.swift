@@ -16,7 +16,7 @@ class LetterCell: BaseTableViewCell {
         let label = UILabel()
         
         label.text = "from. 김민경"
-        label.font = UIFont.init(name: "SpoqaHanSansBold", size: 18)
+        label.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 18)
         label.textColor = UIColor.init(r: 30, g: 30, b: 30)
         label.textAlignment = .left
         return label
@@ -26,7 +26,7 @@ class LetterCell: BaseTableViewCell {
         let label = UILabel()
         
         label.text = "경기 광주시 오포읍 새말길167번길 68"
-        label.font = UIFont.init(name: "SpoqaHanSansRegular", size: 14)
+        label.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         label.textColor = UIColor.init(r: 114, g: 95, b: 95)
         return label
     }()

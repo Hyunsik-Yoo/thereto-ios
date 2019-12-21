@@ -16,7 +16,7 @@ class FriendCell: BaseTableViewCell {
         let label = UILabel()
         
         label.text = "박은지"
-        label.font = UIFont.init(name: "SpoqaHanSansBold", size: 14)
+        label.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
         label.textColor = UIColor.init(r: 30, g: 30, b: 30)
         return label
     }()

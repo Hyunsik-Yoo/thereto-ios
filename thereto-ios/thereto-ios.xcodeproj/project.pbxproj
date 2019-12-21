@@ -23,7 +23,7 @@
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
-		6E804B3A23ADF179009574CD /* SpoqaHanSansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */; };
+		6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */; };
 		6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
@@ -31,8 +31,8 @@
 		6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */; };
 		6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025023A8E61D00328C08 /* LetterCell.swift */; };
 		6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */; };
-		6EC1025523A8E7D400328C08 /* SpoqaHanSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025423A8E7D400328C08 /* SpoqaHanSansBold.ttf */; };
-		6EC1025723A8E84900328C08 /* SpoqaHanSansRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025623A8E84900328C08 /* SpoqaHanSansRegular.ttf */; };
+		6EC1025523A8E7D400328C08 /* SpoqaHanSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025423A8E7D400328C08 /* SpoqaHanSans-Bold.ttf */; };
+		6EC1025723A8E84900328C08 /* SpoqaHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025623A8E84900328C08 /* SpoqaHanSans-Regular.ttf */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
@@ -64,7 +64,7 @@
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
-		6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansLight.ttf; sourceTree = "<group>"; };
+		6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Light.ttf"; sourceTree = "<group>"; };
 		6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 		6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationBar.swift; sourceTree = "<group>"; };
 		6EC1025023A8E61D00328C08 /* LetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCell.swift; sourceTree = "<group>"; };
 		6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		6EC1025423A8E7D400328C08 /* SpoqaHanSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansBold.ttf; sourceTree = "<group>"; };
-		6EC1025623A8E84900328C08 /* SpoqaHanSansRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansRegular.ttf; sourceTree = "<group>"; };
+		6EC1025423A8E7D400328C08 /* SpoqaHanSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Bold.ttf"; sourceTree = "<group>"; };
+		6EC1025623A8E84900328C08 /* SpoqaHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Regular.ttf"; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -197,9 +197,9 @@
 		6EBF6BE423A8922300182078 /* font */ = {
 			isa = PBXGroup;
 			children = (
-				6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */,
-				6EC1025423A8E7D400328C08 /* SpoqaHanSansBold.ttf */,
-				6EC1025623A8E84900328C08 /* SpoqaHanSansRegular.ttf */,
+				6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */,
+				6EC1025423A8E7D400328C08 /* SpoqaHanSans-Bold.ttf */,
+				6EC1025623A8E84900328C08 /* SpoqaHanSans-Regular.ttf */,
 				6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */,
 			);
 			path = font;
@@ -352,10 +352,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC1025523A8E7D400328C08 /* SpoqaHanSansBold.ttf in Resources */,
+				6EC1025523A8E7D400328C08 /* SpoqaHanSans-Bold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
-				6E804B3A23ADF179009574CD /* SpoqaHanSansLight.ttf in Resources */,
-				6EC1025723A8E84900328C08 /* SpoqaHanSansRegular.ttf in Resources */,
+				6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */,
+				6EC1025723A8E84900328C08 /* SpoqaHanSans-Regular.ttf in Resources */,
 				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
 				6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */,
 			);

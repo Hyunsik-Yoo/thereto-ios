@@ -42,9 +42,10 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SpoqaHanSans-Light.ttf</string>
 		<string>FrankRuhlLibre-Black.ttf</string>
-		<string>SpoqaHanSansBold.ttf</string>
-		<string>SpoqaHanSansRegular.ttf</string>
+		<string>SpoqaHanSans-Bold.ttf</string>
+		<string>SpoqaHanSans-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
