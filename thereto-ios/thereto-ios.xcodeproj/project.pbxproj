@@ -22,6 +22,9 @@
 		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
+		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
+		6E804B3A23ADF179009574CD /* SpoqaHanSansLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */; };
+		6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
@@ -60,6 +63,9 @@
 		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
+		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
+		6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpoqaHanSansLight.ttf; sourceTree = "<group>"; };
+		6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
@@ -141,12 +147,22 @@
 		6E43271923A9A71800AEBD93 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				6E804B3623ADEEA4009574CD /* add-friend */,
 				6E43271A23A9A74A00AEBD93 /* FriendListView.swift */,
 				6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */,
 				6E804B3223ADDFDD009574CD /* FriendCell.swift */,
 				6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */,
 			);
 			path = friends;
+			sourceTree = "<group>";
+		};
+		6E804B3623ADEEA4009574CD /* add-friend */ = {
+			isa = PBXGroup;
+			children = (
+				6E804B3723ADEEB7009574CD /* AddFriendView.swift */,
+				6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */,
+			);
+			path = "add-friend";
 			sourceTree = "<group>";
 		};
 		6EA738CC23939423002176F6 /* membership */ = {
@@ -181,6 +197,7 @@
 		6EBF6BE423A8922300182078 /* font */ = {
 			isa = PBXGroup;
 			children = (
+				6E804B3923ADF179009574CD /* SpoqaHanSansLight.ttf */,
 				6EC1025423A8E7D400328C08 /* SpoqaHanSansBold.ttf */,
 				6EC1025623A8E84900328C08 /* SpoqaHanSansRegular.ttf */,
 				6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */,
@@ -337,6 +354,7 @@
 			files = (
 				6EC1025523A8E7D400328C08 /* SpoqaHanSansBold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
+				6E804B3A23ADF179009574CD /* SpoqaHanSansLight.ttf in Resources */,
 				6EC1025723A8E84900328C08 /* SpoqaHanSansRegular.ttf in Resources */,
 				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
 				6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */,
@@ -397,6 +415,7 @@
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
+				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
 				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
 				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
@@ -410,6 +429,7 @@
 				6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */,
 				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
 				6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */,
+				6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
 				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,

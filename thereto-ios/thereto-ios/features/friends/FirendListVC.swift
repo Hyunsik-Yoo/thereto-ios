@@ -28,6 +28,7 @@ class FriendListVC: BaseVC {
             make.edges.equalTo(0)
         }
         navigationController?.isNavigationBarHidden = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
         friendListView.topBar.setFriendListMode()
         
         // TODO: UserDefaults 만들어서 내 정보 저장해야함
@@ -50,7 +51,7 @@ class FriendListVC: BaseVC {
     }
     
     private func initDrawer() {
-        friendListView.topBar.hambugerBtn.rx.tap.bind { () in
+        friendListView.topBar.hambugerBtn.rx.tap.bind {
             self.friendListView.showMenu()
         }.disposed(by: disposeBag)
         
@@ -58,6 +59,9 @@ class FriendListVC: BaseVC {
             self.friendListView.hideMenu { }
         }.disposed(by: disposeBag)
         
+        friendListView.topBar.addFriendBtn.rx.tap.bind {
+            self.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
         
         let letterboxLabelTap = UITapGestureRecognizer()
         

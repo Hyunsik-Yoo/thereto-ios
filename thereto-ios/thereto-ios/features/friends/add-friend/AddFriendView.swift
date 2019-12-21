@@ -1,0 +1,93 @@
+import UIKit
+import Then
+
+class AddFriendView: BaseView {
+    
+    let backBtn = UIButton().then {
+        $0.setImage(UIImage.init(named: "ic_back"), for: .normal)
+    }
+    
+    private let titleLabel = UILabel().then {
+        $0.text = "Add Friend."
+        $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 51)
+        $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
+    }
+    
+    let nicknameField = UITextField().then {
+        $0.placeholder = "닉네임을 입력하세요."
+        $0.font = UIFont.init(name: "SpoqaHanSansRegular", size: 14)
+        $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
+    }
+    
+    let searchBtn = UIButton().then {
+        $0.setImage(UIImage.init(named: "ic_search"), for: .normal)
+    }
+    
+    let underLine = UIView().then {
+        $0.backgroundColor = UIColor.init(r: 66, g: 40, b: 15)
+    }
+    
+    private let descLabel = UILabel().then {
+        $0.text = "아직 가입하지 않은\n친구에게 thereto를 공유해주세요."
+        $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
+        $0.numberOfLines = 0
+        $0.font = UIFont.init(name: "SpoqaHanSansLight", size: 17)
+    }
+    
+    private let linkBtn = UIButton().then {
+        $0.setTitle("친구에게 초대링크 보내기", for: .normal)
+        $0.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
+        $0.setTitleColor(.white, for: .normal)
+    }
+    
+    
+    override func setup() {
+        backgroundColor = UIColor.themeColor
+        addSubViews(backBtn, titleLabel, nicknameField, searchBtn,
+                    underLine, descLabel, linkBtn)
+    }
+    
+    override func bindConstraints() {
+        backBtn.snp.makeConstraints { (make) in
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+            make.left.equalToSuperview().offset(24)
+            make.width.height.equalTo(24)
+        }
+        
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(backBtn.snp.left)
+            make.top.equalTo(backBtn.snp.bottom).offset(16)
+        }
+        
+        searchBtn.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-24)
+            make.top.equalTo(titleLabel.snp.bottom).offset(27)
+            make.width.height.equalTo(24)
+        }
+        
+        nicknameField.snp.makeConstraints { (make) in
+            make.left.equalTo(backBtn.snp.left)
+            make.centerY.equalTo(searchBtn.snp.centerY)
+            make.right.equalTo(searchBtn.snp.left).offset(-10)
+        }
+        
+        underLine.snp.makeConstraints { (make) in
+            make.left.equalTo(nicknameField.snp.left)
+            make.right.equalTo(searchBtn.snp.right)
+            make.top.equalTo(searchBtn.snp.bottom).offset(7.5)
+            make.height.equalTo(1)
+        }
+        
+        descLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(backBtn.snp.left)
+            make.top.equalTo(underLine.snp.bottom).offset(68)
+        }
+        
+        linkBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(backBtn.snp.left)
+            make.right.equalTo(underLine.snp.right)
+            make.top.equalTo(descLabel.snp.bottom).offset(21)
+            make.height.equalTo(56)
+        }
+    }
+}
