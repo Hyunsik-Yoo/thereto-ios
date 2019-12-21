@@ -1,6 +1,10 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class FriendListVC: BaseVC {
+    
+    private let viewModel = FriendListViewModel()
     
     private let friendListView: FriendListView = {
         let view = FriendListView()
@@ -34,6 +38,11 @@ class FriendListVC: BaseVC {
                 print("friendList is not empty")
             }
         }
+        friendListView.tableView.delegate = self
+        friendListView.tableView.dataSource = self
+        friendListView.tableView.register(FriendCell.self, forCellReuseIdentifier: FriendCell.registerId)
+        friendListView.tableView.rowHeight = UITableView.automaticDimension
+        friendListView.tableView.separatorStyle = .none
     }
     
     override func bindViewModel() {
@@ -71,5 +80,19 @@ class FriendListVC: BaseVC {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.goToLetterbox()
         }
+    }
+}
+
+extension FriendListVC: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.registerId, for: indexPath) as? FriendCell else {
+            return BaseTableViewCell()
+        }
+        
+        return cell
     }
 }
