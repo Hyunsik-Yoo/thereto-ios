@@ -27,6 +27,13 @@ class AddFriendView: BaseView {
         $0.backgroundColor = UIColor.init(r: 66, g: 40, b: 15)
     }
     
+    let tableView = UITableView().then {
+        $0.tableFooterView = UIView()
+        $0.backgroundColor = UIColor.themeColor
+        $0.separatorStyle = .none
+        $0.isHidden = true
+    }
+    
     private let descLabel = UILabel().then {
         let attributedString =
             NSMutableAttributedString(string: "아직 가입하지 않은\n친구에게 ",
@@ -43,7 +50,7 @@ class AddFriendView: BaseView {
         $0.numberOfLines = 0
     }
     
-    private let linkBtn = UIButton().then {
+    let linkBtn = UIButton().then {
         $0.setTitle("친구에게 초대링크 보내기", for: .normal)
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
         $0.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
@@ -54,7 +61,7 @@ class AddFriendView: BaseView {
     override func setup() {
         backgroundColor = UIColor.themeColor
         addSubViews(backBtn, titleLabel, nicknameField, searchBtn,
-                    underLine, descLabel, linkBtn)
+                    underLine, descLabel, linkBtn, tableView)
     }
     
     override func bindConstraints() {
@@ -99,5 +106,16 @@ class AddFriendView: BaseView {
             make.top.equalTo(descLabel.snp.bottom).offset(21)
             make.height.equalTo(56)
         }
+        
+        tableView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(underLine.snp.bottom).offset(23)
+        }
+    }
+    
+    func setDataMode(isDataMode: Bool) {
+        tableView.isHidden = !isDataMode
+        descLabel.isHidden = isDataMode
+        linkBtn.isHidden = isDataMode
     }
 }
