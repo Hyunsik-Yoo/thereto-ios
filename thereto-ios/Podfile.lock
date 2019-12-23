@@ -148,7 +148,7 @@ DEPENDENCIES:
   - Then
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - BoringSSL-GRPC
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -210,4 +210,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1145538c7adfa84f41fce9366a734ee712324053
 
-COCOAPODS: 1.7.4
+COCOAPODS: 1.8.4

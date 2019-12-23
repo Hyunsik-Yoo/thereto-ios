@@ -2,6 +2,8 @@ import UIKit
 
 class LetterBoxVC: BaseVC {
     
+    private var lastContentOffset: CGFloat = 0
+    
     private lazy var letterBoxView: LetterBoxView = {
         let view = LetterBoxView(frame: self.view.bounds)
         
@@ -87,11 +89,22 @@ extension LetterBoxVC: UITableViewDelegate, UITableViewDataSource {
             stoppedScrolling()
         }
     }
-
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if (self.lastContentOffset > scrollView.contentOffset.y) {
+//            self.letterBoxView.tableView.transform = self.letterBoxView.tableView.transform.translatedBy(x: 0, y: 2)
+//        }
+//        else if (self.lastContentOffset < scrollView.contentOffset.y) {
+//           self.letterBoxView.tableView.transform = self.letterBoxView.tableView.transform.translatedBy(x: 0, y: -2)
+//        }
+//        self.letterBoxView.tableView.layoutIfNeeded()
+        print(scrollView.contentOffset.y)
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         stoppedScrolling()
     }
-
+    
     func stoppedScrolling() {
         self.letterBoxView.showWrieBtn()
     }
