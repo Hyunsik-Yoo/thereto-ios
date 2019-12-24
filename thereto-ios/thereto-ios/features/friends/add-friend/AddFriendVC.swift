@@ -49,6 +49,7 @@ class AddFriendVC: BaseVC {
     }
     
     private func findUser(inputNickname: String) {
+        self.addFriendView.startLoading()
         if inputNickname.isEmpty {
             AlertUtil.show(message: "닉네임을 제대로 입력해주세요.")
         } else {
@@ -58,6 +59,7 @@ class AddFriendVC: BaseVC {
                 } else {
                     self.viewModel.people.accept(userList)
                 }
+                self.addFriendView.stopLoading()
             }
         }
     }
