@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class AddFriendCell: BaseTableViewCell {
     
@@ -6,6 +7,7 @@ class AddFriendCell: BaseTableViewCell {
     
     let profileImage = UIImageView().then {
         $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
         $0.backgroundColor = .red
     }
     
@@ -46,7 +48,10 @@ class AddFriendCell: BaseTableViewCell {
         }
     }
     
-    func bind(user: User?) {
-        // TODO: bind
+    func bind(user: User) {
+        nameLabel.text = user.nickname
+        if let profileURL = user.profileURL {
+            profileImage.setImage(urlString: profileURL)
+        }
     }
 }

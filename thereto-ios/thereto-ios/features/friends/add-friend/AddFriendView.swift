@@ -16,6 +16,7 @@ class AddFriendView: BaseView {
     let nicknameField = UITextField().then {
         $0.placeholder = "닉네임을 입력하세요."
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
+        $0.returnKeyType = .done
         $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
     }
     

@@ -50,4 +50,26 @@ struct UserService {
             completion(friendList)
         }
     }
+    
+    static func findUser(nickname: String, completion: @escaping ([User]) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").whereField("nickname", isEqualTo: nickname).addSnapshotListener { (snapshot, error) in
+            if let error = error {
+                AlertUtil.show(message: error.localizedDescription)
+            }
+            guard let snapshot = snapshot else {
+                AlertUtil.show(message: "snapshot is nil")
+                return
+            }
+            
+            var userList:[User] = []
+            for document in snapshot.documents {
+                let user = User(map: document.data())
+                
+                userList.append(user)
+            }
+            completion(userList)
+        }
+    }
 }

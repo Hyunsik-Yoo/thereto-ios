@@ -25,9 +25,17 @@ class AddFriendVC: BaseVC {
             self.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
         
+        addFriendView.nicknameField.rx.controlEvent(.editingDidEndOnExit).bind {
+            self.findUser(inputNickname: self.addFriendView.nicknameField.text!)
+        }.disposed(by: disposeBag)
+        
+        addFriendView.searchBtn.rx.tap.bind {
+            self.findUser(inputNickname: self.addFriendView.nicknameField.text!)
+        }.disposed(by: disposeBag)
+        
         
         viewModel.people.asObservable().bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, user, cell in
-            if user != nil {
+            if let user = user {
                 self.addFriendView.setDataMode(isDataMode: true)
                 cell.bind(user: user)
             } else {
@@ -36,8 +44,22 @@ class AddFriendVC: BaseVC {
         }.disposed(by: disposeBag)
         
         addFriendView.linkBtn.rx.tap.bind {
-            self.viewModel.people.accept([User.init(nickname: "", name: "", social: "facebook", id: "", profileURL: "")])
+
         }.disposed(by: disposeBag)
+    }
+    
+    private func findUser(inputNickname: String) {
+        if inputNickname.isEmpty {
+            AlertUtil.show(message: "닉네임을 제대로 입력해주세요.")
+        } else {
+            UserService.findUser(nickname: inputNickname) { (userList) in
+                if userList.isEmpty {
+                    self.viewModel.people.accept([nil])
+                } else {
+                    self.viewModel.people.accept(userList)
+                }
+            }
+        }
     }
 }
 

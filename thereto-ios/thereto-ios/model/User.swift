@@ -5,7 +5,7 @@ struct User {
     var nickname: String
     var social: SocialType
     var socialId: String
-    var profileURL: String
+    var profileURL: String?
     
     init(nickname: String, name: String, social: String, id: String, profileURL: String) {
         self.nickname = nickname
