@@ -7,7 +7,7 @@ class AddFriendView: BaseView {
         $0.setImage(UIImage.init(named: "ic_back"), for: .normal)
     }
     
-    private let titleLabel = UILabel().then {
+    let titleLabel = UILabel().then {
         $0.text = "Add Friend."
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 51)
         $0.textColor = UIColor.init(r: 60, g: 46, b: 42)
@@ -74,7 +74,7 @@ class AddFriendView: BaseView {
         
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(backBtn.snp.left)
-            make.top.equalTo(backBtn.snp.bottom).offset(16)
+            make.top.equalTo(safeAreaLayoutGuide).offset(56)
         }
         
         searchBtn.snp.makeConstraints { (make) in
