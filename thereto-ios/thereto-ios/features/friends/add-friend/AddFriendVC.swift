@@ -57,22 +57,8 @@ class AddFriendVC: BaseVC {
                 if userList.isEmpty {
                     self.viewModel.people.accept([nil])
                 } else {
-                    var list = userList
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    list.append(userList[0])
-                    self.viewModel.people.accept(list)
+                    self.viewModel.people.accept(userList)
+
                 }
                 self.addFriendView.stopLoading()
             }
@@ -83,22 +69,20 @@ class AddFriendVC: BaseVC {
 extension AddFriendVC: UITableViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset.y
         
-        if 130 - scrollView.contentOffset.y > 0 && scrollView.contentOffset.y > 0 {
+        if 130 - contentOffset > 0 && contentOffset > 0 && scrollView.contentSize.height > scrollView.frame.height {
             self.addFriendView.titleLabel.snp.remakeConstraints { (make) in
-//                make.right.equalToSuperview().offset(-24)
-//                make.centerY.equalTo(self.addFriendView.backBtn.snp.centerY).offset(112 - scrollView.contentOffset.y)
-                
                 make.left.equalTo(self.addFriendView.backBtn.snp.left)
-                make.top.equalTo(self.view.safeAreaLayoutGuide).offset(56 - scrollView.contentOffset.y)
+                make.top.equalTo(self.view.safeAreaLayoutGuide).offset(40 - contentOffset)
             }
+            self.addFriendView.titleLabel.alpha = CGFloat((130 - contentOffset)/130)
             
             self.addFriendView.nicknameField.snp.remakeConstraints { (make) in
-                make.left.equalTo(self.addFriendView.backBtn.snp.left).offset(scrollView.contentOffset.y * 34 / 130)
+                make.left.equalTo(self.addFriendView.backBtn.snp.left).offset(contentOffset * 34 / 130)
                 make.centerY.equalTo(self.addFriendView.searchBtn.snp.centerY)
                 make.right.equalTo(self.addFriendView.searchBtn.snp.left).offset(-10)
             }
         }
-        print(scrollView.contentOffset.y)
     }
 }
