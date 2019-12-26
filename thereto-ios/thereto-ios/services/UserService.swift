@@ -54,7 +54,7 @@ struct UserService {
     static func findUser(nickname: String, completion: @escaping ([User]) -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("user").whereField("nickname", isEqualTo: nickname).addSnapshotListener { (snapshot, error) in
+        db.collection("user").whereField("nickname", isGreaterThan: nickname).addSnapshotListener { (snapshot, error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             }
