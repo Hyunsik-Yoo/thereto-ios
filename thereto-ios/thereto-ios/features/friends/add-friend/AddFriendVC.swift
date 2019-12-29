@@ -16,6 +16,8 @@ class AddFriendVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = addFriendView
+        getFriendList()
+        
         addFriendView.tableView.delegate = self
         addFriendView.tableView.register(AddFriendCell.self, forCellReuseIdentifier: AddFriendCell.registerId)
     }
@@ -38,6 +40,9 @@ class AddFriendVC: BaseVC {
             if let user = user {
                 self.addFriendView.setDataMode(isDataMode: true)
                 cell.bind(user: user)
+                cell.addBtn.rx.tap.bind {
+                    AlertUtil.show("친구 요청", message: "친구요청을 보내시겠습니까?")
+                }.disposed(by: self.disposeBag)
             } else {
                 self.addFriendView.setDataMode(isDataMode: false)
             }
@@ -57,11 +62,27 @@ class AddFriendVC: BaseVC {
                 if userList.isEmpty {
                     self.viewModel.people.accept([nil])
                 } else {
-                    self.viewModel.people.accept(userList)
-
+                    // 내 친구가 아닌 사람들만 보여줘야하므로 필터링!
+                    let filteredList = userList.filter { (user) -> Bool in
+                        !self.viewModel.friends.contains { (friend) -> Bool in
+                            friend?.nickname != user.nickname
+                        }
+                    }
+                    
+                    self.viewModel.people.accept(filteredList.isEmpty ? [nil] : filteredList)
                 }
                 self.addFriendView.stopLoading()
             }
+        }
+    }
+    
+    private func getFriendList() {
+        if let token = UserDefaultsUtil.getUserToken() {
+            UserService.findFriend(id: token) { (friends) in
+                self.viewModel.friends = friends
+            }
+        } else {
+            AlertUtil.show("error", message: "토큰이 유효하지 않습니다.")
         }
     }
 }

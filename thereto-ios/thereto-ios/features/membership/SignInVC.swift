@@ -67,6 +67,7 @@ extension SignInVC: LoginButtonDelegate {
                 let id = result?.token?.userID {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 
+                UserDefaultsUtil.setUserToken(token: "facebook\(id)")
                 FirebaseUtil.auth(credential: credential) {
                     self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
                 }

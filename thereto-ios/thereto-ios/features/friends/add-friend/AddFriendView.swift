@@ -37,7 +37,7 @@ class AddFriendView: BaseView {
     
     private let descLabel = UILabel().then {
         let attributedString =
-            NSMutableAttributedString(string: "아직 가입하지 않은\n친구에게 ",
+            NSMutableAttributedString(string: "검색 결과가 없습니다.\n친구에게 ",
                                       attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!])
         attributedString
             .append(NSMutableAttributedString(string: "thereto",
