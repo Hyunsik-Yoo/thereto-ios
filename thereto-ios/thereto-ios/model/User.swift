@@ -28,7 +28,7 @@ struct User {
     
     func toDict() -> [String: Any] {
         return ["name": name, "nickname": nickname, "social": social.rawValue,
-                "social_id": socialId, "profile_url": profileURL, "requestState": requestState.rawValue]
+                "social_id": socialId, "profile_url": profileURL, "request_state": requestState.rawValue]
     }
     
     func getSocial() -> String {

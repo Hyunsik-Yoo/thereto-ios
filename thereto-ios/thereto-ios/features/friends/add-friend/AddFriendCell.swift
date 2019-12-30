@@ -21,11 +21,19 @@ class AddFriendCell: BaseTableViewCell {
         $0.setImage(UIImage.init(named: "ic_add"), for: .normal)
     }
     
+    let waitingLabel = UILabel().then {
+        $0.text = "친구요청 수락 기다리는 중"
+        $0.textColor = UIColor.init(r: 165, g: 156, b: 156)
+        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
+        $0.textAlignment = .right
+        $0.isHidden = true
+    }
+    
     
     override func setup() {
         backgroundColor = .clear
         selectionStyle = .none
-        addSubViews(profileImage, nameLabel, addBtn)
+        addSubViews(profileImage, nameLabel, addBtn, waitingLabel)
     }
     
     override func bindConstraints() {
@@ -46,12 +54,22 @@ class AddFriendCell: BaseTableViewCell {
             make.right.equalToSuperview().offset(-24)
             make.width.height.equalTo(24)
         }
+        
+        waitingLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(profileImage.snp.centerY)
+            make.right.equalToSuperview().offset(-24)
+        }
     }
     
     func bind(user: User) {
         nameLabel.text = user.nickname
         if let profileURL = user.profileURL {
             profileImage.setImage(urlString: profileURL)
+        }
+        
+        if user.requestState == .WAIT || user.requestState == .REQUEST_SENT {
+            waitingLabel.isHidden = false
+            addBtn.isHidden = true
         }
     }
 }
