@@ -4,20 +4,21 @@ class PageCell: BaseCollectionViewCell {
     
     static let registerId = "\(PageCell.self)"
     
-    let label = UILabel().then {
-        $0.text = "page"
-        $0.textColor = .black
+    let tableView = UITableView().then {
+        $0.backgroundColor = UIColor.init(r: 255, g: 248, b: 239)
+        $0.tableFooterView = UIView()
+        $0.separatorStyle = .none
     }
     
     
     override func setup() {
         backgroundColor = UIColor.init(r: 255, g: 248, b: 239)
-        addSubViews(label)
+        addSubViews(tableView)
     }
     
     override func bindConstraints() {
-        label.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
         }
     }
 }

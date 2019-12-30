@@ -66,7 +66,10 @@ extension FriendTabBar: UICollectionViewDelegate, UICollectionViewDataSource, UI
         }
         
         if indexPath.row == 1 {
+            cell.titleLabel.text = "보낸 친구요청"
             cell.titleLabel.textColor = UIColor.init(r: 206, g: 176, b: 164)
+        } else {
+            cell.titleLabel.text = "받은 친구요청"
         }
         return cell
     }
@@ -86,6 +89,9 @@ extension FriendTabBar: UICollectionViewDelegate, UICollectionViewDataSource, UI
             self.layoutIfNeeded()
         }, completion: nil)
         self.deleagte?.friendTabBar(scrollTo: indexPath.row)
+        
+        let deselectedIndex = IndexPath(item: indexPath.row == 0 ? 1: 0, section: 0)
+        self.collectionView(collectionView, didDeselectItemAt: deselectedIndex)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
