@@ -10,12 +10,18 @@ class LetterBoxVC: BaseVC {
     }()
     
     
-    static func instance() -> LetterBoxVC {
-        return LetterBoxVC(nibName: nil, bundle: nil)
+    static func instance() -> UINavigationController {
+        let controller = LetterBoxVC(nibName: nil, bundle: nil)
+        
+        return UINavigationController(rootViewController: controller)
     }
     
     override func viewDidLoad() {
-        view = letterBoxView
+        navigationController?.isNavigationBarHidden = true
+        view.addSubview(letterBoxView)
+        letterBoxView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
         initDrawer()
         
         letterBoxView.topBar.setLetterBoxMode()
@@ -50,6 +56,10 @@ class LetterBoxVC: BaseVC {
         letterBoxView.drawer.addGestureRecognizer(tapGesture)
         tapGesture.rx.event.bind { _ in
             self.letterBoxView.hideMenu { }
+        }.disposed(by: disposeBag)
+        
+        letterBoxView.drawer.friendControllBtn.rx.tap.bind {
+            self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         }.disposed(by: disposeBag)
     }
     

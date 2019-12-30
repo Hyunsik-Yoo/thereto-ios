@@ -78,6 +78,10 @@ class FriendListVC: BaseVC {
         tapGesture.rx.event.bind { _ in
             self.friendListView.hideMenu { }
         }.disposed(by: disposeBag)
+        
+        friendListView.drawer.friendControllBtn.rx.tap.bind {
+            self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
     }
     
     private func goToLetterBox() {
