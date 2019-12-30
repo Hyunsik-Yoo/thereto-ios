@@ -41,7 +41,12 @@ class AddFriendVC: BaseVC {
                 self.addFriendView.setDataMode(isDataMode: true)
                 cell.bind(user: user)
                 cell.addBtn.rx.tap.bind {
-                    AlertUtil.show("친구 요청", message: "친구요청을 보내시겠습니까?")
+                    AlertUtil.showWithCancel(title: "친구 요청", message: "친구 요청을 보내시겠습니까?") {
+                        var friend = user
+                        
+                        friend.requestState = .REQUEST_SENT
+                        self.requestFriend(friend: friend)
+                    }
                 }.disposed(by: self.disposeBag)
             } else {
                 self.addFriendView.setDataMode(isDataMode: false)
@@ -51,6 +56,30 @@ class AddFriendVC: BaseVC {
         addFriendView.linkBtn.rx.tap.bind {
 
         }.disposed(by: disposeBag)
+    }
+    
+    private func requestFriend(friend: User) {
+        // 내 User document에 상대방 넣고 state는 request_sent
+        let myToken = UserDefaultsUtil.getUserToken()!
+        let friendToken = "\(friend.getSocial())\(friend.socialId)"
+        
+        UserService.addFriend(token: myToken, friend: friend) { (isSuccess) in
+            if isSuccess {
+                // 상대방 user document에 내 User넣고 state는 wait
+                UserService.getMyUser { (user) in
+                    var myUser = user
+                    myUser.requestState = User.State.WAIT
+                    UserService.addFriend(token: friendToken, friend: myUser) { (isSuccess) in
+                        if isSuccess {
+                            AlertUtil.show(message: "친구 요청 성공")
+                        } else {
+                            // 실패한 경우 다시 지워야 함
+                            UserService.deleteFriend(token: myToken, friendToken: friendToken) { }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func findUser(inputNickname: String) {

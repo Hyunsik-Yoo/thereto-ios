@@ -6,6 +6,7 @@ struct User {
     var social: SocialType
     var socialId: String
     var profileURL: String?
+    var requestState: State
     
     init(nickname: String, name: String, social: String, id: String, profileURL: String) {
         self.nickname = nickname
@@ -13,6 +14,7 @@ struct User {
         self.social = SocialType(rawValue: social)!
         self.socialId = id
         self.profileURL = profileURL
+        self.requestState = .NONE
     }
     
     init(map: [String: Any]) {
@@ -20,12 +22,13 @@ struct User {
         self.name = map["name"] as! String
         self.social = SocialType(rawValue: map["social"] as! String)!
         self.socialId = map["social_id"] as! String
-        self.profileURL = map["profile_url"] as! String
+        self.profileURL = map["profile_url"] as? String
+        self.requestState = State(rawValue: map["request_state"] as! String)!
     }
     
     func toDict() -> [String: Any] {
         return ["name": name, "nickname": nickname, "social": social.rawValue,
-                "social_id": socialId, "profile_url": profileURL]
+                "social_id": socialId, "profile_url": profileURL, "requestState": requestState.rawValue]
     }
     
     func getSocial() -> String {
@@ -34,5 +37,12 @@ struct User {
     
     enum SocialType: String {
         case FACEBOOK = "facebook"
+    }
+    
+    enum State: String {
+        case WAIT = "wait" // 수락 대기중
+        case REQUEST_SENT = "request_sent" // 친구 요청 보냄
+        case FRIEND = "friend"
+        case NONE = "none"
     }
 }

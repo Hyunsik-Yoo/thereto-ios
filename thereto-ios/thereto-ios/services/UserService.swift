@@ -85,4 +85,45 @@ struct UserService {
             }
         }
     }
+    
+    static func addFriend(token: String, friend: User, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let friendToken = "\(friend.getSocial())\(friend.socialId)"
+        
+        db.collection("user/\(token)/friends").document(friendToken).setData(friend.toDict()) { (error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+    
+    static func getMyUser(completion: @escaping (User) -> Void) {
+        let db = Firestore.firestore()
+        let token = UserDefaultsUtil.getUserToken()!
+        
+        db.collection("user").document(token).getDocument { (snapshot, error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+            } else {
+                if let data = snapshot?.data() {
+                    completion(User(map: data))
+                }
+            }
+        }
+    }
+    
+    static func deleteFriend(token: String, friendToken: String, completion: @escaping () -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(token).collection("friends").document(friendToken).delete { (error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+            } else {
+                completion()
+            }
+        }
+    }
 }
