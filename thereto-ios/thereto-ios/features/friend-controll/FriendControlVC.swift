@@ -14,7 +14,6 @@ class FriendControlVC: BaseVC {
         view = friendControlView
         
         friendControlView.friendTabBar.deleagte = self
-        friendControlView.friendTabBar.setupTabBar()
         friendControlView.pageCollectionView.delegate = self
         friendControlView.pageCollectionView.dataSource = self
         friendControlView.pageCollectionView.isPagingEnabled = true
