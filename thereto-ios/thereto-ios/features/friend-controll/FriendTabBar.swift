@@ -32,9 +32,6 @@ class FriendTabBar: BaseView {
         tabBarCollectionView.delegate = self
         tabBarCollectionView.dataSource = self
         tabBarCollectionView.register(TabBarCell.self, forCellWithReuseIdentifier: TabBarCell.registerId)
-        
-        let indexPath = IndexPath(item: 0, section: 0)
-        tabBarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
     }
     
     override func bindConstraints() {
@@ -68,6 +65,9 @@ extension FriendTabBar: UICollectionViewDelegate, UICollectionViewDataSource, UI
             return BaseCollectionViewCell()
         }
         
+        if indexPath.row == 1 {
+            cell.titleLabel.textColor = UIColor.init(r: 206, g: 176, b: 164)
+        }
         return cell
     }
     
@@ -93,5 +93,12 @@ extension FriendTabBar: UICollectionViewDelegate, UICollectionViewDataSource, UI
         cell.titleLabel.textColor = UIColor.init(r: 206, g: 176, b: 164)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
 }
 

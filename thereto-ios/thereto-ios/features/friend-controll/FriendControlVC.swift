@@ -54,9 +54,11 @@ extension FriendControlVC: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
-        let indexPath = IndexPath(item: itemAt, section: 0)
+        let selectedIndex = IndexPath(item: itemAt, section: 0)
+        let deSelectedIndex = IndexPath(item: itemAt == 0 ? 1 : 0, section: 0)
         
-        self.friendControlView.friendTabBar.tabBarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didSelectItemAt: selectedIndex)
+        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didDeselectItemAt: deSelectedIndex)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
