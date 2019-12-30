@@ -43,6 +43,12 @@ class SignInVC: BaseVC {
         controller.presentationContextProvider = self
         controller.performRequests()
     }
+    
+    private func goToMain() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToLetterbox()
+        }
+    }
 }
 
 extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
@@ -66,10 +72,17 @@ extension SignInVC: LoginButtonDelegate {
             if let token = AccessToken.current?.tokenString,
                 let id = result?.token?.userID {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
+                let socialToken = "facebook\(id)"
                 
-                UserDefaultsUtil.setUserToken(token: "facebook\(id)")
                 FirebaseUtil.auth(credential: credential) {
-                    self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
+                    UserService.validateUser(token: socialToken) { (isValidated) in
+                        UserDefaultsUtil.setUserToken(token: token)
+                        if isValidated {
+                            self.goToMain()
+                        } else {
+                            self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
+                        }
+                    }
                 }
             }
         }

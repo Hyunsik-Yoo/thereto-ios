@@ -72,4 +72,17 @@ struct UserService {
             completion(userList)
         }
     }
+    
+    static func validateUser(token: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(token).getDocument { (snapshot, error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
 }
