@@ -76,7 +76,7 @@ extension SignInVC: LoginButtonDelegate {
                 
                 FirebaseUtil.auth(credential: credential) {
                     UserService.validateUser(token: socialToken) { (isValidated) in
-                        UserDefaultsUtil.setUserToken(token: token)
+                        UserDefaultsUtil.setUserToken(token: socialToken)
                         if isValidated {
                             self.goToMain()
                         } else {
