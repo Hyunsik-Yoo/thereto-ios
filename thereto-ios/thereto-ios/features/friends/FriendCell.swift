@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 class FriendCell: BaseTableViewCell {
     
@@ -9,6 +10,7 @@ class FriendCell: BaseTableViewCell {
         
         imageView.layer.cornerRadius = 20
         imageView.backgroundColor = .red
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -55,5 +57,12 @@ class FriendCell: BaseTableViewCell {
             make.left.equalTo(nameLabel.snp.right).offset(2)
             make.width.height.equalTo(6)
         }
+    }
+    
+    func bind(user: User) {
+        profileImage.kf.setImage(with: URL.init(string: user.profileURL!)!, placeholder: UIImage.init(named: "ic_add"))
+        nameLabel.text = user.nickname
+        // TODO: 얘 어떻게 처리해야할까...
+        favoriteDot.isHidden = true
     }
 }

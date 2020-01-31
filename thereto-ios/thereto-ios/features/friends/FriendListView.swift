@@ -16,14 +16,12 @@ class FriendListView: BaseView {
         return view
     }()
     
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        
-        tableView.allowsSelection = false
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
+    let tableView =  UITableView().then {
+        $0.tableFooterView = UIView()
+        $0.backgroundColor = .clear
+        $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
+    }
     
     let writeBtn: UIButton = {
         let button = UIButton()
@@ -37,7 +35,6 @@ class FriendListView: BaseView {
     
     
     override func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.themeColor
         addSubViews(topBar, drawer, tableView, writeBtn)
     }

@@ -6,61 +6,46 @@ class FriendListVC: BaseVC {
     
     private let viewModel = FriendListViewModel()
     
-    private let friendListView: FriendListView = {
-        let view = FriendListView()
-        
-        view.isUserInteractionEnabled = true
-        return view
-    }()
+    private lazy var friendListView = FriendListView(frame: self.view.frame)
     
     static func instance() -> UINavigationController {
-        let controller = FriendListVC(nibName: nil, bundle: nil)
-        let navi = UINavigationController(rootViewController: controller)
-        
-        return navi
+        return UINavigationController.init(rootViewController: FriendListVC.init(nibName: nil, bundle: nil))
     }
     
     
     override func viewDidLoad() {
-        view.addSubview(friendListView)
-        initDrawer()
-        friendListView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        friendListView.topBar.setFriendListMode()
+        super.viewDidLoad()
         
-        // TODO: UserDefaults 만들어서 내 정보 저장해야함
-        UserService.findFriend(id: "facebook2574917595938223") { (friendList) in
-            if friendList.isEmpty {
-                print("friendList is empty")
-            } else {
-                print("friendList is not empty")
-            }
-        }
-        friendListView.tableView.delegate = self
-        friendListView.tableView.dataSource = self
-        friendListView.tableView.register(FriendCell.self, forCellReuseIdentifier: FriendCell.registerId)
-        friendListView.tableView.rowHeight = UITableView.automaticDimension
-        friendListView.tableView.separatorStyle = .none
+        view = friendListView
+        setupDrawer()
+        setupTableView()
+        setupNavigationBar()
+        getFriendList()
     }
     
     override func bindViewModel() {
-        
+        viewModel.friends.bind(to: friendListView.tableView.rx.items(cellIdentifier: FriendCell.registerId, cellType: FriendCell.self)) { row, user, cell in
+            cell.bind(user: user)
+        }.disposed(by: disposeBag)
     }
     
-    private func initDrawer() {
-        friendListView.topBar.hambugerBtn.rx.tap.bind {
-            self.friendListView.showMenu()
+    private func setupNavigationBar() {
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        friendListView.topBar.setFriendListMode()
+    }
+    
+    private func setupDrawer() {
+        friendListView.topBar.hambugerBtn.rx.tap.bind { [weak self] in
+            self?.friendListView.showMenu()
         }.disposed(by: disposeBag)
         
-        friendListView.drawer.closeBtn.rx.tap.bind {
-            self.friendListView.hideMenu { }
+        friendListView.drawer.closeBtn.rx.tap.bind { [weak self] in
+            self?.friendListView.hideMenu { }
         }.disposed(by: disposeBag)
         
-        friendListView.topBar.addFriendBtn.rx.tap.bind {
-            self.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
+        friendListView.topBar.addFriendBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
         
         friendListView.drawer.letterboxBtn.rx.tap.bind { [weak self] in
@@ -71,16 +56,24 @@ class FriendListVC: BaseVC {
             }
         }.disposed(by: disposeBag)
         
-        let tapGesture = UITapGestureRecognizer()
-        
-        friendListView.drawer.addGestureRecognizer(tapGesture)
-        tapGesture.rx.event.bind { _ in
-            self.friendListView.hideMenu { }
+        friendListView.drawer.friendControllBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         }.disposed(by: disposeBag)
-        
-        friendListView.drawer.friendControllBtn.rx.tap.bind {
-            self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
-        }.disposed(by: disposeBag)
+    }
+    
+    private func setupTableView() {
+        friendListView.tableView.delegate = self
+        friendListView.tableView.register(FriendCell.self, forCellReuseIdentifier: FriendCell.registerId)
+    }
+    
+    private func getFriendList() {
+        UserService.findFriend(id: UserDefaultsUtil.getUserToken()!) { [weak self] (friendList) in
+            if friendList.isEmpty {
+                print("friendList is empty")
+            } else {
+                self?.viewModel.friends.onNext(friendList)
+            }
+        }
     }
     
     private func goToLetterBox() {
@@ -90,16 +83,8 @@ class FriendListVC: BaseVC {
     }
 }
 
-extension FriendListVC: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.registerId, for: indexPath) as? FriendCell else {
-            return BaseTableViewCell()
-        }
+extension FriendListVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        return cell
     }
 }
