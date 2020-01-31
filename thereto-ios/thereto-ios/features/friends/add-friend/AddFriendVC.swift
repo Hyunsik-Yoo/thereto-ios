@@ -15,29 +15,31 @@ class AddFriendVC: BaseVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view = addFriendView
         getFriendList()
-        
-        addFriendView.tableView.delegate = self
-        addFriendView.tableView.register(AddFriendCell.self, forCellReuseIdentifier: AddFriendCell.registerId)
+        setupTableView()
     }
     
     override func bindViewModel() {
-        addFriendView.backBtn.rx.tap.bind {
-            self.navigationController?.popViewController(animated: true)
+        addFriendView.backBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
         
-        addFriendView.nicknameField.rx.controlEvent(.editingDidEndOnExit).bind {
-            self.findUser(inputNickname: self.addFriendView.nicknameField.text!)
+        addFriendView.nicknameField.rx.controlEvent(.editingDidEndOnExit).bind { [weak self] in
+            if let vc = self {
+                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
+            }
         }.disposed(by: disposeBag)
         
-        addFriendView.searchBtn.rx.tap.bind {
-            self.findUser(inputNickname: self.addFriendView.nicknameField.text!)
+        addFriendView.searchBtn.rx.tap.bind { [weak self] in
+            if let vc = self {
+                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
+            }
         }.disposed(by: disposeBag)
         
-        
-        viewModel.people.asObservable().bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, user, cell in
-            if let user = user {
+        viewModel.people.bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, user, cell in
+            if let user = user { // 검색 결과가 있을 때
                 self.addFriendView.setDataMode(isDataMode: true)
                 cell.bind(user: user)
                 cell.addBtn.rx.tap.bind {
@@ -48,7 +50,7 @@ class AddFriendVC: BaseVC {
                         self.requestFriend(friend: friend)
                     }
                 }.disposed(by: self.disposeBag)
-            } else {
+            } else { // 검색 결과가 없을 떄
                 self.addFriendView.setDataMode(isDataMode: false)
             }
         }.disposed(by: disposeBag)
@@ -56,6 +58,11 @@ class AddFriendVC: BaseVC {
         addFriendView.linkBtn.rx.tap.bind {
             
         }.disposed(by: disposeBag)
+    }
+    
+    private func setupTableView() {
+        addFriendView.tableView.delegate = self
+        addFriendView.tableView.register(AddFriendCell.self, forCellReuseIdentifier: AddFriendCell.registerId)
     }
     
     private func requestFriend(friend: User) {
