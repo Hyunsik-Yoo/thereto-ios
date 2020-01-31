@@ -3,7 +3,7 @@ import UIKit
 class FriendControlVC: BaseVC {
     
     private lazy var friendControlView = FriendControlView(frame: self.view.frame)
-    
+    let pageVC = FriendPageVC.instance()
     
     static func instance() -> FriendControlVC {
         return FriendControlVC(nibName: nil, bundle: nil)
@@ -12,12 +12,8 @@ class FriendControlVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = friendControlView
-        
-        friendControlView.friendTabBar.deleagte = self
-        friendControlView.pageCollectionView.delegate = self
-        friendControlView.pageCollectionView.dataSource = self
-        friendControlView.pageCollectionView.isPagingEnabled = true
-        friendControlView.pageCollectionView.register(PageCell.self, forCellWithReuseIdentifier: PageCell.registerId)
+        setupPageVC()
+//        friendControlView.friendTabBar.deleagte = self
     }
     
     override func bindViewModel() {
@@ -25,49 +21,37 @@ class FriendControlVC: BaseVC {
             self.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
     }
-}
-
-extension FriendControlVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, FriendTabBarProtocol {
-    func friendTabBar(scrollTo index: Int) {
-        let indexPath = IndexPath(row: index, section: 0)
-        
-        self.friendControlView.pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCell.registerId, for: indexPath) as? PageCell else {
-            return BaseCollectionViewCell()
+    private func setupPageVC() {
+        addChild(pageVC)
+        friendControlView.pageView.addSubview(pageVC.view)
+        pageVC.view.snp.makeConstraints { (make) in
+            make.edges.equalTo(friendControlView.pageView)
         }
         
-        return cell
+        for v in pageVC.view.subviews{
+            if v is UIScrollView{
+                (v as! UIScrollView).delegate = self
+            }
+        }
     }
-    
+}
+
+extension FriendControlVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.friendControlView.friendTabBar.indicatorView.snp.updateConstraints { (make) in
-            make.left.equalTo(self.friendControlView.friendTabBar.tabBarCollectionView.snp.left).offset((scrollView.contentOffset.x / 2))
+        self.friendControlView.indicatorView.snp.updateConstraints { (make) in
+            print(scrollView.contentOffset.x)
+            make.left.equalToSuperview().offset(scrollView.contentOffset.x / 2)
         }
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
-        let selectedIndex = IndexPath(item: itemAt, section: 0)
-        let deSelectedIndex = IndexPath(item: itemAt == 0 ? 1 : 0, section: 0)
-        
-        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didSelectItemAt: selectedIndex)
-        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didDeselectItemAt: deSelectedIndex)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.friendControlView.pageCollectionView.frame.width, height: self.friendControlView.pageCollectionView.frame.height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
+//        let selectedIndex = IndexPath(item: itemAt, section: 0)
+//        let deSelectedIndex = IndexPath(item: itemAt == 0 ? 1 : 0, section: 0)
+//
+//        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didSelectItemAt: selectedIndex)
+//        self.friendControlView.friendTabBar.collectionView(self.friendControlView.friendTabBar.tabBarCollectionView, didDeselectItemAt: deSelectedIndex)
+//    }
 }
-
 

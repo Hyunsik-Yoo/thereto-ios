@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */; };
 		6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4F23A540740026BCD7 /* ProfileVC.swift */; };
+		6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E127E8123E3FED400EE6126 /* FriendPageVC.swift */; };
+		6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E127E8323E3FF6100EE6126 /* FriendTableView.swift */; };
+		6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E127E8523E3FFA100EE6126 /* FriendTableVC.swift */; };
 		6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E13207623A8BC1400D868D6 /* DrawerView.swift */; };
 		6E1EBD9523A493280062C2F9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */; };
 		6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */; };
@@ -59,6 +62,9 @@
 		4E46EFDF274E0BBCE233D62F /* Pods-thereto-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.debug.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6E10BC4F23A540740026BCD7 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		6E127E8123E3FED400EE6126 /* FriendPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPageVC.swift; sourceTree = "<group>"; };
+		6E127E8323E3FF6100EE6126 /* FriendTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableView.swift; sourceTree = "<group>"; };
+		6E127E8523E3FFA100EE6126 /* FriendTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableVC.swift; sourceTree = "<group>"; };
 		6E13207623A8BC1400D868D6 /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
@@ -179,8 +185,11 @@
 			isa = PBXGroup;
 			children = (
 				6E45E41823B9B83000C2900C /* FriendControlView.swift */,
-				6E45E41C23B9C2B300C2900C /* TabBarCell.swift */,
 				6E45E42023B9C5B300C2900C /* FriendControlVC.swift */,
+				6E127E8123E3FED400EE6126 /* FriendPageVC.swift */,
+				6E127E8323E3FF6100EE6126 /* FriendTableView.swift */,
+				6E127E8523E3FFA100EE6126 /* FriendTableVC.swift */,
+				6E45E41C23B9C2B300C2900C /* TabBarCell.swift */,
 				6E45E42223B9E2F900C2900C /* FriendTabBar.swift */,
 				6E45E42423B9E73700C2900C /* PageCell.swift */,
 			);
@@ -446,12 +455,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */,
+				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,
 				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
+				6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */,
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E45E41D23B9C2B300C2900C /* TabBarCell.swift in Sources */,
 				6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */,
@@ -479,6 +490,7 @@
 				6E45E42323B9E2F900C2900C /* FriendTabBar.swift in Sources */,
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
 				6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */,
+				6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */,
 				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
