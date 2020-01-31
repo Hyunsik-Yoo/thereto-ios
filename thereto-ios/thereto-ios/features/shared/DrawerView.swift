@@ -2,33 +2,21 @@ import UIKit
 
 class DrawerView: BaseView {
     
-    private let bgView: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = UIColor.themeColor
-        return view
-    }()
+    let bgView = UIView().then {
+        $0.backgroundColor = UIColor.themeColor
+    }
     
-    let closeBtn: UIButton = {
-        let button = UIButton()
-        
-        button.setImage(UIImage.init(named: "ic_close"), for: .normal)
-        return button
-    }()
+    let closeBtn = UIButton().then {
+        $0.setImage(UIImage.init(named: "ic_close"), for: .normal)
+    }
     
-    private let logoImage: UIImageView = {
-        let image = UIImageView()
-        
-        image.image = UIImage.init(named: "image_logo")
-        return image
-    }()
+    let logoImage = UIImageView().then {
+        $0.image = UIImage.init(named: "image_logo")
+    }
     
-    private let middleLine: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = UIColor.init(r: 66, g: 40, b: 15)
-        return view
-    }()
+    let middleLine = UIView().then {
+        $0.backgroundColor = UIColor.init(r: 66, g: 40, b: 15)
+    }
     
     let letterboxBtn = UIButton().then {
         $0.setTitle("Letterbox.", for: .normal)
