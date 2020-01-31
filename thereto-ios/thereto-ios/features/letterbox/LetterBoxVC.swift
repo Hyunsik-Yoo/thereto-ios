@@ -41,13 +41,9 @@ class LetterBoxVC: BaseVC {
             self.letterBoxView.hideMenu { }
         }.disposed(by: disposeBag)
         
-        
-        let friendLabelTap = UITapGestureRecognizer()
-        
-        letterBoxView.drawer.friendLabel.addGestureRecognizer(friendLabelTap)
-        friendLabelTap.rx.event.bind { (_) in
-            self.letterBoxView.hideMenu {
-                self.goToFriend()
+        letterBoxView.drawer.friendBtn.rx.tap.bind { [weak self] in
+            self?.letterBoxView.hideMenu {
+                self?.goToFriend()
             }
         }.disposed(by: disposeBag)
         

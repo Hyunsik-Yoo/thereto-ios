@@ -30,45 +30,29 @@ class DrawerView: BaseView {
         return view
     }()
     
-    let letterboxLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Letterbox."
-        label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
-        label.textColor = UIColor.init(r: 60, g: 46, b: 42)
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+    let letterboxBtn = UIButton().then {
+        $0.setTitle("Letterbox.", for: .normal)
+        $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
+    }
     
-    let sentletterLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Sent letter."
-        label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
-        label.textColor = UIColor.init(r: 60, g: 46, b: 42)
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+    let sentLetterBtn = UIButton().then {
+        $0.setTitle("Sent letter.", for: .normal)
+        $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
+    }
     
-    let friendLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Friend."
-        label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
-        label.textColor = UIColor.init(r: 60, g: 46, b: 42)
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+    let friendBtn = UIButton().then {
+        $0.setTitle("Friend.", for: .normal)
+        $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
+    }
     
-    let setupLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "Setup."
-        label.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
-        label.textColor = UIColor.init(r: 60, g: 46, b: 42)
-        label.isUserInteractionEnabled = true
-        return label
-    }()
+    let setupBtn = UIButton().then {
+        $0.setTitle("Setup.", for: .normal)
+        $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 26)
+    }
     
     let friendControllBtn = UIButton().then {
         $0.setTitle("친구요청 관리", for: .normal)
@@ -86,8 +70,8 @@ class DrawerView: BaseView {
     
     override func setup() {
         isUserInteractionEnabled = true
-        addSubViews(bgView, closeBtn, logoImage, middleLine, letterboxLabel,
-                    sentletterLabel, friendLabel, setupLabel, friendControllBtn, newBadge)
+        addSubViews(bgView, closeBtn, logoImage, middleLine, letterboxBtn,
+                    sentLetterBtn, friendBtn, setupBtn, friendControllBtn, newBadge)
     }
     
     override func bindConstraints() {
@@ -116,24 +100,24 @@ class DrawerView: BaseView {
             make.height.equalTo(1)
         }
         
-        letterboxLabel.snp.makeConstraints { (make) in
+        letterboxBtn.snp.makeConstraints { (make) in
             make.left.equalTo(bgView.snp.left).offset(50)
             make.top.equalTo(middleLine.snp.bottom).offset(25)
         }
         
-        sentletterLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(letterboxLabel)
-            make.top.equalTo(letterboxLabel.snp.bottom).offset(30)
+        sentLetterBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(letterboxBtn)
+            make.top.equalTo(letterboxBtn.snp.bottom).offset(30)
         }
         
-        friendLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(letterboxLabel)
-            make.top.equalTo(sentletterLabel.snp.bottom).offset(30)
+        friendBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(letterboxBtn)
+            make.top.equalTo(sentLetterBtn.snp.bottom).offset(30)
         }
         
-        setupLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(letterboxLabel)
-            make.top.equalTo(friendLabel.snp.bottom).offset(30)
+        setupBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(letterboxBtn)
+            make.top.equalTo(friendBtn.snp.bottom).offset(30)
         }
         
         friendControllBtn.snp.makeConstraints { (make) in

@@ -63,12 +63,11 @@ class FriendListVC: BaseVC {
             self.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
         
-        let letterboxLabelTap = UITapGestureRecognizer()
-        
-        friendListView.drawer.letterboxLabel.addGestureRecognizer(letterboxLabelTap)
-        letterboxLabelTap.rx.event.bind { (_) in
-            self.friendListView.hideMenu {
-                self.goToLetterBox()
+        friendListView.drawer.letterboxBtn.rx.tap.bind { [weak self] in
+            if let vc = self {
+                vc.friendListView.hideMenu {
+                    vc.goToLetterBox()
+                }
             }
         }.disposed(by: disposeBag)
         
