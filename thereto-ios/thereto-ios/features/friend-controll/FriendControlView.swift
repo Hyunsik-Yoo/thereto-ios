@@ -68,4 +68,20 @@ class FriendControlView: BaseView {
             make.top.equalTo(indicatorView.snp.bottom)
         }
     }
+    
+    func selectTab(index: Int) {
+        if index == 0 {
+            receivedBtn.isSelected = true
+            sentBtn.isSelected = false
+            indicatorView.snp.updateConstraints { (make) in
+                make.left.equalToSuperview()
+            }
+        } else {
+            receivedBtn.isSelected = false
+            sentBtn.isSelected = true
+            indicatorView.snp.updateConstraints { (make) in
+                make.left.equalToSuperview().offset(frame.width / 2)
+            }
+        }
+    }
 }

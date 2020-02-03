@@ -1,8 +1,13 @@
 import UIKit
 
+protocol FriendPageDelegate: class {
+    func onSelectTap(index: Int)
+}
+
 class FriendPageVC: UIPageViewController {
     
-    let controllers = [FriendTableVC.instance(a: 0), FriendTableVC.instance(a: 1)]
+    weak var friendPageDelegate: FriendPageDelegate?
+    let controllers = [FriendTableVC.instance(), FriendTableVC.instance()]
     
     static func instance() -> FriendPageVC {
         return FriendPageVC.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
@@ -14,6 +19,14 @@ class FriendPageVC: UIPageViewController {
         delegate = self
         dataSource = self
         setViewControllers([controllers[0]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    func scrollToIndex(index: Int) {
+        if index == 0 {
+            setViewControllers([controllers[0]], direction: .reverse, animated: true, completion: nil)
+        } else {
+            setViewControllers([controllers[1]], direction: .forward, animated: true, completion: nil)
+        }
     }
 }
 
@@ -44,5 +57,12 @@ extension FriendPageVC: UIPageViewControllerDelegate, UIPageViewControllerDataSo
             return nil
         }
         return controllers[nextIndex]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            let selectedIndex = abs(self.controllers.firstIndex(of: previousViewControllers.first as! FriendTableVC)! - 1)
+            friendPageDelegate?.onSelectTap(index: selectedIndex)
+        }
     }
 }
