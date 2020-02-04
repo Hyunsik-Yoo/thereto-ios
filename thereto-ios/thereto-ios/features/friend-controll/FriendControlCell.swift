@@ -82,6 +82,13 @@ class FriendControlCell: BaseTableViewCell {
         }
     }
     
+    func bind(user: User) {
+        if let profileURL = user.profileURL {
+            profileImg.kf.setImage(with: URL.init(string: profileURL)!)
+        }
+        nameLabel.text = user.nickname
+    }
+    
     func setMode(mode: ControlMode) {
         if mode == .RECEIVE {
             leftBtn.setTitle("수락", for: .normal)

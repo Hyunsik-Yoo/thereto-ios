@@ -3,35 +3,77 @@ import UIKit
 class FriendTableVC: BaseVC {
     
     private lazy var friendTableView = FriendTableView.init(frame: self.view.frame)
+    private var mode: ControlMode!
+    private var viewModel = FriendControlViewModel()
     
-    static func instance() -> FriendTableVC {
-        return FriendTableVC.init(nibName: nil, bundle: nil)
+    static func instance(mode: ControlMode) -> FriendTableVC {
+        return FriendTableVC.init(nibName: nil, bundle: nil).then {
+            $0.mode = mode
+        }
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view = friendTableView
-        friendTableView.tableView.delegate = self
-        friendTableView.tableView.dataSource = self
-        friendTableView.tableView.register(FriendControlCell.self, forCellReuseIdentifier: FriendControlCell.registerId)
+        setupTableView()
+        
+        switch mode {
+        case .RECEIVE:
+            getReceivedFriends()
+        case .SENT:
+            getSentFriends()
+        case .none:
+            break
+        }
     }
     
     override func bindViewModel() {
-        
+        viewModel.friends.bind(to: friendTableView.tableView.rx.items(cellIdentifier: FriendControlCell.registerId, cellType: FriendControlCell.self)) { [weak self] row, user, cell in
+            cell.bind(user: user)
+            if let vc = self {
+                cell.setMode(mode: vc.mode)
+                if vc.mode == .RECEIVE {
+                    
+                } else { // SENT
+                    cell.leftBtn.rx.tap.bind {
+                        AlertUtil.show(message: "재요청하였습니다.")
+                    }.disposed(by: cell.disposeBag)
+                    
+                    cell.rightBtn.rx.tap.bind {
+                        AlertUtil.show(message: "친구요청을 취소하겠습니까?")
+                    }.disposed(by: cell.disposeBag)
+                    
+                }
+            }
+        }.disposed(by: disposeBag)
+    }
+    
+    private func setupTableView() {
+        friendTableView.tableView.delegate = self
+        friendTableView.tableView.register(FriendControlCell.self, forCellReuseIdentifier: FriendControlCell.registerId)
+    }
+    
+    private func getReceivedFriends() {
+        friendTableView.startLoading()
+        UserService.getReceivedFriends { [weak self] (friends) in
+            self?.friendTableView.emptyLabel.isHidden = !friends.isEmpty
+            self?.viewModel.friends.onNext(friends)
+            self?.friendTableView.stopLoading()
+        }
+    }
+    
+    private func getSentFriends() {
+        friendTableView.startLoading()
+        UserService.getSentFriends { [weak self] (friends) in
+            self?.friendTableView.emptyLabel.isHidden = !friends.isEmpty
+            self?.viewModel.friends.onNext(friends)
+            self?.friendTableView.stopLoading()
+        }
     }
 }
 
-extension FriendTableVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
+extension FriendTableVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendControlCell.registerId, for: indexPath) as? FriendControlCell else {
-            return BaseTableViewCell()
-        }
-        
-        return cell
-    }
 }

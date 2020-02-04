@@ -1,6 +1,8 @@
 import UIKit
+import RxSwift
 
 class BaseTableViewCell: UITableViewCell {
+    var disposeBag = DisposeBag()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -12,6 +14,11 @@ class BaseTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
         bindConstraints()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     func setup() { }

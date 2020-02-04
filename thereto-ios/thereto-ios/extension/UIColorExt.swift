@@ -14,7 +14,7 @@ extension UIColor {
         return UIColor.init(r: 255, g: 84, b: 41)
     }
     
-    class var black: UIColor {
+    class var black_30: UIColor {
         return UIColor.init(r: 30, g: 30, b: 30)
     }
     

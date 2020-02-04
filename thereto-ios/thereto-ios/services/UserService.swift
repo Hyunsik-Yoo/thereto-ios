@@ -125,4 +125,50 @@ struct UserService {
             }
         }
     }
+    
+    static func getReceivedFriends(completion: @escaping (([User]) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                print(error.localizedDescription)
+            } else {
+                if let snapShot = snapShot {
+                    var friends:[User] = []
+                    for document in snapShot.documents {
+                        let user = User(map: document.data())
+                        
+                        friends.append(user)
+                    }
+                    completion(friends)
+                } else {
+                    AlertUtil.show("error", message: "snapShots is nil")
+                }
+            }
+        }
+    }
+    
+    static func getSentFriends(completion: @escaping (([User]) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                print(error.localizedDescription)
+            } else {
+                if let snapShot = snapShot {
+                    var friends:[User] = []
+                    for document in snapShot.documents {
+                        let user = User(map: document.data())
+                        
+                        friends.append(user)
+                    }
+                    completion(friends)
+                } else {
+                    AlertUtil.show("error", message: "snapShots is nil")
+                }
+            }
+        }
+    }
 }

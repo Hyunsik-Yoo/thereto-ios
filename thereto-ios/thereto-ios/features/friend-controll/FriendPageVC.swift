@@ -7,7 +7,7 @@ protocol FriendPageDelegate: class {
 class FriendPageVC: UIPageViewController {
     
     weak var friendPageDelegate: FriendPageDelegate?
-    let controllers = [FriendTableVC.instance(), FriendTableVC.instance()]
+    let controllers = [FriendTableVC.instance(mode: .RECEIVE), FriendTableVC.instance(mode: .SENT)]
     
     static func instance() -> FriendPageVC {
         return FriendPageVC.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
