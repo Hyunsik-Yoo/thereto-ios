@@ -77,8 +77,7 @@ struct UserService {
         let db = Firestore.firestore()
         
         db.collection("user").document(token).getDocument { (snapshot, error) in
-            if let error = error {
-                AlertUtil.show("error", message: error.localizedDescription)
+            if snapshot?.data() == nil {
                 completion(false)
             } else {
                 completion(true)
