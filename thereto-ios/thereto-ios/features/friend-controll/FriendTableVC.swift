@@ -29,6 +29,7 @@ class FriendTableVC: BaseVC {
                 if vc.mode == .RECEIVE {
                     
                 } else { // SENT
+                    cell.setShowBtn(isShowBtn: DateUtil.isAfterDay(dateString: user.createdAt!))
                     cell.leftBtn.rx.tap.bind {
                         AlertUtil.show(message: "재요청하였습니다.")
                     }.disposed(by: cell.disposeBag)

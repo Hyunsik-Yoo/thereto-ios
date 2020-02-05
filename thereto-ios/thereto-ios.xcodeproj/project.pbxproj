@@ -44,6 +44,7 @@
 		6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */; };
 		6EC1025523A8E7D400328C08 /* SpoqaHanSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025423A8E7D400328C08 /* SpoqaHanSans-Bold.ttf */; };
 		6EC1025723A8E84900328C08 /* SpoqaHanSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EC1025623A8E84900328C08 /* SpoqaHanSans-Regular.ttf */; };
+		6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
@@ -97,6 +98,7 @@
 		6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		6EC1025423A8E7D400328C08 /* SpoqaHanSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Bold.ttf"; sourceTree = "<group>"; };
 		6EC1025623A8E84900328C08 /* SpoqaHanSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Regular.ttf"; sourceTree = "<group>"; };
+		6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				6E1EBD9723A4A06E0062C2F9 /* AlertUtil.swift */,
 				6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */,
 				6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */,
+				6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
+				6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,

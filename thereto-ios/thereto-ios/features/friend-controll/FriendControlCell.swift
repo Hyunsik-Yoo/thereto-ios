@@ -98,6 +98,12 @@ class FriendControlCell: BaseTableViewCell {
             rightBtn.setTitle("삭제", for: .normal)
         }
     }
+    
+    func setShowBtn(isShowBtn: Bool) {
+        leftBtn.isHidden = !isShowBtn
+        rightBtn.isHidden = !isShowBtn
+        waitingLabel.isHidden = isShowBtn
+    }
 }
 
 enum ControlMode: Int {

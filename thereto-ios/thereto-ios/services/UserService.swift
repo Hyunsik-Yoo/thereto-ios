@@ -88,8 +88,9 @@ struct UserService {
     static func addFriend(token: String, friend: User, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
         let friendToken = "\(friend.getSocial())\(friend.socialId)"
-        
-        db.collection("user/\(token)/friends").document(friendToken).setData(friend.toDict()) { (error) in
+        var friendDict = friend.toDict()
+        friendDict["createdAt"] = DateUtil.date2String(date: Date())
+        db.collection("user/\(token)/friends").document(friendToken).setData(friendDict) { (error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 completion(false)

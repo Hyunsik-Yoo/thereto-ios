@@ -7,6 +7,7 @@ struct User {
     var socialId: String
     var profileURL: String?
     var requestState: State
+    var createdAt: String?
     
     init(nickname: String, name: String, social: String, id: String, profileURL: String) {
         self.nickname = nickname
@@ -15,6 +16,7 @@ struct User {
         self.socialId = id
         self.profileURL = profileURL
         self.requestState = .NONE
+        self.createdAt = DateUtil.date2String(date: Date())
     }
     
     init(map: [String: Any]) {
@@ -24,11 +26,12 @@ struct User {
         self.socialId = map["social_id"] as! String
         self.profileURL = map["profile_url"] as? String
         self.requestState = State(rawValue: map["request_state"] as! String)!
+        self.createdAt = map["createdAt"] as? String
     }
     
     func toDict() -> [String: Any] {
         return ["name": name, "nickname": nickname, "social": social.rawValue,
-                "social_id": socialId, "profile_url": profileURL, "request_state": requestState.rawValue]
+                "social_id": socialId, "profile_url": profileURL, "request_state": requestState.rawValue, "createdAt": createdAt]
     }
     
     func getSocial() -> String {
