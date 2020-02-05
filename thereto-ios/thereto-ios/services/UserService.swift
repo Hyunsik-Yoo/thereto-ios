@@ -114,14 +114,15 @@ struct UserService {
         }
     }
     
-    static func deleteFriend(token: String, friendToken: String, completion: @escaping () -> Void) {
+    static func deleteFriend(token: String, friendToken: String, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
         
         db.collection("user").document(token).collection("friends").document(friendToken).delete { (error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
+                completion(false)
             } else {
-                completion()
+                completion(true)
             }
         }
     }

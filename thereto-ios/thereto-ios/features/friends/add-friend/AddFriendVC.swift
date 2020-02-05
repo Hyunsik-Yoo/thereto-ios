@@ -84,7 +84,7 @@ class AddFriendVC: BaseVC {
                             self.addFriendView.setDataMode(isDataMode: false)
                         } else {
                             // 실패한 경우 다시 지워야 함
-                            UserService.deleteFriend(token: myToken, friendToken: friendToken) { }
+                            UserService.deleteFriend(token: myToken, friendToken: friendToken) { _ in }
                         }
                         self.addFriendView.stopLoading()
                     }
