@@ -173,4 +173,17 @@ struct UserService {
             }
         }
     }
+    
+    static func updateRequest(friendToken: String, completion: @escaping ((Bool) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(friendToken).updateData(["createAt" : Date()]) { error in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
 }

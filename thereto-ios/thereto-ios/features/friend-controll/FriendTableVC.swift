@@ -27,16 +27,26 @@ class FriendTableVC: BaseVC {
             if let vc = self {
                 cell.setMode(mode: vc.mode)
                 if vc.mode == .RECEIVE {
+                    cell.leftBtn.rx.tap.bind {
+                        // 수락
+                    }.disposed(by: cell.disposeBag)
                     
+                    cell.rightBtn.rx.tap.bind {
+                        AlertUtil.showWithCancel(message: "거부하시겠습니까?") {
+                            self?.cancelFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)")
+                        }
+                    }.disposed(by: cell.disposeBag)
                 } else { // SENT
                     cell.setShowBtn(isShowBtn: DateUtil.isAfterDay(dateString: user.createdAt!))
                     cell.leftBtn.rx.tap.bind {
-                        AlertUtil.show(message: "재요청하였습니다.")
+                        self?.updateFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)", complection: {
+                            AlertUtil.show(message: "재요청하였습니다.")
+                            cell.setShowBtn(isShowBtn: false)
+                        })
                     }.disposed(by: cell.disposeBag)
                     
                     cell.rightBtn.rx.tap.bind { [weak self] in
                         AlertUtil.showWithCancel(message: "친구요청을 취소하겠습니까?") {
-                            // 친구 요청 삭제
                             self?.cancelFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)")
                         }
                     }.disposed(by: cell.disposeBag)
@@ -94,6 +104,16 @@ class FriendTableVC: BaseVC {
             } else {
                 self?.friendTableView.stopLoading()
             }
+        }
+    }
+    
+    private func updateFriendRequest(friendToken: String, complection: @escaping (() -> Void)) {
+        friendTableView.startLoading()
+        UserService.updateRequest(friendToken: friendToken) { [weak self] (isSuccess) in
+            if isSuccess {
+                complection()
+            }
+            self?.friendTableView.stopLoading()
         }
     }
 }
