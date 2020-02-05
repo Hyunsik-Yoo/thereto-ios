@@ -40,6 +40,7 @@ struct User {
     
     enum SocialType: String {
         case FACEBOOK = "facebook"
+        case APPLE = "apple"
     }
     
     enum State: String {
