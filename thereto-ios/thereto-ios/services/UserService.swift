@@ -186,4 +186,17 @@ struct UserService {
             }
         }
     }
+    
+    static func acceptRequest(token: String, friendToken: String, completion: @escaping ((Bool) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(token).collection("friends").document(friendToken).updateData(["request_state" : "friend"]) { error in
+            if let error = error {
+                AlertUtil.show("error", message: error.localizedDescription)
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
 }

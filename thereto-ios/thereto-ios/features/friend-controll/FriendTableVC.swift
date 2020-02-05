@@ -27,25 +27,25 @@ class FriendTableVC: BaseVC {
             if let vc = self {
                 cell.setMode(mode: vc.mode)
                 if vc.mode == .RECEIVE {
-                    cell.leftBtn.rx.tap.bind {
-                        // 수락
+                    cell.leftBtn.rx.tap.bind { // 수락
+                        self?.acceptFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)")
                     }.disposed(by: cell.disposeBag)
                     
-                    cell.rightBtn.rx.tap.bind {
+                    cell.rightBtn.rx.tap.bind { // 거부
                         AlertUtil.showWithCancel(message: "거부하시겠습니까?") {
                             self?.cancelFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)")
                         }
                     }.disposed(by: cell.disposeBag)
                 } else { // SENT
                     cell.setShowBtn(isShowBtn: DateUtil.isAfterDay(dateString: user.createdAt!))
-                    cell.leftBtn.rx.tap.bind {
+                    cell.leftBtn.rx.tap.bind { // 재요청
                         self?.updateFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)", complection: {
                             AlertUtil.show(message: "재요청하였습니다.")
                             cell.setShowBtn(isShowBtn: false)
                         })
                     }.disposed(by: cell.disposeBag)
                     
-                    cell.rightBtn.rx.tap.bind { [weak self] in
+                    cell.rightBtn.rx.tap.bind { // 요청 취소
                         AlertUtil.showWithCancel(message: "친구요청을 취소하겠습니까?") {
                             self?.cancelFriendRequest(friendToken: "\(user.getSocial())\(user.socialId)")
                         }
@@ -87,6 +87,23 @@ class FriendTableVC: BaseVC {
             self?.friendTableView.emptyLabel.isHidden = !friends.isEmpty
             self?.viewModel.friends.onNext(friends)
             self?.friendTableView.stopLoading()
+        }
+    }
+    
+    private func acceptFriendRequest(friendToken: String) {
+        friendTableView.startLoading()
+        UserService.acceptRequest(token: UserDefaultsUtil.getUserToken()!, friendToken: friendToken) { [weak self] (isSuccess) in
+            if isSuccess {
+                UserService.acceptRequest(token: friendToken, friendToken: UserDefaultsUtil.getUserToken()!) { (isSuccess) in
+                    if isSuccess {
+                        AlertUtil.show(message: "친구요청을 수락하였습니다.")
+                        self?.getFriends()
+                    }
+                    self?.friendTableView.stopLoading()
+                }
+            } else {
+                self?.friendTableView.stopLoading()
+            }
         }
     }
     
