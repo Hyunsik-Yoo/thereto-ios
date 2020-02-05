@@ -11,6 +11,7 @@ class FriendControlView: BaseView {
         $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .selected)
         $0.setTitleColor(UIColor.init(r: 206, g: 176, b: 164), for: .normal)
         $0.titleLabel?.textAlignment = .center
+        $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
         $0.isSelected = true
     }
     
@@ -18,6 +19,7 @@ class FriendControlView: BaseView {
         $0.setTitle("보낸 친구요청", for: .normal)
         $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .selected)
         $0.setTitleColor(UIColor.init(r: 206, g: 176, b: 164), for: .normal)
+        $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 16)
         $0.titleLabel?.textAlignment = .center
         $0.isSelected = false
     }
@@ -72,12 +74,16 @@ class FriendControlView: BaseView {
     func selectTab(index: Int) {
         if index == 0 {
             receivedBtn.isSelected = true
+            receivedBtn.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
+            sentBtn.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
             sentBtn.isSelected = false
             indicatorView.snp.updateConstraints { (make) in
                 make.left.equalToSuperview()
             }
         } else {
             receivedBtn.isSelected = false
+            sentBtn.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
+            receivedBtn.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
             sentBtn.isSelected = true
             indicatorView.snp.updateConstraints { (make) in
                 make.left.equalToSuperview().offset(frame.width / 2)
