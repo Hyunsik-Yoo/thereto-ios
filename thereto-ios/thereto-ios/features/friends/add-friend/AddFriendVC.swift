@@ -129,12 +129,8 @@ class AddFriendVC: BaseVC {
     }
     
     private func getFriendList() {
-        if let token = UserDefaultsUtil.getUserToken() {
-            UserService.findFriend(id: token) { (friends) in
-                self.viewModel.friends = friends
-            }
-        } else {
-            AlertUtil.show("error", message: "토큰이 유효하지 않습니다.")
+        UserService.findFriends() { (friends) in
+            self.viewModel.friends = friends
         }
     }
 }

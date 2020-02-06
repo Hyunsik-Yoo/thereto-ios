@@ -67,7 +67,7 @@ class FriendListVC: BaseVC {
     }
     
     private func getFriendList() {
-        UserService.findFriend(id: UserDefaultsUtil.getUserToken()!) { [weak self] (friendList) in
+        UserService.findFriends() { [weak self] (friendList) in
             if !friendList.isEmpty {
                 self?.viewModel.friends.onNext(friendList)
             }
@@ -84,6 +84,9 @@ class FriendListVC: BaseVC {
 
 extension FriendListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(FriendDetailVC.instance(), animated: true)
+        let friends = try! self.viewModel.friends.value()
+        let friendId = "\(friends[indexPath.row].social)\(friends[indexPath.row].socialId)"
+        
+        self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friendId), animated: true)
     }
 }

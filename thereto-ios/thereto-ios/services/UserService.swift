@@ -29,10 +29,10 @@ struct UserService {
         }
     }
     
-    static func findFriend(id: String, completion: @escaping ([User]) -> Void) {
+    static func findFriends(completion: @escaping ([User]) -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(id).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
+        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             }
