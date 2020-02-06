@@ -84,7 +84,7 @@ class FriendControlCell: BaseTableViewCell {
     
     func bind(user: User) {
         if let profileURL = user.profileURL {
-            profileImg.kf.setImage(with: URL.init(string: profileURL)!)
+            profileImg.kf.setImage(with: URL.init(string: profileURL))
         }
         nameLabel.text = user.nickname
     }
