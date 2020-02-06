@@ -13,7 +13,6 @@ class FriendDetailView: BaseView {
     }
     
     let nameLabel = UILabel().then {
-        $0.text = "박은지 (박은지)"
         $0.textColor = .black_30
         $0.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 19)
     }
@@ -164,6 +163,13 @@ class FriendDetailView: BaseView {
         writeLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(writeBtn)
             make.right.equalToSuperview().offset(-80)
+        }
+    }
+    
+    func bind(friend: User?) {
+        if let friend = friend {
+            profileImg.kf.setImage(with: URL.init(string: friend.profileURL!))
+            nameLabel.text = "\(friend.nickname) (\(friend.name))"
         }
     }
 }

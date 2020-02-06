@@ -51,6 +51,22 @@ struct UserService {
         }
     }
     
+    static func findFriend(id: String, completion: @escaping ((Result<User>) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                if let data = snapShot?.data() {
+                    completion(.success(User.init(map: data)))
+                } else {
+                    completion(.failure(CommonError.init(desc: "snapShot is nil")))
+                }
+            }
+        }
+    }
+    
     static func findUser(nickname: String, completion: @escaping ([User]) -> Void) {
         let db = Firestore.firestore()
         

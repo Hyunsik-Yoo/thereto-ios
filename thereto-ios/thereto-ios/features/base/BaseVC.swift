@@ -16,7 +16,10 @@ class BaseVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
+        bindEvent()
     }
     
     func bindViewModel() { }
+    
+    func bindEvent() { }
 }

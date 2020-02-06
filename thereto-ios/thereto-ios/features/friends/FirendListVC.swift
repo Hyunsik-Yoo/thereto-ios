@@ -85,7 +85,7 @@ class FriendListVC: BaseVC {
 extension FriendListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let friends = try! self.viewModel.friends.value()
-        let friendId = "\(friends[indexPath.row].social)\(friends[indexPath.row].socialId)"
+        let friendId = "\(friends[indexPath.row].getSocial())\(friends[indexPath.row].socialId)"
         
         self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friendId), animated: true)
     }
