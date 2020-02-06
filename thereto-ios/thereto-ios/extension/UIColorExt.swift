@@ -21,4 +21,12 @@ extension UIColor {
     class var very_light_pink: UIColor {
         return UIColor.init(r: 255, g: 248, b: 239)
     }
+    
+    class var brownish_grey: UIColor {
+        return UIColor.init(r: 114, g: 95, b: 95)
+    }
+    
+    class var greyish_brown: UIColor {
+        return UIColor.init(r: 60, g: 46, b: 42)
+    }
 }

@@ -30,6 +30,9 @@
 		6E590DB123E8122A006814BE /* FriendControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E590DB023E8122A006814BE /* FriendControlCell.swift */; };
 		6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63140623B0E1D1009F1D09 /* AddFriendViewModel.swift */; };
 		6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E63140823B0E452009F1D09 /* AddFriendCell.swift */; };
+		6E6443DB23EBA87C00254331 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443DA23EBA87C00254331 /* FriendDetailView.swift */; };
+		6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443DC23EBACCA00254331 /* FriendDetailVC.swift */; };
+		6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443DE23EBB1A500254331 /* RatioUtils.swift */; };
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
@@ -83,6 +86,9 @@
 		6E590DB023E8122A006814BE /* FriendControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlCell.swift; sourceTree = "<group>"; };
 		6E63140623B0E1D1009F1D09 /* AddFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewModel.swift; sourceTree = "<group>"; };
 		6E63140823B0E452009F1D09 /* AddFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendCell.swift; sourceTree = "<group>"; };
+		6E6443DA23EBA87C00254331 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
+		6E6443DC23EBACCA00254331 /* FriendDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailVC.swift; sourceTree = "<group>"; };
+		6E6443DE23EBB1A500254331 /* RatioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatioUtils.swift; sourceTree = "<group>"; };
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */,
 				6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */,
 				6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */,
+				6E6443DE23EBB1A500254331 /* RatioUtils.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -173,6 +180,7 @@
 		6E43271923A9A71800AEBD93 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				6E6443D923EBA86100254331 /* friend-detail */,
 				6E804B3623ADEEA4009574CD /* add-friend */,
 				6E43271A23A9A74A00AEBD93 /* FriendListView.swift */,
 				6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */,
@@ -194,6 +202,15 @@
 				6E0A654823E92D4400FC1DB7 /* FriendControlViewModel.swift */,
 			);
 			path = "friend-controll";
+			sourceTree = "<group>";
+		};
+		6E6443D923EBA86100254331 /* friend-detail */ = {
+			isa = PBXGroup;
+			children = (
+				6E6443DA23EBA87C00254331 /* FriendDetailView.swift */,
+				6E6443DC23EBACCA00254331 /* FriendDetailVC.swift */,
+			);
+			path = "friend-detail";
 			sourceTree = "<group>";
 		};
 		6E804B3623ADEEA4009574CD /* add-friend */ = {
@@ -254,7 +271,6 @@
 				6E43271923A9A71800AEBD93 /* friends */,
 				6EBF6BE023A88CF100182078 /* shared */,
 				6E2A08A823A7685300A13F92 /* letterbox */,
-				6E1EBD9623A4A0600062C2F9 /* util */,
 				6EA738CC23939423002176F6 /* membership */,
 				6EE72F69239238E500C4CFA7 /* splash */,
 				6EE72F61239236A200C4CFA7 /* base */,
@@ -319,6 +335,7 @@
 				6E1EBD9423A493280062C2F9 /* GoogleService-Info.plist */,
 				6EA738D12393A573002176F6 /* thereto-ios.entitlements */,
 				6EE72F66239237B000C4CFA7 /* extension */,
+				6E1EBD9623A4A0600062C2F9 /* util */,
 				6EE72F602392369000C4CFA7 /* features */,
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
 				6EE8DFD82392325D00BF2E59 /* Assets.xcassets */,
@@ -472,6 +489,7 @@
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
+				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
 				6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */,
 				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
@@ -481,12 +499,14 @@
 				6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */,
 				6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
+				6E6443DB23EBA87C00254331 /* FriendDetailView.swift in Sources */,
 				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
+				6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */,
 				6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */,
 				6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */,
 				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,

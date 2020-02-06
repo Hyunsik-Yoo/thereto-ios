@@ -69,7 +69,7 @@ class FriendListVC: BaseVC {
     private func getFriendList() {
         UserService.findFriend(id: UserDefaultsUtil.getUserToken()!) { [weak self] (friendList) in
             if !friendList.isEmpty {
-                self?.viewModel.friends.onNext(friendList)   
+                self?.viewModel.friends.onNext(friendList)
             }
             self?.friendListView.emptyLabel.isHidden = !friendList.isEmpty
         }
@@ -84,6 +84,6 @@ class FriendListVC: BaseVC {
 
 extension FriendListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        self.navigationController?.pushViewController(FriendDetailVC.instance(), animated: true)
     }
 }
