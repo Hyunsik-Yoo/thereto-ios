@@ -23,8 +23,8 @@ class FriendDetailVC: BaseVC {
     }
     
     override func bindViewModel() {
-        viewModel.friend.bind { [weak self] (user) in
-            self?.friendDetailView.bind(friend: user)
+        viewModel.friend.bind { [weak self] (friend) in
+            self?.friendDetailView.bind(friend: friend)
         }.disposed(by: disposeBag)
     }
     
@@ -38,8 +38,8 @@ class FriendDetailVC: BaseVC {
         friendDetailView.startLoading()
         UserService.findFriend(id: friendId) { [weak self] (result) in
             switch result {
-            case .success(let user):
-                self?.viewModel.friend.onNext(user)
+            case .success(let friend):
+                self?.viewModel.friend.onNext(friend)
             case .failure(let error):
                 AlertUtil.show("findFriend error", message: error.localizedDescription)
             }

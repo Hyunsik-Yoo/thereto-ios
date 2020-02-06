@@ -36,6 +36,9 @@
 		6E6443E123EBCDC600254331 /* FriendDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E023EBCDC600254331 /* FriendDetailViewModel.swift */; };
 		6E6443E323EBD3A000254331 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E223EBD3A000254331 /* Result.swift */; };
 		6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E423EBD5BA00254331 /* CommonError.swift */; };
+		6E6443E723EBDC4E00254331 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E623EBDC4E00254331 /* Friend.swift */; };
+		6E6443E923EBDD6300254331 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E823EBDD6300254331 /* SocialType.swift */; };
+		6E6443EB23EBDD7900254331 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443EA23EBDD7900254331 /* State.swift */; };
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
@@ -95,6 +98,9 @@
 		6E6443E023EBCDC600254331 /* FriendDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailViewModel.swift; sourceTree = "<group>"; };
 		6E6443E223EBD3A000254331 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		6E6443E423EBD5BA00254331 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		6E6443E623EBDC4E00254331 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		6E6443E823EBDD6300254331 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
+		6E6443EA23EBDD7900254331 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
@@ -161,8 +167,11 @@
 			isa = PBXGroup;
 			children = (
 				6E2A08A323A758B000A13F92 /* User.swift */,
+				6E6443E623EBDC4E00254331 /* Friend.swift */,
 				6E6443E223EBD3A000254331 /* Result.swift */,
 				6E6443E423EBD5BA00254331 /* CommonError.swift */,
+				6E6443E823EBDD6300254331 /* SocialType.swift */,
+				6E6443EA23EBDD7900254331 /* State.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -495,6 +504,7 @@
 				6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */,
 				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
 				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
+				6E6443E723EBDC4E00254331 /* Friend.swift in Sources */,
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
@@ -502,6 +512,7 @@
 				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
 				6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */,
 				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
+				6E6443EB23EBDD7900254331 /* State.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */,
 				6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */,
@@ -515,6 +526,7 @@
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
+				6E6443E923EBDD6300254331 /* SocialType.swift in Sources */,
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
 				6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */,
 				6E6443E323EBD3A000254331 /* Result.swift in Sources */,

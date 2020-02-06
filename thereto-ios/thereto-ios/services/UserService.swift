@@ -3,7 +3,7 @@ import FirebaseFirestore
 struct UserService {
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
-        Firestore.firestore().collection("user").document("\(user.getSocial())\(user.socialId)").setData(user.toDict()) { (error) in
+        Firestore.firestore().collection("user").document("\(user.id)").setData(user.toDict()) { (error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             } else {
@@ -29,7 +29,7 @@ struct UserService {
         }
     }
     
-    static func findFriends(completion: @escaping ([User]) -> Void) {
+    static func findFriends(completion: @escaping ([Friend]) -> Void) {
         let db = Firestore.firestore()
         
         db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
@@ -41,9 +41,9 @@ struct UserService {
                 return
             }
             
-            var friendList:[User] = []
+            var friendList:[Friend] = []
             for document in snapshot.documents {
-                let user = User(map: document.data())
+                let user = Friend(map: document.data())
                 
                 friendList.append(user)
             }
@@ -51,7 +51,7 @@ struct UserService {
         }
     }
     
-    static func findFriend(id: String, completion: @escaping ((Result<User>) -> Void)) {
+    static func findFriend(id: String, completion: @escaping ((Result<Friend>) -> Void)) {
         let db = Firestore.firestore()
         
         db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
@@ -59,7 +59,7 @@ struct UserService {
                 completion(.failure(error))
             } else {
                 if let data = snapShot?.data() {
-                    completion(.success(User.init(map: data)))
+                    completion(.success(Friend.init(map: data)))
                 } else {
                     completion(.failure(CommonError.init(desc: "snapShot is nil")))
                 }
@@ -101,12 +101,11 @@ struct UserService {
         }
     }
     
-    static func addFriend(token: String, friend: User, completion: @escaping (Bool) -> Void) {
+    static func addFriend(token: String, friend: Friend, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
-        let friendToken = "\(friend.getSocial())\(friend.socialId)"
         var friendDict = friend.toDict()
         friendDict["createdAt"] = DateUtil.date2String(date: Date())
-        db.collection("user/\(token)/friends").document(friendToken).setData(friendDict) { (error) in
+        db.collection("user/\(token)/friends").document(friend.id).setData(friendDict) { (error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 completion(false)
@@ -131,10 +130,10 @@ struct UserService {
         }
     }
     
-    static func deleteFriend(token: String, friendToken: String, completion: @escaping (Bool) -> Void) {
+    static func deleteFriend(token: String, friendId: String, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(token).collection("friends").document(friendToken).delete { (error) in
+        db.collection("user").document(token).collection("friends").document(friendId).delete { (error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 completion(false)
@@ -144,7 +143,7 @@ struct UserService {
         }
     }
     
-    static func getReceivedFriends(completion: @escaping (([User]) -> Void)) {
+    static func getReceivedFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
         db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
@@ -153,9 +152,9 @@ struct UserService {
                 print(error.localizedDescription)
             } else {
                 if let snapShot = snapShot {
-                    var friends:[User] = []
+                    var friends:[Friend] = []
                     for document in snapShot.documents {
-                        let user = User(map: document.data())
+                        let user = Friend(map: document.data())
                         
                         friends.append(user)
                     }
@@ -167,18 +166,17 @@ struct UserService {
         }
     }
     
-    static func getSentFriends(completion: @escaping (([User]) -> Void)) {
+    static func getSentFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
         db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
-                print(error.localizedDescription)
             } else {
                 if let snapShot = snapShot {
-                    var friends:[User] = []
+                    var friends:[Friend] = []
                     for document in snapShot.documents {
-                        let user = User(map: document.data())
+                        let user = Friend(map: document.data())
                         
                         friends.append(user)
                     }

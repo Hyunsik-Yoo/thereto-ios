@@ -82,11 +82,11 @@ class FriendControlCell: BaseTableViewCell {
         }
     }
     
-    func bind(user: User) {
-        if let profileURL = user.profileURL {
+    func bind(friend: Friend) {
+        if let profileURL = friend.profileURL {
             profileImg.kf.setImage(with: URL.init(string: profileURL))
         }
-        nameLabel.text = user.nickname
+        nameLabel.text = friend.nickname
     }
     
     func setMode(mode: ControlMode) {

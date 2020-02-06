@@ -166,7 +166,7 @@ class FriendDetailView: BaseView {
         }
     }
     
-    func bind(friend: User?) {
+    func bind(friend: Friend?) {
         if let friend = friend {
             profileImg.kf.setImage(with: URL.init(string: friend.profileURL!))
             nameLabel.text = "\(friend.nickname) (\(friend.name))"

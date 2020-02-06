@@ -24,8 +24,8 @@ class FriendListVC: BaseVC {
     }
     
     override func bindViewModel() {
-        viewModel.friends.bind(to: friendListView.tableView.rx.items(cellIdentifier: FriendCell.registerId, cellType: FriendCell.self)) { row, user, cell in
-            cell.bind(user: user)
+        viewModel.friends.bind(to: friendListView.tableView.rx.items(cellIdentifier: FriendCell.registerId, cellType: FriendCell.self)) { row, friend, cell in
+            cell.bind(friend: friend)
         }.disposed(by: disposeBag)
     }
     
@@ -85,8 +85,7 @@ class FriendListVC: BaseVC {
 extension FriendListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let friends = try! self.viewModel.friends.value()
-        let friendId = "\(friends[indexPath.row].getSocial())\(friends[indexPath.row].socialId)"
         
-        self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friendId), animated: true)
+        self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friends[indexPath.row].id), animated: true)
     }
 }

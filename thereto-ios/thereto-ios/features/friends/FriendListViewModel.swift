@@ -3,5 +3,5 @@ import RxSwift
 
 struct FriendListViewModel {
     
-    var friends = BehaviorSubject<[User]>.init(value: [])
+    var friends = BehaviorSubject<[Friend]>.init(value: [])
 }

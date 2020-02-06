@@ -38,13 +38,13 @@ class AddFriendVC: BaseVC {
             }
         }.disposed(by: disposeBag)
         
-        viewModel.people.bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, user, cell in
-            if let user = user { // 검색 결과가 있을 때
+        viewModel.people.bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, friend, cell in
+            if let friend = friend { // 검색 결과가 있을 때
                 self.addFriendView.setDataMode(isDataMode: true)
-                cell.bind(user: user)
+                cell.bind(friend: friend)
                 cell.addBtn.rx.tap.bind {
                     AlertUtil.showWithCancel(title: "친구 요청", message: "친구 요청을 보내시겠습니까?") {
-                        var friend = user
+                        var friend = friend
                         
                         friend.requestState = .REQUEST_SENT
                         self.requestFriend(friend: friend)
@@ -65,26 +65,25 @@ class AddFriendVC: BaseVC {
         addFriendView.tableView.register(AddFriendCell.self, forCellReuseIdentifier: AddFriendCell.registerId)
     }
     
-    private func requestFriend(friend: User) {
+    private func requestFriend(friend: Friend) {
         self.addFriendView.startLoading()
         // 내 User document에 상대방 넣고 state는 request_sent
         let myToken = UserDefaultsUtil.getUserToken()!
-        let friendToken = "\(friend.getSocial())\(friend.socialId)"
         
         UserService.addFriend(token: myToken, friend: friend) { (isSuccess) in
             if isSuccess {
                 // 상대방 user document에 내 User넣고 state는 wait
                 UserService.getMyUser { (user) in
-                    var myUser = user
-                    myUser.requestState = User.State.WAIT
-                    UserService.addFriend(token: friendToken, friend: myUser) { (isSuccess) in
+                    var myUser = Friend.init(user: user)
+                    myUser.requestState = State.WAIT
+                    UserService.addFriend(token: friend.id, friend: myUser) { (isSuccess) in
                         if isSuccess {
                             AlertUtil.show(message: "친구 요청 성공")
                             self.addFriendView.nicknameField.text = ""
                             self.addFriendView.setDataMode(isDataMode: false)
                         } else {
                             // 실패한 경우 다시 지워야 함
-                            UserService.deleteFriend(token: myToken, friendToken: friendToken) { _ in }
+                            UserService.deleteFriend(token: myToken, friendId: friend.id) { _ in }
                         }
                         self.addFriendView.stopLoading()
                     }
@@ -107,18 +106,18 @@ class AddFriendVC: BaseVC {
                     // 내 친구가 아닌 사람들만 보여줘야하므로 필터링!
                     let filteredList = userList.filter { (user) -> Bool in
                         !self.viewModel.friends.contains { (friend) -> Bool in
-                            friend?.nickname == user.nickname && friend?.requestState == User.State.FRIEND
+                            friend?.nickname == user.nickname && friend?.requestState == State.FRIEND
                         }
-                    }.map { (user) -> User in // 친구요청 수락을 이미 보냈거나 대기중인 사람에게는 기다림 표시 떠야함
+                    }.map { (user) -> Friend in // 친구요청 수락을 이미 보냈거나 대기중인 사람에게는 기다림 표시 떠야함
                         if (self.viewModel.friends.contains { (friend) -> Bool in
                             friend?.nickname == user.nickname
                         }) {
-                            var newUser = user
+                            var newUser = Friend.init(user: user)
                             
-                            newUser.requestState = User.State.REQUEST_SENT
+                            newUser.requestState = State.REQUEST_SENT
                             return newUser
                         } else {
-                            return user
+                            return Friend.init(user: user)
                         }
                     }
                     self.viewModel.people.accept(filteredList.isEmpty ? [nil] : filteredList)
