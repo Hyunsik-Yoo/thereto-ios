@@ -5,6 +5,8 @@ import RxSwift
 class ProfileVC: BaseVC {
     
     var viewModel = ProfileViewModel()
+    var userId: String!
+    var social: String!
     
     private lazy var profileView: ProfileView =  {
         let profileView = ProfileView(frame: self.view.bounds)
@@ -13,23 +15,29 @@ class ProfileVC: BaseVC {
     }()
     
     
-    static func instance(id: String, social: String) -> ProfileVC {
+    static func instance(id: String, social: String, name: String? = nil) -> ProfileVC {
         let controller = ProfileVC(nibName: nil, bundle: nil)
         
-        controller.viewModel.userId = id
-        controller.viewModel.social = social
+        controller.userId = id
+        controller.social = social
+        if let name = name {
+            controller.viewModel.name.onNext(name)
+        }
         return controller
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view = profileView
+        
         profileView.nicknameField.delegate = self
         profileView.delegate = self
-        
-        // focus to textfield
         profileView.nicknameField.becomeFirstResponder()
-        getFBProfile(id: viewModel.userId)
+        
+        if social == "facebook" { // 애플로그인으로 접근할 경우에는 사진이 제공되지 않음
+            getFBProfile(id: userId)
+        }
     }
     
     override func bindViewModel() {
@@ -69,15 +77,15 @@ class ProfileVC: BaseVC {
     }
 }
 
-extension ProfileVC: ProfileDelegate, UITextFieldDelegate {
+extension ProfileVC: ProfileDelegate{
     func onTapOk() {
         let nickname = self.profileView.nicknameField.text!
         
         if !nickname.isEmpty {
             if let name = try? self.viewModel.name.value(),
                 let profileURL = try? self.viewModel.profileImageUrl.value() {
-                let user = User(nickname: nickname, name: name, social: self.viewModel.social,
-                                id: self.viewModel.userId, profileURL: profileURL)
+                let user = User(nickname: nickname, name: name, social: self.social,
+                                id: self.userId, profileURL: profileURL)
                 
                 UserService.isExistingUser(nickname: nickname) { (isExisted) in
                     if (isExisted) {
@@ -91,7 +99,9 @@ extension ProfileVC: ProfileDelegate, UITextFieldDelegate {
             }
         }
     }
-    
+}
+
+extension ProfileVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
             let rangeOfTextToReplace = Range(range, in: textFieldText) else {
