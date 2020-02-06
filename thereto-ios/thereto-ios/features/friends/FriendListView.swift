@@ -1,4 +1,5 @@
 import UIKit
+import Then
 
 class FriendListView: BaseView {
     
@@ -33,10 +34,17 @@ class FriendListView: BaseView {
         return button
     }()
     
+    let emptyLabel = UILabel().then {
+        $0.text = "친구가 없습니다ㅠ.ㅠ"
+        $0.textColor = .black_30
+        $0.font = UIFont.init(name: "SpoqaHanSans-Light", size: 15)
+        $0.isHidden = true
+    }
+    
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubViews(topBar, drawer, tableView, writeBtn)
+        addSubViews(topBar, drawer, tableView, writeBtn, emptyLabel)
     }
     
     override func bindConstraints() {
@@ -55,6 +63,11 @@ class FriendListView: BaseView {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(topBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
+        }
+        
+        emptyLabel.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(topBar.snp.bottom).offset(40)
         }
         
         writeBtn.snp.makeConstraints { (make) in
