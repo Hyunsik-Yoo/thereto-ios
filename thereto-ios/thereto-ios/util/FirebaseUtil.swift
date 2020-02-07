@@ -12,4 +12,8 @@ struct FirebaseUtil {
             }
         }
     }
+    
+    static func signOut() {
+        try! Auth.auth().signOut() 
+    }
 }

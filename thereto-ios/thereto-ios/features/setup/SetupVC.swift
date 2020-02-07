@@ -1,4 +1,6 @@
 import UIKit
+import FBSDKLoginKit
+import FBSDKCoreKit
 
 class SetupVC: BaseVC {
     
@@ -91,6 +93,12 @@ class SetupVC: BaseVC {
             delegate.goToLetterbox()
         }
     }
+    
+    private func goToSignIn() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToSignIn()
+        }
+    }
 }
 
 extension SetupVC: UITableViewDelegate, UITableViewDataSource {
@@ -114,5 +122,31 @@ extension SetupVC: UITableViewDelegate, UITableViewDataSource {
             break
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0: // 알람 설정
+            break
+        case 1: // 로그아웃
+            AlertUtil.showWithCancel(title: "로그아웃", message: "로그아웃하시겠습니까?") { [weak self] in
+                UserDefaultsUtil.clearUserToken()
+                FirebaseUtil.signOut()
+                
+                if let vc = self {
+                    if let user = try! vc.viewModel.user.value(),
+                        user.social == .FACEBOOK {
+                        LoginManager().logOut()
+                    }
+                }
+                self?.goToSignIn()
+            }
+        case 2: // 계정 삭제
+            AlertUtil.showWithCancel(title: "계정삭제", message: "계정을 삭제하시겠습니까?\n삭제 시 모든 데이터가 사라지고 재복구할 수 없습니다.") {
+                
+            }
+        default:
+            break
+        }
     }
 }
