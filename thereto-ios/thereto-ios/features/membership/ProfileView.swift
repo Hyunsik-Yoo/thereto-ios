@@ -14,14 +14,11 @@ class ProfileView: BaseView {
         return image
     }()
     
-    let profileImage: UIImageView = {
-        let image = UIImageView()
-        
-        image.backgroundColor = .red
-        image.layer.cornerRadius = 20
-        image.clipsToBounds = true
-        return image
-    }()
+    let profileImage = UIImageView().then {
+        $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()

@@ -4,13 +4,11 @@ class LetterCell: BaseTableViewCell {
     
     static let registerId = "\(LetterCell.self)"
     
-    private let profileImage: UIImageView = {
-        let image = UIImageView()
-        
-        image.layer.cornerRadius = 25
-        image.backgroundColor = .black
-        return image
-    }()
+    private let profileImage = UIImageView().then {
+        $0.layer.cornerRadius = 25
+        $0.layer.masksToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
+    }
     
     private let fromLabel: UILabel = {
         let label = UILabel()

@@ -5,14 +5,11 @@ class FriendCell: BaseTableViewCell {
     
     static let registerId = "\(FriendCell.self)"
     
-    let profileImage: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.layer.cornerRadius = 20
-        imageView.backgroundColor = .red
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
+    let profileImage = UIImageView().then {
+        $0.layer.cornerRadius = 20
+        $0.layer.masksToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -60,7 +57,7 @@ class FriendCell: BaseTableViewCell {
     }
     
     func bind(friend: Friend) {
-        profileImage.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "ic_add"))
+        profileImage.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
         nameLabel.text = friend.nickname
         // TODO: 얘 어떻게 처리해야할까...
         favoriteDot.isHidden = true

@@ -7,9 +7,9 @@ class FriendDetailView: BaseView {
     }
     
     let profileImg = UIImageView().then {
-        $0.backgroundColor = .gray
         $0.layer.cornerRadius = 56 * (UIScreen.main.bounds.width / 375) / 2
         $0.layer.masksToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
     }
     
     let nameLabel = UILabel().then {
@@ -168,7 +168,7 @@ class FriendDetailView: BaseView {
     
     func bind(friend: Friend?) {
         if let friend = friend {
-            profileImg.kf.setImage(with: URL.init(string: friend.profileURL!))
+            profileImg.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
             nameLabel.text = "\(friend.nickname) (\(friend.name))"
             receivedCountLabel.text = "\(friend.receivedCount)"
             sentCountLabel.text = "\(friend.sentCount)"
