@@ -32,6 +32,18 @@ class FriendDetailVC: BaseVC {
         friendDetailView.backBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
+        
+        friendDetailView.deleteBtn1.rx.tap.bind { [weak self] in
+            AlertUtil.showWithCancel(title: "친구삭제", message: "정말로 삭제하시겠습니까?") {
+                self?.deleteFriend()
+            }
+        }.disposed(by: disposeBag)
+        
+        friendDetailView.deleteBtn2.rx.tap.bind { [weak self] in
+            AlertUtil.showWithCancel(title: "친구삭제", message: "정말로 삭제하시겠습니까?") {
+                self?.deleteFriend()
+            }
+        }.disposed(by: disposeBag)
     }
     
     private func getFriendInfo() {
@@ -44,6 +56,24 @@ class FriendDetailVC: BaseVC {
                 AlertUtil.show("findFriend error", message: error.localizedDescription)
             }
             self?.friendDetailView.stopLoading()
+        }
+    }
+    
+    private func deleteFriend() {
+        friendDetailView.startLoading()
+        UserService.deleteFriend(token: UserDefaultsUtil.getUserToken()!, friendId: friendId) {[weak self] (isSuccess) in
+            if let vc = self {
+                if isSuccess {
+                    UserService.deleteFriend(token: vc.friendId, friendId: UserDefaultsUtil.getUserToken()!) { isSuccess in
+                        if isSuccess {
+                            vc.navigationController?.popViewController(animated: true)
+                        }
+                        self?.friendDetailView.stopLoading()
+                    }
+                } else {
+                    self?.friendDetailView.stopLoading()
+                }
+            }
         }
     }
 }

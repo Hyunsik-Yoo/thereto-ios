@@ -20,6 +20,11 @@ class FriendListVC: BaseVC {
         setupDrawer()
         setupTableView()
         setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getFriendList()
     }
     
@@ -67,11 +72,14 @@ class FriendListVC: BaseVC {
     }
     
     private func getFriendList() {
+        friendListView.startLoading()
         UserService.findFriends() { [weak self] (friendList) in
             if !friendList.isEmpty {
                 self?.viewModel.friends.onNext(friendList)
             }
             self?.friendListView.emptyLabel.isHidden = !friendList.isEmpty
+            self?.friendListView.tableView.isHidden = friendList.isEmpty
+            self?.friendListView.stopLoading()
         }
     }
     
