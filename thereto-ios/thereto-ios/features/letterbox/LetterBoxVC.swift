@@ -41,9 +41,19 @@ class LetterBoxVC: BaseVC {
             self.letterBoxView.hideMenu { }
         }.disposed(by: disposeBag)
         
+        letterBoxView.drawer.letterboxBtn.rx.tap.bind { [weak self] in
+            self?.letterBoxView.hideMenu { }
+        }.disposed(by: disposeBag)
+        
         letterBoxView.drawer.friendBtn.rx.tap.bind { [weak self] in
             self?.letterBoxView.hideMenu {
                 self?.goToFriend()
+            }
+        }.disposed(by: disposeBag)
+        
+        letterBoxView.drawer.setupBtn.rx.tap.bind { [weak self] in
+            self?.letterBoxView.hideMenu {
+                self?.goToSetup()
             }
         }.disposed(by: disposeBag)
         
@@ -66,6 +76,12 @@ class LetterBoxVC: BaseVC {
     private func goToFriend() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.goToFriend()
+        }
+    }
+    
+    private func goToSetup() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToSetup()
         }
     }
 }

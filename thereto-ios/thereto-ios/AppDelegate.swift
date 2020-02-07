@@ -43,5 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = FriendListVC.instance()
         window?.makeKeyAndVisible()
     }
+    
+    func goToSetup() {
+        window?.rootViewController = SetupVC.instance()
+        window?.makeKeyAndVisible()
+    }
 }
 

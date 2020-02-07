@@ -29,4 +29,8 @@ extension UIColor {
     class var greyish_brown: UIColor {
         return UIColor.init(r: 60, g: 46, b: 42)
     }
+    
+    class var mushroom: UIColor {
+        return UIColor.init(r: 165, g: 156, b: 156)
+    }
 }

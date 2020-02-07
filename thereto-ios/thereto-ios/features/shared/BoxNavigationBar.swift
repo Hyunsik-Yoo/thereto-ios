@@ -2,7 +2,7 @@ import UIKit
 
 class BoxNavigationBar: BaseView {
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         
         label.text = "Letterbox."
