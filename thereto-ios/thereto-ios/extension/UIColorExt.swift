@@ -9,4 +9,24 @@ extension UIColor {
     class var themeColor: UIColor? {
         return UIColor.init(r: 255, g: 248, b: 239)
     }
+    
+    class var orange_red: UIColor {
+        return UIColor.init(r: 255, g: 84, b: 41)
+    }
+    
+    class var black_30: UIColor {
+        return UIColor.init(r: 30, g: 30, b: 30)
+    }
+    
+    class var very_light_pink: UIColor {
+        return UIColor.init(r: 255, g: 248, b: 239)
+    }
+    
+    class var brownish_grey: UIColor {
+        return UIColor.init(r: 114, g: 95, b: 95)
+    }
+    
+    class var greyish_brown: UIColor {
+        return UIColor.init(r: 60, g: 46, b: 42)
+    }
 }

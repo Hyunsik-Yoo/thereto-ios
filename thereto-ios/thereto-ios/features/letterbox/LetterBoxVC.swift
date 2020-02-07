@@ -10,18 +10,26 @@ class LetterBoxVC: BaseVC {
     }()
     
     
-    static func instance() -> LetterBoxVC {
-        return LetterBoxVC(nibName: nil, bundle: nil)
+    static func instance() -> UINavigationController {
+        let controller = LetterBoxVC(nibName: nil, bundle: nil)
+        
+        return UINavigationController(rootViewController: controller)
     }
     
     override func viewDidLoad() {
-        view = letterBoxView
+        navigationController?.isNavigationBarHidden = true
+        view.addSubview(letterBoxView)
+        letterBoxView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
         initDrawer()
         
-        self.letterBoxView.tableView.separatorStyle = .none
-        self.letterBoxView.tableView.delegate = self
-        self.letterBoxView.tableView.dataSource = self
-        self.letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
+        letterBoxView.topBar.setLetterBoxMode()
+        
+        letterBoxView.tableView.separatorStyle = .none
+        letterBoxView.tableView.delegate = self
+        letterBoxView.tableView.dataSource = self
+        letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
     }
     
     private func initDrawer() {
@@ -33,18 +41,32 @@ class LetterBoxVC: BaseVC {
             self.letterBoxView.hideMenu { }
         }.disposed(by: disposeBag)
         
+        letterBoxView.drawer.friendBtn.rx.tap.bind { [weak self] in
+            self?.letterBoxView.hideMenu {
+                self?.goToFriend()
+            }
+        }.disposed(by: disposeBag)
+        
         let tapGesture = UITapGestureRecognizer()
         
-        letterBoxView.drawer.isUserInteractionEnabled = true
         letterBoxView.drawer.addGestureRecognizer(tapGesture)
-        
         tapGesture.rx.event.bind { _ in
             self.letterBoxView.hideMenu { }
+        }.disposed(by: disposeBag)
+        
+        letterBoxView.drawer.friendControllBtn.rx.tap.bind {
+            self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         }.disposed(by: disposeBag)
     }
     
     override func bindViewModel() {
         
+    }
+    
+    private func goToFriend() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToFriend()
+        }
     }
 }
 
@@ -71,11 +93,11 @@ extension LetterBoxVC: UITableViewDelegate, UITableViewDataSource {
             stoppedScrolling()
         }
     }
-
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         stoppedScrolling()
     }
-
+    
     func stoppedScrolling() {
         self.letterBoxView.showWrieBtn()
     }

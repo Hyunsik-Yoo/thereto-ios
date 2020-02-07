@@ -34,8 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
-    func goToMain() {
+    func goToLetterbox() {
         window?.rootViewController = LetterBoxVC.instance()
+        window?.makeKeyAndVisible()
+    }
+    
+    func goToFriend() {
+        window?.rootViewController = FriendListVC.instance()
         window?.makeKeyAndVisible()
     }
 }
