@@ -41,7 +41,7 @@ class FriendDetailView: BaseView {
         $0.textAlignment = .right
     }
     
-    let receivedCount = UILabel().then {
+    let receivedCountLabel = UILabel().then {
         $0.text = "0"
         $0.textColor = .greyish_brown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
@@ -54,7 +54,7 @@ class FriendDetailView: BaseView {
         $0.textAlignment = .right
     }
     
-    let sentCount = UILabel().then {
+    let sentCountLabel = UILabel().then {
         $0.text = "2"
         $0.textColor = .greyish_brown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
@@ -83,7 +83,7 @@ class FriendDetailView: BaseView {
     override func setup() {
         backgroundColor = .very_light_pink
         addSubViews(backBtn, profileImg, nameLabel, favoriteBtn, favoriteDot, whiteContainer,
-                    receivedLabel, receivedCount, sentLabel, sentCount, deleteBtn1, deleteBtn2, writeBtn, writeLabel)
+                    receivedLabel, receivedCountLabel, sentLabel, sentCountLabel, deleteBtn1, deleteBtn2, writeBtn, writeLabel)
     }
     
     override func bindConstraints() {
@@ -127,7 +127,7 @@ class FriendDetailView: BaseView {
             make.left.equalTo(whiteContainer).offset(47 * RatioUtils.width)
         }
         
-        receivedCount.snp.makeConstraints { (make) in
+        receivedCountLabel.snp.makeConstraints { (make) in
             make.right.equalTo(receivedLabel)
             make.top.equalTo(receivedLabel.snp.bottom).offset(6)
         }
@@ -137,9 +137,9 @@ class FriendDetailView: BaseView {
             make.centerY.equalTo(receivedLabel)
         }
         
-        sentCount.snp.makeConstraints { (make) in
+        sentCountLabel.snp.makeConstraints { (make) in
             make.right.equalTo(sentLabel)
-            make.centerY.equalTo(receivedCount)
+            make.centerY.equalTo(receivedCountLabel)
         }
         
         deleteBtn1.snp.makeConstraints { (make) in
@@ -170,6 +170,8 @@ class FriendDetailView: BaseView {
         if let friend = friend {
             profileImg.kf.setImage(with: URL.init(string: friend.profileURL!))
             nameLabel.text = "\(friend.nickname) (\(friend.name))"
+            receivedCountLabel.text = "\(friend.receivedCount)"
+            sentCountLabel.text = "\(friend.sentCount)"
         }
     }
 }
