@@ -21,13 +21,11 @@ class SetupView: BaseView {
     }
     
     let nicknameLabel = UILabel().then {
-        $0.text = "구리구리"
         $0.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 20)
         $0.textColor = .black_30
     }
     
     let nameLabel = UILabel().then {
-        $0.text = "사용자명"
         $0.textColor = .mushroom
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 17)
     }
@@ -61,7 +59,7 @@ class SetupView: BaseView {
     }
     
     let sentCountLabel = UILabel().then {
-        $0.text = "2"
+        $0.text = "0"
         $0.textColor = .greyish_brown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
@@ -187,6 +185,16 @@ class SetupView: BaseView {
             self.layoutIfNeeded()
         }) { (_) in
             completion()
+        }
+    }
+    
+    func bind(user: User?) {
+        if let user = user {
+            profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+            nicknameLabel.text = user.nickname
+            nameLabel.text = user.name
+            receivedCountLabel.text = "\(user.receivedCount)"
+            sentCountLabel.text = "\(user.sentCount)"
         }
     }
 }

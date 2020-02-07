@@ -4,6 +4,7 @@ class SetupVC: BaseVC {
     
     private lazy var setupView = SetupView.init(frame: self.view.frame)
     
+    private var viewModel = SetupViewModel()
     
     static func instance() -> UINavigationController {
         return UINavigationController.init(rootViewController: SetupVC.init(nibName: nil, bundle: nil))
@@ -15,10 +16,13 @@ class SetupVC: BaseVC {
         navigationController?.isNavigationBarHidden = true
         view = setupView
         setupTableView()
+        getMyInfo()
     }
     
     override func bindViewModel() {
-        
+        viewModel.user.bind { [weak self] (user) in
+            self?.setupView.bind(user: user)
+        }.disposed(by: disposeBag)
     }
     
     override func bindEvent() {
@@ -66,6 +70,14 @@ class SetupVC: BaseVC {
         setupView.drawer.friendControllBtn.rx.tap.bind {
             self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         }.disposed(by: disposeBag)
+    }
+    
+    private func getMyInfo() {
+        setupView.startLoading()
+        UserService.getMyUser { [weak self] (user) in
+            self?.viewModel.user.onNext(user)
+            self?.setupView.stopLoading()
+        }
     }
     
     private func goToFriend() {
