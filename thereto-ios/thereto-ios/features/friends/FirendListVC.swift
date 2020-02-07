@@ -53,6 +53,10 @@ class FriendListVC: BaseVC {
             self?.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
         
+        friendListView.topBar.searchBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(FindFriendVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
+        
         friendListView.drawer.letterboxBtn.rx.tap.bind { [weak self] in
             if let vc = self {
                 vc.friendListView.hideMenu {

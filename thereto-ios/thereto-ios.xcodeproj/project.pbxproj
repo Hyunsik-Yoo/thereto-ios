@@ -22,6 +22,9 @@
 		6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A623A75BC600A13F92 /* UserService.swift */; };
 		6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */; };
 		6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */; };
+		6E33759123ECF2FD00C3128E /* FindFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759023ECF2FD00C3128E /* FindFriendView.swift */; };
+		6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759223ECF38F00C3128E /* FindFriendVC.swift */; };
+		6E33759523ECF8F900C3128E /* FindFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759423ECF8F900C3128E /* FindFriendViewModel.swift */; };
 		6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271A23A9A74A00AEBD93 /* FriendListView.swift */; };
 		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45E41823B9B83000C2900C /* FriendControlView.swift */; };
@@ -84,6 +87,9 @@
 		6E2A08A623A75BC600A13F92 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxView.swift; sourceTree = "<group>"; };
 		6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxVC.swift; sourceTree = "<group>"; };
+		6E33759023ECF2FD00C3128E /* FindFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendView.swift; sourceTree = "<group>"; };
+		6E33759223ECF38F00C3128E /* FindFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendVC.swift; sourceTree = "<group>"; };
+		6E33759423ECF8F900C3128E /* FindFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendViewModel.swift; sourceTree = "<group>"; };
 		6E43271A23A9A74A00AEBD93 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6E45E41823B9B83000C2900C /* FriendControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlView.swift; sourceTree = "<group>"; };
@@ -194,9 +200,20 @@
 			path = letterbox;
 			sourceTree = "<group>";
 		};
+		6E33758F23ECF2EF00C3128E /* find-friend */ = {
+			isa = PBXGroup;
+			children = (
+				6E33759023ECF2FD00C3128E /* FindFriendView.swift */,
+				6E33759223ECF38F00C3128E /* FindFriendVC.swift */,
+				6E33759423ECF8F900C3128E /* FindFriendViewModel.swift */,
+			);
+			path = "find-friend";
+			sourceTree = "<group>";
+		};
 		6E43271923A9A71800AEBD93 /* friends */ = {
 			isa = PBXGroup;
 			children = (
+				6E33758F23ECF2EF00C3128E /* find-friend */,
 				6E6443D923EBA86100254331 /* friend-detail */,
 				6E804B3623ADEEA4009574CD /* add-friend */,
 				6E43271A23A9A74A00AEBD93 /* FriendListView.swift */,
@@ -493,18 +510,21 @@
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
+				6E33759123ECF2FD00C3128E /* FindFriendView.swift in Sources */,
 				6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,
 				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
 				6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */,
+				6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */,
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */,
 				6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */,
 				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
 				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
 				6E6443E723EBDC4E00254331 /* Friend.swift in Sources */,
+				6E33759523ECF8F900C3128E /* FindFriendViewModel.swift in Sources */,
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
