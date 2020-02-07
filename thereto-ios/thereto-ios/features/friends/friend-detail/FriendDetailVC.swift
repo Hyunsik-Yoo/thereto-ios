@@ -34,13 +34,13 @@ class FriendDetailVC: BaseVC {
         }.disposed(by: disposeBag)
         
         friendDetailView.deleteBtn1.rx.tap.bind { [weak self] in
-            AlertUtil.showWithCancel(title: "친구삭제", message: "정말로 삭제하시겠습니까?") {
+            AlertUtil.showWithCancel(title: "친구삭제", message: "친구를 삭제하면 엽서를 보낼 수 없습니다.\n삭제하시겠습니까?") {
                 self?.deleteFriend()
             }
         }.disposed(by: disposeBag)
         
         friendDetailView.deleteBtn2.rx.tap.bind { [weak self] in
-            AlertUtil.showWithCancel(title: "친구삭제", message: "정말로 삭제하시겠습니까?") {
+            AlertUtil.showWithCancel(title: "친구삭제", message: "친구를 삭제하면 엽서를 보낼 수 없습니다.\n삭제하시겠습니까?") {
                 self?.deleteFriend()
             }
         }.disposed(by: disposeBag)
