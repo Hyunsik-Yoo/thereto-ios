@@ -154,7 +154,7 @@ class FriendDetailView: BaseView {
         }
         
         writeBtn.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-42)
+            make.bottom.equalTo(safeAreaLayoutGuide).offset(-42)
             make.right.equalToSuperview()
             make.left.equalTo(whiteContainer)
             make.height.equalTo(60)

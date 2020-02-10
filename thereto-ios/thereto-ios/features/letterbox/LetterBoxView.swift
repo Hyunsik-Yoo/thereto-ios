@@ -40,7 +40,8 @@ class LetterBoxView: BaseView {
         
         rightWhiteView.snp.makeConstraints { (make) in
             make.top.equalTo(topBar.snp.bottom)
-            make.bottom.right.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide)
             make.width.equalTo(70)
         }
         
