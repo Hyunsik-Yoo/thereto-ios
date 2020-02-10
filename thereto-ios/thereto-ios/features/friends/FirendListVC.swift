@@ -36,6 +36,16 @@ class FriendListVC: BaseVC {
         }.disposed(by: disposeBag)
     }
     
+    override func bindEvent() {
+        friendListView.topBar.addFriendBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
+        
+        friendListView.topBar.searchBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(FindFriendVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
+    }
+    
     private func setupNavigationBar() {
         navigationController?.isNavigationBarHidden = true
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
