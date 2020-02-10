@@ -11,7 +11,7 @@ class FriendListVC: BaseVC {
     static func instance() -> UINavigationController {
         let controller = FriendListVC.init(nibName: nil, bundle: nil)
         
-        controller.tabBarItem = UITabBarItem.init(title: "친구관리", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        controller.tabBarItem = UITabBarItem.init(title: "친구관리", image: UIImage.init(named: "ic_friend_off"), selectedImage: UIImage.init(named: "ic_friend_on"))
         return UINavigationController.init(rootViewController: controller)
     }
     

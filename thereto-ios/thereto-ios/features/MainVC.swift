@@ -24,6 +24,7 @@ class MainVC: UITabBarController {
             [NSAttributedString.Key.font: UIFont(name:"SpoqaHanSans-Regular", size:11)!,
              NSAttributedString.Key.foregroundColor: UIColor.mushroom],
             for: UIControl.State.normal)
+        UITabBar.appearance().tintColor = .greyishBrown
         
         tabBar.shadowImage = UIImage()
         tabBar.backgroundColor = .veryLightPink
