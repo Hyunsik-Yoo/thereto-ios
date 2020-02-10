@@ -13,8 +13,18 @@ class LetterBoxVC: BaseVC {
     static func instance() -> UINavigationController {
         let controller = LetterBoxVC(nibName: nil, bundle: nil)
         
+        controller.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
         return UINavigationController(rootViewController: controller)
     }
+    
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nil, bundle: nil)
+//        tabBarItem.title = "수신함"
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//    }
     
     override func viewDidLoad() {
         navigationController?.isNavigationBarHidden = true

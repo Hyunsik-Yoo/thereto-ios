@@ -9,7 +9,10 @@ class SetupVC: BaseVC {
     private var viewModel = SetupViewModel()
     
     static func instance() -> UINavigationController {
-        return UINavigationController.init(rootViewController: SetupVC.init(nibName: nil, bundle: nil))
+        let controller = SetupVC.init(nibName: nil, bundle: nil)
+        
+        controller.tabBarItem = UITabBarItem.init(title: "설정", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        return UINavigationController.init(rootViewController: controller)
     }
     
     override func viewDidLoad() {

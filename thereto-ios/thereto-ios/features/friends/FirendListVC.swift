@@ -9,7 +9,10 @@ class FriendListVC: BaseVC {
     private lazy var friendListView = FriendListView(frame: self.view.frame)
     
     static func instance() -> UINavigationController {
-        return UINavigationController.init(rootViewController: FriendListVC.init(nibName: nil, bundle: nil))
+        let controller = FriendListVC.init(nibName: nil, bundle: nil)
+        
+        controller.tabBarItem = UITabBarItem.init(title: "친구관리", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        return UINavigationController.init(rootViewController: controller)
     }
     
     

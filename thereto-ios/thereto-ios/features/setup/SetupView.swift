@@ -47,7 +47,7 @@ class SetupView: BaseView {
     
     let receivedCountLabel = UILabel().then {
         $0.text = "0"
-        $0.textColor = .greyish_brown
+        $0.textColor = .greyishBrown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
     
@@ -60,7 +60,7 @@ class SetupView: BaseView {
     
     let sentCountLabel = UILabel().then {
         $0.text = "0"
-        $0.textColor = .greyish_brown
+        $0.textColor = .greyishBrown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
     
@@ -79,7 +79,7 @@ class SetupView: BaseView {
     }
     
     override func setup() {
-        backgroundColor = .very_light_pink
+        backgroundColor = .veryLightPink
         addSubViews(topBar, drawer, profileImg, nicknameLabel, nameLabel,
                     bottomBg, whiteContainer, receivedLabel, receivedCountLabel,
                     sentLabel, sentCountLabel, tableView, writeBtn)

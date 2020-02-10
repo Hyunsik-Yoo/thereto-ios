@@ -18,7 +18,7 @@ extension UIColor {
         return UIColor.init(r: 30, g: 30, b: 30)
     }
     
-    class var very_light_pink: UIColor {
+    class var veryLightPink: UIColor {
         return UIColor.init(r: 255, g: 248, b: 239)
     }
     
@@ -26,7 +26,7 @@ extension UIColor {
         return UIColor.init(r: 114, g: 95, b: 95)
     }
     
-    class var greyish_brown: UIColor {
+    class var greyishBrown: UIColor {
         return UIColor.init(r: 60, g: 46, b: 42)
     }
     

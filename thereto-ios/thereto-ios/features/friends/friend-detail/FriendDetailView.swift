@@ -43,7 +43,7 @@ class FriendDetailView: BaseView {
     
     let receivedCountLabel = UILabel().then {
         $0.text = "0"
-        $0.textColor = .greyish_brown
+        $0.textColor = .greyishBrown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
     
@@ -56,7 +56,7 @@ class FriendDetailView: BaseView {
     
     let sentCountLabel = UILabel().then {
         $0.text = "2"
-        $0.textColor = .greyish_brown
+        $0.textColor = .greyishBrown
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
     
@@ -81,7 +81,7 @@ class FriendDetailView: BaseView {
     }
     
     override func setup() {
-        backgroundColor = .very_light_pink
+        backgroundColor = .veryLightPink
         addSubViews(backBtn, profileImg, nameLabel, favoriteBtn, favoriteDot, whiteContainer,
                     receivedLabel, receivedCountLabel, sentLabel, sentCountLabel, deleteBtn1, deleteBtn2, writeBtn, writeLabel)
     }
