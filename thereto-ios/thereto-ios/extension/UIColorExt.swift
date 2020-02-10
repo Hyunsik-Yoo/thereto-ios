@@ -14,7 +14,7 @@ extension UIColor {
         return UIColor.init(r: 255, g: 84, b: 41)
     }
     
-    class var black_30: UIColor {
+    class var black30: UIColor {
         return UIColor.init(r: 30, g: 30, b: 30)
     }
     
@@ -32,5 +32,9 @@ extension UIColor {
     
     class var mushroom: UIColor {
         return UIColor.init(r: 165, g: 156, b: 156)
+    }
+    
+    class var mudBrown: UIColor {
+        return UIColor.init(r: 66, g: 40, b: 15)
     }
 }

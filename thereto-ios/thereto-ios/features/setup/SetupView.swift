@@ -18,7 +18,7 @@ class SetupView: BaseView {
     
     let nicknameLabel = UILabel().then {
         $0.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 20)
-        $0.textColor = .black_30
+        $0.textColor = .black30
     }
     
     let nameLabel = UILabel().then {

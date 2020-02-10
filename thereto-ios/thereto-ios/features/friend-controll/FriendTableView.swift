@@ -9,7 +9,7 @@ class FriendTableView: BaseView {
     
     let emptyLabel = UILabel().then {
         $0.text = "받은 요청이 없습니다."
-        $0.textColor = .black_30
+        $0.textColor = .black30
         $0.font = UIFont.init(name: "SpoqaHanSans-Light", size: 14)
         $0.isHidden = true
     }

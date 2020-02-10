@@ -13,7 +13,7 @@ class FriendDetailView: BaseView {
     }
     
     let nameLabel = UILabel().then {
-        $0.textColor = .black_30
+        $0.textColor = .black30
         $0.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 19)
     }
     
