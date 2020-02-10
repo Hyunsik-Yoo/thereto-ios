@@ -25,6 +25,10 @@
 		6E33759123ECF2FD00C3128E /* FindFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759023ECF2FD00C3128E /* FindFriendView.swift */; };
 		6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759223ECF38F00C3128E /* FindFriendVC.swift */; };
 		6E33759523ECF8F900C3128E /* FindFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759423ECF8F900C3128E /* FindFriendViewModel.swift */; };
+		6E33759823ED210D00C3128E /* SetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759723ED210D00C3128E /* SetupView.swift */; };
+		6E33759A23ED38B800C3128E /* SetupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759923ED38B800C3128E /* SetupVC.swift */; };
+		6E33759C23ED3FB900C3128E /* SetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759B23ED3FB900C3128E /* SetupCell.swift */; };
+		6E33759E23ED4BA100C3128E /* SetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759D23ED4BA100C3128E /* SetupViewModel.swift */; };
 		6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271A23A9A74A00AEBD93 /* FriendListView.swift */; };
 		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45E41823B9B83000C2900C /* FriendControlView.swift */; };
@@ -90,6 +94,10 @@
 		6E33759023ECF2FD00C3128E /* FindFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendView.swift; sourceTree = "<group>"; };
 		6E33759223ECF38F00C3128E /* FindFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendVC.swift; sourceTree = "<group>"; };
 		6E33759423ECF8F900C3128E /* FindFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendViewModel.swift; sourceTree = "<group>"; };
+		6E33759723ED210D00C3128E /* SetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupView.swift; sourceTree = "<group>"; };
+		6E33759923ED38B800C3128E /* SetupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupVC.swift; sourceTree = "<group>"; };
+		6E33759B23ED3FB900C3128E /* SetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCell.swift; sourceTree = "<group>"; };
+		6E33759D23ED4BA100C3128E /* SetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewModel.swift; sourceTree = "<group>"; };
 		6E43271A23A9A74A00AEBD93 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6E45E41823B9B83000C2900C /* FriendControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlView.swift; sourceTree = "<group>"; };
@@ -210,6 +218,17 @@
 			path = "find-friend";
 			sourceTree = "<group>";
 		};
+		6E33759623ED20D400C3128E /* setup */ = {
+			isa = PBXGroup;
+			children = (
+				6E33759723ED210D00C3128E /* SetupView.swift */,
+				6E33759923ED38B800C3128E /* SetupVC.swift */,
+				6E33759B23ED3FB900C3128E /* SetupCell.swift */,
+				6E33759D23ED4BA100C3128E /* SetupViewModel.swift */,
+			);
+			path = setup;
+			sourceTree = "<group>";
+		};
 		6E43271923A9A71800AEBD93 /* friends */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +321,7 @@
 		6EE72F602392369000C4CFA7 /* features */ = {
 			isa = PBXGroup;
 			children = (
+				6E33759623ED20D400C3128E /* setup */,
 				6E45E41723B9B7F800C2900C /* friend-controll */,
 				6E43271923A9A71800AEBD93 /* friends */,
 				6EBF6BE023A88CF100182078 /* shared */,
@@ -510,11 +530,13 @@
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
+				6E33759823ED210D00C3128E /* SetupView.swift in Sources */,
 				6E33759123ECF2FD00C3128E /* FindFriendView.swift in Sources */,
 				6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,
+				6E33759E23ED4BA100C3128E /* SetupViewModel.swift in Sources */,
 				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
 				6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */,
 				6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */,
@@ -531,6 +553,7 @@
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
 				6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */,
+				6E33759A23ED38B800C3128E /* SetupVC.swift in Sources */,
 				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6E6443EB23EBDD7900254331 /* State.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
@@ -547,6 +570,7 @@
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
 				6E6443E923EBDD6300254331 /* SocialType.swift in Sources */,
+				6E33759C23ED3FB900C3128E /* SetupCell.swift in Sources */,
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
 				6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */,
 				6E6443E323EBD3A000254331 /* Result.swift in Sources */,

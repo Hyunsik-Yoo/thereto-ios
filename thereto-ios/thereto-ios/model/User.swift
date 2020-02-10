@@ -5,6 +5,8 @@ struct User {
     var nickname: String
     var social: SocialType
     var profileURL: String?
+    var receivedCount = 0
+    var sentCount = 0
     var id: String
     
     init(nickname: String, name: String, social: String, id: String, profileURL: String) {
@@ -20,12 +22,14 @@ struct User {
         self.name = map["name"] as! String
         self.social = SocialType(rawValue: map["social"] as! String)!
         self.profileURL = map["profile_url"] as? String
+        self.receivedCount = map["receive_count"] as! Int
+        self.sentCount = map["sent_count"] as! Int
         self.id = map["id"] as! String
     }
     
     func toDict() -> [String: Any] {
         return ["name": name, "nickname": nickname, "social": social.rawValue,
-                "id": id, "profile_url": profileURL!]
+                "id": id, "profile_url": profileURL!, "receive_count": receivedCount, "sent_count": sentCount]
     }
     
     func getSocial() -> String {

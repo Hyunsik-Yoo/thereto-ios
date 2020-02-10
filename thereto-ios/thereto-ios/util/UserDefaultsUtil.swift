@@ -19,4 +19,8 @@ struct UserDefaultsUtil {
     static func getUserToken() -> String? {
         return UserDefaults.standard.string(forKey: UserDefaultsUtil.KEY_TOKEN)
     }
+    
+    static func clearUserToken() {
+        UserDefaults.standard.removeObject(forKey: KEY_TOKEN)
+    }
 }

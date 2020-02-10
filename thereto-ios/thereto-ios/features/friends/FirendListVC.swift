@@ -65,6 +65,16 @@ class FriendListVC: BaseVC {
             }
         }.disposed(by: disposeBag)
         
+        friendListView.drawer.friendBtn.rx.tap.bind { [weak self] in
+            self?.friendListView.hideMenu { }
+        }.disposed(by: disposeBag)
+        
+        friendListView.drawer.setupBtn.rx.tap.bind { [weak self] in
+            self?.friendListView.hideMenu {
+                self?.goToSetup()
+            }
+        }.disposed(by: disposeBag)
+        
         friendListView.drawer.friendControllBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         }.disposed(by: disposeBag)
@@ -90,6 +100,12 @@ class FriendListVC: BaseVC {
     private func goToLetterBox() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.goToLetterbox()
+        }
+    }
+    
+    private func goToSetup() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            delegate.goToSetup()
         }
     }
 }

@@ -7,7 +7,7 @@ class FriendControlCell: BaseTableViewCell {
     let profileImg = UIImageView().then {
         $0.layer.cornerRadius = 20
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .white
+        $0.image = UIImage.init(named: "image_profile_default")
     }
     
     let nameLabel = UILabel().then {
@@ -83,9 +83,7 @@ class FriendControlCell: BaseTableViewCell {
     }
     
     func bind(friend: Friend) {
-        if let profileURL = friend.profileURL {
-            profileImg.kf.setImage(with: URL.init(string: profileURL))
-        }
+        profileImg.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
         nameLabel.text = friend.nickname
     }
     
