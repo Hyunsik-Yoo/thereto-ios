@@ -26,13 +26,6 @@ class BoxNavigationBar: BaseView {
         return button
     }()
     
-    let hambugerBtn: UIButton = {
-        let button = UIButton()
-        
-        button.setImage(UIImage.init(named: "ic_hamburger"), for: .normal)
-        return button
-    }()
-    
     private let bottomLine: UIView = {
         let bottom = UIView()
         
@@ -44,7 +37,7 @@ class BoxNavigationBar: BaseView {
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubViews(titleLabel, addFriendBtn, searchBtn, hambugerBtn, bottomLine)
+        addSubViews(titleLabel, addFriendBtn, searchBtn, bottomLine)
     }
     
     override func bindConstraints() {
@@ -54,14 +47,9 @@ class BoxNavigationBar: BaseView {
             make.bottom.equalToSuperview().offset(-10)
         }
         
-        hambugerBtn.snp.makeConstraints { (make) in
-            make.centerY.equalTo(titleLabel)
-            make.right.equalToSuperview().offset(-20)
-        }
-        
         searchBtn.snp.makeConstraints { (make) in
             make.centerY.equalTo(titleLabel)
-            make.right.equalTo(hambugerBtn.snp.left).offset(-10)
+            make.right.equalToSuperview().offset(-20)
         }
         
         addFriendBtn.snp.makeConstraints { (make) in

@@ -9,10 +9,6 @@ class SetupView: BaseView {
         $0.titleLabel.text = "Setup."
     }
     
-    let drawer = DrawerView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     let profileImg = UIImageView().then {
         $0.layer.cornerRadius = 40
         $0.layer.masksToBounds = true
@@ -64,13 +60,6 @@ class SetupView: BaseView {
         $0.font = UIFont.init(name: "FrankRuhlLibre-Black", size: 25)
     }
     
-    let writeBtn = UIButton().then {
-        $0.layer.cornerRadius = 30
-        $0.clipsToBounds = true
-        $0.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
-        $0.setImage(UIImage.init(named: "ic_write"), for: .normal)
-    }
-    
     let tableView = UITableView().then {
         $0.tableFooterView = UIView()
         $0.separatorStyle = .none
@@ -80,22 +69,15 @@ class SetupView: BaseView {
     
     override func setup() {
         backgroundColor = .veryLightPink
-        addSubViews(topBar, drawer, profileImg, nicknameLabel, nameLabel,
+        addSubViews(topBar, profileImg, nicknameLabel, nameLabel,
                     bottomBg, whiteContainer, receivedLabel, receivedCountLabel,
-                    sentLabel, sentCountLabel, tableView, writeBtn)
+                    sentLabel, sentCountLabel, tableView)
     }
     
     override func bindConstraints() {
         topBar.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide)
-        }
-        
-        drawer.snp.makeConstraints { (make) in
-            make.left.equalTo(topBar.snp.right)
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
         }
         
         profileImg.snp.makeConstraints { (make) in
@@ -149,42 +131,6 @@ class SetupView: BaseView {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(whiteContainer.snp.bottom)
             make.left.right.bottom.equalToSuperview()
-        }
-        
-        writeBtn.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().offset(-30)
-            make.right.equalToSuperview().offset(-30)
-            make.width.height.equalTo(60)
-        }
-    }
-    
-    func showMenu() {
-        bringSubviewToFront(drawer)
-        drawer.snp.remakeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.layoutIfNeeded()
-        }) { (_) in
-            self.drawer.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.5)
-            self.layoutIfNeeded()
-        }
-    }
-    
-    func hideMenu(completion: @escaping () -> Void) {
-        drawer.snp.remakeConstraints { (make) in
-            make.left.equalTo(topBar.snp.right)
-            make.top.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        self.drawer.backgroundColor = .clear
-        
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            self.layoutIfNeeded()
-        }) { (_) in
-            completion()
         }
     }
     
