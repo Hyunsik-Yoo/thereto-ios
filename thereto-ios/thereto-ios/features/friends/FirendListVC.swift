@@ -9,7 +9,10 @@ class FriendListVC: BaseVC {
     private lazy var friendListView = FriendListView(frame: self.view.frame)
     
     static func instance() -> UINavigationController {
-        return UINavigationController.init(rootViewController: FriendListVC.init(nibName: nil, bundle: nil))
+        let controller = FriendListVC.init(nibName: nil, bundle: nil)
+        
+        controller.tabBarItem = UITabBarItem.init(title: "친구관리", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        return UINavigationController.init(rootViewController: controller)
     }
     
     
@@ -17,7 +20,6 @@ class FriendListVC: BaseVC {
         super.viewDidLoad()
         
         view = friendListView
-        setupDrawer()
         setupTableView()
         setupNavigationBar()
     }
@@ -34,21 +36,7 @@ class FriendListVC: BaseVC {
         }.disposed(by: disposeBag)
     }
     
-    private func setupNavigationBar() {
-        navigationController?.isNavigationBarHidden = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        friendListView.topBar.setFriendListMode()
-    }
-    
-    private func setupDrawer() {
-        friendListView.topBar.hambugerBtn.rx.tap.bind { [weak self] in
-            self?.friendListView.showMenu()
-        }.disposed(by: disposeBag)
-        
-        friendListView.drawer.closeBtn.rx.tap.bind { [weak self] in
-            self?.friendListView.hideMenu { }
-        }.disposed(by: disposeBag)
-        
+    override func bindEvent() {
         friendListView.topBar.addFriendBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
@@ -56,28 +44,12 @@ class FriendListVC: BaseVC {
         friendListView.topBar.searchBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.pushViewController(FindFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
-        
-        friendListView.drawer.letterboxBtn.rx.tap.bind { [weak self] in
-            if let vc = self {
-                vc.friendListView.hideMenu {
-                    vc.goToLetterBox()
-                }
-            }
-        }.disposed(by: disposeBag)
-        
-        friendListView.drawer.friendBtn.rx.tap.bind { [weak self] in
-            self?.friendListView.hideMenu { }
-        }.disposed(by: disposeBag)
-        
-        friendListView.drawer.setupBtn.rx.tap.bind { [weak self] in
-            self?.friendListView.hideMenu {
-                self?.goToSetup()
-            }
-        }.disposed(by: disposeBag)
-        
-        friendListView.drawer.friendControllBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
-        }.disposed(by: disposeBag)
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        friendListView.topBar.setFriendListMode()
     }
     
     private func setupTableView() {
@@ -94,18 +66,6 @@ class FriendListVC: BaseVC {
             self?.friendListView.emptyLabel.isHidden = !friendList.isEmpty
             self?.friendListView.tableView.isHidden = friendList.isEmpty
             self?.friendListView.stopLoading()
-        }
-    }
-    
-    private func goToLetterBox() {
-        if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            delegate.goToLetterbox()
-        }
-    }
-    
-    private func goToSetup() {
-        if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            delegate.goToSetup()
         }
     }
 }

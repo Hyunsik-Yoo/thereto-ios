@@ -48,5 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = SetupVC.instance()
         window?.makeKeyAndVisible()
     }
+    
+    func goToMain() {
+        window?.rootViewController = MainVC.instance()
+        window?.makeKeyAndVisible()
+    }
 }
 

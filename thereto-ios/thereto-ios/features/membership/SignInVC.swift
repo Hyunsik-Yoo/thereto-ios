@@ -42,7 +42,7 @@ class SignInVC: BaseVC {
     
     private func goToMain() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            delegate.goToLetterbox()
+            delegate.goToMain()
         }
     }
     

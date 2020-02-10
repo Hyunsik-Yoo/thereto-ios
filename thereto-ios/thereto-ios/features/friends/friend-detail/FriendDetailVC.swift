@@ -11,6 +11,7 @@ class FriendDetailVC: BaseVC {
     
     static func instance(friendId: String) -> FriendDetailVC {
         return FriendDetailVC.init(nibName: nil, bundle: nil).then {
+            $0.hidesBottomBarWhenPushed = true
             $0.friendId = friendId
         }
     }
