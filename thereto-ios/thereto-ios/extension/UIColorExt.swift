@@ -37,4 +37,8 @@ extension UIColor {
     class var mudBrown: UIColor {
         return UIColor.init(r: 66, g: 40, b: 15)
     }
+    
+    class var pinkishGrey: UIColor {
+        return UIColor.init(r: 208, g: 179, b: 168)
+    }
 }
