@@ -73,7 +73,7 @@ class WriteView: BaseView {
     
     
     override func setup() {
-        backgroundColor = .white
+        backgroundColor = .themeColor
         addSubViews(topBg, closeBtn, sendBtn, navigationLine, manImg,
                     friendBtn, line1, locationImg, locationBtn, line2,
                     pictureImg, pictureBtn, line3, textField)
@@ -81,8 +81,9 @@ class WriteView: BaseView {
     
     override func bindConstraints() {
         topBg.snp.makeConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(100)
+            make.left.right.equalToSuperview()
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(56)
         }
         
         closeBtn.snp.makeConstraints { (make) in
