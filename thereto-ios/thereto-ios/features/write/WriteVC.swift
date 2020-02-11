@@ -25,5 +25,9 @@ class WriteVC: BaseVC {
         writeView.closeBtn.rx.tap.bind { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }.disposed(by: disposeBag)
+        
+        writeView.friendBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(SelectFriendVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
     }
 }

@@ -54,6 +54,9 @@
 		6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */; };
 		6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */; };
 		6E93C84023F25C45002E737F /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C83F23F25C45002E737F /* WriteVC.swift */; };
+		6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84223F27536002E737F /* SelectFriendView.swift */; };
+		6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84423F2807A002E737F /* SelectFriendVC.swift */; };
+		6E93C84723F28520002E737F /* SelectFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84623F28520002E737F /* SelectFriendViewModel.swift */; };
 		6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
@@ -126,6 +129,9 @@
 		6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Light.ttf"; sourceTree = "<group>"; };
 		6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		6E93C83F23F25C45002E737F /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
+		6E93C84223F27536002E737F /* SelectFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendView.swift; sourceTree = "<group>"; };
+		6E93C84423F2807A002E737F /* SelectFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendVC.swift; sourceTree = "<group>"; };
+		6E93C84623F28520002E737F /* SelectFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendViewModel.swift; sourceTree = "<group>"; };
 		6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 		6E1404D923F1059200E954BD /* write */ = {
 			isa = PBXGroup;
 			children = (
+				6E93C84123F27519002E737F /* select-friend */,
 				6E1404DA23F1059A00E954BD /* WriteView.swift */,
 				6E93C83F23F25C45002E737F /* WriteVC.swift */,
 			);
@@ -291,6 +298,16 @@
 				6E63140823B0E452009F1D09 /* AddFriendCell.swift */,
 			);
 			path = "add-friend";
+			sourceTree = "<group>";
+		};
+		6E93C84123F27519002E737F /* select-friend */ = {
+			isa = PBXGroup;
+			children = (
+				6E93C84223F27536002E737F /* SelectFriendView.swift */,
+				6E93C84423F2807A002E737F /* SelectFriendVC.swift */,
+				6E93C84623F28520002E737F /* SelectFriendViewModel.swift */,
+			);
+			path = "select-friend";
 			sourceTree = "<group>";
 		};
 		6EA738CC23939423002176F6 /* membership */ = {
@@ -544,12 +561,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */,
+				6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */,
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
 				6E33759823ED210D00C3128E /* SetupView.swift in Sources */,
 				6E33759123ECF2FD00C3128E /* FindFriendView.swift in Sources */,
 				6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */,
+				6E93C84723F28520002E737F /* SelectFriendViewModel.swift in Sources */,
 				6EA738D02393982F002176F6 /* SignInVC.swift in Sources */,
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,
@@ -596,6 +615,7 @@
 				6E6443E323EBD3A000254331 /* Result.swift in Sources */,
 				6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */,
 				6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */,
+				6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */,
 				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6E0A654923E92D4400FC1DB7 /* FriendControlViewModel.swift in Sources */,
