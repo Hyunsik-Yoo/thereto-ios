@@ -60,6 +60,11 @@
 		6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84223F27536002E737F /* SelectFriendView.swift */; };
 		6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84423F2807A002E737F /* SelectFriendVC.swift */; };
 		6E93C84723F28520002E737F /* SelectFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84623F28520002E737F /* SelectFriendViewModel.swift */; };
+		6E9F9EEC23F3BA3900A14C40 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EEB23F3BA3900A14C40 /* MapService.swift */; };
+		6E9F9EEE23F3C37300A14C40 /* ReverseGeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EED23F3C37300A14C40 /* ReverseGeoLocation.swift */; };
+		6E9F9EF023F3C42C00A14C40 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EEF23F3C42C00A14C40 /* Area.swift */; };
+		6E9F9EF223F3C48900A14C40 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF123F3C48900A14C40 /* Region.swift */; };
+		6E9F9EF423F3C62200A14C40 /* NaverResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */; };
 		6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
@@ -135,6 +140,11 @@
 		6E93C84223F27536002E737F /* SelectFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendView.swift; sourceTree = "<group>"; };
 		6E93C84423F2807A002E737F /* SelectFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendVC.swift; sourceTree = "<group>"; };
 		6E93C84623F28520002E737F /* SelectFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendViewModel.swift; sourceTree = "<group>"; };
+		6E9F9EEB23F3BA3900A14C40 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		6E9F9EED23F3C37300A14C40 /* ReverseGeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseGeoLocation.swift; sourceTree = "<group>"; };
+		6E9F9EEF23F3C42C00A14C40 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
+		6E9F9EF123F3C48900A14C40 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverResponse.swift; sourceTree = "<group>"; };
 		6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -205,6 +215,10 @@
 				6E6443E423EBD5BA00254331 /* CommonError.swift */,
 				6E6443E823EBDD6300254331 /* SocialType.swift */,
 				6E6443EA23EBDD7900254331 /* State.swift */,
+				6E9F9EED23F3C37300A14C40 /* ReverseGeoLocation.swift */,
+				6E9F9EEF23F3C42C00A14C40 /* Area.swift */,
+				6E9F9EF123F3C48900A14C40 /* Region.swift */,
+				6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -213,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				6E2A08A623A75BC600A13F92 /* UserService.swift */,
+				6E9F9EEB23F3BA3900A14C40 /* MapService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -574,6 +589,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E9F9EF223F3C48900A14C40 /* Region.swift in Sources */,
 				6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */,
 				6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */,
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
@@ -604,14 +620,17 @@
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
+				6E9F9EF423F3C62200A14C40 /* NaverResponse.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
+				6E9F9EEE23F3C37300A14C40 /* ReverseGeoLocation.swift in Sources */,
 				6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */,
 				6E33759A23ED38B800C3128E /* SetupVC.swift in Sources */,
 				6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */,
 				6E6443EB23EBDD7900254331 /* State.swift in Sources */,
 				6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */,
 				6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */,
+				6E9F9EEC23F3BA3900A14C40 /* MapService.swift in Sources */,
 				6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */,
 				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
 				6E559D8323F37CE000086080 /* SelectLocationView.swift in Sources */,
@@ -634,6 +653,7 @@
 				6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */,
 				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
+				6E9F9EF023F3C42C00A14C40 /* Area.swift in Sources */,
 				6E0A654923E92D4400FC1DB7 /* FriendControlViewModel.swift in Sources */,
 				6E6443E123EBCDC600254331 /* FriendDetailViewModel.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,

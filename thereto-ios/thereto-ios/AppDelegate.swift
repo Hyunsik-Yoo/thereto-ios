@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import AlamofireNetworkActivityLogger
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize facebook
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        //
+        NetworkActivityLogger.shared.startLogging()
+        NetworkActivityLogger.shared.level = .debug
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.themeColor

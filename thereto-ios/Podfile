@@ -23,6 +23,9 @@ target 'thereto-ios' do
   
   pod 'NMapsMap'
   
+  pod 'Alamofire', '~> 4.9.1'
+  pod 'AlamofireNetworkActivityLogger', '~> 2.4'
+  
   # Then
   pod 'Then'
 end

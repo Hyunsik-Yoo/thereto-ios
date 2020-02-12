@@ -42,7 +42,6 @@ class SelectLocationView: BaseView {
     }
     
     let addressLabel = UILabel().then {
-        $0.text = "서울특별시 성동구 뚝섬로1길 25 (성수동 1가)"
         $0.textColor = .brownishGrey
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
     }

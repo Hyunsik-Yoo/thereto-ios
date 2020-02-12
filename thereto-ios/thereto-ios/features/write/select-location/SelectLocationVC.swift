@@ -39,6 +39,12 @@ class SelectLocationVC: BaseVC {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
+    
+    private func getAddress(latitude: Double, longitude: Double) {
+        MapService.getAddressFromLocation(latitude: latitude, longitude: longitude) { [weak self] (address) in
+            self?.selectLocationView.addressLabel.text = address
+        }
+    }
 }
 
 extension SelectLocationVC: CLLocationManagerDelegate {
@@ -48,6 +54,7 @@ extension SelectLocationVC: CLLocationManagerDelegate {
         
         print("lat: \(location!.coordinate.latitude), lng: \(location!.coordinate.longitude)")
         self.selectLocationView.mapView.mapView.moveCamera(cameraUpdate)
+        self.getAddress(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         locationManager.stopUpdatingLocation()
     }
     
