@@ -17,12 +17,12 @@ class FriendControlCell: BaseTableViewCell {
     }
     
     let leftBtn = UIButton().then {
-        $0.layer.borderColor = UIColor.orange_red.cgColor
+        $0.layer.borderColor = UIColor.orangeRed.cgColor
         $0.layer.borderWidth = 1
         $0.backgroundColor = UIColor.init(r: 255, g: 233, b: 228)
         $0.setTitle("수락", for: .normal)
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 12)
-        $0.setTitleColor(.orange_red, for: .normal)
+        $0.setTitleColor(.orangeRed, for: .normal)
     }
     
     let rightBtn = UIButton().then {

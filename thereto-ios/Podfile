@@ -21,6 +21,8 @@ target 'thereto-ios' do
   # Kingfisher
   pod 'Kingfisher', '~> 5.0'
   
+  pod 'NMapsMap'
+  
   # Then
   pod 'Then'
 end

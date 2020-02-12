@@ -32,6 +32,10 @@ class WriteVC: BaseVC {
             }
             self?.navigationController?.pushViewController(selectFriendVC, animated: true)
         }.disposed(by: disposeBag)
+        
+        writeView.locationBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(SelectLocationVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
     }
 }
 

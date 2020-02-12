@@ -36,7 +36,7 @@ class SetupView: BaseView {
     
     let receivedLabel = UILabel().then {
         $0.text = "받은 엽서"
-        $0.textColor = .brownish_grey
+        $0.textColor = .brownishGrey
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 15)
         $0.textAlignment = .right
     }
@@ -49,7 +49,7 @@ class SetupView: BaseView {
     
     let sentLabel = UILabel().then {
         $0.text = "보낸 엽서"
-        $0.textColor = .brownish_grey
+        $0.textColor = .brownishGrey
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 15)
         $0.textAlignment = .right
     }

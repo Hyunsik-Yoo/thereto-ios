@@ -291,6 +291,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - NMapsMap (3.7.0)
   - PromisesObjC (1.2.8)
   - RxCocoa (5.0.1):
     - RxRelay (~> 5)
@@ -307,6 +308,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
   - Kingfisher (~> 5.0)
+  - NMapsMap
   - RxCocoa (~> 5)
   - RxSwift (~> 5)
   - SnapKit (~> 5.0.0)
@@ -338,6 +340,7 @@ SPEC REPOS:
     - Kingfisher
     - leveldb-library
     - nanopb
+    - NMapsMap
     - PromisesObjC
     - RxCocoa
     - RxRelay
@@ -370,6 +373,7 @@ SPEC CHECKSUMS:
   Kingfisher: 0d334cada987fcddbe9b5cec516406e1ee9d4748
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  NMapsMap: 46ce3d48d7976dd10c6ec63cd7eecf655a7dd955
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
@@ -377,6 +381,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 1145538c7adfa84f41fce9366a734ee712324053
+PODFILE CHECKSUM: 628d51449524ee6b28f00e511d2ab7bfaf1ed8e1
 
 COCOAPODS: 1.8.4
