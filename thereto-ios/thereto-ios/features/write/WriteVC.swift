@@ -27,7 +27,16 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
         
         writeView.friendBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(SelectFriendVC.instance(), animated: true)
+            let selectFriendVC = SelectFriendVC.instance().then {
+                $0.delegate = self
+            }
+            self?.navigationController?.pushViewController(selectFriendVC, animated: true)
         }.disposed(by: disposeBag)
+    }
+}
+
+extension WriteVC: SelectFriendDelegate {
+    func onSelectFriend(friend: Friend) {
+        self.writeView.friendBtn.setTitle("\(friend.nickname) (\(friend.name))", for: .normal)
     }
 }

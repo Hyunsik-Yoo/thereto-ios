@@ -1,9 +1,15 @@
 import UIKit
 
+protocol SelectFriendDelegate: class {
+    func onSelectFriend(friend: Friend)
+}
+
 class SelectFriendVC: BaseVC {
     private lazy var selectFriendView = SelectFirendView.init(frame: self.view.frame)
     
     private var viewModel = SelectFriendViewModel()
+    
+    weak var delegate: SelectFriendDelegate?
     
     static func instance() -> SelectFriendVC {
         return SelectFriendVC.init(nibName: nil, bundle: nil)
@@ -67,5 +73,10 @@ class SelectFriendVC: BaseVC {
 }
 
 extension SelectFriendVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let friends = try? self.viewModel.friends.value() {
+            self.delegate?.onSelectFriend(friend: friends[indexPath.row])
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }
