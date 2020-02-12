@@ -8,6 +8,8 @@ class SelectLocationVC: BaseVC {
     
     var locationManager = CLLocationManager()
     
+    private var mapAnimationFlag = false
+    
     static func instance() -> SelectLocationVC {
         return SelectLocationVC.init(nibName: nil, bundle: nil)
     }
@@ -29,6 +31,7 @@ class SelectLocationVC: BaseVC {
         }.disposed(by: disposeBag)
         
         selectLocationView.myLocationBtn.rx.tap.bind { [weak self] in
+            self?.mapAnimationFlag = true
             self?.locationManager.startUpdatingLocation()
         }.disposed(by: disposeBag)
     }
@@ -53,6 +56,9 @@ extension SelectLocationVC: CLLocationManagerDelegate {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
         
         print("lat: \(location!.coordinate.latitude), lng: \(location!.coordinate.longitude)")
+        if self.mapAnimationFlag {
+            cameraUpdate.animation = .easeIn
+        }
         self.selectLocationView.mapView.mapView.moveCamera(cameraUpdate)
         self.getAddress(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         locationManager.stopUpdatingLocation()
