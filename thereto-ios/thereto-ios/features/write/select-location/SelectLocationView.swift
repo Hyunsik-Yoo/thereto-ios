@@ -9,13 +9,22 @@ class SelectLocationView: BaseView {
     
     let mapView = NMFNaverMapView().then {
         $0.positionMode = .normal
-        $0.showLocationButton = true
+        $0.showLocationButton = false
         $0.showZoomControls = false
         $0.showScaleBar = false
     }
     
     let whiteBg = UIView().then {
         $0.backgroundColor = .white
+    }
+    
+    let myLocationBtn = UIButton().then {
+        $0.backgroundColor = .white
+        $0.layer.shadowOffset = CGSize(width: 0, height: 0)
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOpacity = 0.5
+        $0.layer.shadowRadius = 2
+        $0.setImage(UIImage.init(named: "ic_my_location"), for: .normal)
     }
     
     let brownLine = UIView().then {
@@ -54,7 +63,7 @@ class SelectLocationView: BaseView {
     
     override func setup() {
         backgroundColor = .themeColor
-        addSubViews(backBtn, mapView, whiteBg, brownLine, locationImg,
+        addSubViews(backBtn, mapView, whiteBg, myLocationBtn, brownLine, locationImg,
                     placeLabel, addressLabel, confirmBtn, selectLocationBtn)
     }
     
@@ -74,6 +83,12 @@ class SelectLocationView: BaseView {
             make.right.bottom.equalToSuperview()
             make.left.equalToSuperview().offset(39 * RatioUtils.width)
             make.height.equalTo(212)
+        }
+        
+        myLocationBtn.snp.makeConstraints { (make) in
+            make.right.equalToSuperview().offset(-16)
+            make.bottom.equalTo(whiteBg.snp.top).offset(-16)
+            make.width.height.equalTo(40)
         }
         
         brownLine.snp.makeConstraints { (make) in

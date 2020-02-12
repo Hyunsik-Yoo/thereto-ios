@@ -27,6 +27,10 @@ class SelectLocationVC: BaseVC {
         selectLocationView.backBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
+        
+        selectLocationView.myLocationBtn.rx.tap.bind { [weak self] in
+            self?.locationManager.startUpdatingLocation()
+        }.disposed(by: disposeBag)
     }
     
     private func setupLocationManager() {
