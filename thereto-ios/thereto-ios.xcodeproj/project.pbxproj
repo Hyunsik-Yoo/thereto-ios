@@ -66,6 +66,13 @@
 		6E9F9EF223F3C48900A14C40 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF123F3C48900A14C40 /* Region.swift */; };
 		6E9F9EF423F3C62200A14C40 /* NaverResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */; };
 		6E9F9EF623F3CA0E00A14C40 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF523F3CA0E00A14C40 /* SelectLocationViewModel.swift */; };
+		6E9F9EF923F3CBA800A14C40 /* FindAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EF823F3CBA800A14C40 /* FindAddressView.swift */; };
+		6E9F9EFB23F3CD1100A14C40 /* FindAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EFA23F3CD1100A14C40 /* FindAddressVC.swift */; };
+		6E9F9EFD23F3D11300A14C40 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EFC23F3D11300A14C40 /* AddressService.swift */; };
+		6E9F9EFF23F3EB1300A14C40 /* Juso.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9EFE23F3EB1300A14C40 /* Juso.swift */; };
+		6E9F9F0123F3F14F00A14C40 /* JusoResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9F0023F3F14F00A14C40 /* JusoResults.swift */; };
+		6E9F9F0523F3F35E00A14C40 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9F0423F3F35E00A14C40 /* AddressCell.swift */; };
+		6E9F9F0723F3F44100A14C40 /* FindAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9F9F0623F3F44100A14C40 /* FindAddressViewModel.swift */; };
 		6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
@@ -147,6 +154,13 @@
 		6E9F9EF123F3C48900A14C40 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverResponse.swift; sourceTree = "<group>"; };
 		6E9F9EF523F3CA0E00A14C40 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
+		6E9F9EF823F3CBA800A14C40 /* FindAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAddressView.swift; sourceTree = "<group>"; };
+		6E9F9EFA23F3CD1100A14C40 /* FindAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAddressVC.swift; sourceTree = "<group>"; };
+		6E9F9EFC23F3D11300A14C40 /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; };
+		6E9F9EFE23F3EB1300A14C40 /* Juso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Juso.swift; sourceTree = "<group>"; };
+		6E9F9F0023F3F14F00A14C40 /* JusoResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JusoResults.swift; sourceTree = "<group>"; };
+		6E9F9F0423F3F35E00A14C40 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		6E9F9F0623F3F44100A14C40 /* FindAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindAddressViewModel.swift; sourceTree = "<group>"; };
 		6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
@@ -221,6 +235,8 @@
 				6E9F9EEF23F3C42C00A14C40 /* Area.swift */,
 				6E9F9EF123F3C48900A14C40 /* Region.swift */,
 				6E9F9EF323F3C62200A14C40 /* NaverResponse.swift */,
+				6E9F9EFE23F3EB1300A14C40 /* Juso.swift */,
+				6E9F9F0023F3F14F00A14C40 /* JusoResults.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -230,6 +246,7 @@
 			children = (
 				6E2A08A623A75BC600A13F92 /* UserService.swift */,
 				6E9F9EEB23F3BA3900A14C40 /* MapService.swift */,
+				6E9F9EFC23F3D11300A14C40 /* AddressService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -296,6 +313,7 @@
 		6E559D8123F37CCA00086080 /* select-location */ = {
 			isa = PBXGroup;
 			children = (
+				6E9F9EF723F3CB3900A14C40 /* find-address */,
 				6E559D8223F37CE000086080 /* SelectLocationView.swift */,
 				6E559D8423F37E0D00086080 /* SelectLocationVC.swift */,
 				6E9F9EF523F3CA0E00A14C40 /* SelectLocationViewModel.swift */,
@@ -332,6 +350,17 @@
 				6E93C84623F28520002E737F /* SelectFriendViewModel.swift */,
 			);
 			path = "select-friend";
+			sourceTree = "<group>";
+		};
+		6E9F9EF723F3CB3900A14C40 /* find-address */ = {
+			isa = PBXGroup;
+			children = (
+				6E9F9EF823F3CBA800A14C40 /* FindAddressView.swift */,
+				6E9F9EFA23F3CD1100A14C40 /* FindAddressVC.swift */,
+				6E9F9F0423F3F35E00A14C40 /* AddressCell.swift */,
+				6E9F9F0623F3F44100A14C40 /* FindAddressViewModel.swift */,
+			);
+			path = "find-address";
 			sourceTree = "<group>";
 		};
 		6EA738CC23939423002176F6 /* membership */ = {
@@ -595,6 +624,7 @@
 				6E9F9EF223F3C48900A14C40 /* Region.swift in Sources */,
 				6E13207723A8BC1400D868D6 /* DrawerView.swift in Sources */,
 				6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */,
+				6E9F9EFF23F3EB1300A14C40 /* Juso.swift in Sources */,
 				6E127E8223E3FED400EE6126 /* FriendPageVC.swift in Sources */,
 				6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */,
 				6EE72F6D239239FA00C4CFA7 /* UIColorExt.swift in Sources */,
@@ -613,6 +643,7 @@
 				6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */,
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */,
+				6E9F9F0523F3F35E00A14C40 /* AddressCell.swift in Sources */,
 				6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */,
 				6E1404DB23F1059A00E954BD /* WriteView.swift in Sources */,
 				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
@@ -624,6 +655,7 @@
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
+				6E9F9EFD23F3D11300A14C40 /* AddressService.swift in Sources */,
 				6E9F9EF423F3C62200A14C40 /* NaverResponse.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
@@ -642,6 +674,8 @@
 				6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
 				6E6443DB23EBA87C00254331 /* FriendDetailView.swift in Sources */,
+				6E9F9EF923F3CBA800A14C40 /* FindAddressView.swift in Sources */,
+				6E9F9F0723F3F44100A14C40 /* FindAddressViewModel.swift in Sources */,
 				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
@@ -654,7 +688,9 @@
 				6E6443E323EBD3A000254331 /* Result.swift in Sources */,
 				6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */,
 				6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */,
+				6E9F9EFB23F3CD1100A14C40 /* FindAddressVC.swift in Sources */,
 				6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */,
+				6E9F9F0123F3F14F00A14C40 /* JusoResults.swift in Sources */,
 				6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6E9F9EF023F3C42C00A14C40 /* Area.swift in Sources */,

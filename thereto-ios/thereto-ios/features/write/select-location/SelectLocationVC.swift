@@ -41,6 +41,10 @@ class SelectLocationVC: BaseVC {
             self?.mapAnimationFlag = true
             self?.locationManager.startUpdatingLocation()
         }.disposed(by: disposeBag)
+        
+        selectLocationView.selectLocationBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(FindAddressVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
     }
     
     private func setupLocationManager() {
