@@ -6,9 +6,12 @@ class SelectLocationVC: BaseVC {
     
     private lazy var selectLocationView = SelectLocationView.init(frame: self.view.frame)
     
-    var locationManager = CLLocationManager()
+    private var viewModel = SelectLocationViewModel()
     
     private var mapAnimationFlag = false
+    
+    private var locationManager = CLLocationManager()
+    
     
     static func instance() -> SelectLocationVC {
         return SelectLocationVC.init(nibName: nil, bundle: nil)
@@ -23,6 +26,10 @@ class SelectLocationVC: BaseVC {
         
         view = selectLocationView
         setupLocationManager()
+    }
+    
+    override func bindViewModel() {
+        viewModel.address.bind(to: selectLocationView.addressLabel.rx.text).disposed(by: disposeBag)
     }
     
     override func bindEvent() {
@@ -45,7 +52,7 @@ class SelectLocationVC: BaseVC {
     
     private func getAddress(latitude: Double, longitude: Double) {
         MapService.getAddressFromLocation(latitude: latitude, longitude: longitude) { [weak self] (address) in
-            self?.selectLocationView.addressLabel.text = address
+            self?.viewModel.address.onNext(address)
         }
     }
 }
@@ -55,7 +62,6 @@ extension SelectLocationVC: CLLocationManagerDelegate {
         let location = locations.last
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
         
-        print("lat: \(location!.coordinate.latitude), lng: \(location!.coordinate.longitude)")
         if self.mapAnimationFlag {
             cameraUpdate.animation = .easeIn
         }
