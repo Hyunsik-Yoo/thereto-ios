@@ -13,4 +13,5 @@ struct Common: Codable {
     var errorCode: String!
     var currentPage: String!
     var totalCount: String!
+    var errorMessage: String!
 }

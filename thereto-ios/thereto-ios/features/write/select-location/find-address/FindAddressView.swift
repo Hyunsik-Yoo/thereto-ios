@@ -5,7 +5,7 @@ class FindAddressView: BaseView {
         $0.setImage(UIImage.init(named: "ic_back"), for: .normal)
     }
     
-    let nicknameField = UITextField().then {
+    let addressField = UITextField().then {
         $0.placeholder = "주소를 입력하세요."
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         $0.returnKeyType = .done
@@ -35,7 +35,7 @@ class FindAddressView: BaseView {
     
     override func setup() {
         backgroundColor = .themeColor
-        addSubViews(backBtn, nicknameField, searchBtn, underLine, tableView, emptyLabel)
+        addSubViews(backBtn, addressField, searchBtn, underLine, tableView, emptyLabel)
     }
     
     override func bindConstraints() {
@@ -51,7 +51,7 @@ class FindAddressView: BaseView {
             make.width.height.equalTo(24)
         }
         
-        nicknameField.snp.makeConstraints { (make) in
+        addressField.snp.makeConstraints { (make) in
             make.left.equalTo(backBtn)
             make.centerY.equalTo(searchBtn)
             make.right.equalTo(searchBtn.snp.left).offset(-10)

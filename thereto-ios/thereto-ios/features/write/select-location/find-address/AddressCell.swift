@@ -16,6 +16,7 @@ class AddressCell: BaseTableViewCell {
     
     override func setup() {
         backgroundColor = .clear
+        selectionStyle = .none
         addSubViews(roadAddress, jibunAddress)
     }
     
@@ -33,8 +34,21 @@ class AddressCell: BaseTableViewCell {
         }
     }
     
-    func bind(juso: Juso) {
-        roadAddress.text = juso.roadAddr
-        jibunAddress.text = juso.jibunAddr
+    func bind(juso: Juso, keyword: String) {
+        let roadAddr = juso.roadAddr!
+        let attributedText1 = NSMutableAttributedString(string: roadAddr)
+        
+        attributedText1.addAttribute(.foregroundColor, value: UIColor.orangeRed, range: (roadAddr as NSString).range(of: keyword))
+        attributedText1.addAttribute(.font, value: UIFont.init(name: "SpoqaHanSans-Bold", size: 14)!, range: (roadAddr as NSString).range(of: keyword))
+        roadAddress.attributedText = attributedText1
+        
+        let jibunAddr = juso.jibunAddr!
+        let attributedText2 = NSMutableAttributedString(string: jibunAddr)
+        
+        attributedText2.addAttribute(.foregroundColor, value: UIColor.orangeRed, range: (jibunAddr as NSString).range(of: keyword))
+        attributedText2.addAttribute(.font, value: UIFont.init(name: "SpoqaHanSans-Bold", size: 14)!, range: (jibunAddr as NSString).range(of: keyword))
+        jibunAddress.attributedText = attributedText2
     }
+    
+    
 }

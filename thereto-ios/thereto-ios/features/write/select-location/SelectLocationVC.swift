@@ -12,6 +12,8 @@ class SelectLocationVC: BaseVC {
     
     private var locationManager = CLLocationManager()
     
+    private var currentLocation: (latitude: Double, longitude: Double)!
+    
     
     static func instance() -> SelectLocationVC {
         return SelectLocationVC.init(nibName: nil, bundle: nil)
@@ -30,6 +32,12 @@ class SelectLocationVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.address.bind(to: selectLocationView.addressLabel.rx.text).disposed(by: disposeBag)
+        
+        viewModel.marker.subscribe(onNext: { [weak self] (marker) in
+            if let vc = self {
+                marker.mapView = vc.selectLocationView.mapView.mapView
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func bindEvent() {
@@ -43,7 +51,12 @@ class SelectLocationVC: BaseVC {
         }.disposed(by: disposeBag)
         
         selectLocationView.selectLocationBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(FindAddressVC.instance(), animated: true)
+            if let vc = self {
+                let controller = FindAddressVC.instance().then {
+                    $0.delegate = vc
+                }
+                self?.navigationController?.pushViewController(controller, animated: true)
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -59,12 +72,38 @@ class SelectLocationVC: BaseVC {
             self?.viewModel.address.onNext(address)
         }
     }
+    
+    private func getLocationFromAddress(address: String) {
+        MapService.getLocationFromAddress(address: address, currentLocation: currentLocation) {[weak self] (longitude, latitude, distance) in
+            if let vc = self {
+                // 기존에 있던 마커 지우기
+                let oldMarker = try! vc.viewModel.marker.value()
+                
+                oldMarker.mapView = nil
+                
+                if distance > 300 {
+                    AlertUtil.show(controller: vc, title: "위치선택오류", message: "현재 위치 기준 300m 밖의 장소는 선택할 수 없습니다.")
+                } else {
+                    let marker = NMFMarker().then {
+                        $0.position = NMGLatLng(lat: latitude, lng: longitude)
+                    }
+                    
+                    let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude - 0.005, lng: longitude))
+                    cameraUpdate.animation = .easeIn
+                    vc.selectLocationView.mapView.mapView.moveCamera(cameraUpdate)
+                    vc.viewModel.marker.onNext(marker)
+                }
+            }
+        }
+    }
 }
 
 extension SelectLocationVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
+        
+        currentLocation = (location!.coordinate.latitude, location!.coordinate.longitude)
         
         if self.mapAnimationFlag {
             cameraUpdate.animation = .easeIn
@@ -82,6 +121,16 @@ extension SelectLocationVC: CLLocationManagerDelegate {
         } else {
             AlertUtil.show("error locationManager", message: error.localizedDescription)
         }
+    }
+}
+
+extension SelectLocationVC: FindAddressDelegate {
+    func onSelectAddress(juso: Juso) {
+        // 주소 받아서 좌표 찍기
+        self.getLocationFromAddress(address: juso.roadAddr)
+        
+        // 도로명 주소 입력
+        self.selectLocationView.addressLabel.text = juso.roadAddr
     }
 }
 
