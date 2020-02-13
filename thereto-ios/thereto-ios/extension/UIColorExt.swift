@@ -45,4 +45,8 @@ extension UIColor {
     class var brownGrey: UIColor {
         return UIColor.init(r: 139, g: 139, b: 139)
     }
+    
+    class var black49: UIColor {
+        return UIColor.init(r: 49, g: 49, b: 49)
+    }
 }

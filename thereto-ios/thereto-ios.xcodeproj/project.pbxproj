@@ -33,6 +33,8 @@
 		6E33759C23ED3FB900C3128E /* SetupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759B23ED3FB900C3128E /* SetupCell.swift */; };
 		6E33759E23ED4BA100C3128E /* SetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E33759D23ED4BA100C3128E /* SetupViewModel.swift */; };
 		6E34E95F23F529CC009F93C6 /* GeoLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */; };
+		6E34E96223F53BC5009F93C6 /* PlaceTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E96123F53BC5009F93C6 /* PlaceTitleView.swift */; };
+		6E34E96423F544DD009F93C6 /* PlaceTitleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E96323F544DD009F93C6 /* PlaceTitleVC.swift */; };
 		6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271A23A9A74A00AEBD93 /* FriendListView.swift */; };
 		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45E41823B9B83000C2900C /* FriendControlView.swift */; };
@@ -122,6 +124,8 @@
 		6E33759B23ED3FB900C3128E /* SetupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCell.swift; sourceTree = "<group>"; };
 		6E33759D23ED4BA100C3128E /* SetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewModel.swift; sourceTree = "<group>"; };
 		6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationResponse.swift; sourceTree = "<group>"; };
+		6E34E96123F53BC5009F93C6 /* PlaceTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTitleView.swift; sourceTree = "<group>"; };
+		6E34E96323F544DD009F93C6 /* PlaceTitleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTitleVC.swift; sourceTree = "<group>"; };
 		6E43271A23A9A74A00AEBD93 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6E45E41823B9B83000C2900C /* FriendControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlView.swift; sourceTree = "<group>"; };
@@ -285,6 +289,15 @@
 			path = setup;
 			sourceTree = "<group>";
 		};
+		6E34E96023F53BB6009F93C6 /* place-title */ = {
+			isa = PBXGroup;
+			children = (
+				6E34E96123F53BC5009F93C6 /* PlaceTitleView.swift */,
+				6E34E96323F544DD009F93C6 /* PlaceTitleVC.swift */,
+			);
+			path = "place-title";
+			sourceTree = "<group>";
+		};
 		6E43271923A9A71800AEBD93 /* friends */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +371,7 @@
 		6E9F9EF723F3CB3900A14C40 /* find-address */ = {
 			isa = PBXGroup;
 			children = (
+				6E34E96023F53BB6009F93C6 /* place-title */,
 				6E9F9EF823F3CBA800A14C40 /* FindAddressView.swift */,
 				6E9F9EFA23F3CD1100A14C40 /* FindAddressVC.swift */,
 				6E9F9F0423F3F35E00A14C40 /* AddressCell.swift */,
@@ -641,6 +655,7 @@
 				6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */,
 				6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */,
 				6E33759E23ED4BA100C3128E /* SetupViewModel.swift in Sources */,
+				6E34E96223F53BC5009F93C6 /* PlaceTitleView.swift in Sources */,
 				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
 				6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */,
 				6E1404D823F0E51900E954BD /* MainVC.swift in Sources */,
@@ -686,6 +701,7 @@
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
 				6E6443E923EBDD6300254331 /* SocialType.swift in Sources */,
+				6E34E96423F544DD009F93C6 /* PlaceTitleVC.swift in Sources */,
 				6E33759C23ED3FB900C3128E /* SetupCell.swift in Sources */,
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
 				6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */,

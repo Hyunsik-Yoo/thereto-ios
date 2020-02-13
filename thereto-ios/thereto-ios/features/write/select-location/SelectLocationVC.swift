@@ -58,6 +58,15 @@ class SelectLocationVC: BaseVC {
                 self?.navigationController?.pushViewController(controller, animated: true)
             }
         }.disposed(by: disposeBag)
+        
+        selectLocationView.confirmBtn.rx.tap.bind { [weak self] in
+            self?.selectLocationView.addBgDim()
+            
+            let controller = PlaceTitleVC.instance().then {
+                $0.delegate = self
+            }
+            self?.present(controller, animated: true, completion: nil)
+        }.disposed(by: disposeBag)
     }
     
     private func setupLocationManager() {
@@ -96,6 +105,8 @@ class SelectLocationVC: BaseVC {
             }
         }
     }
+    
+    
 }
 
 extension SelectLocationVC: CLLocationManagerDelegate {
@@ -131,6 +142,12 @@ extension SelectLocationVC: FindAddressDelegate {
         
         // 도로명 주소 입력
         self.selectLocationView.addressLabel.text = juso.roadAddr
+    }
+}
+
+extension SelectLocationVC: PlaceTitleDelegate {
+    func onClose() {
+        self.selectLocationView.removeBgDim()
     }
 }
 
