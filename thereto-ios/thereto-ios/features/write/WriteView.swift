@@ -60,15 +60,21 @@ class WriteView: BaseView {
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
     }
     
+    let pictureImgBtn = UIButton().then {
+        $0.isHidden = true
+        $0.contentMode = .scaleAspectFit
+    }
+    
     let line3 = UIView().then {
         $0.backgroundColor = .pinkishGrey
     }
     
-    let textField = UITextField().then {
-        $0.placeholder = "내용을 입력해주세요"
+    let textField = UITextView().then {
+        $0.text = "내용을 입력해주세요"
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 19)
+        $0.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 10, right: 0)
+        $0.backgroundColor = .clear
         $0.textColor = .mushroom
-        $0.contentVerticalAlignment = .top
     }
     
     
@@ -76,7 +82,7 @@ class WriteView: BaseView {
         backgroundColor = .themeColor
         addSubViews(topBg, closeBtn, sendBtn, navigationLine, manImg,
                     friendBtn, line1, locationImg, locationBtn, line2,
-                    pictureImg, pictureBtn, line3, textField)
+                    pictureImg, pictureBtn, pictureImgBtn, line3, textField)
     }
     
     override func bindConstraints() {
@@ -143,20 +149,26 @@ class WriteView: BaseView {
         pictureImg.snp.makeConstraints { (make) in
             make.left.equalTo(locationImg)
             make.width.height.equalTo(16)
-            make.top.equalTo(line2.snp.bottom).offset(20)
+            make.top.equalTo(line2.snp.bottom).offset(36)
         }
         
         pictureBtn.snp.makeConstraints { (make) in
             make.left.equalTo(pictureImg.snp.right).offset(16)
-            make.right.equalToSuperview().offset(-20)
             make.centerY.equalTo(pictureImg)
+            make.height.equalTo(56)
+        }
+        
+        pictureImgBtn.snp.makeConstraints { (make) in
+            make.left.equalTo(pictureBtn)
+            make.centerY.equalTo(pictureImg)
+            make.width.height.equalTo(56)
         }
         
         line3.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(1)
-            make.top.equalTo(pictureImg.snp.bottom).offset(19)
+            make.top.equalTo(pictureImg.snp.bottom).offset(36)
         }
         
         textField.snp.makeConstraints { (make) in

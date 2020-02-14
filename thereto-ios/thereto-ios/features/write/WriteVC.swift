@@ -4,6 +4,10 @@ class WriteVC: BaseVC {
     
     private lazy var writeView = WriteView.init(frame: self.view.frame)
     
+    private var viewModel = WriteViewModel.init()
+
+    private let imagePicker = UIImagePickerController()
+    
     static func instance() -> UINavigationController {
         let controller = WriteVC.init(nibName: nil, bundle: nil)
         
@@ -19,6 +23,7 @@ class WriteVC: BaseVC {
         
         navigationController?.isNavigationBarHidden = true
         view = writeView
+        imagePicker.delegate = self
     }
     
     override func bindEvent() {
@@ -39,6 +44,18 @@ class WriteVC: BaseVC {
             }
             self?.navigationController?.pushViewController(selectLocationVC, animated: true)
         }.disposed(by: disposeBag)
+        
+        writeView.pictureBtn.rx.tap.bind { [weak self] in
+            if let vc = self {
+                AlertUtil.showImagePicker(controller: vc, picker: vc.imagePicker)
+            }
+        }.disposed(by: disposeBag)
+        
+        writeView.pictureImgBtn.rx.tap.bind { [weak self] in
+            if let vc = self {
+                AlertUtil.showImagePicker(controller: vc, picker: vc.imagePicker)
+            }
+        }.disposed(by: disposeBag)
     }
 }
 
@@ -53,3 +70,16 @@ extension WriteVC: SelectLocationDelegate {
         self.writeView.locationBtn.setTitle("\(location.name!) (\(location.addr!))", for: .normal)
     }
 }
+
+extension WriteVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            self.viewModel.mainImg.onNext(image)
+            self.writeView.pictureBtn.isHidden = true
+            self.writeView.pictureImgBtn.isHidden = false
+            self.writeView.pictureImgBtn.setImage(image, for: .normal)
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
