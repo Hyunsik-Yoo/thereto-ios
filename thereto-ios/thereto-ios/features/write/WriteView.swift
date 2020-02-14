@@ -1,6 +1,7 @@
 import UIKit
 
 class WriteView: BaseView {
+    let tapBg = UITapGestureRecognizer()
     
     let topBg = UIView().then {
         $0.backgroundColor = .veryLightPink
@@ -19,6 +20,10 @@ class WriteView: BaseView {
     let navigationLine = UIView().then {
         $0.backgroundColor = .mudBrown
     }
+    
+    let scrollView = UIScrollView()
+    
+    let containerView = UIView()
     
     let manImg = UIImageView().then {
         $0.image = UIImage.init(named: "ic_man")
@@ -70,7 +75,7 @@ class WriteView: BaseView {
     }
     
     let textField = UITextView().then {
-        $0.text = "내용을 입력해주세요"
+        $0.text = "내용을 입력해주세요."
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 19)
         $0.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 10, right: 0)
         $0.backgroundColor = .clear
@@ -80,9 +85,12 @@ class WriteView: BaseView {
     
     override func setup() {
         backgroundColor = .themeColor
-        addSubViews(topBg, closeBtn, sendBtn, navigationLine, manImg,
-                    friendBtn, line1, locationImg, locationBtn, line2,
-                    pictureImg, pictureBtn, pictureImgBtn, line3, textField)
+        addGestureRecognizer(tapBg)
+        containerView.addSubViews(manImg,
+                                  friendBtn, line1, locationImg, locationBtn, line2,
+                                  pictureImg, pictureBtn, pictureImgBtn, line3, textField)
+        scrollView.addSubViews(containerView)
+        addSubViews(topBg, closeBtn, sendBtn, navigationLine, scrollView)
     }
     
     override func bindConstraints() {
@@ -109,9 +117,14 @@ class WriteView: BaseView {
             make.top.equalTo(closeBtn.snp.bottom).offset(16)
         }
         
+        scrollView.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(navigationLine.snp.bottom)
+        }
+        
         manImg.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(24)
-            make.top.equalTo(navigationLine.snp.bottom).offset(20)
+            make.top.equalToSuperview().offset(20)
             make.width.height.equalTo(16)
         }
         
@@ -178,5 +191,9 @@ class WriteView: BaseView {
             make.top.equalTo(line3.snp.bottom).offset(20)
         }
         
+        containerView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+            make.width.height.equalToSuperview()
+        }
     }
 }

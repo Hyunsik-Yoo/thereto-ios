@@ -8,6 +8,7 @@ class WriteVC: BaseVC {
 
     private let imagePicker = UIImagePickerController()
     
+    
     static func instance() -> UINavigationController {
         let controller = WriteVC.init(nibName: nil, bundle: nil)
         
@@ -18,15 +19,26 @@ class WriteVC: BaseVC {
         }
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.isNavigationBarHidden = true
         view = writeView
+        writeView.textField.delegate = self
         imagePicker.delegate = self
+        setupKeyboardEvent()
     }
     
     override func bindEvent() {
+        writeView.tapBg.rx.event.bind { [weak self] _ in
+            self?.writeView.endEditing(true)
+        }.disposed(by: disposeBag)
+        
         writeView.closeBtn.rx.tap.bind { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }.disposed(by: disposeBag)
@@ -57,6 +69,27 @@ class WriteVC: BaseVC {
             }
         }.disposed(by: disposeBag)
     }
+    
+    private func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func onShowKeyboard(notification: NSNotification) {
+        let userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.writeView.scrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.writeView.scrollView.contentInset = contentInset
+    }
+    
+    @objc func onHideKeyboard(notification: NSNotification) {
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        
+        self.writeView.scrollView.contentInset = contentInset
+    }
 }
 
 extension WriteVC: SelectFriendDelegate {
@@ -80,6 +113,37 @@ extension WriteVC: UIImagePickerControllerDelegate, UINavigationControllerDelega
             self.writeView.pictureImgBtn.setImage(image, for: .normal)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension WriteVC: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "내용을 입력해주세요." {
+            textView.text = ""
+            textView.textColor = .greyishBrownTwo
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "내용을 입력해주세요."
+            textView.textColor = .mushroom
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if(text == "\n") {
+            textView.resignFirstResponder()
+            return false
+        }
+        guard let textFieldText = textView.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + text.count
+        
+        return count <= 100
     }
 }
 
