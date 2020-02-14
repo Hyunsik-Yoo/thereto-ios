@@ -8,6 +8,8 @@ class WriteVC: BaseVC {
 
     private let imagePicker = UIImagePickerController()
     
+    private var myInfo: User!
+    
     
     static func instance() -> UINavigationController {
         let controller = WriteVC.init(nibName: nil, bundle: nil)
@@ -31,6 +33,7 @@ class WriteVC: BaseVC {
         view = writeView
         writeView.textField.delegate = self
         imagePicker.delegate = self
+        getMyInfo()
         setupKeyboardEvent()
     }
     
@@ -74,6 +77,28 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
     }
     
+    override func bindViewModel() {
+        viewModel.friend.bind { [weak self] (friend) in
+            if let friend = friend {
+                self?.writeView.friendBtn.setTitle("\(friend.nickname) (\(friend.name))", for: .normal)
+            }
+        }.disposed(by: disposeBag)
+        
+        viewModel.location.bind { [weak self] (location) in
+            if let location = location {
+                self?.writeView.locationBtn.setTitle("\(location.name!) (\(location.addr!))", for: .normal)
+            }
+        }.disposed(by: disposeBag)
+    }
+    
+    private func getMyInfo() {
+        writeView.startLoading()
+        UserService.getMyUser { [weak self] (user) in
+            self?.myInfo = user
+            self?.writeView.stopLoading()
+        }
+    }
+    
     private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self, selector: #selector(onShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -85,7 +110,16 @@ class WriteVC: BaseVC {
             if let vc = self {
                 switch result {
                 case .success(let url):
-                    print(url)
+                    let letter = Letter.init(from: vc.myInfo,
+                                             to: try! vc.viewModel.friend.value()!,
+                                             location: try! vc.viewModel.location.value()!,
+                                             photo: url,
+                                             message: vc.writeView.textField.text!)
+                    LetterSerivce.sendLetter(letter: letter) {
+                        AlertUtil.showWithCancel(message: "엽서 보내기 성공") {
+                            vc.dismiss(animated: true, completion: nil)
+                        }
+                    }
                 case .failure(let error):
                     AlertUtil.show(controller: vc, title: "사진 저장 오류", message: error.localizedDescription)
                 }
@@ -112,13 +146,13 @@ class WriteVC: BaseVC {
 
 extension WriteVC: SelectFriendDelegate {
     func onSelectFriend(friend: Friend) {
-        self.writeView.friendBtn.setTitle("\(friend.nickname) (\(friend.name))", for: .normal)
+        self.viewModel.friend.onNext(friend)
     }
 }
 
 extension WriteVC: SelectLocationDelegate {
     func onSelectLocation(location: Location) {
-        self.writeView.locationBtn.setTitle("\(location.name!) (\(location.addr!))", for: .normal)
+        self.viewModel.location.onNext(location)
     }
 }
 

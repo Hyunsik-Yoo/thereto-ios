@@ -13,4 +13,8 @@ struct Location {
         self.latitude = latitude
         self.longitude = longitude
     }
+    
+    func toDict() -> [String: Any] {
+        return ["addr": addr!, "name": name!, "latitude": latitude!, "longitude": longitude!]
+    }
 }

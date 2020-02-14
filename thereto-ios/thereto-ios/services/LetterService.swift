@@ -26,4 +26,14 @@ struct LetterSerivce {
             completion(.failure(CommonError.init(desc: "image.pngData() is nil")))
         }
     }
+    
+    static func sendLetter(letter: Letter, completion: @escaping (() -> Void)) {
+        Firestore.firestore().collection("letter").document().setData(letter.toDict()) { (error) in
+            if let error = error {
+                AlertUtil.show(message: error.localizedDescription)
+            } else {
+                completion()
+            }
+        }
+    }
 }
