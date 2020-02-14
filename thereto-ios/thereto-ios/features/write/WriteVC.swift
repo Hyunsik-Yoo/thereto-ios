@@ -34,7 +34,10 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
         
         writeView.locationBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(SelectLocationVC.instance(), animated: true)
+            let selectLocationVC = SelectLocationVC.instance().then {
+                $0.delegate = self
+            }
+            self?.navigationController?.pushViewController(selectLocationVC, animated: true)
         }.disposed(by: disposeBag)
     }
 }
@@ -42,5 +45,11 @@ class WriteVC: BaseVC {
 extension WriteVC: SelectFriendDelegate {
     func onSelectFriend(friend: Friend) {
         self.writeView.friendBtn.setTitle("\(friend.nickname) (\(friend.name))", for: .normal)
+    }
+}
+
+extension WriteVC: SelectLocationDelegate {
+    func onSelectLocation(location: Location) {
+        self.writeView.locationBtn.setTitle("\(location.name!) (\(location.addr!))", for: .normal)
     }
 }

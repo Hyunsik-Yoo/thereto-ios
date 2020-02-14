@@ -54,6 +54,7 @@
 		6E6443E723EBDC4E00254331 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E623EBDC4E00254331 /* Friend.swift */; };
 		6E6443E923EBDD6300254331 /* SocialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443E823EBDD6300254331 /* SocialType.swift */; };
 		6E6443EB23EBDD7900254331 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443EA23EBDD7900254331 /* State.swift */; };
+		6E7041E623F6558500843A37 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E523F6558500843A37 /* Location.swift */; };
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
@@ -145,6 +146,7 @@
 		6E6443E623EBDC4E00254331 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		6E6443E823EBDD6300254331 /* SocialType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialType.swift; sourceTree = "<group>"; };
 		6E6443EA23EBDD7900254331 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		6E7041E523F6558500843A37 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				6E9F9EFE23F3EB1300A14C40 /* Juso.swift */,
 				6E9F9F0023F3F14F00A14C40 /* JusoResults.swift */,
 				6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */,
+				6E7041E523F6558500843A37 /* Location.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				6E9F9EF023F3C42C00A14C40 /* Area.swift in Sources */,
 				6E0A654923E92D4400FC1DB7 /* FriendControlViewModel.swift in Sources */,
 				6E6443E123EBCDC600254331 /* FriendDetailViewModel.swift in Sources */,
+				6E7041E623F6558500843A37 /* Location.swift in Sources */,
 				6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */,
 				6E590DB123E8122A006814BE /* FriendControlCell.swift in Sources */,
 				6E45E42123B9C5B300C2900C /* FriendControlVC.swift in Sources */,

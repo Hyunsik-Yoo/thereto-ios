@@ -38,9 +38,14 @@ class PlaceTitleView: BaseView {
         $0.backgroundColor = .orangeRed
     }
     
+    let swipeDownGesture = UISwipeGestureRecognizer().then {
+        $0.direction = .down
+    }
+    
     override func setup() {
         backgroundColor = .clear
         addSubViews(bg, closeBtn, titleLabel, placeImg, placeField, underLine, confirmBtn)
+        addGestureRecognizer(swipeDownGesture)
     }
     
     override func bindConstraints() {

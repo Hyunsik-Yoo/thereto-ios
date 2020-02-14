@@ -2,6 +2,10 @@ import UIKit
 import CoreLocation
 import NMapsMap
 
+protocol SelectLocationDelegate: class {
+    func onSelectLocation(location: Location)
+}
+
 class SelectLocationVC: BaseVC {
     
     private lazy var selectLocationView = SelectLocationView.init(frame: self.view.frame)
@@ -13,6 +17,8 @@ class SelectLocationVC: BaseVC {
     private var locationManager = CLLocationManager()
     
     private var currentLocation: (latitude: Double, longitude: Double)!
+    
+    var delegate: SelectLocationDelegate?
     
     
     static func instance() -> SelectLocationVC {
@@ -146,6 +152,14 @@ extension SelectLocationVC: FindAddressDelegate {
 }
 
 extension SelectLocationVC: PlaceTitleDelegate {
+    func onSelectName(name: String) {
+        self.selectLocationView.removeBgDim()
+        
+        let location = Location.init(name: name, addr: self.selectLocationView.addressLabel.text!, latitude: currentLocation.0, longitude: currentLocation.1)
+        self.delegate?.onSelectLocation(location: location)
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func onClose() {
         self.selectLocationView.removeBgDim()
     }
