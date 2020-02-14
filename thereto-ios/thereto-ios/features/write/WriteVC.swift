@@ -68,11 +68,29 @@ class WriteVC: BaseVC {
                 AlertUtil.showImagePicker(controller: vc, picker: vc.imagePicker)
             }
         }.disposed(by: disposeBag)
+        
+        writeView.sendBtn.rx.tap.bind { [weak self] in
+            self?.uploadPhoto()
+        }.disposed(by: disposeBag)
     }
     
     private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self, selector: #selector(onShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func uploadPhoto() {
+        let photo = try! viewModel.mainImg.value()
+        LetterSerivce.saveLetterPhoto(image: photo, name: "test") { [weak self] (result) in
+            if let vc = self {
+                switch result {
+                case .success(let url):
+                    print(url)
+                case .failure(let error):
+                    AlertUtil.show(controller: vc, title: "사진 저장 오류", message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     @objc func onShowKeyboard(notification: NSNotification) {

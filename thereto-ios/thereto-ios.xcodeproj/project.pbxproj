@@ -56,6 +56,7 @@
 		6E6443EB23EBDD7900254331 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443EA23EBDD7900254331 /* State.swift */; };
 		6E7041E623F6558500843A37 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E523F6558500843A37 /* Location.swift */; };
 		6E7041E823F65DB400843A37 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E723F65DB400843A37 /* WriteViewModel.swift */; };
+		6E7041EA23F6807900843A37 /* LetterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E923F6807900843A37 /* LetterService.swift */; };
 		6E804B3323ADDFDD009574CD /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3223ADDFDD009574CD /* FriendCell.swift */; };
 		6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */; };
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
@@ -149,6 +150,7 @@
 		6E6443EA23EBDD7900254331 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		6E7041E523F6558500843A37 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6E7041E723F65DB400843A37 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
+		6E7041E923F6807900843A37 /* LetterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterService.swift; sourceTree = "<group>"; };
 		6E804B3223ADDFDD009574CD /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewModel.swift; sourceTree = "<group>"; };
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 				6E2A08A623A75BC600A13F92 /* UserService.swift */,
 				6E9F9EEB23F3BA3900A14C40 /* MapService.swift */,
 				6E9F9EFC23F3D11300A14C40 /* AddressService.swift */,
+				6E7041E923F6807900843A37 /* LetterService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				6E9F9EF923F3CBA800A14C40 /* FindAddressView.swift in Sources */,
 				6E9F9F0723F3F44100A14C40 /* FindAddressViewModel.swift in Sources */,
 				6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */,
+				6E7041EA23F6807900843A37 /* LetterService.swift in Sources */,
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
