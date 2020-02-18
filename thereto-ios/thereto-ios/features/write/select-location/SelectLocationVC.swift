@@ -82,6 +82,14 @@ class SelectLocationVC: BaseVC {
         locationManager.startUpdatingLocation()
     }
     
+    private func setupMapCircle(lat: Double, lng: Double) {
+        let circle = NMFCircleOverlay.init(NMGLatLng.init(lat: lat, lng: lng), radius: 300).then {
+            $0.fillColor = UIColor.init(r: 106, g: 38, b: 255, a: 0.21)
+        }
+        
+        circle.mapView = selectLocationView.mapView.mapView
+    }
+    
     private func getAddress(latitude: Double, longitude: Double) {
         MapService.getAddressFromLocation(latitude: latitude, longitude: longitude) { [weak self] (address) in
             self?.viewModel.address.onNext(address)
@@ -118,8 +126,9 @@ class SelectLocationVC: BaseVC {
 extension SelectLocationVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
         
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
+        self.setupMapCircle(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude)
         currentLocation = (location!.coordinate.latitude, location!.coordinate.longitude)
         
         if self.mapAnimationFlag {

@@ -73,7 +73,7 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
         
         writeView.sendBtn.rx.tap.bind { [weak self] in
-            self?.uploadPhoto()
+            self?.sendLetter()
         }.disposed(by: disposeBag)
     }
     
@@ -104,7 +104,7 @@ class WriteVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func uploadPhoto() {
+    private func sendLetter() {
         let photo = try! viewModel.mainImg.value()
         LetterSerivce.saveLetterPhoto(image: photo, name: "test") { [weak self] (result) in
             if let vc = self {
