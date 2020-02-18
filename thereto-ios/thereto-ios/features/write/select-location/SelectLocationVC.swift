@@ -131,6 +131,7 @@ class SelectLocationVC: BaseVC {
                 } else {
                     let marker = NMFMarker().then {
                         $0.position = NMGLatLng(lat: latitude, lng: longitude)
+                        $0.iconImage = NMFOverlayImage.init(name: "ic_spot")
                     }
                     
                     let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude - 0.005, lng: longitude))
