@@ -23,9 +23,14 @@ class SentLetterVC: BaseVC {
         setupTableView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getSentLetters()
+    }
+    
     override func bindViewModel() {
         viewModel.letters.bind(to: sentLetterView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            
+            cell.bind(letter: letter)
         }.disposed(by: disposeBag)
     }
     
@@ -36,6 +41,21 @@ class SentLetterVC: BaseVC {
     private func setupTableView() {
         sentLetterView.tableView.delegate = self
         sentLetterView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
+    }
+    
+    private func getSentLetters() {
+        sentLetterView.startLoading()
+        LetterSerivce.getSentLetters { [weak self] (result) in
+            switch result {
+            case .success(let letters):
+                self?.viewModel.letters.onNext(letters)
+            case .failure(let error):
+                if let vc = self {
+                    AlertUtil.show(controller: vc, title: "error", message: error.localizedDescription)
+                }
+            }
+            self?.sentLetterView.stopLoading()
+        }
     }
 }
 

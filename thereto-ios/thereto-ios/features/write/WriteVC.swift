@@ -86,7 +86,7 @@ class WriteVC: BaseVC {
         
         viewModel.location.bind { [weak self] (location) in
             if let location = location {
-                self?.writeView.locationBtn.setTitle("\(location.name!) (\(location.addr!))", for: .normal)
+                self?.writeView.locationBtn.setTitle("\(location.name) (\(location.addr))", for: .normal)
             }
         }.disposed(by: disposeBag)
     }
@@ -107,7 +107,9 @@ class WriteVC: BaseVC {
     private func sendLetter() {
         writeView.startLoading()
         let photo = try! viewModel.mainImg.value()
-        LetterSerivce.saveLetterPhoto(image: photo, name: "test") { [weak self] (result) in
+        let fileName = "\(UserDefaultsUtil.getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
+        
+        LetterSerivce.saveLetterPhoto(image: photo, name: fileName) { [weak self] (result) in
             if let vc = self {
                 switch result {
                 case .success(let url):

@@ -293,6 +293,7 @@
 			children = (
 				6E2A08A923A7689E00A13F92 /* LetterBoxView.swift */,
 				6E2A08AB23A768C300A13F92 /* LetterBoxVC.swift */,
+				6EC1025023A8E61D00328C08 /* LetterCell.swift */,
 			);
 			path = letterbox;
 			sourceTree = "<group>";
@@ -428,7 +429,6 @@
 			children = (
 				6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */,
 				6E13207623A8BC1400D868D6 /* DrawerView.swift */,
-				6EC1025023A8E61D00328C08 /* LetterCell.swift */,
 			);
 			path = shared;
 			sourceTree = "<group>";

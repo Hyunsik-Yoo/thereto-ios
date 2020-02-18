@@ -84,5 +84,16 @@ class LetterCell: BaseTableViewCell {
             make.left.equalToSuperview()
         }
     }
+    
+    func bind(letter: Letter) {
+        if let profileURL = letter.from.profileURL {
+            profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
+        }
+        fromLabel.text = letter.from.nickname
+        addressLabel.text = letter.location.addr
+        
+        cardImage.kf.setImage(with: URL.init(string: letter.photo))
+        dateLabel.text =  String(letter.createdAt.prefix(10))
+    }
 }
 
