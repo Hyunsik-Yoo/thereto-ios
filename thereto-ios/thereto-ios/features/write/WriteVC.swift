@@ -116,7 +116,7 @@ class WriteVC: BaseVC {
                                              photo: url,
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
-                        AlertUtil.showWithCancel(message: "엽서 보내기 성공") {
+                        AlertUtil.showWithCancel(controller: vc, message: "엽서 보내기 성공") {
                             vc.dismiss(animated: true, completion: nil)
                         }
                     }

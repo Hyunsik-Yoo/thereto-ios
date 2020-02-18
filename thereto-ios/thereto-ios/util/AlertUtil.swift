@@ -17,6 +17,15 @@ struct AlertUtil {
         show(title: title, message: message, [okAction, cancelAction])
     }
     
+    static func showWithCancel(controller: UIViewController, title: String? = nil, message: String? = nil, onTapOk: @escaping () -> Void) {
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            onTapOk()
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+        
+        show(controller: controller, title: title, message: message, [okAction, cancelAction])
+    }
+    
     static func show(title: String?, message: String?, _ actions: [UIAlertAction]) {
         if let appDelegate = UIApplication.shared.delegate,
             let rootVC = appDelegate.window??.rootViewController {
@@ -35,6 +44,15 @@ struct AlertUtil {
         
         alertController.addAction(okAction)
         controller.present(alertController, animated: true)
+    }
+    
+    static func show(controller: UIViewController, title: String?, message: String?, _ actions: [UIAlertAction]) {
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        for action in actions {
+            controller.addAction(action)
+        }
+        controller.present(controller, animated: true)
     }
     
     static func showImagePicker(controller: UIViewController, picker: UIImagePickerController) {
