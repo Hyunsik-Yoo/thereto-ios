@@ -184,10 +184,6 @@ extension WriteVC: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if(text == "\n") {
-            textView.resignFirstResponder()
-            return false
-        }
         guard let textFieldText = textView.text,
             let rangeOfTextToReplace = Range(range, in: textFieldText) else {
                 return false
