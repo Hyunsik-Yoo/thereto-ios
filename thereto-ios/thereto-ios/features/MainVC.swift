@@ -3,7 +3,7 @@ import UIKit
 
 class MainVC: UITabBarController {
     
-    let controllers = [LetterBoxVC.instance(), LetterBoxVC.instance(), WriteVC.instance(),
+    let controllers = [LetterBoxVC.instance(), SentLetterVC.instance(), WriteVC.instance(),
                        FriendListVC.instance(), SetupVC.instance()]
     static func instance() -> MainVC {
         return MainVC.init(nibName: nil, bundle: nil)

@@ -63,4 +63,9 @@ class BoxNavigationBar: BaseView {
         titleLabel.text = "Friend."
         addFriendBtn.isHidden = false
     }
+    
+    func setSentLetterMode() {
+        titleLabel.text = "Sent letter."
+        addFriendBtn.isHidden = true
+    }
 }
