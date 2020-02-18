@@ -14,12 +14,18 @@ target 'thereto-ios' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
   
   # Facebook auth
   pod 'FBSDKLoginKit'
   
   # Kingfisher
   pod 'Kingfisher', '~> 5.0'
+  
+  pod 'NMapsMap'
+  
+  pod 'Alamofire', '~> 4.9.1'
+  pod 'AlamofireNetworkActivityLogger', '~> 2.4'
   
   # Then
   pod 'Then'

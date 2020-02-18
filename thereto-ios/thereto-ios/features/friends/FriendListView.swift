@@ -19,7 +19,7 @@ class FriendListView: BaseView {
     
     let emptyLabel = UILabel().then {
         $0.text = "친구가 없습니다ㅠ.ㅠ"
-        $0.textColor = .black_30
+        $0.textColor = .black30
         $0.font = UIFont.init(name: "SpoqaHanSans-Light", size: 15)
         $0.isHidden = true
     }

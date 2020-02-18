@@ -13,7 +13,7 @@ class FriendDetailView: BaseView {
     }
     
     let nameLabel = UILabel().then {
-        $0.textColor = .black_30
+        $0.textColor = .black30
         $0.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 19)
     }
     
@@ -27,7 +27,7 @@ class FriendDetailView: BaseView {
     let favoriteDot = UIView().then {
         $0.layer.cornerRadius = 3
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .orange_red
+        $0.backgroundColor = .orangeRed
     }
     
     let whiteContainer = UIView().then {
@@ -36,7 +36,7 @@ class FriendDetailView: BaseView {
     
     let receivedLabel = UILabel().then {
         $0.text = "받은 엽서"
-        $0.textColor = .brownish_grey
+        $0.textColor = .brownishGrey
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 15)
         $0.textAlignment = .right
     }
@@ -49,7 +49,7 @@ class FriendDetailView: BaseView {
     
     let sentLabel = UILabel().then {
         $0.text = "보낸 엽서"
-        $0.textColor = .brownish_grey
+        $0.textColor = .brownishGrey
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 15)
         $0.textAlignment = .right
     }
@@ -71,7 +71,7 @@ class FriendDetailView: BaseView {
     }
     
     let writeBtn = UIButton().then {
-        $0.backgroundColor = .orange_red
+        $0.backgroundColor = .orangeRed
     }
     
     let writeLabel = UILabel().then {

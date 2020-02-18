@@ -13,7 +13,7 @@ class LetterBoxVC: BaseVC {
     static func instance() -> UINavigationController {
         let controller = LetterBoxVC(nibName: nil, bundle: nil)
         
-        controller.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        controller.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_letter_box_off"), selectedImage: UIImage.init(named: "ic_letter_box_on"))
         return UINavigationController(rootViewController: controller)
     }
     

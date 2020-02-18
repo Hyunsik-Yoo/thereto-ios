@@ -11,7 +11,7 @@ class SetupVC: BaseVC {
     static func instance() -> UINavigationController {
         let controller = SetupVC.init(nibName: nil, bundle: nil)
         
-        controller.tabBarItem = UITabBarItem.init(title: "설정", image: UIImage.init(named: "ic_add_friend"), selectedImage: UIImage.init(named: "ic_add_friend"))
+        controller.tabBarItem = UITabBarItem.init(title: "설정", image: UIImage.init(named: "ic_setting_off"), selectedImage: UIImage.init(named: "ic_setting_on"))
         return UINavigationController.init(rootViewController: controller)
     }
     

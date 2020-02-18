@@ -6,15 +6,15 @@ extension UIColor {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: a)
     }
     
-    class var themeColor: UIColor? {
+    class var themeColor: UIColor {
         return UIColor.init(r: 255, g: 248, b: 239)
     }
     
-    class var orange_red: UIColor {
+    class var orangeRed: UIColor {
         return UIColor.init(r: 255, g: 84, b: 41)
     }
     
-    class var black_30: UIColor {
+    class var black30: UIColor {
         return UIColor.init(r: 30, g: 30, b: 30)
     }
     
@@ -22,7 +22,7 @@ extension UIColor {
         return UIColor.init(r: 255, g: 248, b: 239)
     }
     
-    class var brownish_grey: UIColor {
+    class var brownishGrey: UIColor {
         return UIColor.init(r: 114, g: 95, b: 95)
     }
     
@@ -32,5 +32,25 @@ extension UIColor {
     
     class var mushroom: UIColor {
         return UIColor.init(r: 165, g: 156, b: 156)
+    }
+    
+    class var mudBrown: UIColor {
+        return UIColor.init(r: 66, g: 40, b: 15)
+    }
+    
+    class var pinkishGrey: UIColor {
+        return UIColor.init(r: 208, g: 179, b: 168)
+    }
+    
+    class var brownGrey: UIColor {
+        return UIColor.init(r: 139, g: 139, b: 139)
+    }
+    
+    class var black49: UIColor {
+        return UIColor.init(r: 49, g: 49, b: 49)
+    }
+    
+    class var greyishBrownTwo: UIColor {
+        return UIColor.init(r: 74, g: 74, b: 74)
     }
 }
