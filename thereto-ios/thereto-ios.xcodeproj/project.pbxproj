@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5CCC78D19853699B6F3665DC /* Pods_thereto_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3E007D2F9D10449EC91D30 /* Pods_thereto_ios.framework */; };
+		6E01EA2E23FBAD0C00C85607 /* FriendAdminCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E01EA2D23FBAD0C00C85607 /* FriendAdminCell.swift */; };
 		6E0A654923E92D4400FC1DB7 /* FriendControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0A654823E92D4400FC1DB7 /* FriendControlViewModel.swift */; };
 		6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */; };
 		6E10BC5023A540740026BCD7 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E10BC4F23A540740026BCD7 /* ProfileVC.swift */; };
@@ -103,6 +104,7 @@
 
 /* Begin PBXFileReference section */
 		4D3E007D2F9D10449EC91D30 /* Pods_thereto_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_thereto_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E01EA2D23FBAD0C00C85607 /* FriendAdminCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAdminCell.swift; sourceTree = "<group>"; };
 		6E0A654823E92D4400FC1DB7 /* FriendControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlViewModel.swift; sourceTree = "<group>"; };
 		6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6E10BC4F23A540740026BCD7 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */,
 				6E804B3223ADDFDD009574CD /* FriendCell.swift */,
 				6E804B3423ADE4E4009574CD /* FriendListViewModel.swift */,
+				6E01EA2D23FBAD0C00C85607 /* FriendAdminCell.swift */,
 			);
 			path = friends;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				6E7041E823F65DB400843A37 /* WriteViewModel.swift in Sources */,
 				6E9F9EF623F3CA0E00A14C40 /* SelectLocationViewModel.swift in Sources */,
 				6E10BC4E23A53E7D0026BCD7 /* ProfileView.swift in Sources */,
+				6E01EA2E23FBAD0C00C85607 /* FriendAdminCell.swift in Sources */,
 				6E6443E723EBDC4E00254331 /* Friend.swift in Sources */,
 				6E33759523ECF8F900C3128E /* FindFriendViewModel.swift in Sources */,
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
