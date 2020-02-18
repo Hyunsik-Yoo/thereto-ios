@@ -12,7 +12,6 @@ class SelectLocationView: BaseView {
     }
     
     let mapView = NMFNaverMapView().then {
-        $0.positionMode = .normal
         $0.showLocationButton = false
         $0.showZoomControls = false
         $0.showScaleBar = false

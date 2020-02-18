@@ -44,6 +44,18 @@ class SelectLocationVC: BaseVC {
                 marker.mapView = vc.selectLocationView.mapView.mapView
             }
         }).disposed(by: disposeBag)
+        
+        viewModel.myLocation.subscribe (onNext: { [weak self] (myLocation) in
+            if let vc = self {
+                myLocation.mapView = vc.selectLocationView.mapView.mapView
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.myCircle.subscribe(onNext: { [weak self] (myCircle) in
+            if let vc = self {
+                myCircle?.mapView = vc.selectLocationView.mapView.mapView
+            }
+        }).disposed(by: disposeBag)
     }
     
     override func bindEvent() {
@@ -82,12 +94,22 @@ class SelectLocationVC: BaseVC {
         locationManager.startUpdatingLocation()
     }
     
-    private func setupMapCircle(lat: Double, lng: Double) {
-        let circle = NMFCircleOverlay.init(NMGLatLng.init(lat: lat, lng: lng), radius: 300).then {
+    private func setupMyLocation(lat: Double, lng: Double) {
+        if let oldMyLocation = try? self.viewModel.myLocation.value() {
+            oldMyLocation.mapView = nil
+        }
+        let myLocation = NMGLatLng.init(lat: lat, lng: lng)
+        
+        self.viewModel.myLocation.onNext(NMFMarker.init(position: myLocation, iconImage: NMFOverlayImage.init(name: "ic_my_position")))
+        
+        
+        if let oldMyCircle = try? self.viewModel.myCircle.value() {
+            oldMyCircle.mapView = nil
+        }
+        let circle = NMFCircleOverlay.init(myLocation, radius: 300).then {
             $0.fillColor = UIColor.init(r: 106, g: 38, b: 255, a: 0.21)
         }
-        
-        circle.mapView = selectLocationView.mapView.mapView
+        self.viewModel.myCircle.onNext(circle)
     }
     
     private func getAddress(latitude: Double, longitude: Double) {
@@ -128,7 +150,7 @@ extension SelectLocationVC: CLLocationManagerDelegate {
         let location = locations.last
         
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
-        self.setupMapCircle(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude)
+        self.setupMyLocation(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude)
         currentLocation = (location!.coordinate.latitude, location!.coordinate.longitude)
         
         if self.mapAnimationFlag {
