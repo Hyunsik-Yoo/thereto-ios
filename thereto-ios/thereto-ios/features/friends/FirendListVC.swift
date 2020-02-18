@@ -4,7 +4,7 @@ import RxCocoa
 
 class FriendListVC: BaseVC {
     
-    private let viewModel = FriendListViewModel()
+    private var viewModel = FriendListViewModel()
     
     private lazy var friendListView = FriendListView(frame: self.view.frame)
     
@@ -30,12 +30,6 @@ class FriendListVC: BaseVC {
         getFriendList()
     }
     
-    override func bindViewModel() {
-        viewModel.friends.bind(to: friendListView.tableView.rx.items(cellIdentifier: FriendCell.registerId, cellType: FriendCell.self)) { row, friend, cell in
-            cell.bind(friend: friend)
-        }.disposed(by: disposeBag)
-    }
-    
     override func bindEvent() {
         friendListView.topBar.addFriendBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.pushViewController(AddFriendVC.instance(), animated: true)
@@ -54,26 +48,60 @@ class FriendListVC: BaseVC {
     
     private func setupTableView() {
         friendListView.tableView.delegate = self
+        friendListView.tableView.dataSource = self
         friendListView.tableView.register(FriendCell.self, forCellReuseIdentifier: FriendCell.registerId)
+        friendListView.tableView.register(FriendAdminCell.self, forCellReuseIdentifier: FriendAdminCell.registerId)
     }
     
     private func getFriendList() {
         friendListView.startLoading()
         UserService.findFriends() { [weak self] (friendList) in
-            if !friendList.isEmpty {
-                self?.viewModel.friends.onNext(friendList)
-            }
-            self?.friendListView.emptyLabel.isHidden = !friendList.isEmpty
-            self?.friendListView.tableView.isHidden = friendList.isEmpty
+            self?.viewModel.friends = friendList
+            self?.friendListView.tableView.reloadData()
             self?.friendListView.stopLoading()
         }
     }
 }
 
-extension FriendListVC: UITableViewDelegate {
+extension FriendListVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
+            return self.viewModel.friends.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendAdminCell.registerId, for: indexPath) as? FriendAdminCell else {
+                return BaseTableViewCell()
+            }
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.registerId, for: indexPath) as? FriendCell else {
+                return BaseTableViewCell()
+            }
+            
+            cell.bind(friend: self.viewModel.friends[indexPath.row])
+            return cell
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let friends = try! self.viewModel.friends.value()
-        
-        self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friends[indexPath.row].id), animated: true)
+        if indexPath.section == 0 {
+            self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
+        } else {
+            let friendId = self.viewModel.friends[indexPath.row].id
+            
+            self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friendId), animated: true)
+        }
     }
 }

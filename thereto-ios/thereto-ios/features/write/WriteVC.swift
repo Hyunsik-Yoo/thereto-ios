@@ -105,6 +105,7 @@ class WriteVC: BaseVC {
     }
     
     private func sendLetter() {
+        writeView.startLoading()
         let photo = try! viewModel.mainImg.value()
         LetterSerivce.saveLetterPhoto(image: photo, name: "test") { [weak self] (result) in
             if let vc = self {
@@ -116,12 +117,12 @@ class WriteVC: BaseVC {
                                              photo: url,
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
-                        AlertUtil.showWithCancel(controller: vc, message: "엽서 보내기 성공") {
-                            vc.dismiss(animated: true, completion: nil)
-                        }
+                        vc.writeView.stopLoading()
+                        vc.dismiss(animated: true, completion: nil)
                     }
                 case .failure(let error):
                     AlertUtil.show(controller: vc, title: "사진 저장 오류", message: error.localizedDescription)
+                    vc.writeView.stopLoading()
                 }
             }
         }

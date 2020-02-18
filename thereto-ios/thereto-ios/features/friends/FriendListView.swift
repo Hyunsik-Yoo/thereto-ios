@@ -17,17 +17,10 @@ class FriendListView: BaseView {
         $0.separatorStyle = .none
     }
     
-    let emptyLabel = UILabel().then {
-        $0.text = "친구가 없습니다ㅠ.ㅠ"
-        $0.textColor = .black30
-        $0.font = UIFont.init(name: "SpoqaHanSans-Light", size: 15)
-        $0.isHidden = true
-    }
-    
     
     override func setup() {
         backgroundColor = UIColor.themeColor
-        addSubViews(topBar, tableView, emptyLabel)
+        addSubViews(topBar, tableView)
     }
     
     override func bindConstraints() {
@@ -39,11 +32,6 @@ class FriendListView: BaseView {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(topBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
-        }
-        
-        emptyLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(topBar.snp.bottom).offset(40)
         }
     }
 }
