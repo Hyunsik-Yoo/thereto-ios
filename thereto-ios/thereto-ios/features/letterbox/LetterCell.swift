@@ -8,6 +8,7 @@ class LetterCell: BaseTableViewCell {
         $0.layer.cornerRadius = 25
         $0.layer.masksToBounds = true
         $0.image = UIImage.init(named: "image_profile_default")
+        $0.backgroundColor = .gray
     }
     
     private let fromLabel: UILabel = {
@@ -87,8 +88,8 @@ class LetterCell: BaseTableViewCell {
     }
     
     func bind(letter: Letter) {
-        if let profileURL = letter.from.profileURL {
-            profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
+        if !letter.from.profileURL!.isEmpty {
+            profileImage.kf.setImage(with: URL.init(string: letter.from.profileURL!)!, placeholder: UIImage.init(named: "image_profile_default"))
         }
         fromLabel.text = letter.from.nickname
         addressLabel.text = letter.location.addr

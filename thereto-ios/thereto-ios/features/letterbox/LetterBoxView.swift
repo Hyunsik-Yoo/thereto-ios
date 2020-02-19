@@ -2,32 +2,26 @@ import UIKit
 
 class LetterBoxView: BaseView {
     
-    let topBar : BoxNavigationBar = {
-        let topBar = BoxNavigationBar()
-        
-        topBar.isUserInteractionEnabled = true
-        return topBar
-    }()
-
-    private let rightWhiteView: UIView = {
-        let view = UIView()
-        
-        view.backgroundColor = .white
-        return view
-    }()
+    lazy var dimView = UIView(frame: self.frame).then {
+        $0.backgroundColor = .clear
+    }
     
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        
-        tableView.allowsSelection = false
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = .clear
-        return tableView
-    }()
+    let topBar = BoxNavigationBar().then {
+        $0.isUserInteractionEnabled = true
+    }
+
+    let rightWhiteView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    let tableView = UITableView().then {
+        $0.tableFooterView = UIView()
+        $0.backgroundColor = .clear
+        $0.separatorStyle = .none
+    }
     
     
     override func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = UIColor.themeColor
         addSubViews(topBar, rightWhiteView, tableView)
     }
@@ -48,6 +42,29 @@ class LetterBoxView: BaseView {
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(topBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    func addBgDim() {
+        DispatchQueue.main.async { [weak self] in
+            if let view = self {
+                view.addSubview(view.dimView)
+                UIView.animate(withDuration: 0.3) {
+                    view.dimView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a:0.5)
+                }
+            }
+            
+        }
+    }
+    
+    
+    func removeBgDim() {
+        DispatchQueue.main.async { [weak self] in
+            UIView.animate(withDuration: 0.3, animations: {
+                self?.dimView.backgroundColor = .clear
+            }) { (_) in
+                self?.dimView.removeFromSuperview()
+            }
         }
     }
 }

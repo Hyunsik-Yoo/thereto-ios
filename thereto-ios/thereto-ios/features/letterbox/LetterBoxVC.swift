@@ -2,53 +2,75 @@ import UIKit
 
 class LetterBoxVC: BaseVC {
     
-    private lazy var letterBoxView: LetterBoxView = {
-        let view = LetterBoxView(frame: self.view.bounds)
-        
-        view.isUserInteractionEnabled = true
-        return view
-    }()
+    private lazy var letterBoxView = LetterBoxView.init(frame: self.view.frame)
     
+    private var viewModel = LetterBoxViewModel.init()
     
     static func instance() -> UINavigationController {
-        let controller = LetterBoxVC(nibName: nil, bundle: nil)
+        let controller = LetterBoxVC(nibName: nil, bundle: nil).then {
+            $0.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_letter_box_off"), selectedImage: UIImage.init(named: "ic_letter_box_on"))
+        }
         
-        controller.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_letter_box_off"), selectedImage: UIImage.init(named: "ic_letter_box_on"))
         return UINavigationController(rootViewController: controller)
     }
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        view.addSubview(letterBoxView)
-        letterBoxView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
+        view = letterBoxView
         
         letterBoxView.topBar.setLetterBoxMode()
-        
-        letterBoxView.tableView.separatorStyle = .none
-        letterBoxView.tableView.delegate = self
-        letterBoxView.tableView.dataSource = self
-        letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
+        setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getLetters()
     }
     
     override func bindViewModel() {
+        viewModel.letters.bind(to: letterBoxView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
+            cell.bind(letter: letter)
+        }.disposed(by: disposeBag)
         
+    }
+    
+    private func setupTableView() {
+        letterBoxView.tableView.delegate = self
+        letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
+    }
+    
+    private func getLetters() {
+        letterBoxView.startLoading()
+        LetterSerivce.getLetters { [weak self] (result) in
+            switch result {
+            case .success(let letters):
+                self?.viewModel.letters.onNext(letters)
+            case .failure(let error):
+                if let vc = self {
+                    AlertUtil.show(controller: vc, title: "error", message: error.localizedDescription)
+                }
+            }
+            self?.letterBoxView.stopLoading()
+        }
     }
 }
 
-extension LetterBoxVC: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.letterBoxView.tableView.dequeueReusableCell(withIdentifier: LetterCell.registerId, for: indexPath) as? LetterCell else {
-            return UITableViewCell()
+extension LetterBoxVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let letters = try? self.viewModel.letters.value() {
+            self.letterBoxView.addBgDim()
+            let farAwayVC = FarAwayVC.instance(letter: letters[indexPath.row]).then {
+                $0.delegate = self
+            }
+            self.present(farAwayVC, animated: true, completion: nil)
         }
-        
-        return cell
+    }
+}
+
+extension LetterBoxVC: FarAwayDelegate {
+    func onClose() {
+        self.letterBoxView.removeBgDim()
     }
 }

@@ -139,7 +139,6 @@ class SelectLocationView: BaseView {
         }
     }
     
-    
     func removeBgDim() {
         DispatchQueue.main.async { [weak self] in
             UIView.animate(withDuration: 0.3, animations: {

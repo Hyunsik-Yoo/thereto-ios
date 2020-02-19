@@ -1,0 +1,86 @@
+import UIKit
+import CoreLocation
+import NMapsMap
+
+protocol FarAwayDelegate: class {
+    func onClose()
+}
+
+class FarAwayVC: BaseVC {
+    
+    private lazy var farAwayView = FarAwayView.init(frame: self.view.frame)
+    
+    private var locationManager = CLLocationManager()
+    
+    weak var delegate: FarAwayDelegate?
+    
+    var letter: Letter!
+    var myMarker: NMFMarker?
+    var circle: NMFCircleOverlay?
+    
+    static func instance(letter: Letter) -> FarAwayVC {
+        return FarAwayVC.init(nibName: nil, bundle: nil).then {
+            $0.modalPresentationStyle = .overFullScreen
+            $0.letter = letter
+        }
+    }
+    
+    deinit {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view = farAwayView
+        farAwayView.bind(letter: letter)
+        setupLocationManager()
+    }
+    
+    override func bindEvent() {
+        farAwayView.confirmBtn.rx.tap.bind { [weak self] in
+            self?.delegate?.onClose()
+            self?.dismiss(animated: true, completion: nil)
+        }.disposed(by: disposeBag)
+    }
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func setupMyLocation(lat: Double, lng: Double) {
+        let myLocation = NMGLatLng.init(lat: lat, lng: lng)
+        myMarker?.mapView = nil
+        myMarker = NMFMarker.init(position: myLocation, iconImage: NMFOverlayImage.init(name: "ic_my_position"))
+        
+        myMarker?.mapView = farAwayView.mapView.mapView
+        
+        circle?.mapView = nil
+        circle = NMFCircleOverlay.init(myLocation, radius: 300).then {
+            $0.fillColor = UIColor.init(r: 106, g: 38, b: 255, a: 0.21)
+        }
+        circle?.mapView = farAwayView.mapView.mapView
+    }
+}
+
+extension FarAwayVC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last
+        
+        self.setupMyLocation(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude)
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if (error as NSError).code == 1 {
+            AlertUtil.showWithCancel(title: "위치 권한 오류", message: "설정 > 가슴속 3천원 > 위치 > 앱을 사용하는 동안으로 선택해주세요.") {
+                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            }
+        } else {
+            AlertUtil.show("error locationManager", message: error.localizedDescription)
+        }
+    }
+}
+
