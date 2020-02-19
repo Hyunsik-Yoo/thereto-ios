@@ -49,6 +49,7 @@ class LetterCell: BaseTableViewCell {
     
     override func setup() {
         backgroundColor = .clear
+        selectionStyle = .none
         addSubViews(profileImage, fromLabel, addressLabel,
                     cardImage, dateLabel)
     }

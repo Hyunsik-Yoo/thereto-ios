@@ -11,7 +11,6 @@ class SentLetterView: BaseView {
     }
     
     let tableView = UITableView().then {
-        $0.allowsSelection = false
         $0.tableFooterView = UIView()
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
