@@ -36,4 +36,21 @@ struct LetterSerivce {
             }
         }
     }
+    
+    static func getSentLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
+        let senderId = UserDefaultsUtil.getUserToken()!
+        Firestore.firestore().collection("letter").whereField("from.id", isEqualTo: senderId).getDocuments { (snapShot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var letters: [Letter] = []
+                if let documents = snapShot?.documents {
+                    for document in documents {
+                        letters.append(Letter.init(map: document.data()))
+                    }
+                    completion(.success(letters))
+                }
+            }
+        }
+    }
 }
