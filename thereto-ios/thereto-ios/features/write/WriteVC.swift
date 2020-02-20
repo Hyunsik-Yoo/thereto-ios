@@ -109,6 +109,7 @@ class WriteVC: BaseVC {
         let photo = try! viewModel.mainImg.value()
         let fileName = "\(UserDefaultsUtil.getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
         
+        
         LetterSerivce.saveLetterPhoto(image: photo, name: fileName) { [weak self] (result) in
             if let vc = self {
                 switch result {
@@ -119,6 +120,8 @@ class WriteVC: BaseVC {
                                              photo: url,
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
+                        LetterSerivce.increaseSentCount(userId: UserDefaultsUtil.getUserToken()!)
+                        LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)
                     }

@@ -71,4 +71,12 @@ struct LetterSerivce {
             }
         }
     }
+    
+    static func increaseReceiveCount(userId: String) {
+        Firestore.firestore().collection("user").document(userId).updateData(["receive_count": FieldValue.increment(Int64(1))])
+    }
+    
+    static func increaseSentCount(userId: String) {
+        Firestore.firestore().collection("user").document(userId).updateData(["sent_count": FieldValue.increment(Int64(1))])
+    }
 }
