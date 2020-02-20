@@ -67,7 +67,8 @@ class WriteView: BaseView {
     
     let pictureImgBtn = UIButton().then {
         $0.isHidden = true
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     
     let line3 = UIView().then {

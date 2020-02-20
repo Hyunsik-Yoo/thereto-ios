@@ -30,12 +30,11 @@ class LetterCell: BaseTableViewCell {
         return label
     }()
     
-    private let cardImage: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.image = UIImage.init(named: "image_card")
-        return imageView
-    }()
+    let cardImage = UIImageView().then {
+        $0.image = UIImage.init(named: "image_card")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
     
     private let dateLabel: UILabel = {
         let label = UILabel()
