@@ -17,6 +17,10 @@ class SelectLocationView: BaseView {
         $0.showScaleBar = false
     }
     
+    let pointerImg = UIImageView().then {
+        $0.image = UIImage.init(named: "ic_spot")
+    }
+    
     let whiteBg = UIView().then {
         $0.backgroundColor = .white
     }
@@ -60,12 +64,13 @@ class SelectLocationView: BaseView {
         $0.setTitle("이 장소가 아닌가요?", for: .normal)
         $0.setTitleColor(.brownGrey, for: .normal)
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 15)
+        $0.isHidden = true
     }
     
     
     override func setup() {
         backgroundColor = .themeColor
-        addSubViews(backBtn, mapView, whiteBg, myLocationBtn, brownLine, locationImg,
+        addSubViews(backBtn, mapView, pointerImg, whiteBg, myLocationBtn, brownLine, locationImg,
                     placeLabel, addressLabel, confirmBtn, selectLocationBtn)
     }
     
@@ -79,6 +84,11 @@ class SelectLocationView: BaseView {
         mapView.snp.makeConstraints { (make) in
             make.top.equalTo(backBtn.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
+        }
+        
+        pointerImg.snp.makeConstraints { (make) in
+            make.center.equalTo(mapView)
+            make.width.height.equalTo(40)
         }
         
         whiteBg.snp.makeConstraints { (make) in
