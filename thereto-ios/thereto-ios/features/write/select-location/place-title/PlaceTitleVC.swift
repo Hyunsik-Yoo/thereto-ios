@@ -52,6 +52,12 @@ class PlaceTitleVC: BaseVC {
                 })
             }
         }.disposed(by: disposeBag)
+        
+        placeTitleView.placeField.rx.controlEvent(.editingChanged).bind { [weak self] (_) in
+            if let vc = self {
+                vc.placeTitleView.setbtnEnable(isEnable: !vc.placeTitleView.placeField.text!.isEmpty)
+            }
+        }.disposed(by: disposeBag)
     }
     
     private func setupKeyboardEvent() {
