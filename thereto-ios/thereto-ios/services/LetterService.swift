@@ -28,7 +28,11 @@ struct LetterSerivce {
     }
     
     static func sendLetter(letter: Letter, completion: @escaping (() -> Void)) {
-        Firestore.firestore().collection("letter").document().setData(letter.toDict()) { (error) in
+        let documentRef = Firestore.firestore().collection("letter").document()
+        var letterDict = letter.toDict()
+        
+        letterDict["id"] = documentRef.documentID
+        documentRef.setData(letterDict) { (error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             } else {
@@ -78,5 +82,9 @@ struct LetterSerivce {
     
     static func increaseSentCount(userId: String) {
         Firestore.firestore().collection("user").document(userId).updateData(["sent_count": FieldValue.increment(Int64(1))])
+    }
+    
+    static func setRead(letterId: String) {
+        Firestore.firestore().collection("letter").document(letterId).updateData(["isRead": true])
     }
 }

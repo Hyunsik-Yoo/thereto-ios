@@ -17,11 +17,16 @@ class LetterDetailVC: BaseVC {
         super.viewDidLoad()
         view = letterDetailView
         letterDetailView.bind(letter: letter)
+        setRead()
     }
     
     override func bindEvent() {
         letterDetailView.backBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
+    }
+    
+    private func setRead() {
+        LetterSerivce.setRead(letterId: letter.id)
     }
 }

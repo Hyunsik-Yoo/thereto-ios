@@ -43,7 +43,7 @@ class LetterBoxVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.letters.bind(to: letterBoxView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentLetter: false)
         }.disposed(by: disposeBag)
     }
     
