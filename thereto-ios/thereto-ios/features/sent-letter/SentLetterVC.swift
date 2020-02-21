@@ -34,6 +34,12 @@ class SentLetterVC: BaseVC {
         }.disposed(by: disposeBag)
     }
     
+    override func bindEvent() {
+        sentLetterView.emptyBtn.rx.tap.bind { [weak self] in
+            self?.present(WriteVC.instance(), animated: true, completion: nil)
+        }.disposed(by: disposeBag)
+    }
+    
     private func setupNavigationBar() {
         sentLetterView.topBar.setSentLetterMode()
     }
@@ -48,6 +54,7 @@ class SentLetterVC: BaseVC {
         LetterSerivce.getSentLetters { [weak self] (result) in
             switch result {
             case .success(let letters):
+                self?.sentLetterView.setEmpty(isEmpty: letters.isEmpty)
                 self?.viewModel.letters.onNext(letters)
             case .failure(let error):
                 if let vc = self {
