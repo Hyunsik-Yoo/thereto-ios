@@ -41,6 +41,12 @@ class LetterBoxVC: BaseVC {
         getLetters()
     }
     
+    override func bindEvent() {
+        letterBoxView.emptyBtn.rx.tap.bind { [weak self] in
+            self?.present(WriteVC.instance(), animated: true, completion: nil)
+        }.disposed(by: disposeBag)
+    }
+    
     override func bindViewModel() {
         viewModel.letters.bind(to: letterBoxView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
             cell.bind(letter: letter)
@@ -64,6 +70,7 @@ class LetterBoxVC: BaseVC {
         LetterSerivce.getLetters { [weak self] (result) in
             switch result {
             case .success(let letters):
+                self?.letterBoxView.setEmpty(isEmpty: letters.isEmpty)
                 self?.viewModel.letters.onNext(letters)
             case .failure(let error):
                 if let vc = self {
