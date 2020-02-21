@@ -382,6 +382,7 @@
 		6E559D8123F37CCA00086080 /* select-location */ = {
 			isa = PBXGroup;
 			children = (
+				6E34E96023F53BB6009F93C6 /* place-title */,
 				6E9F9EF723F3CB3900A14C40 /* find-address */,
 				6E559D8223F37CE000086080 /* SelectLocationView.swift */,
 				6E559D8423F37E0D00086080 /* SelectLocationVC.swift */,
@@ -424,7 +425,6 @@
 		6E9F9EF723F3CB3900A14C40 /* find-address */ = {
 			isa = PBXGroup;
 			children = (
-				6E34E96023F53BB6009F93C6 /* place-title */,
 				6E9F9EF823F3CBA800A14C40 /* FindAddressView.swift */,
 				6E9F9EFA23F3CD1100A14C40 /* FindAddressVC.swift */,
 				6E9F9F0423F3F35E00A14C40 /* AddressCell.swift */,
