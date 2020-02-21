@@ -73,7 +73,11 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
         
         writeView.sendBtn.rx.tap.bind { [weak self] in
-            self?.sendLetter()
+            if let vc = self {
+                if vc.validateContents() {
+                    vc.sendLetter()
+                }
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -104,13 +108,42 @@ class WriteVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func validateContents() -> Bool {
+        let friend = try! viewModel.friend.value()
+        
+        if friend == nil {
+            writeView.showToast(message: "보낼 친구를 선택해주세요.")
+            return false
+        }
+        
+        let location = try! viewModel.location.value()
+        
+        if location == nil {
+            writeView.showToast(message: "장소를 선택해주세요.")
+            return false
+        }
+        
+        let photo = try! viewModel.mainImg.value()
+        
+        if photo == nil {
+            writeView.showToast(message: "사진을 선택해주세요.")
+            return false
+        }
+        
+        if writeView.textField.text!.isEmpty || writeView.textField.text! == "내용을 입력해주세요." {
+            writeView.showToast(message: "내용을 입력해주세요.")
+            return false
+        }
+        
+        return true
+    }
+    
     private func sendLetter() {
         writeView.startLoading()
         let photo = try! viewModel.mainImg.value()
         let fileName = "\(UserDefaultsUtil.getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
         
-        
-        LetterSerivce.saveLetterPhoto(image: photo, name: fileName) { [weak self] (result) in
+        LetterSerivce.saveLetterPhoto(image: photo!, name: fileName) { [weak self] (result) in
             if let vc = self {
                 switch result {
                 case .success(let url):
