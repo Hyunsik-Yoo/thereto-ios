@@ -32,6 +32,7 @@ struct Letter {
         self.isRead = false
     }
     
+    
     func toDict() -> [String: Any] {
         return ["from": from.toDict(), "to": to.toDict(), "location": location.toDict(),
                 "photo": photo, "message": message, "createdAt": createdAt, "isRead": isRead]

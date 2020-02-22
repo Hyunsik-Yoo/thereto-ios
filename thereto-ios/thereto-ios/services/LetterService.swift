@@ -76,6 +76,16 @@ struct LetterSerivce {
         }
     }
     
+    static func deleteLetter(letterId: String, completion: @escaping ((Result<Void>) -> Void)) {
+        Firestore.firestore().collection("letter").document(letterId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
     static func increaseReceiveCount(userId: String) {
         Firestore.firestore().collection("user").document(userId).updateData(["receive_count": FieldValue.increment(Int64(1))])
     }

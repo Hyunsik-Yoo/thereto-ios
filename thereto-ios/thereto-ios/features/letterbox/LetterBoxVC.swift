@@ -11,6 +11,7 @@ class LetterBoxVC: BaseVC {
     
     private var myLocation: CLLocation!
     
+    private var myInfo: User!
     
     deinit {
         locationManager.stopUpdatingLocation()
@@ -38,7 +39,11 @@ class LetterBoxVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getLetters()
+        if !UserDefaultsUtil.isTutorialFinished() {
+            getMyInfo()
+        } else {
+            getLetters()
+        }
     }
     
     override func bindViewModel() {
@@ -59,19 +64,30 @@ class LetterBoxVC: BaseVC {
         letterBoxView.tableView.register(LetterCell.self, forCellReuseIdentifier: LetterCell.registerId)
     }
     
+    private func getMyInfo() {
+        UserService.getMyUser { [weak self] (user) in
+            self?.myInfo = user
+            self?.getLetters()
+        }
+    }
+    
     private func getLetters() {
         letterBoxView.startLoading()
         LetterSerivce.getLetters { [weak self] (result) in
-            switch result {
-            case .success(let letters):
-                self?.letterBoxView.setEmpty(isEmpty: letters.isEmpty)
-                self?.viewModel.letters.onNext(letters)
-            case .failure(let error):
-                if let vc = self {
+            if let vc = self {
+                switch result {
+                case .success(var letters):
+                    if !UserDefaultsUtil.isTutorialFinished() {
+                        // 튜토리얼 카드 넣어야합니다.
+                        letters.insert(vc.getTutorialCard(), at: 0)
+                    }
+                    self?.letterBoxView.setEmpty(isEmpty: letters.isEmpty)
+                    self?.viewModel.letters.onNext(letters)
+                case .failure(let error):
                     AlertUtil.show(controller: vc, title: "error", message: error.localizedDescription)
                 }
+                self?.letterBoxView.stopLoading()
             }
-            self?.letterBoxView.stopLoading()
         }
     }
     
@@ -80,6 +96,17 @@ class LetterBoxVC: BaseVC {
         
         return Int(myLocation.distance(from: letterLocation))
     }
+    
+    private func getTutorialCard() -> Letter {
+        let thereto = User.init(nickname: "thereto", name: "thereto", social: "facebook", id: "tutorial", profileURL: "")
+        let me = Friend.init(nickname: myInfo.nickname, name: myInfo.name, social: myInfo.getSocial(), id: myInfo.id, profileURL: myInfo.profileURL!)
+        let location = Location.init(name: "데얼투", addr: "서울 강남구 삼성로85길 26", latitude: 37.504884, longitude: 127.055053)
+        var letter = Letter.init(from: thereto, to: me, location: location, photo: "https://firebasestorage.googleapis.com/v0/b/there-to.appspot.com/o/img%402x.png?alt=media&token=cdab7112-0702-490f-8d82-eac91213f044", message: "\(myInfo.nickname)님, thereto에 오신것을 환영합니다. 특별한 장소에서 친구에게특별한 엽서를 남겨보세요.\n친구는 해당 장소에 도착해야지만 엽서를 볼 수 있습니다.\n\n감사합니다.")
+        
+        letter.id = "tutorial"
+        
+        return letter
+    }
 }
 
 extension LetterBoxVC: UITableViewDelegate {
@@ -87,14 +114,18 @@ extension LetterBoxVC: UITableViewDelegate {
         if let letters = try? self.viewModel.letters.value() {
             let letter = letters[indexPath.row]
             
-            if getDistanceToLetter(latitude: letter.location.latitude, longitude: letter.location.longitude) <= 300 {
+            if letter.id == "tutorial" {
                 self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letter), animated: true)
             } else {
-                self.letterBoxView.addBgDim()
-                let farAwayVC = FarAwayVC.instance(letter: letter, myLocation: myLocation).then {
-                    $0.delegate = self
+                if getDistanceToLetter(latitude: letter.location.latitude, longitude: letter.location.longitude) <= 300 {
+                    self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letter), animated: true)
+                } else {
+                    self.letterBoxView.addBgDim()
+                    let farAwayVC = FarAwayVC.instance(letter: letter, myLocation: myLocation).then {
+                        $0.delegate = self
+                    }
+                    self.present(farAwayVC, animated: true, completion: nil)
                 }
-                self.present(farAwayVC, animated: true, completion: nil)
             }
         }
     }
