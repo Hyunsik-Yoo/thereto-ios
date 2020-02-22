@@ -28,7 +28,7 @@ class LetterDetailVC: BaseVC {
         letterDetailView.deleteBtn.rx.tap.bind { [weak self] in
             if let vc = self {
                 AlertUtil.showWithCancel(title: nil, message: "삭제하시겠습니까?") {
-                    if UserDefaultsUtil.isTutorialFinished() { // 튜토리얼일 경우 UserDefault 에서 설정
+                    if vc.letter.id != "tutorial" {
                         vc.deleteLetter(letterId: vc.letter.id)
                     } else {
                         UserDefaultsUtil.setTutorialFinish()
