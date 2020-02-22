@@ -38,6 +38,10 @@ class SentLetterVC: BaseVC {
         sentLetterView.emptyBtn.rx.tap.bind { [weak self] in
             self?.present(WriteVC.instance(), animated: true, completion: nil)
         }.disposed(by: disposeBag)
+        
+        sentLetterView.topBar.searchBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(LetterSearchVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
     }
     
     private func setupNavigationBar() {

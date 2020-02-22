@@ -52,6 +52,12 @@ class LetterBoxVC: BaseVC {
         }.disposed(by: disposeBag)
     }
     
+    override func bindEvent() {
+        letterBoxView.topBar.searchBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(LetterSearchVC.instance(), animated: true)
+        }.disposed(by: disposeBag)
+    }
+    
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
