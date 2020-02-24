@@ -40,7 +40,7 @@ class SentLetterVC: BaseVC {
         }.disposed(by: disposeBag)
         
         sentLetterView.topBar.searchBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(LetterSearchVC.instance(), animated: true)
+            self?.navigationController?.pushViewController(LetterSearchVC.instance(type: "from"), animated: true)
         }.disposed(by: disposeBag)
     }
     

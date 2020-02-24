@@ -54,7 +54,7 @@ class LetterBoxVC: BaseVC {
     
     override func bindEvent() {
         letterBoxView.topBar.searchBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.pushViewController(LetterSearchVC.instance(), animated: true)
+            self?.navigationController?.pushViewController(LetterSearchVC.instance(type: "to"), animated: true)
         }.disposed(by: disposeBag)
     }
     

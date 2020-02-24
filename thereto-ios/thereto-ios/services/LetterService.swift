@@ -1,5 +1,6 @@
 import FirebaseStorage
 import FirebaseFirestore
+import RxSwift
 
 struct LetterSerivce {
     
@@ -73,6 +74,27 @@ struct LetterSerivce {
                     completion(.success(letters))
                 }
             }
+        }
+    }
+    
+    static func searchLetters(keyword: String, type: String, completion: @escaping ((Result<[Letter]>) -> Void)) {
+        let oppose = type == "from" ? "to" : "from"
+        
+        Firestore.firestore().collection("letter").whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
+            .whereField("\(oppose).nickname", isEqualTo: keyword)
+            .getDocuments { (snapShot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    var letters: [Letter] = []
+                    
+                    if let documents = snapShot?.documents {
+                        for document in documents {
+                            letters.append(Letter.init(map: document.data()))
+                        }
+                        completion(.success(letters))
+                    }
+                }
         }
     }
     
