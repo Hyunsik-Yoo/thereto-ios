@@ -10,13 +10,16 @@ class SentLetterVC: BaseVC {
         let controller = SentLetterVC.init(nibName: nil, bundle: nil)
         
         controller.tabBarItem = UITabBarItem.init(title: "발신함", image: UIImage.init(named: "ic_sent_box_off"), selectedImage: UIImage.init(named: "ic_sent_box_on"))
-        return UINavigationController(rootViewController: controller)
+        return UINavigationController(rootViewController: controller).then {
+            $0.interactivePopGestureRecognizer?.delegate = nil
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
+        
         view = sentLetterView
         
         setupNavigationBar()

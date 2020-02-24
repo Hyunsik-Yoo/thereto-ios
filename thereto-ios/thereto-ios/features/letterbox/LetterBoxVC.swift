@@ -23,7 +23,9 @@ class LetterBoxVC: BaseVC {
             $0.tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_letter_box_off"), selectedImage: UIImage.init(named: "ic_letter_box_on"))
         }
         
-        return UINavigationController(rootViewController: controller)
+        return UINavigationController(rootViewController: controller).then {
+            $0.interactivePopGestureRecognizer?.delegate = nil
+        }
     }
     
     
