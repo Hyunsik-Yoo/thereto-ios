@@ -169,7 +169,7 @@ class WriteView: BaseView {
         
         pictureImg.snp.makeConstraints { (make) in
             make.left.equalTo(locationImg)
-            make.width.height.equalTo(16)
+            make.width.equalTo(16)
             make.top.equalTo(line2.snp.bottom).offset(36)
         }
         
@@ -182,7 +182,8 @@ class WriteView: BaseView {
         pictureImgBtn.snp.makeConstraints { (make) in
             make.left.equalTo(pictureBtn)
             make.centerY.equalTo(pictureImg)
-            make.width.height.equalTo(56)
+            make.height.equalTo(56)
+            make.width.equalTo(75)
         }
         
         line3.snp.makeConstraints { (make) in
