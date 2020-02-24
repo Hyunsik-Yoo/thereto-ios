@@ -1,4 +1,5 @@
 import UIKit
+import CropViewController
 
 class WriteVC: BaseVC {
     
@@ -166,6 +167,19 @@ class WriteVC: BaseVC {
         }
     }
     
+    private func presentCropViewController(image: UIImage) {
+        let cropViewController = CropViewController.init(croppingStyle: .default, image: image)
+        
+        cropViewController.delegate = self
+        cropViewController.aspectRatioLockDimensionSwapEnabled = false
+        cropViewController.aspectRatioPreset = .preset4x3
+        cropViewController.aspectRatioPickerButtonHidden = true
+        cropViewController.aspectRatioLockEnabled = true
+        cropViewController.resetButtonHidden = true
+        
+        present(cropViewController, animated: true, completion: nil)
+    }
+    
     @objc func onShowKeyboard(notification: NSNotification) {
         let userInfo = notification.userInfo!
         var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
@@ -183,6 +197,15 @@ class WriteVC: BaseVC {
     }
 }
 
+extension WriteVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true) {
+            self.viewModel.mainImg.onNext(image)
+            self.writeView.pictureImgBtn.setImage(image, for: .normal)
+        }
+    }
+}
+
 extension WriteVC: SelectFriendDelegate {
     func onSelectFriend(friend: Friend) {
         self.viewModel.friend.onNext(friend)
@@ -197,13 +220,12 @@ extension WriteVC: SelectLocationDelegate {
 
 extension WriteVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
-            self.viewModel.mainImg.onNext(image)
             self.writeView.pictureBtn.isHidden = true
             self.writeView.pictureImgBtn.isHidden = false
-            self.writeView.pictureImgBtn.setImage(image, for: .normal)
+            self.presentCropViewController(image: image)
         }
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 

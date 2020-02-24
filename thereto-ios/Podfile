@@ -27,6 +27,8 @@ target 'thereto-ios' do
   pod 'Alamofire', '~> 4.9.1'
   pod 'AlamofireNetworkActivityLogger', '~> 2.4'
   
+  pod 'CropViewController'
+  
   # Then
   pod 'Then'
 end

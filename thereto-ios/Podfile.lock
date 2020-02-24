@@ -167,6 +167,7 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - CropViewController (2.5.2)
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
     - FBSDKCoreKit/Core (= 5.15.1)
@@ -315,6 +316,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.9.1)
   - AlamofireNetworkActivityLogger (~> 2.4)
+  - CropViewController
   - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
@@ -333,6 +335,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireNetworkActivityLogger
     - BoringSSL-GRPC
+    - CropViewController
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -369,6 +372,7 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireNetworkActivityLogger: 6d3398c692d2c5d83b0c58793537860aca1e383d
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  CropViewController: 1aac40093c5739e60d992b04724a55d12a689a4c
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: 497158b816d0a86fc31babbd05546fcd7e6083ff
@@ -400,6 +404,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 4ea8a469f20dfcbac50d36c1b817cdb31d5f29db
+PODFILE CHECKSUM: 395dbb2dd9c53a0cc590853de643494679223c40
 
 COCOAPODS: 1.8.4
