@@ -43,6 +43,13 @@ class LetterSearchVC: BaseVC {
                 vc.searchLetter(keyworkd: keyword)
             }
         }).disposed(by: disposeBag)
+        
+        letterSearchView.searchBtn.rx.tap.bind { [weak self] in
+            if let vc = self,
+                let keyword = vc.letterSearchView.nicknameField.text {
+                vc.searchLetter(keyworkd: keyword)
+            }
+        }.disposed(by: disposeBag)
     }
     
     private func setupTableView() {
