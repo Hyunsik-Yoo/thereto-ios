@@ -55,6 +55,7 @@ class LetterSearchVC: BaseVC {
         LetterSerivce.searchLetters(keyword: keyworkd, type: type) { [weak self] (result) in
             switch result {
             case .success(let letters):
+                self?.letterSearchView.setEmpty(isEmpty: letters.isEmpty)
                 self?.viewModel.letters.onNext(letters)
             case .failure(let error):
                 if let vc = self {

@@ -32,9 +32,15 @@ class LetterSearchView: BaseView {
         $0.tableFooterView = UIView()
     }
     
+    let descLabel = UILabel().then {
+        $0.text = "받는 사람 혹은 보내는 사람의 이름으로 검색할 수 있습니다."
+        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
+        $0.textColor = .brownishGrey
+    }
+    
     override func setup() {
         backgroundColor = .veryLightPink
-        addSubViews(backBtn, titleLabel, nicknameField, nicknameField, searchBtn, underLine, tableView)
+        addSubViews(backBtn, titleLabel, nicknameField, nicknameField, searchBtn, underLine, tableView, descLabel)
     }
     
     override func bindConstraints() {
@@ -72,5 +78,16 @@ class LetterSearchView: BaseView {
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(underLine.snp.bottom).offset(30)
         }
+        
+        descLabel.snp.makeConstraints { (make) in
+            make.left.equalToSuperview().offset(22)
+            make.top.equalTo(tableView).offset(22)
+        }
+    }
+    
+    func setEmpty(isEmpty: Bool) {
+        tableView.isHidden = isEmpty
+        descLabel.isHidden = !isEmpty
+        descLabel.text = "일치하는 검색 결과가 없습니다."
     }
 }
