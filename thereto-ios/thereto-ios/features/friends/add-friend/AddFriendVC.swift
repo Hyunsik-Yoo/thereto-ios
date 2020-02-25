@@ -104,10 +104,10 @@ class AddFriendVC: BaseVC {
     }
     
     private func findUser(inputNickname: String) {
-        self.addFriendView.startLoading()
         if inputNickname.isEmpty {
             AlertUtil.show(message: "닉네임을 제대로 입력해주세요.")
         } else {
+            self.addFriendView.startLoading()
             UserService.findUser(nickname: inputNickname) { (userList) in
                 if userList.isEmpty {
                     self.viewModel.people.accept([nil])

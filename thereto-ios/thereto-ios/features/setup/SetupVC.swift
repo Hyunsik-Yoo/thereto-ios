@@ -53,7 +53,7 @@ class SetupVC: BaseVC {
 
 extension SetupVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,11 +63,7 @@ extension SetupVC: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.titleLabel.text = "알림설정"
-        case 1:
             cell.titleLabel.text = "로그아웃"
-        case 2:
-            cell.titleLabel.text = "계정삭제"
         default:
             break
         }
@@ -76,9 +72,7 @@ extension SetupVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
-        case 0: // 알람 설정
-            break
-        case 1: // 로그아웃
+        case 0: // 로그아웃
             AlertUtil.showWithCancel(title: "로그아웃", message: "로그아웃하시겠습니까?") { [weak self] in
                 UserDefaultsUtil.clearUserToken()
                 FirebaseUtil.signOut()
@@ -90,10 +84,6 @@ extension SetupVC: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
                 self?.goToSignIn()
-            }
-        case 2: // 계정 삭제
-            AlertUtil.showWithCancel(title: "계정삭제", message: "계정을 삭제하시겠습니까?\n삭제 시 모든 데이터가 사라지고 재복구할 수 없습니다.") {
-                
             }
         default:
             break

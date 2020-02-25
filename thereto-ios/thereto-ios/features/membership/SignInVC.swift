@@ -30,14 +30,21 @@ class SignInVC: BaseVC {
         view = signInView
         
         signInView.fbBtn.delegate = self
-        signInView.appleBtn.rx.controlEvent(.touchUpInside)
-            .subscribe { (event) in
-                self.onTapAppleBtn()
-        }.disposed(by: disposeBag)
+        
+        if #available(iOS 13.0, *) {
+            signInView.appleBtn!.rx.controlEvent(.touchUpInside)
+                .subscribe { (event) in
+                    self.onTapAppleBtn()
+            }.disposed(by: disposeBag)
+        }
     }
     
     func onTapAppleBtn() {
-        startSignInWithAppleFlow()
+        if #available(iOS 13.0, *) {
+            startSignInWithAppleFlow()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     private func goToMain() {
@@ -46,6 +53,8 @@ class SignInVC: BaseVC {
         }
     }
     
+    
+    @available(iOS 13.0, *)
     func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
         currentNonce = nonce
@@ -60,6 +69,7 @@ class SignInVC: BaseVC {
         authorizationController.performRequests()
     }
     
+    @available(iOS 13.0, *)
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
@@ -104,10 +114,12 @@ class SignInVC: BaseVC {
 }
 
 extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    @available(iOS 13.0, *)
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
     
+    @available(iOS 13.0, *)
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {

@@ -3,7 +3,12 @@ import UIKit
 class BaseView: UIView {
     
     private let loadingView = UIActivityIndicatorView().then {
-        $0.style = .large
+        if #available(iOS 13.0, *) {
+            $0.style = .large
+        } else {
+            // Fallback on earlier versions
+            $0.style = .gray
+        }
         $0.hidesWhenStopped = true
     }
     
