@@ -22,10 +22,10 @@ class SplashVC: BaseVC {
         Observable<Void>.empty()
             .delay(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe { (event) in
-                if (self.isSessionExisted()) {
-                    self.goToMain()
-                } else {
+                if !UserDefaultsUtil.isNormalLaunch() || !self.isSessionExisted() {
                     self.goToSignIn()
+                } else {
+                    self.goToMain()
                 }
         }.disposed(by: disposeBag)
     }

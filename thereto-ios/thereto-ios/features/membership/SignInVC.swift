@@ -144,6 +144,7 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                 UserService.validateUser(token: socialToken) { (isValidated) in
                     UserDefaultsUtil.setUserToken(token: socialToken)
                     if isValidated {
+                        UserDefaultsUtil.setNormalLaunch(isNormal: true)
                         self.goToMain()
                     } else {
                         self.navigationController?.pushViewController(ProfileVC.instance(id: appleIDCredential.user, social: "apple", name: name), animated: true)
@@ -168,6 +169,7 @@ extension SignInVC: LoginButtonDelegate {
                     UserService.validateUser(token: socialToken) { (isValidated) in
                         UserDefaultsUtil.setUserToken(token: socialToken)
                         if isValidated {
+                            UserDefaultsUtil.setNormalLaunch(isNormal: true)
                             self.goToMain()
                         } else {
                             self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
