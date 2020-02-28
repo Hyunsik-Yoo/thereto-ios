@@ -156,6 +156,7 @@ class WriteVC: BaseVC {
                     LetterSerivce.sendLetter(letter: letter) {
                         LetterSerivce.increaseSentCount(userId: UserDefaultsUtil.getUserToken()!)
                         LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
+                        LetterSerivce.increaseFriendCount(userId: try! vc.viewModel.friend.value()!.id)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)
                     }

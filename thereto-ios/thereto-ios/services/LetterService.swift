@@ -62,7 +62,10 @@ struct LetterSerivce {
     static func getLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
         let receiverId = UserDefaultsUtil.getUserToken()!
         
-        Firestore.firestore().collection("letter").whereField("to.id", isEqualTo: receiverId).getDocuments { (snapShot, error) in
+        Firestore.firestore().collection("letter")
+            .whereField("to.id", isEqualTo: receiverId)
+            .order(by: FirebaseFirestore.FieldPath.documentID())
+            .getDocuments { (snapShot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -114,6 +117,11 @@ struct LetterSerivce {
     
     static func increaseSentCount(userId: String) {
         Firestore.firestore().collection("user").document(userId).updateData(["sent_count": FieldValue.increment(Int64(1))])
+    }
+    
+    static func increaseFriendCount(userId: String) {
+        Firestore.firestore().collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(userId).updateData(["sentCount": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(userId).collection("friends").document(UserDefaultsUtil.getUserToken()!).updateData(["receivedCount": FieldValue.increment(Int64(1))])
     }
     
     static func setRead(letterId: String) {
