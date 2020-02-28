@@ -138,7 +138,6 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             let socialToken = "apple\(appleIDCredential.user)"
-            let name = "\(appleIDCredential.fullName!.givenName!) \(appleIDCredential.fullName!.familyName!)"
             // Sign in with Firebase.
             FirebaseUtil.auth(credential: credential) {
                 UserService.validateUser(token: socialToken) { (isValidated) in
@@ -147,6 +146,10 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                         UserDefaultsUtil.setNormalLaunch(isNormal: true)
                         self.goToMain()
                     } else {
+                        // 이름은 제일처음 로그인할때 한번만 조회가 가능한 것 같습니다.
+                        // 따라서 회원가입할때만 조회가 되도록 해야하므로 여기에 위치시켰습니다.
+                        let name = "\(appleIDCredential.fullName!.givenName!) \(appleIDCredential.fullName!.familyName!)"
+                        
                         self.navigationController?.pushViewController(ProfileVC.instance(id: appleIDCredential.user, social: "apple", name: name), animated: true)
                     }
                 }
