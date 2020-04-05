@@ -1,4 +1,5 @@
 import UIKit
+import CropViewController
 
 class WriteVC: BaseVC {
     
@@ -73,7 +74,11 @@ class WriteVC: BaseVC {
         }.disposed(by: disposeBag)
         
         writeView.sendBtn.rx.tap.bind { [weak self] in
-            self?.sendLetter()
+            if let vc = self {
+                if vc.validateContents() {
+                    vc.sendLetter()
+                }
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -104,12 +109,42 @@ class WriteVC: BaseVC {
         NotificationCenter.default.addObserver(self, selector: #selector(onHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func validateContents() -> Bool {
+        let friend = try! viewModel.friend.value()
+        
+        if friend == nil {
+            writeView.showToast(message: "보낼 친구를 선택해주세요.")
+            return false
+        }
+        
+        let location = try! viewModel.location.value()
+        
+        if location == nil {
+            writeView.showToast(message: "장소를 선택해주세요.")
+            return false
+        }
+        
+        let photo = try! viewModel.mainImg.value()
+        
+        if photo == nil {
+            writeView.showToast(message: "사진을 선택해주세요.")
+            return false
+        }
+        
+        if writeView.textField.text!.isEmpty || writeView.textField.text! == "내용을 입력해주세요." {
+            writeView.showToast(message: "내용을 입력해주세요.")
+            return false
+        }
+        
+        return true
+    }
+    
     private func sendLetter() {
         writeView.startLoading()
         let photo = try! viewModel.mainImg.value()
         let fileName = "\(UserDefaultsUtil.getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
         
-        LetterSerivce.saveLetterPhoto(image: photo, name: fileName) { [weak self] (result) in
+        LetterSerivce.saveLetterPhoto(image: photo!, name: fileName) { [weak self] (result) in
             if let vc = self {
                 switch result {
                 case .success(let url):
@@ -119,6 +154,9 @@ class WriteVC: BaseVC {
                                              photo: url,
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
+                        LetterSerivce.increaseSentCount(userId: UserDefaultsUtil.getUserToken()!)
+                        LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
+                        LetterSerivce.increaseFriendCount(userId: try! vc.viewModel.friend.value()!.id)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)
                     }
@@ -128,6 +166,19 @@ class WriteVC: BaseVC {
                 }
             }
         }
+    }
+    
+    private func presentCropViewController(image: UIImage) {
+        let cropViewController = CropViewController.init(croppingStyle: .default, image: image)
+        
+        cropViewController.delegate = self
+        cropViewController.aspectRatioLockDimensionSwapEnabled = false
+        cropViewController.aspectRatioPreset = .preset4x3
+        cropViewController.aspectRatioPickerButtonHidden = true
+        cropViewController.aspectRatioLockEnabled = true
+        cropViewController.resetButtonHidden = true
+        
+        present(cropViewController, animated: true, completion: nil)
     }
     
     @objc func onShowKeyboard(notification: NSNotification) {
@@ -147,6 +198,15 @@ class WriteVC: BaseVC {
     }
 }
 
+extension WriteVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true) {
+            self.viewModel.mainImg.onNext(image)
+            self.writeView.pictureImgBtn.setImage(image, for: .normal)
+        }
+    }
+}
+
 extension WriteVC: SelectFriendDelegate {
     func onSelectFriend(friend: Friend) {
         self.viewModel.friend.onNext(friend)
@@ -161,13 +221,12 @@ extension WriteVC: SelectLocationDelegate {
 
 extension WriteVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
-            self.viewModel.mainImg.onNext(image)
             self.writeView.pictureBtn.isHidden = true
             self.writeView.pictureImgBtn.isHidden = false
-            self.writeView.pictureImgBtn.setImage(image, for: .normal)
+            self.presentCropViewController(image: image)
         }
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 

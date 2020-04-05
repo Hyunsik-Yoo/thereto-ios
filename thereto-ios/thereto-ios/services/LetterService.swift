@@ -1,5 +1,6 @@
 import FirebaseStorage
 import FirebaseFirestore
+import RxSwift
 
 struct LetterSerivce {
     
@@ -28,7 +29,11 @@ struct LetterSerivce {
     }
     
     static func sendLetter(letter: Letter, completion: @escaping (() -> Void)) {
-        Firestore.firestore().collection("letter").document().setData(letter.toDict()) { (error) in
+        let documentRef = Firestore.firestore().collection("letter").document()
+        var letterDict = letter.toDict()
+        
+        letterDict["id"] = documentRef.documentID
+        documentRef.setData(letterDict) { (error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             } else {
@@ -52,5 +57,74 @@ struct LetterSerivce {
                 }
             }
         }
+    }
+    
+    static func getLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
+        let receiverId = UserDefaultsUtil.getUserToken()!
+        
+        Firestore.firestore().collection("letter")
+            .whereField("to.id", isEqualTo: receiverId)
+            .order(by: FirebaseFirestore.FieldPath.documentID())
+            .getDocuments { (snapShot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                var letters: [Letter] = []
+                if let documents = snapShot?.documents {
+                    for document in documents {
+                        letters.append(Letter.init(map: document.data()))
+                    }
+                    completion(.success(letters))
+                }
+            }
+        }
+    }
+    
+    static func searchLetters(keyword: String, type: String, completion: @escaping ((Result<[Letter]>) -> Void)) {
+        let oppose = type == "from" ? "to" : "from"
+        
+        Firestore.firestore().collection("letter").whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
+            .whereField("\(oppose).nickname", isEqualTo: keyword)
+            .getDocuments { (snapShot, error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    var letters: [Letter] = []
+                    
+                    if let documents = snapShot?.documents {
+                        for document in documents {
+                            letters.append(Letter.init(map: document.data()))
+                        }
+                        completion(.success(letters))
+                    }
+                }
+        }
+    }
+    
+    static func deleteLetter(letterId: String, completion: @escaping ((Result<Void>) -> Void)) {
+        Firestore.firestore().collection("letter").document(letterId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    static func increaseReceiveCount(userId: String) {
+        Firestore.firestore().collection("user").document(userId).updateData(["receive_count": FieldValue.increment(Int64(1))])
+    }
+    
+    static func increaseSentCount(userId: String) {
+        Firestore.firestore().collection("user").document(userId).updateData(["sent_count": FieldValue.increment(Int64(1))])
+    }
+    
+    static func increaseFriendCount(userId: String) {
+        Firestore.firestore().collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(userId).updateData(["sentCount": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(userId).collection("friends").document(UserDefaultsUtil.getUserToken()!).updateData(["receivedCount": FieldValue.increment(Int64(1))])
+    }
+    
+    static func setRead(letterId: String) {
+        Firestore.firestore().collection("letter").document(letterId).updateData(["isRead": true])
     }
 }

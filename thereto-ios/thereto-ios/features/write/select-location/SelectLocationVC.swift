@@ -78,13 +78,26 @@ class SelectLocationVC: BaseVC {
         }.disposed(by: disposeBag)
         
         selectLocationView.confirmBtn.rx.tap.bind { [weak self] in
-            self?.selectLocationView.addBgDim()
-            
-            let controller = PlaceTitleVC.instance().then {
-                $0.delegate = self
+            if let vc = self {
+                if vc.isIn300m() {
+                    self?.selectLocationView.addBgDim()
+                    
+                    let controller = PlaceTitleVC.instance().then {
+                        $0.delegate = self
+                    }
+                    self?.present(controller, animated: true, completion: nil)
+                } else {
+                    AlertUtil.show(controller: vc, title: "위치선택오류", message: "현재 위치 기준 300m 밖의 장소는 선택할 수 없습니다.")
+                }
             }
-            self?.present(controller, animated: true, completion: nil)
         }.disposed(by: disposeBag)
+    }
+    
+    private func isIn300m() -> Bool {
+        let currentPosition = NMGLatLng.init(lat: currentLocation.0, lng: currentLocation.1)
+        let distance = selectLocationView.mapView.mapView.cameraPosition.target.distance(to: currentPosition)
+        
+        return Int(distance) <= 300
     }
     
     private func setupLocationManager() {
@@ -149,8 +162,8 @@ class SelectLocationVC: BaseVC {
 extension SelectLocationVC: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude))
         
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location!.coordinate.latitude - 0.005, lng: location!.coordinate.longitude))
         self.setupMyLocation(lat: location!.coordinate.latitude, lng: location!.coordinate.longitude)
         currentLocation = (location!.coordinate.latitude, location!.coordinate.longitude)
         

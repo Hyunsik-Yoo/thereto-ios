@@ -20,6 +20,11 @@ class FriendDetailVC: BaseVC {
         super.viewDidLoad()
         
         view = friendDetailView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getFriendInfo()
     }
     
@@ -44,6 +49,10 @@ class FriendDetailVC: BaseVC {
             AlertUtil.showWithCancel(title: "친구삭제", message: "친구를 삭제하면 엽서를 보낼 수 없습니다.\n삭제하시겠습니까?") {
                 self?.deleteFriend()
             }
+        }.disposed(by: disposeBag)
+        
+        friendDetailView.writeBtn.rx.tap.bind { [weak self] in
+            self?.present(WriteVC.instance(), animated: true, completion: nil)
         }.disposed(by: disposeBag)
     }
     

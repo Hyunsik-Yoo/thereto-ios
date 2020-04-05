@@ -44,6 +44,7 @@ class LetterDetailView: BaseView {
         $0.backgroundColor = .black30
         $0.layer.cornerRadius = 16
         $0.layer.masksToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
     }
     
     let toUserLabel = UILabel().then {
@@ -62,6 +63,7 @@ class LetterDetailView: BaseView {
         $0.backgroundColor = .black30
         $0.layer.cornerRadius = 16
         $0.layer.masksToBounds = true
+        $0.image = UIImage.init(named: "image_profile_default")
     }
     
     let fromUserLabel = UILabel().then {
@@ -237,7 +239,7 @@ class LetterDetailView: BaseView {
     func bind(letter: Letter) {
         mainPhoto.kf.setImage(with: URL.init(string: letter.photo))
         dateLabel.text = String(letter.createdAt.prefix(10))
-        toProfileImg.kf.setImage(with: URL.init(string: letter.from.profileURL!))
+        toProfileImg.kf.setImage(with: URL.init(string: letter.to.profileURL!))
         toUserLabel.text = "to. \(letter.to.nickname)"
         messageLabel.text = letter.message
         fromProfileImg.kf.setImage(with: URL.init(string: letter.from.profileURL!))

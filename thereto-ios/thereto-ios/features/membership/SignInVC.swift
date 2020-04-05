@@ -30,14 +30,21 @@ class SignInVC: BaseVC {
         view = signInView
         
         signInView.fbBtn.delegate = self
-        signInView.appleBtn.rx.controlEvent(.touchUpInside)
-            .subscribe { (event) in
-                self.onTapAppleBtn()
-        }.disposed(by: disposeBag)
+        
+        if #available(iOS 13.0, *) {
+            signInView.appleBtn!.rx.controlEvent(.touchUpInside)
+                .subscribe { (event) in
+                    self.onTapAppleBtn()
+            }.disposed(by: disposeBag)
+        }
     }
     
     func onTapAppleBtn() {
-        startSignInWithAppleFlow()
+        if #available(iOS 13.0, *) {
+            startSignInWithAppleFlow()
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     private func goToMain() {
@@ -46,6 +53,8 @@ class SignInVC: BaseVC {
         }
     }
     
+    
+    @available(iOS 13.0, *)
     func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
         currentNonce = nonce
@@ -60,6 +69,7 @@ class SignInVC: BaseVC {
         authorizationController.performRequests()
     }
     
+    @available(iOS 13.0, *)
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
@@ -104,10 +114,12 @@ class SignInVC: BaseVC {
 }
 
 extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    @available(iOS 13.0, *)
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }
     
+    @available(iOS 13.0, *)
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
@@ -126,14 +138,18 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             let socialToken = "apple\(appleIDCredential.user)"
-            let name = "\(appleIDCredential.fullName!.givenName!) \(appleIDCredential.fullName!.familyName!)"
             // Sign in with Firebase.
             FirebaseUtil.auth(credential: credential) {
                 UserService.validateUser(token: socialToken) { (isValidated) in
                     UserDefaultsUtil.setUserToken(token: socialToken)
                     if isValidated {
+                        UserDefaultsUtil.setNormalLaunch(isNormal: true)
                         self.goToMain()
                     } else {
+                        // 이름은 제일처음 로그인할때 한번만 조회가 가능한 것 같습니다.
+                        // 따라서 회원가입할때만 조회가 되도록 해야하므로 여기에 위치시켰습니다.
+                        let name = "\(appleIDCredential.fullName!.givenName!) \(appleIDCredential.fullName!.familyName!)"
+                        
                         self.navigationController?.pushViewController(ProfileVC.instance(id: appleIDCredential.user, social: "apple", name: name), animated: true)
                     }
                 }
@@ -156,6 +172,7 @@ extension SignInVC: LoginButtonDelegate {
                     UserService.validateUser(token: socialToken) { (isValidated) in
                         UserDefaultsUtil.setUserToken(token: socialToken)
                         if isValidated {
+                            UserDefaultsUtil.setNormalLaunch(isNormal: true)
                             self.goToMain()
                         } else {
                             self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)

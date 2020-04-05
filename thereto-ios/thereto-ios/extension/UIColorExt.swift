@@ -53,4 +53,12 @@ extension UIColor {
     class var greyishBrownTwo: UIColor {
         return UIColor.init(r: 74, g: 74, b: 74)
     }
+    
+    class var greyishBrownThree: UIColor {
+        return UIColor.init(r: 79, g: 66, b: 65)
+    }
+    
+    class var mushroomTwo: UIColor {
+        return UIColor.init(r: 183, g: 162, b: 157)
+    }
 }

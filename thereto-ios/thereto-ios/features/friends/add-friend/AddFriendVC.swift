@@ -22,22 +22,6 @@ class AddFriendVC: BaseVC {
     }
     
     override func bindViewModel() {
-        addFriendView.backBtn.rx.tap.bind { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }.disposed(by: disposeBag)
-        
-        addFriendView.nicknameField.rx.controlEvent(.editingDidEndOnExit).bind { [weak self] in
-            if let vc = self {
-                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
-            }
-        }.disposed(by: disposeBag)
-        
-        addFriendView.searchBtn.rx.tap.bind { [weak self] in
-            if let vc = self {
-                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
-            }
-        }.disposed(by: disposeBag)
-        
         viewModel.people.bind(to: addFriendView.tableView.rx.items(cellIdentifier: AddFriendCell.registerId, cellType: AddFriendCell.self)) { index, friend, cell in
             if let friend = friend { // 검색 결과가 있을 때
                 self.addFriendView.setDataMode(isDataMode: true)
@@ -57,6 +41,31 @@ class AddFriendVC: BaseVC {
         
         addFriendView.linkBtn.rx.tap.bind {
             
+        }.disposed(by: disposeBag)
+    }
+    
+    override func bindEvent() {
+        addFriendView.backBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }.disposed(by: disposeBag)
+        
+        addFriendView.nicknameField.rx.controlEvent(.editingDidEndOnExit).bind { [weak self] in
+            if let vc = self {
+                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
+            }
+        }.disposed(by: disposeBag)
+        
+        addFriendView.searchBtn.rx.tap.bind { [weak self] in
+            if let vc = self {
+                vc.findUser(inputNickname: vc.addFriendView.nicknameField.text!)
+            }
+        }.disposed(by: disposeBag)
+        
+        addFriendView.linkBtn.rx.tap.bind { [weak self] in
+//            self?.showSharedVC()
+            if let vc = self {
+                AlertUtil.show(controller: vc, title: "", message: "준비중입니다.")
+            }
         }.disposed(by: disposeBag)
     }
     
@@ -95,10 +104,10 @@ class AddFriendVC: BaseVC {
     }
     
     private func findUser(inputNickname: String) {
-        self.addFriendView.startLoading()
         if inputNickname.isEmpty {
             AlertUtil.show(message: "닉네임을 제대로 입력해주세요.")
         } else {
+            self.addFriendView.startLoading()
             UserService.findUser(nickname: inputNickname) { (userList) in
                 if userList.isEmpty {
                     self.viewModel.people.accept([nil])
@@ -130,6 +139,18 @@ class AddFriendVC: BaseVC {
     private func getFriendList() {
         UserService.findFriends() { (friends) in
             self.viewModel.friends = friends
+        }
+    }
+    
+    private func showSharedVC() {
+        let activityVC = UIActivityViewController(activityItems: ["보낸이가 있던 장소에 가야만 확인할 수 있는 엽서 서비스 데얼투.\n지금 앱스토어에서 다운받으세요.\n"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        present(activityVC, animated: true, completion: nil)
+        activityVC.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+            
+            if completed  {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }

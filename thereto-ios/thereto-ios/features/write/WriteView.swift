@@ -67,7 +67,8 @@ class WriteView: BaseView {
     
     let pictureImgBtn = UIButton().then {
         $0.isHidden = true
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
     }
     
     let line3 = UIView().then {
@@ -82,6 +83,13 @@ class WriteView: BaseView {
         $0.textColor = .mushroom
     }
     
+    let toastLabel = UILabel().then {
+        $0.backgroundColor = .greyishBrownThree
+        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
+        $0.textColor = .white
+        $0.textAlignment = .center
+        $0.alpha = 0
+    }
     
     override func setup() {
         backgroundColor = .themeColor
@@ -161,7 +169,7 @@ class WriteView: BaseView {
         
         pictureImg.snp.makeConstraints { (make) in
             make.left.equalTo(locationImg)
-            make.width.height.equalTo(16)
+            make.width.equalTo(16)
             make.top.equalTo(line2.snp.bottom).offset(36)
         }
         
@@ -174,7 +182,8 @@ class WriteView: BaseView {
         pictureImgBtn.snp.makeConstraints { (make) in
             make.left.equalTo(pictureBtn)
             make.centerY.equalTo(pictureImg)
-            make.width.height.equalTo(56)
+            make.height.equalTo(56)
+            make.width.equalTo(75)
         }
         
         line3.snp.makeConstraints { (make) in
@@ -194,6 +203,34 @@ class WriteView: BaseView {
         containerView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
             make.width.height.equalToSuperview()
+        }
+    }
+    
+    func showToast(message: String) {
+        toastLabel.text = message
+        
+        addSubview(toastLabel)
+        toastLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+            make.right.equalToSuperview().offset(-24)
+            make.height.equalTo(48)
+        }
+        
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.toastLabel.alpha = 1
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak self] in
+            self?.removeToast()
+        }
+    }
+    
+    func removeToast() {
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.toastLabel.alpha = 0
+        }) { [weak self] (_) in
+            self?.toastLabel.removeFromSuperview()
         }
     }
 }

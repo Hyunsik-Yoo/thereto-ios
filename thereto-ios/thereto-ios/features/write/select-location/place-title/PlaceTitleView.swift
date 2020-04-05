@@ -35,7 +35,8 @@ class PlaceTitleView: BaseView {
         $0.setTitle("확인", for: .normal)
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Bold", size: 14)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .orangeRed
+        $0.backgroundColor = .mushroomTwo
+        $0.isEnabled = false
     }
     
     let swipeDownGesture = UISwipeGestureRecognizer().then {
@@ -88,6 +89,23 @@ class PlaceTitleView: BaseView {
             make.left.equalToSuperview().offset(87 * RatioUtils.width)
             make.height.equalTo(56)
             make.bottom.equalToSuperview().offset(-72)
+        }
+    }
+    
+    func setbtnEnable(isEnable: Bool) {
+        confirmBtn.isEnabled = isEnable
+        if isEnable {
+            DispatchQueue.main.async { [weak self] in
+                UIView.animate(withDuration: 0.2) {
+                    self?.confirmBtn.backgroundColor = .orangeRed
+                }
+            }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                UIView.animate(withDuration: 0.2) {
+                    self?.confirmBtn.backgroundColor = .mushroomTwo
+                }
+            }
         }
     }
 }

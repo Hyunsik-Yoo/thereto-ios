@@ -70,6 +70,14 @@ class FriendDetailView: BaseView {
         $0.setImage(UIImage.init(named: "ic_delete"), for: .normal)
     }
     
+    let descLabel = UILabel().then {
+        $0.text = "* 친구요청 수락 중입니다.\n수락 후 엽서쓰기, 친구삭제가 가능합니다."
+        $0.numberOfLines = 0
+        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 12)
+        $0.textColor = .brownishGrey
+        $0.isHidden = true
+    }
+    
     let writeBtn = UIButton().then {
         $0.backgroundColor = .orangeRed
     }
@@ -83,7 +91,8 @@ class FriendDetailView: BaseView {
     override func setup() {
         backgroundColor = .veryLightPink
         addSubViews(backBtn, profileImg, nameLabel, favoriteBtn, favoriteDot, whiteContainer,
-                    receivedLabel, receivedCountLabel, sentLabel, sentCountLabel, deleteBtn1, deleteBtn2, writeBtn, writeLabel)
+                    receivedLabel, receivedCountLabel, sentLabel, sentCountLabel, deleteBtn1, deleteBtn2,
+                    writeBtn, writeLabel, descLabel)
     }
     
     override func bindConstraints() {
@@ -164,6 +173,20 @@ class FriendDetailView: BaseView {
             make.centerY.equalTo(writeBtn)
             make.right.equalToSuperview().offset(-80)
         }
+        
+        descLabel.snp.makeConstraints { (make) in
+            make.left.right.equalTo(writeBtn)
+            make.bottom.equalTo(writeBtn.snp.top).offset(-24)
+        }
+    }
+    
+    private func setWriteBtnEnable(isEnable: Bool) {
+        writeBtn.isEnabled = isEnable
+        if isEnable {
+            writeBtn.backgroundColor = .orangeRed
+        } else {
+            writeBtn.backgroundColor = .mushroomTwo
+        }
     }
     
     func bind(friend: Friend?) {
@@ -172,6 +195,10 @@ class FriendDetailView: BaseView {
             nameLabel.text = "\(friend.nickname) (\(friend.name))"
             receivedCountLabel.text = "\(friend.receivedCount)"
             sentCountLabel.text = "\(friend.sentCount)"
+            setWriteBtnEnable(isEnable: friend.requestState == .FRIEND)
+            deleteBtn1.isHidden = friend.requestState != .FRIEND
+            deleteBtn2.isHidden = friend.requestState != .FRIEND
+            descLabel.isHidden = friend.requestState != .REQUEST_SENT
         }
     }
 }

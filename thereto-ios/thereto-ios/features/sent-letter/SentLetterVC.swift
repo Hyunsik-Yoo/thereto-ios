@@ -10,13 +10,16 @@ class SentLetterVC: BaseVC {
         let controller = SentLetterVC.init(nibName: nil, bundle: nil)
         
         controller.tabBarItem = UITabBarItem.init(title: "발신함", image: UIImage.init(named: "ic_sent_box_off"), selectedImage: UIImage.init(named: "ic_sent_box_on"))
-        return UINavigationController(rootViewController: controller)
+        return UINavigationController(rootViewController: controller).then {
+            $0.interactivePopGestureRecognizer?.delegate = nil
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
+        
         view = sentLetterView
         
         setupNavigationBar()
@@ -30,7 +33,17 @@ class SentLetterVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.letters.bind(to: sentLetterView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentLetter: true)
+        }.disposed(by: disposeBag)
+    }
+    
+    override func bindEvent() {
+        sentLetterView.emptyBtn.rx.tap.bind { [weak self] in
+            self?.present(WriteVC.instance(), animated: true, completion: nil)
+        }.disposed(by: disposeBag)
+        
+        sentLetterView.topBar.searchBtn.rx.tap.bind { [weak self] in
+            self?.navigationController?.pushViewController(LetterSearchVC.instance(type: "from"), animated: true)
         }.disposed(by: disposeBag)
     }
     
@@ -48,6 +61,7 @@ class SentLetterVC: BaseVC {
         LetterSerivce.getSentLetters { [weak self] (result) in
             switch result {
             case .success(let letters):
+                self?.sentLetterView.setEmpty(isEmpty: letters.isEmpty)
                 self?.viewModel.letters.onNext(letters)
             case .failure(let error):
                 if let vc = self {

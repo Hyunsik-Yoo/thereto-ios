@@ -24,6 +24,7 @@ class MainVC: UITabBarController {
              NSAttributedString.Key.foregroundColor: UIColor.mushroom],
             for: UIControl.State.normal)
         UITabBar.appearance().tintColor = .greyishBrown
+        UITabBar.appearance().barTintColor = .veryLightPink
         
         tabBar.shadowImage = UIImage()
         tabBar.backgroundColor = .veryLightPink

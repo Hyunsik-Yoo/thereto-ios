@@ -8,6 +8,7 @@ class LetterCell: BaseTableViewCell {
         $0.layer.cornerRadius = 25
         $0.layer.masksToBounds = true
         $0.image = UIImage.init(named: "image_profile_default")
+        $0.backgroundColor = .gray
     }
     
     private let fromLabel: UILabel = {
@@ -29,12 +30,11 @@ class LetterCell: BaseTableViewCell {
         return label
     }()
     
-    private let cardImage: UIImageView = {
-        let imageView = UIImageView()
-        
-        imageView.image = UIImage.init(named: "image_card")
-        return imageView
-    }()
+    let cardImage = UIImageView().then {
+        $0.image = UIImage.init(named: "image_card")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+    }
     
     private let dateLabel: UILabel = {
         let label = UILabel()
@@ -86,14 +86,19 @@ class LetterCell: BaseTableViewCell {
         }
     }
     
-    func bind(letter: Letter) {
-        if let profileURL = letter.from.profileURL {
-            profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
+    func bind(letter: Letter, isSentLetter: Bool) {
+        if !letter.from.profileURL!.isEmpty {
+            profileImage.kf.setImage(with: URL.init(string: letter.from.profileURL!)!, placeholder: UIImage.init(named: "image_profile_default"))
         }
         fromLabel.text = letter.from.nickname
         addressLabel.text = letter.location.addr
         
-        cardImage.kf.setImage(with: URL.init(string: letter.photo))
+        if letter.isRead || isSentLetter {
+            cardImage.kf.setImage(with: URL.init(string: letter.photo))
+        } else {
+            cardImage.image = UIImage.init(named: "image_default_card")
+        }
+        
         dateLabel.text =  String(letter.createdAt.prefix(10))
     }
 }

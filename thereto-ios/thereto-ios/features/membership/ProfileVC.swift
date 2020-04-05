@@ -93,6 +93,7 @@ extension ProfileVC: ProfileDelegate{
                     } else {
                         UserService.saveUser(user: user) {
                             self.goToMain()
+                            UserDefaultsUtil.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
                         }
                     }
                 }
