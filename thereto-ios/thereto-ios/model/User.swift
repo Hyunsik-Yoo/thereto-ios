@@ -1,6 +1,6 @@
 import Foundation
 
-struct User {
+struct User: Codable {
     var name: String
     var nickname: String
     var social: SocialType

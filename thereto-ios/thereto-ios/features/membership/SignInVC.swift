@@ -22,6 +22,7 @@ class SignInVC: BaseVC {
     static func instance() -> UINavigationController {
         let controller = SignInVC(nibName: nil, bundle: nil)
         let navi = UINavigationController(rootViewController: controller)
+        
         return navi
     }
     

@@ -4,9 +4,7 @@ import RxSwift
 
 class ProfileVC: BaseVC {
     
-    var viewModel = ProfileViewModel()
-    var userId: String!
-    var social: String!
+    var viewModel: ProfileViewModel!
     
     private lazy var profileView: ProfileView =  {
         let profileView = ProfileView(frame: self.view.bounds)
@@ -16,13 +14,13 @@ class ProfileVC: BaseVC {
     
     
     static func instance(id: String, social: String, name: String? = nil) -> ProfileVC {
-        let controller = ProfileVC(nibName: nil, bundle: nil)
-        
-        controller.userId = id
-        controller.social = social
-        if let name = name {
-            controller.viewModel.name.onNext(name)
+        let controller = ProfileVC(nibName: nil, bundle: nil).then {
+            $0.viewModel = ProfileViewModel(id: id, social: social, name: name,
+                                            facebookManager: FacebookManager(),
+                                            userService: UserService(),
+                                            userDefaults: UserDefaultsUtil())
         }
+        
         return controller
     }
     
@@ -30,44 +28,28 @@ class ProfileVC: BaseVC {
         super.viewDidLoad()
         
         view = profileView
-        
-        profileView.nicknameField.delegate = self
-        profileView.delegate = self
-        profileView.nicknameField.becomeFirstResponder()
-        
-        if social == "facebook" { // 애플로그인으로 접근할 경우에는 사진이 제공되지 않음
-            getFBProfile(id: userId)
-        }
+        setupNicknameField()
+        viewModel.input.getProfileEvent.onNext(()) // 소셜 id 가지고 오면 프로필 사진 바로 로딩
     }
+    
+    override func bindEvent() {}
     
     override func bindViewModel() {
-        viewModel.name
-            .bind(to: profileView.nameLabel.rx.text)
-            .disposed(by: disposeBag)
+        // Bind input
+        profileView.nicknameField.rx.text.orEmpty.bind(to: viewModel.input.nicknameText).disposed(by: disposeBag)
+        profileView.okBtn.rx.tap.bind(to: viewModel.input.tapConfirm).disposed(by: disposeBag)
         
-        viewModel.profileImageUrl
-            .filter({ $0 != "" })
-            .bind(onNext: { (urlString) in
-                self.profileView.profileImage.setImage(urlString: urlString)
-            }).disposed(by: disposeBag)
+        // Bind output
+        viewModel.output.socialNickname.bind(to: profileView.nicknameField.rx.text).disposed(by: disposeBag)
+        viewModel.output.errorMsg.bind(onNext: profileView.showError).disposed(by: disposeBag)
+        viewModel.output.profileImage.bind(onNext: profileView.setProfile).disposed(by: disposeBag)
+        viewModel.output.showAlert.bind(onNext: showAlert).disposed(by: disposeBag)
+        viewModel.output.goToMain.bind(onNext: goToMain).disposed(by: disposeBag)
     }
     
-    private func getFBProfile(id: String){
-        let connection = GraphRequestConnection()
-        
-        connection.add(GraphRequest(graphPath: "/me")) { (httpResponse, result, error) in
-            if error != nil {
-                AlertUtil.show(message: error.debugDescription)
-            } else {
-                if let result = result as? [String:String],
-                    let name: String = result["name"],
-                    let fbId: String = result["id"] {
-                    self.viewModel.name.onNext(name)
-                    self.viewModel.profileImageUrl.onNext("https://graph.facebook.com/\(fbId)/picture?height=400")
-                }
-            }
-        }
-        connection.start()
+    private func setupNicknameField() {
+        profileView.nicknameField.delegate = self
+        profileView.nicknameField.becomeFirstResponder()
     }
     
     private func goToMain() {
@@ -75,30 +57,9 @@ class ProfileVC: BaseVC {
             delegate.goToMain()
         }
     }
-}
-
-extension ProfileVC: ProfileDelegate{
-    func onTapOk() {
-        let nickname = self.profileView.nicknameField.text!
-        
-        if !nickname.isEmpty {
-            if let name = try? self.viewModel.name.value(),
-                let profileURL = try? self.viewModel.profileImageUrl.value() {
-                let user = User(nickname: nickname, name: name, social: self.social,
-                                id: self.userId, profileURL: profileURL)
-                
-                UserService.isExistingUser(nickname: nickname) { (isExisted) in
-                    if (isExisted) {
-                        AlertUtil.show(message: "중복된 닉네임입니다.\n다른 닉네임을 적어주세요.")
-                    } else {
-                        UserService.saveUser(user: user) {
-                            self.goToMain()
-                            UserDefaultsUtil.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
-                        }
-                    }
-                }
-            }
-        }
+    
+    private func showAlert(message: String) {
+        AlertUtil.show(controller: self, title: message, message: "")
     }
 }
 

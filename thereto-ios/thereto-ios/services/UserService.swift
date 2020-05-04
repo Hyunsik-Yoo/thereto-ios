@@ -1,6 +1,29 @@
 import FirebaseFirestore
+import RxSwift
+import RxCocoa
+import Firebase
 
-struct UserService {
+protocol UserServiceProtocol {
+    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void))
+    func isSessionExisted() -> Bool
+}
+
+struct UserService: UserServiceProtocol{
+    func isSessionExisted() -> Bool {
+        if let _ = Auth.auth().currentUser {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void)) {
+        /**
+         회원가입 로직
+         동일한 아이디가 존재하면 에러를 반환
+         */
+        print("회원가입 함수가 호출되었습니다.")
+    }
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
         Firestore.firestore().collection("user").document("\(user.id)").setData(user.toDict()) { (error) in

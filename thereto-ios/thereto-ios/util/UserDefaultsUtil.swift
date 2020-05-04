@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct UserDefaultsUtil {
+protocol UserDefaultsProtocol {
+    func setNormalLaunch(isNormal: Bool)
+    func isNormalLaunch() -> Bool
+}
+
+struct UserDefaultsUtil: UserDefaultsProtocol {
     
     static let KEY_TOKEN = "KEY_TOKEN"
     static let KEY_TUTORIAL_CARD = "KEY_TUTORIAL_CARD"
@@ -40,5 +45,13 @@ struct UserDefaultsUtil {
     
     static func setNormalLaunch(isNormal: Bool) {
         UserDefaults.standard.set(isNormal, forKey: UserDefaultsUtil.KEY_IS_NORMAL_LAUNCH)
+    }
+    
+    func setNormalLaunch(isNormal: Bool) {
+        UserDefaults.standard.set(isNormal, forKey: UserDefaultsUtil.KEY_IS_NORMAL_LAUNCH)
+    }
+    
+    func isNormalLaunch() -> Bool {
+        return UserDefaults.standard.bool(forKey: UserDefaultsUtil.KEY_IS_NORMAL_LAUNCH)
     }
 }
