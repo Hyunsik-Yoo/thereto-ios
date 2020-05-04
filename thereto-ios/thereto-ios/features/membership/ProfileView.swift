@@ -14,15 +14,6 @@ class ProfileView: BaseView {
         $0.image = UIImage.init(named: "image_profile_default")
     }
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "박은지"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
-    
     let nicknameField: UITextField = {
         let field = UITextField()
         
@@ -61,7 +52,7 @@ class ProfileView: BaseView {
     override func setup() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapOutofTextField)))
         backgroundColor = UIColor.themeColor
-        addSubViews(logoImage, profileImage, nameLabel, nicknameUnderLine,
+        addSubViews(logoImage, profileImage, nicknameUnderLine,
                     nicknameField, descLabel, okBtn)
     }
     
@@ -77,11 +68,6 @@ class ProfileView: BaseView {
             make.left.equalToSuperview().offset(32)
             make.top.equalTo(logoImage.snp.bottom).offset(30)
             make.width.height.equalTo(40)
-        }
-        
-        nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(profileImage.snp.right).offset(10)
-            make.centerY.equalTo(profileImage)
         }
         
         nicknameField.snp.makeConstraints { (make) in

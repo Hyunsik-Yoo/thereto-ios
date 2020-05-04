@@ -4,18 +4,13 @@ import RxSwift
 
 class ProfileVC: BaseVC {
     
+    private lazy var profileView = ProfileView(frame: self.view.frame)
     var viewModel: ProfileViewModel!
     
-    private lazy var profileView: ProfileView =  {
-        let profileView = ProfileView(frame: self.view.bounds)
-        
-        return profileView
-    }()
     
-    
-    static func instance(id: String, social: String, name: String? = nil) -> ProfileVC {
+    static func instance(id: String, social: String) -> ProfileVC {
         let controller = ProfileVC(nibName: nil, bundle: nil).then {
-            $0.viewModel = ProfileViewModel(id: id, social: social, name: name,
+            $0.viewModel = ProfileViewModel(id: id, social: social,
                                             facebookManager: FacebookManager(),
                                             userService: UserService(),
                                             userDefaults: UserDefaultsUtil())
@@ -40,11 +35,18 @@ class ProfileVC: BaseVC {
         profileView.okBtn.rx.tap.bind(to: viewModel.input.tapConfirm).disposed(by: disposeBag)
         
         // Bind output
-        viewModel.output.socialNickname.bind(to: profileView.nicknameField.rx.text).disposed(by: disposeBag)
-        viewModel.output.errorMsg.bind(onNext: profileView.showError).disposed(by: disposeBag)
-        viewModel.output.profileImage.bind(onNext: profileView.setProfile).disposed(by: disposeBag)
-        viewModel.output.showAlert.bind(onNext: showAlert).disposed(by: disposeBag)
-        viewModel.output.goToMain.bind(onNext: goToMain).disposed(by: disposeBag)
+        viewModel.output.showLoading.bind(onNext: profileView.showLoading(isShow:))
+            .disposed(by: disposeBag)
+        viewModel.output.socialNickname.bind(to: profileView.nicknameField.rx.text)
+            .disposed(by: disposeBag)
+        viewModel.output.errorMsg.bind(onNext: profileView.showError)
+            .disposed(by: disposeBag)
+        viewModel.output.profileImage.bind(onNext: profileView.setProfile)
+            .disposed(by: disposeBag)
+        viewModel.output.showAlert.bind(onNext: showAlert)
+            .disposed(by: disposeBag)
+        viewModel.output.goToMain.bind(onNext: goToMain)
+            .disposed(by: disposeBag)
     }
     
     private func setupNicknameField() {

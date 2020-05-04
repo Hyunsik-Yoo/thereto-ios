@@ -9,7 +9,6 @@ class ProfileViewModel: BaseViewModel {
     
     var id: String
     var social: String
-    var name: String?
     
     var facebookManager: FaceboookManagerProtocol
     var userService: UserServiceProtocol
@@ -22,6 +21,7 @@ class ProfileViewModel: BaseViewModel {
     }
     
     struct Output {
+        var showLoading: Observable<Bool>
         var socialNickname: Observable<String>
         var errorMsg: Observable<String>
         var profileImage: Observable<String>
@@ -33,19 +33,19 @@ class ProfileViewModel: BaseViewModel {
     let tapConfirmPublisher = PublishSubject<Void>()
     let getProfileEventPublisher = PublishSubject<Void>()
     
+    let showLoadingPublisher = PublishSubject<Bool>()
     let socialNicknamePublisher = PublishSubject<String>()
     let errorMsgPublisher = PublishSubject<String>()
     let profileImagePublisher = PublishSubject<String>()
     let showAlertPublisher = PublishSubject<String>()
     let goToMainPublisher = PublishSubject<Void>()
     
-    init(id: String, social: String, name: String? = nil,
+    init(id: String, social: String,
          facebookManager: FaceboookManagerProtocol,
          userService: UserServiceProtocol,
          userDefaults: UserDefaultsProtocol) {
         self.id = id
         self.social = social
-        self.name = name
         self.facebookManager = facebookManager
         self.userService = userService
         self.userDefaults = userDefaults
@@ -54,7 +54,8 @@ class ProfileViewModel: BaseViewModel {
                       tapConfirm: tapConfirmPublisher.asObserver(),
                       getProfileEvent: getProfileEventPublisher.asObserver())
         
-        output = Output(socialNickname: socialNicknamePublisher.asObservable(),
+        output = Output(showLoading: showLoadingPublisher.asObservable(),
+                        socialNickname: socialNicknamePublisher.asObservable(),
                         errorMsg: errorMsgPublisher.asObservable(),
                         profileImage: profileImagePublisher.asObservable(),
                         showAlert: showAlertPublisher.asObservable(),
@@ -73,27 +74,32 @@ class ProfileViewModel: BaseViewModel {
                         self.showAlertPublisher.onNext(error.localizedDescription)
                     }).disposed(by: self.disposeBag)
                 }
+            } else {
+                self.profileImagePublisher.onNext("")
             }
         }.disposed(by: disposeBag)
-        
         
         tapConfirmPublisher.withLatestFrom(Observable.combineLatest(nicknameTextPublisher, profileImagePublisher))
             .bind { [weak self] (nickname, profileURL) in
                 guard let self = self else { return }
                 if !nickname.isEmpty {
-                    let user = User(nickname: nickname, name: name!, social: social, id: id, profileURL: profileURL)
+                    let user = User(nickname: nickname, social: social, id: id, profileURL: profileURL)
                     
+                    self.showLoadingPublisher.onNext(true)
                     userService.signUp(user: user) { (responseObservable) in
                         responseObservable.subscribe(onNext: { (response) in
                             // 메인 화면으로 이동
-                            userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
+                            self.userDefaults.setUserToken(token: id)
+                            self.userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
                             self.goToMainPublisher.onNext(())
+                            self.showLoadingPublisher.onNext(false)
                         }, onError: { (error) in
                             if let error = error as? CommonError {
                                 self.showAlertPublisher.onNext(error.description)
                             } else {
                                 self.showAlertPublisher.onNext(error.localizedDescription)
                             }
+                            self.showLoadingPublisher.onNext(false)
                         }).disposed(by: self.disposeBag)
                     }
                 } else {

@@ -138,7 +138,7 @@ class SetupView: BaseView {
         if let user = user {
             profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
             nicknameLabel.text = user.nickname
-            nameLabel.text = user.name
+            nameLabel.text = "user.name"
             receivedCountLabel.text = "\(user.receivedCount)"
             sentCountLabel.text = "\(user.sentCount)"
         }

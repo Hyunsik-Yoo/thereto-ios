@@ -176,7 +176,6 @@ extension SignInVC: LoginButtonDelegate {
                 let id = result?.token?.userID {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 let socialToken = "facebook\(id)"
-                
                 FirebaseUtil.auth(credential: credential) {
                     self.viewModel.input.userToken.onNext((socialToken, "facebook"))
                 }
