@@ -6,9 +6,19 @@ import Firebase
 protocol UserServiceProtocol {
     func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void))
     func isSessionExisted() -> Bool
+    func validateUser(token: String, completion: @escaping (Bool) -> Void)
 }
 
 struct UserService: UserServiceProtocol{
+    
+    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void)) {
+        /**
+         회원가입 로직
+         동일한 아이디가 존재하면 에러를 반환
+         */
+        print("회원가입 함수가 호출되었습니다.")
+    }
+    
     func isSessionExisted() -> Bool {
         if let _ = Auth.auth().currentUser {
             return true
@@ -17,12 +27,17 @@ struct UserService: UserServiceProtocol{
         }
     }
     
-    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void)) {
-        /**
-         회원가입 로직
-         동일한 아이디가 존재하면 에러를 반환
-         */
-        print("회원가입 함수가 호출되었습니다.")
+    func validateUser(token: String, completion: @escaping (Bool) -> Void) {
+        Firestore.firestore()
+            .collection("user")
+            .document(token)
+            .getDocument { (snapshot, error) in
+            if snapshot?.data() == nil {
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
     }
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
@@ -109,18 +124,6 @@ struct UserService: UserServiceProtocol{
                 userList.append(user)
             }
             completion(userList)
-        }
-    }
-    
-    static func validateUser(token: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        
-        db.collection("user").document(token).getDocument { (snapshot, error) in
-            if snapshot?.data() == nil {
-                completion(false)
-            } else {
-                completion(true)
-            }
         }
     }
     

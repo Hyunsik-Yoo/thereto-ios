@@ -75,6 +75,7 @@
 		6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */; };
 		6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */; };
 		6E8C8A65245FBB73004C0DD1 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C8A64245FBB73004C0DD1 /* SplashViewModel.swift */; };
+		6E8C8A67245FD7C2004C0DD1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */; };
 		6E93C84023F25C45002E737F /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C83F23F25C45002E737F /* WriteVC.swift */; };
 		6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84223F27536002E737F /* SelectFriendView.swift */; };
 		6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84423F2807A002E737F /* SelectFriendVC.swift */; };
@@ -186,6 +187,7 @@
 		6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Light.ttf"; sourceTree = "<group>"; };
 		6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
 		6E8C8A64245FBB73004C0DD1 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		6E93C83F23F25C45002E737F /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
 		6E93C84223F27536002E737F /* SelectFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendView.swift; sourceTree = "<group>"; };
 		6E93C84423F2807A002E737F /* SelectFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendVC.swift; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 			children = (
 				6EA738CD2393947B002176F6 /* SignInView.swift */,
 				6EA738CF2393982F002176F6 /* SignInVC.swift */,
+				6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */,
 				6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */,
 				6E10BC4F23A540740026BCD7 /* ProfileVC.swift */,
 				6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */,
@@ -756,6 +759,7 @@
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */,
 				6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */,
+				6E8C8A67245FD7C2004C0DD1 /* SignInViewModel.swift in Sources */,
 				6E01EA3323FBBBD900C85607 /* SentLetterVC.swift in Sources */,
 				6E9F9F0523F3F35E00A14C40 /* AddressCell.swift in Sources */,
 				6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */,

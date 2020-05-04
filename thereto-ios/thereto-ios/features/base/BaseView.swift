@@ -42,6 +42,20 @@ class BaseView: UIView {
         loadingView.stopAnimating()
         isUserInteractionEnabled = true
         loadingView.removeFromSuperview()
-        
+    }
+    
+    func showLoading(isShow: Bool) {
+        if isShow {
+            addSubview(loadingView)
+            loadingView.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+            }
+            isUserInteractionEnabled = false
+            loadingView.startAnimating()
+        } else {
+            loadingView.stopAnimating()
+            isUserInteractionEnabled = true
+            loadingView.removeFromSuperview()
+        }
     }
 }

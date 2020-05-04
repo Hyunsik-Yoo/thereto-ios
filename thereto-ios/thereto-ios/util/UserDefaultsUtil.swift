@@ -11,6 +11,7 @@ import Foundation
 protocol UserDefaultsProtocol {
     func setNormalLaunch(isNormal: Bool)
     func isNormalLaunch() -> Bool
+    func setUserToken(token: String)
 }
 
 struct UserDefaultsUtil: UserDefaultsProtocol {
@@ -53,5 +54,9 @@ struct UserDefaultsUtil: UserDefaultsProtocol {
     
     func isNormalLaunch() -> Bool {
         return UserDefaults.standard.bool(forKey: UserDefaultsUtil.KEY_IS_NORMAL_LAUNCH)
+    }
+    
+    func setUserToken(token: String) {
+        UserDefaults.standard.set(token, forKey: UserDefaultsUtil.KEY_TOKEN)
     }
 }
