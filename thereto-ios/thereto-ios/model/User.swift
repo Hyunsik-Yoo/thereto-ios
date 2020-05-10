@@ -18,15 +18,15 @@ struct User: Codable {
     init(map: [String: Any]) {
         self.nickname = map["nickname"] as! String
         self.social = SocialType(rawValue: map["social"] as! String)!
-        self.profileURL = map["profile_url"] as? String
-        self.receivedCount = map["receive_count"] as! Int
-        self.sentCount = map["sent_count"] as! Int
+        self.profileURL = map["profileURL"] as? String
+        self.receivedCount = map["receiveCount"] as! Int
+        self.sentCount = map["sentCount"] as! Int
         self.id = map["id"] as! String
     }
     
     func toDict() -> [String: Any] {
         return ["nickname": nickname, "social": social.rawValue,
-                "id": id, "profile_url": profileURL!, "receive_count": receivedCount, "sent_count": sentCount]
+                "id": id, "profileURL": profileURL!, "receivedCount": receivedCount, "sentCount": sentCount]
     }
     
     func getSocial() -> String {

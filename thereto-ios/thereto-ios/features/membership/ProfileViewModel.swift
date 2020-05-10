@@ -86,10 +86,10 @@ class ProfileViewModel: BaseViewModel {
                     let user = User(nickname: nickname, social: social, id: id, profileURL: profileURL)
                     
                     self.showLoadingPublisher.onNext(true)
-                    userService.signUp(user: user) { (responseObservable) in
-                        responseObservable.subscribe(onNext: { (response) in
+                    userService.signUp(user: user) { (userObservable) in
+                        userObservable.subscribe(onNext: { (user) in
                             // 메인 화면으로 이동
-                            self.userDefaults.setUserToken(token: id)
+                            self.userDefaults.setUserToken(token: user.id)
                             self.userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
                             self.goToMainPublisher.onNext(())
                             self.showLoadingPublisher.onNext(false)

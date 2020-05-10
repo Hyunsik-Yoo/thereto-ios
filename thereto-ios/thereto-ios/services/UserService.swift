@@ -2,21 +2,39 @@ import FirebaseFirestore
 import RxSwift
 import RxCocoa
 import Firebase
+import Alamofire
 
 protocol UserServiceProtocol {
-    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void))
+    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void))
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
 }
 
 struct UserService: UserServiceProtocol{
     
-    func signUp(user: User, completion: @escaping ((Observable<CommonResponse<User>>) -> Void)) {
-        /**
-         회원가입 로직
-         동일한 아이디가 존재하면 에러를 반환
-         */
-        print("회원가입 함수가 호출되었습니다.")
+    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
+        let url = "\(HTTPUtils.url)/signUp"
+        let headers = HTTPUtils.jsonHeader()
+        let params = user.toDict()
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            if let value = response.value {
+                if let commonResponse: CommonResponse<User> = JsonUtils.toJson(object: value) {
+                    if commonResponse.error.isEmpty {
+                        completion(Observable.just(commonResponse.data))
+                    } else {
+                        let error = CommonError(desc: commonResponse.error)
+                        completion(Observable.error(error))
+                    }
+                } else {
+                    let error = CommonError(desc: "Error in serilization.")
+                    completion(Observable.error(error))
+                }
+            } else {
+                let error = CommonError(desc: "데이터가 비어있습니다.")
+                completion(Observable.error(error))
+            }
+        }
     }
     
     func isSessionExisted() -> Bool {
