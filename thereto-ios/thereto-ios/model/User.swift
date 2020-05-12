@@ -19,7 +19,7 @@ struct User: Codable {
         self.nickname = map["nickname"] as! String
         self.social = SocialType(rawValue: map["social"] as! String)!
         self.profileURL = map["profileURL"] as? String
-        self.receivedCount = map["receiveCount"] as! Int
+        self.receivedCount = map["receivedCount"] as! Int
         self.sentCount = map["sentCount"] as! Int
         self.id = map["id"] as! String
     }

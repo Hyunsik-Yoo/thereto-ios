@@ -7,10 +7,6 @@ class SelectLocationView: BaseView {
         $0.setImage(UIImage.init(named: "ic_back"), for: .normal)
     }
     
-    lazy var dimView = UIView(frame: self.frame).then {
-        $0.backgroundColor = .clear
-    }
-    
     let mapView = NMFNaverMapView().then {
         $0.showLocationButton = false
         $0.showZoomControls = false
@@ -134,28 +130,6 @@ class SelectLocationView: BaseView {
         selectLocationBtn.snp.makeConstraints { (make) in
             make.right.equalToSuperview().offset(-24)
             make.bottom.equalTo(safeAreaLayoutGuide).offset(-5)
-        }
-    }
-    
-    func addBgDim() {
-        DispatchQueue.main.async { [weak self] in
-            if let view = self {
-                view.addSubview(view.dimView)
-                UIView.animate(withDuration: 0.3) {
-                    view.dimView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a:0.5)
-                }
-            }
-            
-        }
-    }
-    
-    func removeBgDim() {
-        DispatchQueue.main.async { [weak self] in
-            UIView.animate(withDuration: 0.3, animations: {
-                self?.dimView.backgroundColor = .clear
-            }) { (_) in
-                self?.dimView.removeFromSuperview()
-            }
         }
     }
 }

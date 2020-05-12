@@ -8,10 +8,10 @@ protocol UserServiceProtocol {
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void))
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
+    func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
 }
 
 struct UserService: UserServiceProtocol{
-    
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
         let url = "\(HTTPUtils.url)/signUp"
         let headers = HTTPUtils.jsonHeader()
@@ -54,6 +54,22 @@ struct UserService: UserServiceProtocol{
                 completion(false)
             } else {
                 completion(true)
+            }
+        }
+    }
+    
+    func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(token).getDocument { (snapshot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                snapshot?.exists
+                if let data = snapshot?.data() {
+                    let user = User(map: data)
+                    completion(Observable.just(user))
+                }
             }
         }
     }

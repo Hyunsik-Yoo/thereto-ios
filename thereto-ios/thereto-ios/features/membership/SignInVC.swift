@@ -157,7 +157,7 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            let socialToken = "apple\(appleIDCredential.user)"
+            let socialToken = appleIDCredential.user
             
             // Sign in with Firebase.
             FirebaseUtil.auth(credential: credential) {

@@ -2,10 +2,6 @@ import UIKit
 
 class LetterBoxView: BaseView {
     
-    lazy var dimView = UIView(frame: self.frame).then {
-        $0.backgroundColor = .clear
-    }
-    
     let topBar = BoxNavigationBar().then {
         $0.isUserInteractionEnabled = true
     }
@@ -59,28 +55,5 @@ class LetterBoxView: BaseView {
     
     func setEmpty(isEmpty: Bool) {
         emptyLabel.isHidden = !isEmpty
-    }
-    
-    func addBgDim() {
-        DispatchQueue.main.async { [weak self] in
-            if let view = self {
-                view.addSubview(view.dimView)
-                UIView.animate(withDuration: 0.3) {
-                    view.dimView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a:0.5)
-                }
-            }
-            
-        }
-    }
-    
-    
-    func removeBgDim() {
-        DispatchQueue.main.async { [weak self] in
-            UIView.animate(withDuration: 0.3, animations: {
-                self?.dimView.backgroundColor = .clear
-            }) { (_) in
-                self?.dimView.removeFromSuperview()
-            }
-        }
     }
 }
