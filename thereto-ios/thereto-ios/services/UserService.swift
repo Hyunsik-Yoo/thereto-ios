@@ -65,7 +65,6 @@ struct UserService: UserServiceProtocol{
             if let error = error {
                 completion(Observable.error(error))
             } else {
-                snapshot?.exists
                 if let data = snapshot?.data() {
                     let user = User(map: data)
                     completion(Observable.just(user))

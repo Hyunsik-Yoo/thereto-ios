@@ -12,7 +12,7 @@ struct User: Codable {
         self.nickname = nickname
         self.social = SocialType(rawValue: social)!
         self.profileURL = profileURL
-        self.id = "\(social)\(id)"
+        self.id = id
     }
     
     init(map: [String: Any]) {
