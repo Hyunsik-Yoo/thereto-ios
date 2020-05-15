@@ -25,8 +25,12 @@ struct User: Codable {
     }
     
     func toDict() -> [String: Any] {
-        return ["nickname": nickname, "social": social.rawValue,
-                "id": id, "profileURL": profileURL!, "receivedCount": receivedCount, "sentCount": sentCount]
+        return ["id": id,
+                "nickname": nickname,
+                "social": social.rawValue,
+                "profileURL": profileURL!,
+                "receivedCount": receivedCount,
+                "sentCount": sentCount]
     }
     
     func getSocial() -> String {

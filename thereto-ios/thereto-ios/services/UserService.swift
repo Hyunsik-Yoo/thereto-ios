@@ -9,9 +9,13 @@ protocol UserServiceProtocol {
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
+    func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
+    func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
+    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
 }
 
 struct UserService: UserServiceProtocol{
+    
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
         let url = "\(HTTPUtils.url)/signUp"
         let headers = HTTPUtils.jsonHeader()
@@ -69,6 +73,65 @@ struct UserService: UserServiceProtocol{
                     let user = User(map: data)
                     completion(Observable.just(user))
                 }
+            }
+        }
+    }
+    
+    func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").whereField("nickname", isEqualTo: nickname).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            }
+            guard let snapshot = snapshot else {
+                completion(Observable.error(CommonError(desc: "Snapshot is nil")))
+                return
+            }
+            
+            var userList:[User] = []
+            for document in snapshot.documents {
+                let user = User(map: document.data())
+                
+                userList.append(user)
+            }
+            completion(Observable.just(userList))
+        }
+    }
+    
+    func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(id).collection("friends").getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            }
+            guard let snapshot = snapshot else {
+                let error = CommonError(desc: "Snapshot is nil")
+                completion(Observable.error(error))
+                return
+            }
+            
+            var friendList:[Friend] = []
+            for document in snapshot.documents {
+                let user = Friend(map: document.data())
+                
+                friendList.append(user)
+            }
+            completion(Observable.just(friendList))
+        }
+    }
+    
+    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void) {
+        let db = Firestore.firestore()
+        
+        var friendDict = friend.toDict()
+        friendDict["createdAt"] = DateUtil.date2String(date: Date())
+        db.collection("user/\(id)/friends").document(friend.id).setData(friendDict) { (error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                completion(Observable.just(()))
             }
         }
     }

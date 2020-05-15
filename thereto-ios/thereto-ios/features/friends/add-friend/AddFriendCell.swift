@@ -63,8 +63,9 @@ class AddFriendCell: BaseTableViewCell {
     
     func bind(friend: Friend) {
         nameLabel.text = friend.nickname
-        profileImage.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
-        
+        if let profileURL = friend.profileURL {
+            profileImage.kf.setImage(with: URL.init(string: profileURL), placeholder: UIImage.init(named: "image_profile_default"))
+        }
         if friend.requestState == .WAIT || friend.requestState == .REQUEST_SENT {
             waitingLabel.isHidden = false
             addBtn.isHidden = true
