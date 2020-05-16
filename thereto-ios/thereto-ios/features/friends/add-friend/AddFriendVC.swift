@@ -20,6 +20,7 @@ class AddFriendVC: BaseVC {
         view = addFriendView
         setupTableView()
         viewModel.fetchFriend()
+        viewModel.fetchMyInfo()
     }
     
     override func bindViewModel() {
@@ -39,7 +40,7 @@ class AddFriendVC: BaseVC {
                 }
             }.disposed(by: cell.disposeBag)
         }.disposed(by: disposeBag)
-        viewModel.output.dataMode.bind(onNext: addFriendView.setDataMode(isDataMode:))
+        viewModel.output.dataMode.bind(onNext: addFriendView.setDataMode(type:))
             .disposed(by: disposeBag)
         viewModel.output.showLoading.bind(onNext: addFriendView.showLoading(isShow:))
             .disposed(by: disposeBag)
@@ -50,6 +51,7 @@ class AddFriendVC: BaseVC {
     }
     
     override func bindEvent() {
+        addFriendView.nicknameField.delegate = self
         addFriendView.backBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
@@ -96,5 +98,13 @@ extension AddFriendVC: UITableViewDelegate {
                 make.right.equalTo(self.addFriendView.searchBtn.snp.left).offset(-10)
             }
         }
+    }
+}
+
+extension AddFriendVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.viewModel.input.tapSearch.onNext(())
+        self.addFriendView.nicknameField.resignFirstResponder()
+        return true
     }
 }

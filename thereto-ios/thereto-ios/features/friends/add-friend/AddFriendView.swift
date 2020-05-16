@@ -35,6 +35,12 @@ class AddFriendView: BaseView {
         $0.isHidden = true
     }
     
+    enum DataType: String {
+        case DEFAULT = "default"
+        case NOTEXIST = "not_exist"
+        case EXIST = "exist"
+    }
+    
     private let descLabel = UILabel().then {
         let attributedString =
             NSMutableAttributedString(string: "아직 가입하지 않은\n친구에게 ",
@@ -114,16 +120,42 @@ class AddFriendView: BaseView {
         }
     }
     
-    func setDataMode(isDataMode: Bool) {
-        tableView.isHidden = !isDataMode
-        descLabel.isHidden = isDataMode
-        linkBtn.isHidden = isDataMode
-        setDescText()
+    func setDataMode(type: DataType) {
+        switch type {
+        case .DEFAULT:
+            tableView.isHidden = true
+            descLabel.isHidden = false
+            linkBtn.isHidden = false
+            setDefaultsDescText()
+        case .NOTEXIST:
+            tableView.isHidden = true
+            descLabel.isHidden = false
+            linkBtn.isHidden = false
+            setNotExistDescText()
+        case .EXIST:
+            tableView.isHidden = false
+            descLabel.isHidden = true
+            linkBtn.isHidden = true
+        }
     }
     
-    private func setDescText() {
+    private func setNotExistDescText() {
         let attributedString =
             NSMutableAttributedString(string: "검색 결과가 없습니다.\n친구에게 ",
+                                      attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!])
+        attributedString
+            .append(NSMutableAttributedString(string: "thereto",
+                                              attributes: [.font: UIFont.init(name: "SpoqaHanSans-Bold", size: 17)!]))
+        attributedString
+            .append(NSMutableAttributedString(string: "를 공유해주세요.",
+                                              attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!]))
+        
+        descLabel.attributedText = attributedString
+    }
+    
+    private func setDefaultsDescText() {
+        let attributedString =
+            NSMutableAttributedString(string: "아직 가입하지 않은\n친구에게 ",
                                       attributes: [.font: UIFont.init(name: "SpoqaHanSans-Light", size: 17)!])
         attributedString
             .append(NSMutableAttributedString(string: "thereto",

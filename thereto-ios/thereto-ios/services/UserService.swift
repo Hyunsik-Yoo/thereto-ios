@@ -12,6 +12,7 @@ protocol UserServiceProtocol {
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
     func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
+    func requestFriend(user: Friend, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
 }
 
 struct UserService: UserServiceProtocol{
@@ -132,6 +133,22 @@ struct UserService: UserServiceProtocol{
                 completion(Observable.error(error))
             } else {
                 completion(Observable.just(()))
+            }
+        }
+    }
+    
+    func requestFriend(user: Friend, friend: Friend, completion: @escaping (Observable<Void>) -> Void) {
+        let url = "\(HTTPUtils.url)/requestFriend"
+        let headers = HTTPUtils.jsonHeader()
+        let params: [String: Any] = ["user": user.toDict(),
+                                     "friend": friend.toDict()]
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            if let _ = response.value {
+                completion(Observable.just(()))
+            } else {
+                let error = CommonError(desc: "데이터가 비어있습니다.")
+                completion(Observable.error(error))
             }
         }
     }

@@ -15,7 +15,7 @@ class AddFriendViewModel: BaseViewModel {
     
     struct Output {
         var userList: Observable<[Friend]>
-        var dataMode: Observable<Bool>
+        var dataMode: Observable<AddFriendView.DataType>
         var showLoading: Observable<Bool>
         var showAlert: Observable<(String, String)>
     }
@@ -25,8 +25,9 @@ class AddFriendViewModel: BaseViewModel {
     let requestFirendPublisher = PublishSubject<Int>()
     
     let userListPublisher = PublishSubject<[Friend]>()
-    let dataModePublisher = PublishSubject<Bool>()
+    let dataModePublisher = PublishSubject<AddFriendView.DataType>()
     let friendListPublisher = PublishSubject<[Friend]>()
+    let myInfoPublisher = PublishSubject<Friend>()
     let showLoadingPublisher = PublishSubject<Bool>()
     let showAlertPublisher = PublishSubject<(String, String)>()
     
@@ -70,7 +71,7 @@ class AddFriendViewModel: BaseViewModel {
                         }
                     }
                     
-                    self.dataModePublisher.onNext(!filteredList.isEmpty)
+                    self.dataModePublisher.onNext(filteredList.isEmpty ? .NOTEXIST : .EXIST)
                     self.userListPublisher.onNext(filteredList)
                     self.showLoadingPublisher.onNext(false)
                 }, onError: { (error) in
@@ -84,7 +85,7 @@ class AddFriendViewModel: BaseViewModel {
             }
         }.disposed(by: disposeBag)
         
-        requestFirendPublisher.withLatestFrom(Observable.combineLatest(requestFirendPublisher, userListPublisher)).bind { [weak self] (index, friends) in
+        requestFirendPublisher.withLatestFrom(Observable.combineLatest(requestFirendPublisher, userListPublisher, myInfoPublisher)).bind { [weak self] (index, friends, myInfo) in
             guard let self = self else { return }
             var friend = friends[index]
             // 주고받은 편지 개수 초기화
@@ -97,8 +98,18 @@ class AddFriendViewModel: BaseViewModel {
                 observable.subscribe(onNext: { (_) in
                     // 내 친구가 추가되었을때, 친구 필드에도 나를 WAIT 상태로 추가해야합니다.
                     // 친구 요청 완료한 뒤, 앱 화면 초기화 시켜야합니다.
-                    
-                    self.showLoadingPublisher.onNext(false)
+                    userService.requestFriend(id: friend.id, friend: myInfo) { (observable) in
+                        observable.subscribe(onNext: { (_) in
+                            self.showAlertPublisher.onNext(("","친구 요청 성공"))
+                            self.nicknameTextPublisher.onNext("")
+                            self.showLoadingPublisher.onNext(false)
+                            self.dataModePublisher.onNext(.DEFAULT)
+                            self.fetchFriend()
+                        }, onError: { (error) in
+                            self.showAlertPublisher.onNext(("친구 요청 오류", error.localizedDescription))
+                            self.showLoadingPublisher.onNext(false)
+                        }).disposed(by: self.disposeBag)
+                    }
                 }, onError: { (error) in
                     self.showAlertPublisher.onNext(("친구 요청 오류", error.localizedDescription))
                     self.showLoadingPublisher.onNext(false)
@@ -106,36 +117,7 @@ class AddFriendViewModel: BaseViewModel {
             }
         }.disposed(by: disposeBag)
     }
-    
-//    private func requestFriend(friend: Friend) {
-//        self.addFriendView.startLoading()
-//        // 내 User document에 상대방 넣고 state는 request_sent
-//        let myToken = UserDefaultsUtil.getUserToken()!
-//
-//        UserService.addFriend(token: myToken, friend: friend) { (isSuccess) in
-//            if isSuccess {
-//                // 상대방 user document에 내 User넣고 state는 wait
-//                UserService.getMyUser { (user) in
-//                    var myUser = Friend.init(user: user)
-//                    myUser.requestState = State.WAIT
-//                    UserService.addFriend(token: friend.id, friend: myUser) { (isSuccess) in
-//                        if isSuccess {
-//                            AlertUtil.show(message: "친구 요청 성공")
-//                            self.addFriendView.nicknameField.text = ""
-//                            self.addFriendView.setDataMode(isDataMode: false)
-//                        } else {
-//                            // 실패한 경우 다시 지워야 함
-//                            UserService.deleteFriend(token: myToken, friendId: friend.id) { _ in }
-//                        }
-//                        self.addFriendView.stopLoading()
-//                    }
-//                }
-//            } else {
-//                self.addFriendView.stopLoading()
-//            }
-//        }
-//    }
-    
+        
     func fetchFriend() {
         self.showLoadingPublisher.onNext(true)
         userService.getFriends(id: userDefaults.getUserToken()) { [weak self] (friendsObservable) in
@@ -148,6 +130,28 @@ class AddFriendViewModel: BaseViewModel {
                     self.showAlertPublisher.onNext(("친구 조회 오류", error.description))
                 } else {
                     self.showAlertPublisher.onNext(("친구 조회 오류", error.localizedDescription))
+                }
+                self.showLoadingPublisher.onNext(false)
+            }).disposed(by: self.disposeBag)
+        }
+    }
+    
+    func fetchMyInfo() {
+        self.showLoadingPublisher.onNext(true)
+        userService.getUserInfo(token: userDefaults.getUserToken()) { [weak self] (userObservable) in
+            guard let self = self else { return }
+            userObservable.subscribe(onNext: { (user) in
+                var my2Friend = Friend(user: user)
+                my2Friend.receivedCount = 0
+                my2Friend.sentCount = 0
+                my2Friend.requestState = .WAIT
+                self.myInfoPublisher.onNext(my2Friend)
+                self.showLoadingPublisher.onNext(false)
+            }, onError: { (error) in
+                if let error = error as? CommonError {
+                    self.showAlertPublisher.onNext(("내정보 조회 오류", error.description))
+                } else {
+                    self.showAlertPublisher.onNext(("내정보 조회 오류", error.localizedDescription))
                 }
                 self.showLoadingPublisher.onNext(false)
             }).disposed(by: self.disposeBag)
