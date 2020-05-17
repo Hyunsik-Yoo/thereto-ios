@@ -7,6 +7,7 @@ struct User: Codable {
     var receivedCount = 0
     var sentCount = 0
     var id: String
+    var newFriendRequest: Bool = false
     
     init(nickname: String,social: String, id: String, profileURL: String) {
         self.nickname = nickname
@@ -22,6 +23,7 @@ struct User: Codable {
         self.receivedCount = map["receivedCount"] as! Int
         self.sentCount = map["sentCount"] as! Int
         self.id = map["id"] as! String
+        self.newFriendRequest = map["newFriendRequest"] as! Bool
     }
     
     func toDict() -> [String: Any] {
@@ -30,7 +32,8 @@ struct User: Codable {
                 "social": social.rawValue,
                 "profileURL": profileURL!,
                 "receivedCount": receivedCount,
-                "sentCount": sentCount]
+                "sentCount": sentCount,
+                "newFriendRequest": newFriendRequest]
     }
     
     func getSocial() -> String {

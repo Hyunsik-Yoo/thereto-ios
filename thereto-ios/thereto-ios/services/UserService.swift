@@ -128,6 +128,7 @@ struct UserService: UserServiceProtocol{
         
         var friendDict = friend.toDict()
         friendDict["createdAt"] = DateUtil.date2String(date: Date())
+        db.document("user/\(id)").updateData(["newFriendRequest": true])
         db.collection("user/\(id)/friends").document(friend.id).setData(friendDict) { (error) in
             if let error = error {
                 completion(Observable.error(error))
@@ -351,5 +352,11 @@ struct UserService: UserServiceProtocol{
                 completion(true)
             }
         }
+    }
+    
+    static func fetchRedDot(token: String) {
+        let db = Firestore.firestore()
+        
+        db.document("user/\(token)").updateData(["newFriendRequest": false])
     }
 }
