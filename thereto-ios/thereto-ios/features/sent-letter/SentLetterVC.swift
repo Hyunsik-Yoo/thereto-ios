@@ -76,7 +76,7 @@ class SentLetterVC: BaseVC {
 extension SentLetterVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let letters = try? self.viewModel.letters.value() {
-            self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row]), animated: true)
+            self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row], isSentMode: true), animated: true)
         }
     }
 }

@@ -80,7 +80,7 @@ class LetterBoxVC: BaseVC {
     }
     
     private func goToLetterDetail(letter: Letter) {
-        self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letter), animated: true)
+        self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letter, isSentMode: false), animated: true)
     }
     
     private func showFarAway(letter: Letter, myLocation: CLLocation) {
