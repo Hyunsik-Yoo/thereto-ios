@@ -134,7 +134,7 @@ class LetterBoxViewModel: BaseViewModel {
         let thereto = User.init(nickname: "thereto", social: "facebook", id: "tutorial", profileURL: "")
         let me = Friend.init(nickname: user.nickname, social: user.getSocial(), id: user.id, profileURL: user.profileURL!)
         let location = Location.init(name: "데얼투", addr: "서울 강남구 삼성로85길 26", latitude: 37.504884, longitude: 127.055053)
-        var letter = Letter.init(from: thereto, to: me, location: location, photo: "https://firebasestorage.googleapis.com/v0/b/there-to.appspot.com/o/img%402x.png?alt=media&token=cdab7112-0702-490f-8d82-eac91213f044", message: "\(user.nickname)님, thereto에 오신것을 환영합니다. 특별한 장소에서 친구에게특별한 엽서를 남겨보세요.\n친구는 해당 장소에 도착해야지만 엽서를 볼 수 있습니다.\n\n감사합니다.")
+        var letter = Letter.init(from: thereto, to: me, location: location, photo: "https://firebasestorage.googleapis.com/v0/b/there-to.appspot.com/o/img%402x.png?alt=media&token=cdab7112-0702-490f-8d82-eac91213f044", message: "\(user.nickname)님, thereto에 오신것을 환영합니다. 특별한 장소에서 친구에게특별한 엽서를 남겨보세요.\n친구는 해당 장소에 도착해야지만 엽서를 볼 수 있습니다.\n\n감사합니다.", createdAt: user.createdAt)
         
         letter.id = "tutorial"
         

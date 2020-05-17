@@ -8,12 +8,14 @@ struct User: Codable {
     var sentCount = 0
     var id: String
     var newFriendRequest: Bool = false
+    var createdAt: String
     
     init(nickname: String,social: String, id: String, profileURL: String) {
         self.nickname = nickname
         self.social = SocialType(rawValue: social)!
         self.profileURL = profileURL
         self.id = id
+        self.createdAt = DateUtil.date2String(date: Date.init())
     }
     
     init(map: [String: Any]) {
@@ -24,6 +26,7 @@ struct User: Codable {
         self.sentCount = map["sentCount"] as! Int
         self.id = map["id"] as! String
         self.newFriendRequest = map["newFriendRequest"] as! Bool
+        self.createdAt = map["createdAt"] as! String
     }
     
     func toDict() -> [String: Any] {
@@ -33,7 +36,8 @@ struct User: Codable {
                 "profileURL": profileURL!,
                 "receivedCount": receivedCount,
                 "sentCount": sentCount,
-                "newFriendRequest": newFriendRequest]
+                "newFriendRequest": newFriendRequest,
+                "createdAt": createdAt]
     }
     
     func getSocial() -> String {
