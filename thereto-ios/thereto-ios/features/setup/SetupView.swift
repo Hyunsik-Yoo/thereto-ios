@@ -126,7 +126,12 @@ class SetupView: BaseView {
     
     func bind(user: User?) {
         if let user = user {
-            profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+            if let profileURL = user.profileURL,
+            !profileURL.isEmpty {
+                profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+            } else {
+                profileImg.image = UIImage(named: "image_profile_default")
+            }
             nicknameLabel.text = user.nickname
             receivedCountLabel.text = "\(user.receivedCount)"
             sentCountLabel.text = "\(user.sentCount)"
