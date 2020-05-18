@@ -63,5 +63,10 @@ class FindFriendVC: BaseVC {
 }
 
 extension FindFriendVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let friend = self.viewModel.totalFriends[indexPath.row]
+        
+        let controller = FriendDetailVC.instance(friendId: friend.id)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
