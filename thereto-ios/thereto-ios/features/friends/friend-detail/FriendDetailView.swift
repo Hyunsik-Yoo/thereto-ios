@@ -192,7 +192,7 @@ class FriendDetailView: BaseView {
     func bind(friend: Friend?) {
         if let friend = friend {
             profileImg.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
-            nameLabel.text = "\(friend.nickname) (friend.name)"
+            nameLabel.text = "\(friend.nickname)"
             receivedCountLabel.text = "\(friend.receivedCount)"
             sentCountLabel.text = "\(friend.sentCount)"
             setWriteBtnEnable(isEnable: friend.requestState == .FRIEND)
