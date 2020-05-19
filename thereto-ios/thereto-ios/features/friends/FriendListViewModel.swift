@@ -35,10 +35,10 @@ class FriendListViewModel: BaseViewModel {
             userObservable.subscribe(onNext: { (user) in
                 self.userService.getFriends(id: self.userDefaults.getUserToken()) { (friendsObservable) in
                     friendsObservable.subscribe(onNext: { (friends) in
-                        let sortedFriends = friends.sorted { (friend1, friend2) -> Bool in
+                        let filterFriends = friends.filter { $0.requestState == .FRIEND }.sorted { (friend1, friend2) -> Bool in
                             friend1.favorite && !friend2.favorite
                         }
-                        self.friendsPublisher.onNext((user, sortedFriends))
+                        self.friendsPublisher.onNext((user, filterFriends))
                         self.showLoadingPublisher.onNext(false)
                     }, onError: { (error) in
                         if let error = error as? CommonError {
