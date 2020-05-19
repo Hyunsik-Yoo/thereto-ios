@@ -102,7 +102,9 @@ class ProfileView: BaseView {
         
     }
     
-    func setProfile(url: String) {
-        profileImage.setImage(urlString: url)
+    func setProfile(url: String?) {
+        if let url = url {
+            profileImage.setImage(urlString: url)
+        }
     }
 }

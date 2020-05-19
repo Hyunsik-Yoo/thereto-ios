@@ -10,7 +10,7 @@ struct User: Codable {
     var newFriendRequest: Bool = false
     var createdAt: String
     
-    init(nickname: String,social: String, id: String, profileURL: String) {
+    init(nickname: String,social: String, id: String, profileURL: String?) {
         self.nickname = nickname
         self.social = SocialType(rawValue: social)!
         self.profileURL = profileURL

@@ -24,7 +24,7 @@ class ProfileViewModel: BaseViewModel {
         var showLoading: Observable<Bool>
         var socialNickname: Observable<String>
         var errorMsg: Observable<String>
-        var profileImage: Observable<String>
+        var profileImage: Observable<String?>
         var showAlert: Observable<String>
         var goToMain: Observable<Void>
     }
@@ -36,7 +36,7 @@ class ProfileViewModel: BaseViewModel {
     let showLoadingPublisher = PublishSubject<Bool>()
     let socialNicknamePublisher = PublishSubject<String>()
     let errorMsgPublisher = PublishSubject<String>()
-    let profileImagePublisher = PublishSubject<String>()
+    let profileImagePublisher = PublishSubject<String?>()
     let showAlertPublisher = PublishSubject<String>()
     let goToMainPublisher = PublishSubject<Void>()
     
@@ -67,9 +67,9 @@ class ProfileViewModel: BaseViewModel {
             if social == "facebook" { // 애플로그인으로 접근할 경우에는 사진이 제공되지 않음
                 facebookManager.getFBProfile(id: id) { [weak self] (infoObservable) in
                     guard let self = self else { return }
-                    infoObservable.subscribe(onNext: { (name, fbId) in
+                    infoObservable.subscribe(onNext: { (name, profileURL) in
                         self.socialNicknamePublisher.onNext(name)
-                        self.profileImagePublisher.onNext(fbId)
+                        self.profileImagePublisher.onNext(profileURL)
                     }, onError: { (error) in
                         self.showAlertPublisher.onNext(error.localizedDescription)
                     }).disposed(by: self.disposeBag)
