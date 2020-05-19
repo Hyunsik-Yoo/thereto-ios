@@ -19,7 +19,7 @@ class FriendControlView: BaseView {
         $0.setTitle("보낸 친구요청", for: .normal)
         $0.setTitleColor(UIColor.init(r: 60, g: 46, b: 42), for: .selected)
         $0.setTitleColor(UIColor.init(r: 206, g: 176, b: 164), for: .normal)
-        $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 16)
+        $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         $0.titleLabel?.textAlignment = .center
         $0.isSelected = false
     }
