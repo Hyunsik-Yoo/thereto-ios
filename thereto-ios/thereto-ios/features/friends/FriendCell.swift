@@ -59,7 +59,6 @@ class FriendCell: BaseTableViewCell {
     func bind(friend: Friend) {
         profileImage.kf.setImage(with: URL.init(string: friend.profileURL!), placeholder: UIImage.init(named: "image_profile_default"))
         nameLabel.text = friend.nickname
-        // TODO: 얘 어떻게 처리해야할까...
-        favoriteDot.isHidden = true
+        favoriteDot.isHidden = !friend.favorite
     }
 }

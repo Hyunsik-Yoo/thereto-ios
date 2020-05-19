@@ -63,9 +63,15 @@ class SelectFriendVC: BaseVC {
         selectFriendView.startLoading()
         UserService.findFriends() { [weak self] (friendList) in
             if !friendList.isEmpty {
+                let sortedFriends = friendList.sorted { (friend1, friend2) -> Bool in
+                    friend1.favorite && !friend2.favorite
+                }
+                self?.viewModel.friends.onNext(sortedFriends)
+                self?.viewModel.totalFriends = sortedFriends
+            } else {
                 self?.viewModel.friends.onNext(friendList)
+                self?.viewModel.totalFriends = friendList
             }
-            self?.viewModel.totalFriends = friendList
             self?.selectFriendView.setDataMode(isEmpty: friendList.isEmpty)
             self?.selectFriendView.stopLoading()
         }
