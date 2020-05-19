@@ -171,7 +171,7 @@ class LetterDetailView: BaseView {
             make.left.equalTo(toProfileImg)
             make.right.equalToSuperview().offset(-39)
             make.top.equalTo(toProfileImg.snp.bottom).offset(9)
-            make.height.greaterThanOrEqualTo(215)
+            make.height.greaterThanOrEqualTo(250)
         }
         
         fromProfileImg.snp.makeConstraints { (make) in
