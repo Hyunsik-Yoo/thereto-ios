@@ -19,15 +19,13 @@ class FriendDetailView: BaseView {
     
     let favoriteBtn = UIButton().then {
         $0.setTitle("즐겨찾기", for: .normal)
-        $0.setTitleColor(UIColor.init(r: 165, g: 156, b: 156), for: .normal)
-        $0.setTitleColor(UIColor.init(r: 114, g: 95, b: 95), for: .selected)
+        $0.setTitleColor(UIColor.init(r: 114, g: 95, b: 95), for: .normal)
         $0.titleLabel?.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 12)
     }
     
-    let favoriteDot = UIView().then {
+    let favoriteDot = UIButton().then {
         $0.layer.cornerRadius = 3
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .orangeRed
     }
     
     let whiteContainer = UIView().then {
@@ -199,6 +197,12 @@ class FriendDetailView: BaseView {
             deleteBtn1.isHidden = friend.requestState != .FRIEND
             deleteBtn2.isHidden = friend.requestState != .FRIEND
             descLabel.isHidden = friend.requestState != .REQUEST_SENT
+            favoriteDot.isEnabled = friend.favorite
+            if (favoriteDot.isEnabled) {
+                favoriteDot.backgroundColor = .orangeRed
+            } else {
+                favoriteDot.backgroundColor = .mushroom
+            }
         }
     }
 }

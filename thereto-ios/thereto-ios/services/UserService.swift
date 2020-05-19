@@ -13,6 +13,9 @@ protocol UserServiceProtocol {
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
     func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
     func requestFriend(user: Friend, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
+    func favoriteFriend(userId: String, friendId: String, isFavorite: Bool)
+    func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void))
+    func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void))
 }
 
 struct UserService: UserServiceProtocol{
@@ -150,6 +153,39 @@ struct UserService: UserServiceProtocol{
             } else {
                 let error = CommonError(desc: "데이터가 비어있습니다.")
                 completion(Observable.error(error))
+            }
+        }
+    }
+    
+    func favoriteFriend(userId: String, friendId: String, isFavorite: Bool) {
+        Firestore.firestore().collection("user").document(userId).collection("friends").document(friendId).updateData(["favorite": isFavorite])
+    }
+    
+    func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(userId).collection("friends").document(friendId).getDocument { (snapShot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                if let data = snapShot?.data() {
+                    completion(Observable.just(Friend(map: data)))
+                } else {
+                    let error = CommonError(desc: "Snapshot is nil")
+                    completion(Observable.error(error))
+                }
+            }
+        }
+    }
+    
+    func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(userId).collection("friends").document(friendId).delete { (error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                completion(Observable.just(()))
             }
         }
     }

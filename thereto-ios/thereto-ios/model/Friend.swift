@@ -9,6 +9,7 @@ struct Friend {
     var receivedCount = 0
     var sentCount = 0
     var id: String
+    var favorite: Bool = false
     
     init(nickname: String, social: String, id: String, profileURL: String) {
         self.nickname = nickname
@@ -28,6 +29,7 @@ struct Friend {
         self.receivedCount = map["receivedCount"] as! Int
         self.sentCount = map["sentCount"] as! Int
         self.id = map["id"] as! String
+        self.favorite = map["favorite"] as! Bool
     }
     
     init(user: User) {
@@ -42,7 +44,7 @@ struct Friend {
     func toDict() -> [String: Any] {
         return ["nickname": nickname, "social": social.rawValue,
                 "profile_url": profileURL, "request_state": requestState.rawValue, "createdAt": createdAt,
-                "receivedCount": receivedCount, "sentCount": sentCount, "id": id]
+                "receivedCount": receivedCount, "sentCount": sentCount, "id": id, "favorite": favorite]
     }
     
     func getSocial() -> String {
