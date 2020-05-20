@@ -33,7 +33,7 @@ class SentLetterVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.letters.bind(to: sentLetterView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter, isSentLetter: true)
+            cell.bind(letter: letter)
         }.disposed(by: disposeBag)
     }
     
@@ -76,7 +76,12 @@ class SentLetterVC: BaseVC {
 extension SentLetterVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let letters = try? self.viewModel.letters.value() {
-            self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row], isSentMode: true), animated: true)
+            let letter = letters[indexPath.row]
+            if letter.isRead {
+                self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row], isSentMode: true), animated: true)
+            } else {
+                AlertUtil.show("편지 읽기 안됩니다!", message: "수신인이 편지를 읽은 후에 해당 편지를 열람할 수 있습니다.")
+            }
         }
     }
 }
