@@ -21,6 +21,10 @@ class SetupVC: BaseVC {
         navigationController?.isNavigationBarHidden = true
         view = setupView
         setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getMyInfo()
     }
     
