@@ -14,6 +14,7 @@ class SelectLocationView: BaseView {
     }
     
     let pointerImg = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
         $0.image = UIImage.init(named: "ic_spot")
     }
     
@@ -84,7 +85,7 @@ class SelectLocationView: BaseView {
         
         pointerImg.snp.makeConstraints { (make) in
             make.center.equalTo(mapView)
-            make.width.height.equalTo(40)
+            make.width.equalTo(40)
         }
         
         whiteBg.snp.makeConstraints { (make) in
