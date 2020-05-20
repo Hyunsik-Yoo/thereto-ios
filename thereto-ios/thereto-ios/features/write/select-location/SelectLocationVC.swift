@@ -34,6 +34,7 @@ class SelectLocationVC: BaseVC {
         
         view = selectLocationView
         setupLocationManager()
+        selectLocationView.mapView.delegate = self
     }
     
     override func bindViewModel() {
@@ -177,7 +178,7 @@ extension SelectLocationVC: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if (error as NSError).code == 1 {
-            AlertUtil.showWithCancel(title: "위치 권한 오류", message: "설정 > 가슴속 3천원 > 위치 > 앱을 사용하는 동안으로 선택해주세요.") {
+            AlertUtil.showWithCancel(title: "위치 권한 오류", message: "설정 > thereto > 위치 > 앱을 사용하는 동안으로 선택해주세요.") {
                 UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
             }
         } else {
@@ -207,5 +208,11 @@ extension SelectLocationVC: PlaceTitleDelegate {
     
     func onClose() {
         self.selectLocationView.removeBgDim()
+    }
+}
+
+extension SelectLocationVC: NMFMapViewDelegate {
+    func mapViewIdle(_ mapView: NMFMapView) {
+        self.getAddress(latitude: mapView.latitude, longitude: mapView.longitude)
     }
 }

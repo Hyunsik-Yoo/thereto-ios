@@ -25,8 +25,13 @@ struct MapService {
                             address = "\(address) \(name)"
                         }
                         
-                        if let roadNumber = geoLocation.results[3].land?.number1 {
-                            address = "\(address) \(roadNumber)"
+                        if let roadNumber1 = geoLocation.results[3].land?.number1 {
+                            address = "\(address) \(roadNumber1)"
+                        }
+                        
+                        if let roadNumber2 = geoLocation.results[3].land?.number2,
+                            !roadNumber2.isEmpty {
+                            address = "\(address)-\(roadNumber2)"
                         }
                     } else {
                         if let detail1 = geoLocation.results[2].land?.number1 {
