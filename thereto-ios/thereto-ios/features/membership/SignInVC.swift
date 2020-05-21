@@ -32,13 +32,11 @@ class SignInVC: BaseVC {
     }
     
     override func bindEvent() {
-        if #available(iOS 13.0, *) {
-            signInView.appleBtn!.rx.controlEvent(.touchUpInside)
-                .subscribe { [weak self] (event) in
-                    guard let self = self else { return }
-                    self.onTapAppleBtn()
-            }.disposed(by: disposeBag)
-        }
+        signInView.appleBtn.rx.controlEvent(.touchUpInside)
+            .subscribe { [weak self] (event) in
+                guard let self = self else { return }
+                self.onTapAppleBtn()
+        }.disposed(by: disposeBag)
     }
     
     override func bindViewModel() {

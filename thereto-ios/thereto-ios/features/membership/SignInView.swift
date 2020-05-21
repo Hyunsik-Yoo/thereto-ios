@@ -11,8 +11,9 @@ class SignInView: BaseView {
         return image
     }()
     
-    @available(iOS 13.0, *)
-    lazy var appleBtn: ASAuthorizationAppleIDButton? = nil
+    let appleBtn = ASAuthorizationAppleIDButton(type: .continue, style: .black).then {
+        $0.cornerRadius = 0
+    }
     
     let fbBtn: FBLoginButton = {
         let button = FBLoginButton(frame: .zero)
@@ -24,7 +25,7 @@ class SignInView: BaseView {
     
     override func setup() {
         backgroundColor = .themeColor
-        addSubViews(splashImage, fbBtn)
+        addSubViews(splashImage, fbBtn, appleBtn)
     }
     
     override func bindConstraints() {
@@ -38,17 +39,8 @@ class SignInView: BaseView {
             make.right.equalToSuperview().offset(-50)
             make.bottom.equalToSuperview().offset(-50)
         }
-        if #available(iOS 13.0, *) {
-            generateSignWithAppleBtn()
-        }
-    }
-    
-    @available(iOS 13.0, *)
-    private func generateSignWithAppleBtn() {
-        appleBtn = ASAuthorizationAppleIDButton(type: .continue, style: .black)
-        addSubview(appleBtn!)
         
-        appleBtn?.snp.makeConstraints { (make) in
+        appleBtn.snp.makeConstraints { (make) in
             make.left.right.equalTo(fbBtn)
             make.height.equalTo(40)
             make.bottom.equalTo(fbBtn.snp.top).offset(-10)
