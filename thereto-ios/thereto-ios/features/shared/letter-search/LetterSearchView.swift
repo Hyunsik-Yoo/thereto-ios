@@ -30,6 +30,7 @@ class LetterSearchView: BaseView {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.tableFooterView = UIView()
+        $0.alwaysBounceVertical = false
     }
     
     let descLabel = UILabel().then {
