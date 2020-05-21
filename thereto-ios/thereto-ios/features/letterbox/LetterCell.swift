@@ -78,7 +78,7 @@ class LetterCell: BaseTableViewCell {
             make.right.equalToSuperview()
             make.left.equalTo(profileImage.snp.left)
             make.height.equalTo(230)
-            make.bottom.equalToSuperview().offset(-70)
+            make.bottom.equalToSuperview().offset(-10)
         }
         
         dateLabel.snp.makeConstraints { (make) in
