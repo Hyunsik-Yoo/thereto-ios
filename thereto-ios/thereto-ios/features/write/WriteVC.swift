@@ -85,7 +85,7 @@ class WriteVC: BaseVC {
     override func bindViewModel() {
         viewModel.friend.bind { [weak self] (friend) in
             if let friend = friend {
-                self?.writeView.friendBtn.setTitle("\(friend.nickname) (friend.name)", for: .normal)
+                self?.writeView.friendBtn.setTitle("\(friend.nickname)", for: .normal)
             }
         }.disposed(by: disposeBag)
         
