@@ -39,7 +39,7 @@ class LetterBoxVC: BaseVC {
         
         // Bind output
         viewModel.output.letters.bind(to: letterBoxView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentMode: false)
         }.disposed(by: disposeBag)
         viewModel.output.showAlerts.bind(onNext: showAlerts)
             .disposed(by: disposeBag)

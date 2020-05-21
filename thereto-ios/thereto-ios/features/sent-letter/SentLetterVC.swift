@@ -33,7 +33,7 @@ class SentLetterVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.letters.bind(to: sentLetterView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentMode: true)
         }.disposed(by: disposeBag)
     }
     

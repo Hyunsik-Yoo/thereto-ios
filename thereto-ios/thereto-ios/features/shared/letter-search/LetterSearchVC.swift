@@ -25,7 +25,7 @@ class LetterSearchVC: BaseVC {
     
     override func bindViewModel() {
         viewModel.letters.bind(to: letterSearchView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentMode: self.type == "from")
         }.disposed(by: disposeBag)
     }
     

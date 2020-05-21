@@ -86,11 +86,21 @@ class LetterCell: BaseTableViewCell {
         }
     }
     
-    func bind(letter: Letter) {
-        if !letter.from.profileURL!.isEmpty {
-            profileImage.kf.setImage(with: URL.init(string: letter.from.profileURL!)!, placeholder: UIImage.init(named: "image_profile_default"))
+    func bind(letter: Letter, isSentMode: Bool) {
+        if isSentMode { // 보낸 편지함일 경우
+            if let profileURL = letter.to.profileURL,
+                !profileURL.isEmpty {
+                
+            }
+            fromLabel.text = letter.to.nickname
+            
+        } else {
+            if let profileURL = letter.from.profileURL,
+                !profileURL.isEmpty {
+                profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
+            }
+            fromLabel.text = letter.from.nickname
         }
-        fromLabel.text = letter.from.nickname
         addressLabel.text = letter.location.addr
         
         if letter.isRead {
@@ -98,7 +108,6 @@ class LetterCell: BaseTableViewCell {
         } else {
             cardImage.image = UIImage.init(named: "image_default_card")
         }
-        
         dateLabel.text =  String(letter.createdAt.prefix(10))
     }
 }
