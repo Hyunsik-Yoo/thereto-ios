@@ -27,6 +27,7 @@ class LetterCell: BaseTableViewCell {
         label.text = "경기 광주시 오포읍 새말길167번길 68"
         label.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         label.textColor = UIColor.init(r: 114, g: 95, b: 95)
+        label.numberOfLines = 2
         return label
     }()
     
@@ -69,11 +70,11 @@ class LetterCell: BaseTableViewCell {
         addressLabel.snp.makeConstraints { (make) in
             make.top.equalTo(fromLabel.snp.bottom).offset(5)
             make.left.equalTo(fromLabel.snp.left)
-            make.right.equalToSuperview().offset(50)
+            make.right.equalToSuperview().offset(-50)
         }
         
         cardImage.snp.makeConstraints { (make) in
-            make.top.equalTo(profileImage.snp.bottom).offset(20)
+            make.top.equalTo(addressLabel.snp.bottom).offset(17)
             make.right.equalToSuperview()
             make.left.equalTo(profileImage.snp.left)
             make.height.equalTo(230)
@@ -92,14 +93,14 @@ class LetterCell: BaseTableViewCell {
                 !profileURL.isEmpty {
                 
             }
-            fromLabel.text = letter.to.nickname
+            fromLabel.text = "To. \(letter.to.nickname)"
             
         } else {
             if let profileURL = letter.from.profileURL,
                 !profileURL.isEmpty {
                 profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
             }
-            fromLabel.text = letter.from.nickname
+            fromLabel.text = "From. \(letter.from.nickname)"
         }
         addressLabel.text = letter.location.addr
         
