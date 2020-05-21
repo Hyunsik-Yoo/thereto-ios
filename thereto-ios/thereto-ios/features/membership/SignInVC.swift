@@ -37,6 +37,11 @@ class SignInVC: BaseVC {
                 guard let self = self else { return }
                 self.onTapAppleBtn()
         }.disposed(by: disposeBag)
+        
+        signInView.facebookBtn.rx.tap.bind { [weak self] (_) in
+            guard let self = self else { return }
+            self.signInView.fbBtn.sendActions(for: .touchUpInside)
+        }.disposed(by: disposeBag)
     }
     
     override func bindViewModel() {
