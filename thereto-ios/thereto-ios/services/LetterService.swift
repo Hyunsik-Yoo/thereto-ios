@@ -10,7 +10,7 @@ struct LetterSerivce: LetterServiceProtocol {
     func getLetters(receiverId: String, completion: @escaping ((Observable<[Letter]>) -> Void)) {
         Firestore.firestore().collection("letter")
             .whereField("to.id", isEqualTo: receiverId)
-            .order(by: FirebaseFirestore.FieldPath.documentID())
+            .order(by: "createdAt", descending: true)
             .getDocuments { (snapShot, error) in
             if let error = error {
                 completion(Observable.error(error))
@@ -66,7 +66,10 @@ struct LetterSerivce: LetterServiceProtocol {
     
     static func getSentLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
         let senderId = UserDefaultsUtil.getUserToken()!
-        Firestore.firestore().collection("letter").whereField("from.id", isEqualTo: senderId).getDocuments { (snapShot, error) in
+        Firestore.firestore().collection("letter")
+            .whereField("from.id", isEqualTo: senderId)
+            .order(by: "timestamp", descending: false)
+            .getDocuments { (snapShot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -86,27 +89,29 @@ struct LetterSerivce: LetterServiceProtocol {
         
         Firestore.firestore().collection("letter")
             .whereField("to.id", isEqualTo: receiverId)
-            .order(by: FirebaseFirestore.FieldPath.documentID())
+            .order(by: "timestamp", descending: false)
             .getDocuments { (snapShot, error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                var letters: [Letter] = []
-                if let documents = snapShot?.documents {
-                    for document in documents {
-                        letters.append(Letter.init(map: document.data()))
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    var letters: [Letter] = []
+                    if let documents = snapShot?.documents {
+                        for document in documents {
+                            letters.append(Letter.init(map: document.data()))
+                        }
+                        completion(.success(letters))
                     }
-                    completion(.success(letters))
                 }
-            }
         }
     }
     
     static func searchLetters(keyword: String, type: String, completion: @escaping ((Result<[Letter]>) -> Void)) {
         let oppose = type == "from" ? "to" : "from"
         
-        Firestore.firestore().collection("letter").whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
+        Firestore.firestore().collection("letter")
+            .whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
             .whereField("\(oppose).nickname", isEqualTo: keyword)
+            .order(by: "timestamp", descending: false)
             .getDocuments { (snapShot, error) in
                 if let error = error {
                     completion(.failure(error))
