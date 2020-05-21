@@ -7,16 +7,41 @@ struct MapService {
         let urlString = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc"
         let headers: [String: String] = ["X-NCP-APIGW-API-KEY-ID": "b7agu1h5c2",
                                          "X-NCP-APIGW-API-KEY": "XXQown7wQLSB7oa5aHR21nJLyEHF2RK9kYe8Zcmt"]
-        let parameters: [String: Any] = ["coords": "\(longitude),\(latitude)", "output": "json"]
+        let parameters: [String: Any] = ["request": "coordsToaddr",
+            "coords": "\(longitude),\(latitude)",
+            "orders": "legalcode,admcode,addr,roadaddr",
+            "output": "json"]
         
         Alamofire.request(urlString, method: .get, parameters: parameters, headers: headers).responseJSON { (response) in
             let decoder = JSONDecoder()
-            
             if let data = response.data,
                 let geoLocation = try? decoder.decode(NaverResponse.self, from: data) {
                 
                 if !geoLocation.results.isEmpty {
-                    let address = "\(geoLocation.results[0].region.area1.name!) \(geoLocation.results[0].region.area2.name!) \(geoLocation.results[0].region.area3.name!) \(geoLocation.results[0].region.area4.name!)"
+                    var address = "\(geoLocation.results[0].region.area1.name!) \(geoLocation.results[0].region.area2.name!) \(geoLocation.results[0].region.area3.name!) \(geoLocation.results[0].region.area4.name!)"
+                    
+                    if geoLocation.results.count == 4 {
+                        if let name = geoLocation.results[3].land?.name {
+                            address = "\(address) \(name)"
+                        }
+                        
+                        if let roadNumber1 = geoLocation.results[3].land?.number1 {
+                            address = "\(address) \(roadNumber1)"
+                        }
+                        
+                        if let roadNumber2 = geoLocation.results[3].land?.number2,
+                            !roadNumber2.isEmpty {
+                            address = "\(address)-\(roadNumber2)"
+                        }
+                    } else {
+                        if let detail1 = geoLocation.results[2].land?.number1 {
+                            address = "\(address) \(detail1)"
+                        }
+                        
+                        if let detail2 = geoLocation.results[2].land?.number2 {
+                            address = "\(address)-\(detail2)"
+                        }
+                    }
                     completion(address)
                 }
             } else {

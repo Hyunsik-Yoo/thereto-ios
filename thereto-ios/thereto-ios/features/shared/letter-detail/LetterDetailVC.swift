@@ -5,10 +5,12 @@ class LetterDetailVC: BaseVC {
     private lazy var letterDetailView = LetterDetailView.init(frame: self.view.frame)
     
     var letter: Letter!
+    var isSentMode: Bool!
     
-    static func instance(letter: Letter) -> LetterDetailVC {
+    static func instance(letter: Letter, isSentMode: Bool) -> LetterDetailVC {
         return LetterDetailVC.init(nibName: nil, bundle: nil).then {
             $0.letter = letter
+            $0.isSentMode = isSentMode
             $0.hidesBottomBarWhenPushed = true
         }
     }
@@ -17,6 +19,7 @@ class LetterDetailVC: BaseVC {
         super.viewDidLoad()
         view = letterDetailView
         letterDetailView.bind(letter: letter)
+        letterDetailView.replyBtn.isHidden = isSentMode
         setRead()
     }
     

@@ -21,14 +21,18 @@ struct Letter {
         self.isRead = map["isRead"] as! Bool
     }
     
-    init(from: User, to: Friend, location: Location, photo: String, message: String) {
+    init(from: User, to: Friend, location: Location, photo: String, message: String, createdAt: String? = nil) {
         self.id = ""
         self.from = from
         self.to = to
         self.location = location
         self.photo = photo
         self.message = message
-        self.createdAt = DateUtil.date2String(date: Date.init())
+        if let createdAt = createdAt {
+            self.createdAt = createdAt
+        } else {
+            self.createdAt = DateUtil.date2String(date: Date.init())
+        }
         self.isRead = false
     }
     

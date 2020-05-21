@@ -171,7 +171,7 @@ class LetterDetailView: BaseView {
             make.left.equalTo(toProfileImg)
             make.right.equalToSuperview().offset(-39)
             make.top.equalTo(toProfileImg.snp.bottom).offset(9)
-            make.height.greaterThanOrEqualTo(215)
+            make.height.greaterThanOrEqualTo(250)
         }
         
         fromProfileImg.snp.makeConstraints { (make) in
@@ -239,10 +239,23 @@ class LetterDetailView: BaseView {
     func bind(letter: Letter) {
         mainPhoto.kf.setImage(with: URL.init(string: letter.photo))
         dateLabel.text = String(letter.createdAt.prefix(10))
-        toProfileImg.kf.setImage(with: URL.init(string: letter.to.profileURL!))
+        
+        if let toURL = letter.to.profileURL,
+            !toURL.isEmpty {
+            toProfileImg.kf.setImage(with: URL.init(string: toURL))
+        } else {
+            toProfileImg.image = UIImage(named: "image_profile_default")
+            
+        }
         toUserLabel.text = "to. \(letter.to.nickname)"
         messageLabel.text = letter.message
-        fromProfileImg.kf.setImage(with: URL.init(string: letter.from.profileURL!))
+        
+        if let fromURL = letter.from.profileURL,
+            !fromURL.isEmpty {
+            fromProfileImg.kf.setImage(with: URL.init(string: letter.from.profileURL!))
+        } else {
+            fromProfileImg.image = UIImage(named: "image_profile_default")
+        }
         fromUserLabel.text = "from. \(letter.from.nickname)"
         locationName.text = letter.location.name
         addressLabel.text = letter.location.addr

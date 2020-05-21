@@ -5,6 +5,8 @@ class MainVC: UITabBarController {
     
     let controllers = [LetterBoxVC.instance(), SentLetterVC.instance(), WriteVC.instance(),
                        FriendListVC.instance(), SetupVC.instance()]
+    
+    
     static func instance() -> MainVC {
         return MainVC.init(nibName: nil, bundle: nil)
     }
@@ -15,6 +17,10 @@ class MainVC: UITabBarController {
         setViewControllers(controllers, animated: true)
         delegate = self
         
+        setupTabBar()
+    }
+    
+    private func setupTabBar() {
         UITabBarItem.appearance().setTitleTextAttributes(
             [NSAttributedString.Key.font: UIFont(name:"SpoqaHanSans-Regular", size:10)!,
              NSAttributedString.Key.foregroundColor: UIColor.greyishBrown],
@@ -30,15 +36,11 @@ class MainVC: UITabBarController {
         tabBar.backgroundColor = .veryLightPink
         tabBar.clipsToBounds = true
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
 }
 
 extension MainVC: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
+        // 쓰기 탭 버튼 눌렀을때는 탭이 아니라 하단에서 올라오는 식으로 적용
         if let navi = viewController as? UINavigationController,
             let rootVC = navi.viewControllers.first {
             if rootVC is WriteVC {

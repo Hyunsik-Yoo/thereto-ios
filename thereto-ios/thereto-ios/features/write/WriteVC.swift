@@ -85,7 +85,7 @@ class WriteVC: BaseVC {
     override func bindViewModel() {
         viewModel.friend.bind { [weak self] (friend) in
             if let friend = friend {
-                self?.writeView.friendBtn.setTitle("\(friend.nickname) (\(friend.name))", for: .normal)
+                self?.writeView.friendBtn.setTitle("\(friend.nickname) (friend.name)", for: .normal)
             }
         }.disposed(by: disposeBag)
         
@@ -154,8 +154,11 @@ class WriteVC: BaseVC {
                                              photo: url,
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
+                        // 보낸 편지 카운팅
                         LetterSerivce.increaseSentCount(userId: UserDefaultsUtil.getUserToken()!)
+                        // 친구의 받은편지 카운팅
                         LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
+                        // 친구와 내 프로필에 각각 받은, 보낸편지 카운팅
                         LetterSerivce.increaseFriendCount(userId: try! vc.viewModel.friend.value()!.id)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)

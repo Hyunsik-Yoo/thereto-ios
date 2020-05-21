@@ -5,12 +5,9 @@ import Firebase
 
 class SplashVC: BaseVC {
     
-    private lazy var splashView: SplashView = {
-        let view = SplashView(frame: self.view.frame)
-        
-        return view
-    }()
-    
+    private lazy var splashView = SplashView(frame: self.view.frame)
+    private var viewModel = SplashViewModel(userDefaults: UserDefaultsUtil(),
+                                            userService: UserService())
     
     static func instance() -> SplashVC {
         return SplashVC(nibName: nil, bundle: nil)
@@ -18,24 +15,25 @@ class SplashVC: BaseVC {
     
     override func viewDidLoad() {
         view = splashView
+        super.viewDidLoad()
         
         Observable<Void>.empty()
             .delay(.seconds(2), scheduler: MainScheduler.instance)
-            .subscribe { (event) in
-                if !UserDefaultsUtil.isNormalLaunch() || !self.isSessionExisted() {
-                    self.goToSignIn()
-                } else {
-                    self.goToMain()
-                }
-        }.disposed(by: disposeBag)
+            .subscribe({ (_) in
+                self.viewModel.input.checkAuth.onNext(())
+            })
+            .disposed(by: disposeBag)
     }
     
-    private func isSessionExisted() -> Bool {
-        if let _ = Auth.auth().currentUser {
-            return true
-        } else {
-            return false
-        }
+    override func bindViewModel() {
+        viewModel.output.goToMain.bind(onNext: goToMain)
+            .disposed(by: disposeBag)
+        viewModel.output.goToSignIn.bind(onNext: goToSignIn)
+            .disposed(by: disposeBag)
+    }
+    
+    override func bindEvent() {
+        
     }
     
     private func goToSignIn() {

@@ -10,33 +10,44 @@ import CryptoKit
 
 class SignInVC: BaseVC {
     
-    private lazy var signInView: SignInView = {
-        let view = SignInView(frame: self.view.frame)
-        
-        return view
-    }()
-    
+    private lazy var signInView = SignInView(frame: self.view.frame)
+    private var viewModel = SignInViewModel(service: UserService(),
+                                            userDefaults: UserDefaultsUtil())
     fileprivate var currentNonce: String?
     
     
     static func instance() -> UINavigationController {
         let controller = SignInVC(nibName: nil, bundle: nil)
         let navi = UINavigationController(rootViewController: controller)
+        
         return navi
     }
     
     override func viewDidLoad() {
-        self.navigationController?.isNavigationBarHidden = true
+        super.viewDidLoad()
         view = signInView
+        setupNavigation()
         
         signInView.fbBtn.delegate = self
-        
+    }
+    
+    override func bindEvent() {
         if #available(iOS 13.0, *) {
             signInView.appleBtn!.rx.controlEvent(.touchUpInside)
-                .subscribe { (event) in
+                .subscribe { [weak self] (event) in
+                    guard let self = self else { return }
                     self.onTapAppleBtn()
             }.disposed(by: disposeBag)
         }
+    }
+    
+    override func bindViewModel() {
+        viewModel.output.showLoading.bind(onNext: signInView.showLoading(isShow:))
+            .disposed(by: disposeBag)
+        viewModel.output.goToMain.bind(onNext: goToMain)
+            .disposed(by: disposeBag)
+        viewModel.output.goToProfile.bind(onNext: goToProfile)
+            .disposed(by: disposeBag)
     }
     
     func onTapAppleBtn() {
@@ -67,6 +78,10 @@ class SignInVC: BaseVC {
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
+    }
+    
+    private func setupNavigation() {
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     @available(iOS 13.0, *)
@@ -108,8 +123,11 @@ class SignInVC: BaseVC {
                 }
             }
         }
-        
         return result
+    }
+    
+    private func goToProfile(userId: String, social: String) {
+        navigationController?.pushViewController(ProfileVC.instance(id: userId, social: social), animated: true)
     }
 }
 
@@ -126,11 +144,13 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
             }
             guard let appleIDToken = appleIDCredential.identityToken else {
-                print("Unable to fetch identity token")
+                AlertUtil.show(controller: self, title: "Sign with apple error",
+                               message: "Unable to fetch identity token")
                 return
             }
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                AlertUtil.show(controller: self, title: "Sign with apple error",
+                               message: "Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
             // Initialize a Firebase credential.
@@ -138,21 +158,10 @@ extension SignInVC: ASAuthorizationControllerDelegate, ASAuthorizationController
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             let socialToken = "apple\(appleIDCredential.user)"
+            
             // Sign in with Firebase.
             FirebaseUtil.auth(credential: credential) {
-                UserService.validateUser(token: socialToken) { (isValidated) in
-                    UserDefaultsUtil.setUserToken(token: socialToken)
-                    if isValidated {
-                        UserDefaultsUtil.setNormalLaunch(isNormal: true)
-                        self.goToMain()
-                    } else {
-                        // 이름은 제일처음 로그인할때 한번만 조회가 가능한 것 같습니다.
-                        // 따라서 회원가입할때만 조회가 되도록 해야하므로 여기에 위치시켰습니다.
-                        let name = "\(appleIDCredential.fullName!.givenName!) \(appleIDCredential.fullName!.familyName!)"
-                        
-                        self.navigationController?.pushViewController(ProfileVC.instance(id: appleIDCredential.user, social: "apple", name: name), animated: true)
-                    }
-                }
+                self.viewModel.input.userToken.onNext((socialToken, "apple"))
             }
         }
     }
@@ -167,17 +176,8 @@ extension SignInVC: LoginButtonDelegate {
                 let id = result?.token?.userID {
                 let credential = FacebookAuthProvider.credential(withAccessToken: token)
                 let socialToken = "facebook\(id)"
-                
                 FirebaseUtil.auth(credential: credential) {
-                    UserService.validateUser(token: socialToken) { (isValidated) in
-                        UserDefaultsUtil.setUserToken(token: socialToken)
-                        if isValidated {
-                            UserDefaultsUtil.setNormalLaunch(isNormal: true)
-                            self.goToMain()
-                        } else {
-                            self.navigationController?.pushViewController(ProfileVC.instance(id: id, social: "facebook"), animated: true)
-                        }
-                    }
+                    self.viewModel.input.userToken.onNext((socialToken, "facebook"))
                 }
             }
         }

@@ -4,9 +4,13 @@ import RxCocoa
 
 class FriendListVC: BaseVC {
     
-    private var viewModel = FriendListViewModel()
+    private var viewModel = FriendListViewModel(userService: UserService(),
+                                                userDefaults: UserDefaultsUtil())
     
     private lazy var friendListView = FriendListView(frame: self.view.frame)
+    
+    var user: User? = nil
+    var friends: [Friend] = []
     
     static func instance() -> UINavigationController {
         let controller = FriendListVC.init(nibName: nil, bundle: nil)
@@ -26,8 +30,7 @@ class FriendListVC: BaseVC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        getFriendList()
+        self.viewModel.fetchFriends()
     }
     
     override func bindEvent() {
@@ -38,6 +41,16 @@ class FriendListVC: BaseVC {
         friendListView.topBar.searchBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.pushViewController(FindFriendVC.instance(), animated: true)
         }.disposed(by: disposeBag)
+    }
+    
+    override func bindViewModel() {
+        viewModel.output.friends.bind(onNext: refreshTableView)
+            .disposed(by: disposeBag)
+        viewModel.output.showAlerts.bind { (title, message) in
+            AlertUtil.show(controller: self, title: title, message: message)
+        }.disposed(by: disposeBag)
+        viewModel.output.showLoading.bind(onNext: friendListView.showLoading(isShow:))
+            .disposed(by: disposeBag)
     }
     
     private func setupNavigationBar() {
@@ -53,13 +66,10 @@ class FriendListVC: BaseVC {
         friendListView.tableView.register(FriendAdminCell.self, forCellReuseIdentifier: FriendAdminCell.registerId)
     }
     
-    private func getFriendList() {
-        friendListView.startLoading()
-        UserService.findFriends() { [weak self] (friendList) in
-            self?.viewModel.friends = friendList
-            self?.friendListView.tableView.reloadData()
-            self?.friendListView.stopLoading()
-        }
+    private func refreshTableView(user: User, friends: [Friend]) {
+        self.user = user
+        self.friends = friends
+        self.friendListView.tableView.reloadData()
     }
 }
 
@@ -73,7 +83,7 @@ extension FriendListVC: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return self.viewModel.friends.count
+            return self.friends.count
         }
     }
     
@@ -83,13 +93,16 @@ extension FriendListVC: UITableViewDelegate, UITableViewDataSource {
                 return BaseTableViewCell()
             }
             
+            if let user = self.user {
+                cell.bind(user: user)
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FriendCell.registerId, for: indexPath) as? FriendCell else {
                 return BaseTableViewCell()
             }
             
-            cell.bind(friend: self.viewModel.friends[indexPath.row])
+            cell.bind(friend: self.friends[indexPath.row])
             return cell
         }
     }
@@ -99,7 +112,7 @@ extension FriendListVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             self.navigationController?.pushViewController(FriendControlVC.instance(), animated: true)
         } else {
-            let friendId = self.viewModel.friends[indexPath.row].id
+            let friendId = self.friends[indexPath.row].id
             
             self.navigationController?.pushViewController(FriendDetailVC.instance(friendId: friendId), animated: true)
         }

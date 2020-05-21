@@ -86,14 +86,14 @@ class LetterCell: BaseTableViewCell {
         }
     }
     
-    func bind(letter: Letter, isSentLetter: Bool) {
+    func bind(letter: Letter) {
         if !letter.from.profileURL!.isEmpty {
             profileImage.kf.setImage(with: URL.init(string: letter.from.profileURL!)!, placeholder: UIImage.init(named: "image_profile_default"))
         }
         fromLabel.text = letter.from.nickname
         addressLabel.text = letter.location.addr
         
-        if letter.isRead || isSentLetter {
+        if letter.isRead {
             cardImage.kf.setImage(with: URL.init(string: letter.photo))
         } else {
             cardImage.image = UIImage.init(named: "image_default_card")

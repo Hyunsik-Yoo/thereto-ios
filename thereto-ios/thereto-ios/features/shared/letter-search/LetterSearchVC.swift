@@ -24,11 +24,8 @@ class LetterSearchVC: BaseVC {
     }
     
     override func bindViewModel() {
-        viewModel.letters.bind(to: letterSearchView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { [weak self] row, letter, cell in
-            if let type = self?.type {
-                cell.bind(letter: letter, isSentLetter: type == "from" ? true : false)
-            }
-            
+        viewModel.letters.bind(to: letterSearchView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
+            cell.bind(letter: letter)
         }.disposed(by: disposeBag)
     }
     
@@ -93,6 +90,6 @@ extension LetterSearchVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let letters = try! self.viewModel.letters.value()
         
-        self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row]), animated: true)
+        self.navigationController?.pushViewController(LetterDetailVC.instance(letter: letters[indexPath.row], isSentMode: false), animated: true)
     }
 }

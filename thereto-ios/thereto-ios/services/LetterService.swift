@@ -2,7 +2,29 @@ import FirebaseStorage
 import FirebaseFirestore
 import RxSwift
 
-struct LetterSerivce {
+protocol LetterServiceProtocol {
+    func getLetters(receiverId: String, completion: @escaping ((Observable<[Letter]>) -> Void))
+}
+
+struct LetterSerivce: LetterServiceProtocol {
+    func getLetters(receiverId: String, completion: @escaping ((Observable<[Letter]>) -> Void)) {
+        Firestore.firestore().collection("letter")
+            .whereField("to.id", isEqualTo: receiverId)
+            .order(by: FirebaseFirestore.FieldPath.documentID())
+            .getDocuments { (snapShot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                var letters: [Letter] = []
+                if let documents = snapShot?.documents {
+                    for document in documents {
+                        letters.append(Letter.init(map: document.data()))
+                    }
+                }
+                completion(Observable.just(letters))
+            }
+        }
+    }
     
     static func saveLetterPhoto(image: UIImage, name: String, completion: @escaping ((Result<String>) -> Void)) {
         let storageRef = Storage.storage().reference()
@@ -112,11 +134,11 @@ struct LetterSerivce {
     }
     
     static func increaseReceiveCount(userId: String) {
-        Firestore.firestore().collection("user").document(userId).updateData(["receive_count": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(userId).updateData(["receiveCount": FieldValue.increment(Int64(1))])
     }
     
     static func increaseSentCount(userId: String) {
-        Firestore.firestore().collection("user").document(userId).updateData(["sent_count": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(userId).updateData(["sentCount": FieldValue.increment(Int64(1))])
     }
     
     static func increaseFriendCount(userId: String) {

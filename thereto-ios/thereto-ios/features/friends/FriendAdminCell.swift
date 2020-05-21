@@ -14,6 +14,7 @@ class FriendAdminCell: BaseTableViewCell {
     let redDot = UIView().then {
         $0.backgroundColor = .orangeRed
         $0.layer.cornerRadius = 3
+        $0.isHidden = true
     }
     
     let rightArrow = UIImageView().then {
@@ -55,6 +56,10 @@ class FriendAdminCell: BaseTableViewCell {
             make.height.equalTo(1)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    func bind(user: User) {
+        redDot.isHidden = !user.newFriendRequest
     }
     
 }

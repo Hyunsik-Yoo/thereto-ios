@@ -41,6 +41,8 @@
 		6E34E95F23F529CC009F93C6 /* GeoLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */; };
 		6E34E96223F53BC5009F93C6 /* PlaceTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E96123F53BC5009F93C6 /* PlaceTitleView.swift */; };
 		6E34E96423F544DD009F93C6 /* PlaceTitleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E34E96323F544DD009F93C6 /* PlaceTitleVC.swift */; };
+		6E3B20DA247252E000E8F7EA /* Land.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B20D9247252E000E8F7EA /* Land.swift */; };
+		6E3B20DC247257AD00E8F7EA /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B20DB247257AD00E8F7EA /* Addition.swift */; };
 		6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271A23A9A74A00AEBD93 /* FriendListView.swift */; };
 		6E43271D23A9A7BE00AEBD93 /* FirendListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */; };
 		6E45E41923B9B83000C2900C /* FriendControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E45E41823B9B83000C2900C /* FriendControlView.swift */; };
@@ -62,6 +64,10 @@
 		6E6443EB23EBDD7900254331 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6443EA23EBDD7900254331 /* State.swift */; };
 		6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB72400E961002292FC /* LetterSearchView.swift */; };
 		6E644FBA2400ED37002292FC /* LetterSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB92400ED37002292FC /* LetterSearchVC.swift */; };
+		6E6587E624663EE8001D9C8E /* HTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6587E524663EE8001D9C8E /* HTTPUtils.swift */; };
+		6E6F0E8F2439CBFD00FD3F08 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */; };
+		6E6F0E912439D1D300FD3F08 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */; };
+		6E6F0E932439D95900FD3F08 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E922439D95900FD3F08 /* CommonResponse.swift */; };
 		6E7041E623F6558500843A37 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E523F6558500843A37 /* Location.swift */; };
 		6E7041E823F65DB400843A37 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E723F65DB400843A37 /* WriteViewModel.swift */; };
 		6E7041EA23F6807900843A37 /* LetterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7041E923F6807900843A37 /* LetterService.swift */; };
@@ -71,6 +77,9 @@
 		6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3723ADEEB7009574CD /* AddFriendView.swift */; };
 		6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */; };
 		6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */; };
+		6E8C8A65245FBB73004C0DD1 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C8A64245FBB73004C0DD1 /* SplashViewModel.swift */; };
+		6E8C8A67245FD7C2004C0DD1 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */; };
+		6E924A3B2467B36200325316 /* JsonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E924A3A2467B36200325316 /* JsonUtils.swift */; };
 		6E93C84023F25C45002E737F /* WriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C83F23F25C45002E737F /* WriteVC.swift */; };
 		6E93C84323F27536002E737F /* SelectFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84223F27536002E737F /* SelectFriendView.swift */; };
 		6E93C84523F2807A002E737F /* SelectFriendVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E93C84423F2807A002E737F /* SelectFriendVC.swift */; };
@@ -148,6 +157,8 @@
 		6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocationResponse.swift; sourceTree = "<group>"; };
 		6E34E96123F53BC5009F93C6 /* PlaceTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTitleView.swift; sourceTree = "<group>"; };
 		6E34E96323F544DD009F93C6 /* PlaceTitleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceTitleVC.swift; sourceTree = "<group>"; };
+		6E3B20D9247252E000E8F7EA /* Land.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Land.swift; sourceTree = "<group>"; };
+		6E3B20DB247257AD00E8F7EA /* Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
 		6E43271A23A9A74A00AEBD93 /* FriendListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListView.swift; sourceTree = "<group>"; };
 		6E43271C23A9A7BE00AEBD93 /* FirendListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirendListVC.swift; sourceTree = "<group>"; };
 		6E45E41823B9B83000C2900C /* FriendControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendControlView.swift; sourceTree = "<group>"; };
@@ -169,6 +180,10 @@
 		6E6443EA23EBDD7900254331 /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		6E644FB72400E961002292FC /* LetterSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchView.swift; sourceTree = "<group>"; };
 		6E644FB92400ED37002292FC /* LetterSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchVC.swift; sourceTree = "<group>"; };
+		6E6587E524663EE8001D9C8E /* HTTPUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUtils.swift; sourceTree = "<group>"; };
+		6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
+		6E6F0E922439D95900FD3F08 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
 		6E7041E523F6558500843A37 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6E7041E723F65DB400843A37 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		6E7041E923F6807900843A37 /* LetterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterService.swift; sourceTree = "<group>"; };
@@ -178,6 +193,9 @@
 		6E804B3723ADEEB7009574CD /* AddFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendView.swift; sourceTree = "<group>"; };
 		6E804B3923ADF179009574CD /* SpoqaHanSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSans-Light.ttf"; sourceTree = "<group>"; };
 		6E804B3B23ADF4ED009574CD /* AddFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendVC.swift; sourceTree = "<group>"; };
+		6E8C8A64245FBB73004C0DD1 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		6E924A3A2467B36200325316 /* JsonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonUtils.swift; sourceTree = "<group>"; };
 		6E93C83F23F25C45002E737F /* WriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteVC.swift; sourceTree = "<group>"; };
 		6E93C84223F27536002E737F /* SelectFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendView.swift; sourceTree = "<group>"; };
 		6E93C84423F2807A002E737F /* SelectFriendVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFriendVC.swift; sourceTree = "<group>"; };
@@ -276,6 +294,9 @@
 				6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */,
 				6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */,
 				6E6443DE23EBB1A500254331 /* RatioUtils.swift */,
+				6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */,
+				6E6587E524663EE8001D9C8E /* HTTPUtils.swift */,
+				6E924A3A2467B36200325316 /* JsonUtils.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -298,6 +319,9 @@
 				6E34E95E23F529CC009F93C6 /* GeoLocationResponse.swift */,
 				6E7041E523F6558500843A37 /* Location.swift */,
 				6E7041EB23F689F200843A37 /* Letter.swift */,
+				6E6F0E922439D95900FD3F08 /* CommonResponse.swift */,
+				6E3B20D9247252E000E8F7EA /* Land.swift */,
+				6E3B20DB247257AD00E8F7EA /* Addition.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -454,6 +478,7 @@
 			children = (
 				6EA738CD2393947B002176F6 /* SignInView.swift */,
 				6EA738CF2393982F002176F6 /* SignInVC.swift */,
+				6E8C8A66245FD7C2004C0DD1 /* SignInViewModel.swift */,
 				6E10BC4D23A53E7C0026BCD7 /* ProfileView.swift */,
 				6E10BC4F23A540740026BCD7 /* ProfileVC.swift */,
 				6E2A089E23A7420100A13F92 /* ProfileViewModel.swift */,
@@ -524,6 +549,7 @@
 				6EE72F642392372D00C4CFA7 /* BaseVC.swift */,
 				6EC1025223A8E65300328C08 /* BaseTableViewCell.swift */,
 				6E45E41E23B9C2D000C2900C /* BaseCollectionViewCell.swift */,
+				6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -543,6 +569,7 @@
 			children = (
 				6EE72F6A2392395800C4CFA7 /* SplashView.swift */,
 				6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */,
+				6E8C8A64245FBB73004C0DD1 /* SplashViewModel.swift */,
 			);
 			path = splash;
 			sourceTree = "<group>";
@@ -744,13 +771,16 @@
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */,
 				6E63140723B0E1D1009F1D09 /* AddFriendViewModel.swift in Sources */,
+				6E8C8A67245FD7C2004C0DD1 /* SignInViewModel.swift in Sources */,
 				6E01EA3323FBBBD900C85607 /* SentLetterVC.swift in Sources */,
 				6E9F9F0523F3F35E00A14C40 /* AddressCell.swift in Sources */,
+				6E924A3B2467B36200325316 /* JsonUtils.swift in Sources */,
 				6E6443E523EBD5BA00254331 /* CommonError.swift in Sources */,
 				6E1404DB23F1059A00E954BD /* WriteView.swift in Sources */,
 				6E7041EC23F689F200843A37 /* Letter.swift in Sources */,
 				6E2A08A423A758B000A13F92 /* User.swift in Sources */,
 				6E01EA3523FBBD8A00C85607 /* SentLetterViewModel.swift in Sources */,
+				6E6F0E912439D1D300FD3F08 /* FacebookManager.swift in Sources */,
 				6E93C84023F25C45002E737F /* WriteVC.swift in Sources */,
 				6E7041E823F65DB400843A37 /* WriteViewModel.swift in Sources */,
 				6E9F9EF623F3CA0E00A14C40 /* SelectLocationViewModel.swift in Sources */,
@@ -758,12 +788,14 @@
 				6E01EA2E23FBAD0C00C85607 /* FriendAdminCell.swift in Sources */,
 				6E6443E723EBDC4E00254331 /* Friend.swift in Sources */,
 				6E33759523ECF8F900C3128E /* FindFriendViewModel.swift in Sources */,
+				6E8C8A65245FBB73004C0DD1 /* SplashViewModel.swift in Sources */,
 				6E2A08A723A75BC600A13F92 /* UserService.swift in Sources */,
 				6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */,
 				6E2A089F23A7420100A13F92 /* ProfileViewModel.swift in Sources */,
 				6E9F9EFD23F3D11300A14C40 /* AddressService.swift in Sources */,
 				6E9F9EF423F3C62200A14C40 /* NaverResponse.swift in Sources */,
 				6EC5DC6323FCC774008AB915 /* LetterDetailVC.swift in Sources */,
+				6E6F0E932439D95900FD3F08 /* CommonResponse.swift in Sources */,
 				6E644FBA2400ED37002292FC /* LetterSearchVC.swift in Sources */,
 				6EE72F6B2392395800C4CFA7 /* SplashView.swift in Sources */,
 				6E6443DD23EBACCA00254331 /* FriendDetailVC.swift in Sources */,
@@ -778,9 +810,11 @@
 				6E9F9EEC23F3BA3900A14C40 /* MapService.swift in Sources */,
 				6E1FB3112403553C00A928A3 /* LetterSearchViewModel.swift in Sources */,
 				6E43271B23A9A74A00AEBD93 /* FriendListView.swift in Sources */,
+				6E3B20DA247252E000E8F7EA /* Land.swift in Sources */,
 				6E2A08A123A74C3100A13F92 /* UIImageViewExt.swift in Sources */,
 				6E559D8323F37CE000086080 /* SelectLocationView.swift in Sources */,
 				6E2A08AC23A768C300A13F92 /* LetterBoxVC.swift in Sources */,
+				6E6587E624663EE8001D9C8E /* HTTPUtils.swift in Sources */,
 				6E804B3823ADEEB7009574CD /* AddFriendView.swift in Sources */,
 				6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */,
 				6E6443DB23EBA87C00254331 /* FriendDetailView.swift in Sources */,
@@ -791,6 +825,7 @@
 				6E2A08AA23A7689E00A13F92 /* LetterBoxView.swift in Sources */,
 				6EA738CE2393947B002176F6 /* SignInView.swift in Sources */,
 				6E45E41F23B9C2D000C2900C /* BaseCollectionViewCell.swift in Sources */,
+				6E6F0E8F2439CBFD00FD3F08 /* BaseViewModel.swift in Sources */,
 				6EC1025323A8E65300328C08 /* BaseTableViewCell.swift in Sources */,
 				6E6443E923EBDD6300254331 /* SocialType.swift in Sources */,
 				6E34E96423F544DD009F93C6 /* PlaceTitleVC.swift in Sources */,
@@ -799,6 +834,7 @@
 				6E804B3523ADE4E4009574CD /* FriendListViewModel.swift in Sources */,
 				6E01EA3123FBBBA500C85607 /* SentLetterView.swift in Sources */,
 				6E6443DF23EBB1A500254331 /* RatioUtils.swift in Sources */,
+				6E3B20DC247257AD00E8F7EA /* Addition.swift in Sources */,
 				6E6443E323EBD3A000254331 /* Result.swift in Sources */,
 				6E63140923B0E452009F1D09 /* AddFriendCell.swift in Sources */,
 				6E127E8423E3FF6100EE6126 /* FriendTableView.swift in Sources */,
@@ -944,12 +980,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
 				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1073,12 +1109,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "thereto-ios/thereto-ios.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = X975A2HM62;
 				ENABLE_PREVIEWS = NO;
 				INFOPLIST_FILE = "thereto-ios/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -14,6 +14,7 @@ class FriendControlVC: BaseVC {
         super.viewDidLoad()
         view = friendControlView
         setupPageVC()
+        fetchRedDot()
     }
     
     override func bindViewModel() {
@@ -39,6 +40,10 @@ class FriendControlVC: BaseVC {
         pageVC.view.snp.makeConstraints { (make) in
             make.edges.equalTo(friendControlView.pageView)
         }
+    }
+    
+    private func fetchRedDot() {
+        UserService.fetchRedDot(token: UserDefaultsUtil().getUserToken())
     }
 }
 

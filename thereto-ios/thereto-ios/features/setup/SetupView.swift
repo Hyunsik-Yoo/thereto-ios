@@ -21,11 +21,6 @@ class SetupView: BaseView {
         $0.textColor = .black30
     }
     
-    let nameLabel = UILabel().then {
-        $0.textColor = .mushroom
-        $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 17)
-    }
-    
     let bottomBg = UIView().then {
         $0.backgroundColor = .white
     }
@@ -69,7 +64,7 @@ class SetupView: BaseView {
     
     override func setup() {
         backgroundColor = .veryLightPink
-        addSubViews(topBar, profileImg, nicknameLabel, nameLabel,
+        addSubViews(topBar, profileImg, nicknameLabel,
                     bottomBg, whiteContainer, receivedLabel, receivedCountLabel,
                     sentLabel, sentCountLabel, tableView)
     }
@@ -89,11 +84,6 @@ class SetupView: BaseView {
         nicknameLabel.snp.makeConstraints { (make) in
             make.left.equalTo(profileImg.snp.right).offset(15)
             make.top.equalTo(profileImg).offset(10)
-        }
-        
-        nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(nicknameLabel)
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(10)
         }
         
         whiteContainer.snp.makeConstraints { (make) in
@@ -136,9 +126,13 @@ class SetupView: BaseView {
     
     func bind(user: User?) {
         if let user = user {
-            profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+            if let profileURL = user.profileURL,
+            !profileURL.isEmpty {
+                profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+            } else {
+                profileImg.image = UIImage(named: "image_profile_default")
+            }
             nicknameLabel.text = user.nickname
-            nameLabel.text = user.name
             receivedCountLabel.text = "\(user.receivedCount)"
             sentCountLabel.text = "\(user.sentCount)"
         }

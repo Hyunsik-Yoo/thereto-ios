@@ -1,12 +1,6 @@
 import UIKit
 
-protocol ProfileDelegate {
-    func onTapOk()
-}
-
 class ProfileView: BaseView {
-    
-    var delegate: ProfileDelegate?
     
     private let logoImage: UIImageView = {
         let image = UIImageView(image: UIImage.init(named: "image_logo"))
@@ -19,15 +13,6 @@ class ProfileView: BaseView {
         $0.clipsToBounds = true
         $0.image = UIImage.init(named: "image_profile_default")
     }
-    
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        
-        label.text = "박은지"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16)
-        return label
-    }()
     
     let nicknameField: UITextField = {
         let field = UITextField()
@@ -61,14 +46,13 @@ class ProfileView: BaseView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         button.backgroundColor = UIColor.init(r: 255, g: 84, b: 41)
-        button.addTarget(self, action: #selector(onTapOk), for: .touchUpInside)
         return button
     }()
     
     override func setup() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTapOutofTextField)))
         backgroundColor = UIColor.themeColor
-        addSubViews(logoImage, profileImage, nameLabel, nicknameUnderLine,
+        addSubViews(logoImage, profileImage, nicknameUnderLine,
                     nicknameField, descLabel, okBtn)
     }
     
@@ -84,11 +68,6 @@ class ProfileView: BaseView {
             make.left.equalToSuperview().offset(32)
             make.top.equalTo(logoImage.snp.bottom).offset(30)
             make.width.height.equalTo(40)
-        }
-        
-        nameLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(profileImage.snp.right).offset(10)
-            make.centerY.equalTo(profileImage)
         }
         
         nicknameField.snp.makeConstraints { (make) in
@@ -115,11 +94,17 @@ class ProfileView: BaseView {
         }
     }
     
-    @objc func onTapOk() {
-        delegate?.onTapOk()
-    }
-    
     @objc func onTapOutofTextField() {
         endEditing(true)
+    }
+    
+    func showError(message: String) {
+        
+    }
+    
+    func setProfile(url: String?) {
+        if let url = url {
+            profileImage.setImage(urlString: url)
+        }
     }
 }
