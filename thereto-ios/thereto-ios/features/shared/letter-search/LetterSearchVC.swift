@@ -20,6 +20,7 @@ class LetterSearchVC: BaseVC {
         super.viewDidLoad()
         
         view = letterSearchView
+        letterSearchView.setType(type: type)
         setupTableView()
     }
     
