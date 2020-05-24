@@ -74,7 +74,7 @@ class LetterBoxVC: BaseVC {
     }
     
     private func showLocationError() {
-        AlertUtil.showWithCancel(title: "위치 권한 오류", message: "") {
+        AlertUtil.showWithAction(title: "위치 권한 오류", message: "설정 > thereto > 위치 설정을 활성화시켜주세요.") {
             UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
         }
     }

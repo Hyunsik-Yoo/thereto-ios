@@ -17,6 +17,15 @@ struct AlertUtil {
         show(title: title, message: message, [okAction, cancelAction])
     }
     
+    static func showWithAction(title: String? = nil, message: String? = nil, onTapOk: @escaping () -> Void) {
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            onTapOk()
+        }
+        
+        show(title: title, message: message, [okAction])
+    }
+    
+    
     static func showWithCancel(controller: UIViewController, title: String? = nil, message: String? = nil, onTapOk: @escaping () -> Void) {
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
             onTapOk()
