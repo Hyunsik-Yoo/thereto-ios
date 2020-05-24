@@ -16,6 +16,8 @@ protocol UserServiceProtocol {
     func favoriteFriend(userId: String, friendId: String, isFavorite: Bool)
     func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void))
     func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void))
+    func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void))
+    func insertAlarm(userId: String, type: String)
 }
 
 struct UserService: UserServiceProtocol{
@@ -189,6 +191,38 @@ struct UserService: UserServiceProtocol{
             }
         }
     }
+    
+    func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(userId).collection("alarms").getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                guard let snapshot = snapshot else {
+                    let error = CommonError(desc: "Snapshot is nil")
+                    completion(Observable.error(error))
+                    return
+                }
+                
+                for document in snapshot.documents {
+                    let alarm = Alarm(map: document.data())
+                    
+                    completion(Observable.just(alarm))
+                    return
+                }
+            }
+        }
+    }
+    
+    func insertAlarm(userId: String, type: String) {
+        let db = Firestore.firestore()
+        let alarm = Alarm(type: type)
+        db.collection("user").document(userId).collection("alarms").addDocument(data: alarm.toDict())
+    }
+    
+    
+    
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
         Firestore.firestore().collection("user").document("\(user.id)").setData(user.toDict()) { (error) in

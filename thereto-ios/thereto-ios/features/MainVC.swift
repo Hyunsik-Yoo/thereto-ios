@@ -1,10 +1,12 @@
 import UIKit
+import RxSwift
 
 
 class MainVC: UITabBarController {
     
     let controllers = [LetterBoxVC.instance(), SentLetterVC.instance(), WriteVC.instance(),
                        FriendListVC.instance(), SetupVC.instance()]
+    let disposeBag = DisposeBag()
     
     
     static func instance() -> MainVC {
@@ -36,6 +38,18 @@ class MainVC: UITabBarController {
         tabBar.backgroundColor = .veryLightPink
         tabBar.clipsToBounds = true
     }
+    
+    private func fetchAlarm() {
+        UserService().fetchAlarm(userId: UserDefaultsUtil().getUserToken()) { [weak self] (alarmObservable) in
+            guard let self = self else { return }
+            alarmObservable.subscribe(onNext: { (alarm) in
+                //알림
+                AlertUtil.show(controller: self, title: "", message: alarm.message)
+            }, onError: { (error) in
+                AlertUtil.show(controller: self, title: "알림 조회 오류", message: error.localizedDescription)
+            }).disposed(by: self.disposeBag)
+        }
+    }
 }
 
 extension MainVC: UITabBarControllerDelegate {
@@ -48,6 +62,7 @@ extension MainVC: UITabBarControllerDelegate {
                 return false
             }
         }
+        self.fetchAlarm()
         return true
     }
 }
