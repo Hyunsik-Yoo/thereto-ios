@@ -53,6 +53,12 @@ class LetterDetailView: BaseView {
         $0.text = "to. 김민경"
     }
     
+    let redDotTo = UIView().then {
+        $0.backgroundColor = .orangeRed
+        $0.layer.cornerRadius = 4
+        $0.layer.masksToBounds = true
+    }
+    
     let messageLabel = UITextView().then {
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 19)
         $0.textColor = .greyishBrownTwo
@@ -72,7 +78,7 @@ class LetterDetailView: BaseView {
         $0.text = "from. 김민경"
     }
     
-    let redDot = UIView().then {
+    let redDotFrom = UIView().then {
         $0.backgroundColor = .orangeRed
         $0.layer.cornerRadius = 4
         $0.layer.masksToBounds = true
@@ -108,8 +114,8 @@ class LetterDetailView: BaseView {
     
     override func setup() {
         backgroundColor = .veryLightPink
-        containerView.addSubViews(mainPhotoContainer, whiteContainer, dateLabel, toProfileImg, toUserLabel,
-                                  messageLabel, fromProfileImg, fromUserLabel, redDot, locationImg,
+        containerView.addSubViews(mainPhotoContainer, whiteContainer, dateLabel, toProfileImg, toUserLabel, redDotTo,
+                                  messageLabel, fromProfileImg, fromUserLabel, redDotFrom, locationImg,
                                   locationName, addressLabel, mapView, deleteBtn)
         scrollView.addSubViews(mainPhoto, containerView)
         addSubViews(backBtn, replyBtn, scrollView)
@@ -167,6 +173,12 @@ class LetterDetailView: BaseView {
             make.left.equalTo(toProfileImg.snp.right).offset(12)
         }
         
+        redDotTo.snp.makeConstraints { (make) in
+            make.left.equalTo(toUserLabel.snp.right)
+            make.centerY.equalTo(toUserLabel.snp.top)
+            make.width.height.equalTo(8)
+        }
+        
         messageLabel.snp.makeConstraints { (make) in
             make.left.equalTo(toProfileImg)
             make.right.equalToSuperview().offset(-39)
@@ -185,7 +197,7 @@ class LetterDetailView: BaseView {
             make.left.equalTo(fromProfileImg.snp.right).offset(12)
         }
         
-        redDot.snp.makeConstraints { (make) in
+        redDotFrom.snp.makeConstraints { (make) in
             make.left.equalTo(fromUserLabel.snp.right)
             make.centerY.equalTo(fromUserLabel.snp.top)
             make.width.height.equalTo(8)
@@ -236,7 +248,7 @@ class LetterDetailView: BaseView {
         }
     }
     
-    func bind(letter: Letter) {
+    func bind(letter: Letter, isSentMode: Bool) {
         mainPhoto.kf.setImage(with: URL.init(string: letter.photo))
         dateLabel.text = String(letter.createdAt.prefix(10))
         
@@ -256,6 +268,16 @@ class LetterDetailView: BaseView {
         } else {
             fromProfileImg.image = UIImage(named: "image_profile_default")
         }
+        
+        if isSentMode { // 발신함에서 들어왔을 경우 From은 무조건 나일테니까 빨간점 제외
+            redDotFrom.isHidden = true
+            redDotTo.isHidden = !letter.to.favorite
+        } else { // 수신함에서 들어왔을 경우 To는 무조건 나일테니까 빨간점 제외
+            redDotTo.isHidden = true
+            redDotFrom.isHidden = !letter.to.favorite
+        }
+        
+        
         fromUserLabel.text = "from. \(letter.from.nickname)"
         locationName.text = letter.location.name
         addressLabel.text = letter.location.addr

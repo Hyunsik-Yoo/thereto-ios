@@ -18,7 +18,7 @@ class LetterDetailVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = letterDetailView
-        letterDetailView.bind(letter: letter)
+        letterDetailView.bind(letter: letter, isSentMode: isSentMode)
         letterDetailView.replyBtn.isHidden = isSentMode
         setRead()
     }
