@@ -91,10 +91,9 @@ class LetterCell: BaseTableViewCell {
         if isSentMode { // 보낸 편지함일 경우
             if let profileURL = letter.to.profileURL,
                 !profileURL.isEmpty {
-                
+                profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
             }
             fromLabel.text = "To. \(letter.to.nickname)"
-            
         } else {
             if let profileURL = letter.from.profileURL,
                 !profileURL.isEmpty {
