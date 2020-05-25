@@ -68,7 +68,7 @@ struct LetterSerivce: LetterServiceProtocol {
         let senderId = UserDefaultsUtil.getUserToken()!
         Firestore.firestore().collection("letter")
             .whereField("from.id", isEqualTo: senderId)
-            .order(by: "timestamp", descending: false)
+            .order(by: "timestamp", descending: true)
             .getDocuments { (snapShot, error) in
             if let error = error {
                 completion(.failure(error))
@@ -89,7 +89,7 @@ struct LetterSerivce: LetterServiceProtocol {
         
         Firestore.firestore().collection("letter")
             .whereField("to.id", isEqualTo: receiverId)
-            .order(by: "timestamp", descending: false)
+            .order(by: "timestamp", descending: true)
             .getDocuments { (snapShot, error) in
                 if let error = error {
                     completion(.failure(error))
@@ -111,7 +111,7 @@ struct LetterSerivce: LetterServiceProtocol {
         Firestore.firestore().collection("letter")
             .whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
             .whereField("\(oppose).nickname", isEqualTo: keyword)
-            .order(by: "timestamp", descending: false)
+            .order(by: "timestamp", descending: true)
             .getDocuments { (snapShot, error) in
                 if let error = error {
                     completion(.failure(error))
