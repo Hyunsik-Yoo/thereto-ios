@@ -18,9 +18,38 @@ protocol UserServiceProtocol {
     func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void))
     func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void))
     func insertAlarm(userId: String, type: AlarmType)
+    func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void))
 }
 
 struct UserService: UserServiceProtocol{
+    func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void)) {
+        let storageRef = Storage.storage().reference()
+        let imagesRef = storageRef.child("profile/\(userId).jpg")
+        
+        if let data = image.pngData() {
+            let _ = imagesRef.putData(data, metadata: nil) { (metadata, error) in
+                guard let _ = metadata else {
+                    let error = CommonError(desc: "metadata is nil")
+                    completion(Observable.error(error))
+                    return
+                }
+                
+                imagesRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        let error = CommonError(desc: "downloadURL is nil")
+                        completion(Observable.error(error))
+                        return
+                    }
+                    completion(Observable.just(downloadURL.absoluteString))
+                    Firestore.firestore().collection("user").document(userId).updateData(["profileURL" : downloadURL.absoluteString])
+                }
+            }
+        } else {
+            let error = CommonError(desc: "image.pngData() is nil")
+            completion(Observable.error(error))
+        }
+    }
+    
     
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
         let url = "\(HTTPUtils.url)/signUp"

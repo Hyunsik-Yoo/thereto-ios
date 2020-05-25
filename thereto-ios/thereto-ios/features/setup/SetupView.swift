@@ -9,11 +9,11 @@ class SetupView: BaseView {
         $0.titleLabel.text = "Setup."
     }
     
-    let profileImg = UIImageView().then {
+    let profileImg = UIButton().then {
         $0.layer.cornerRadius = 40
         $0.layer.masksToBounds = true
         $0.backgroundColor = .gray
-        $0.image = UIImage.init(named: "image_profile_default")
+        $0.setImage(UIImage.init(named: "image_profile_default"), for: .normal)
     }
     
     let nicknameLabel = UILabel().then {
@@ -128,9 +128,9 @@ class SetupView: BaseView {
         if let user = user {
             if let profileURL = user.profileURL,
             !profileURL.isEmpty {
-                profileImg.kf.setImage(with: URL.init(string: user.profileURL!))
+                profileImg.kf.setImage(with: URL.init(string: user.profileURL!), for: .normal)
             } else {
-                profileImg.image = UIImage(named: "image_profile_default")
+                profileImg.setImage(UIImage(named: "image_profile_default"), for: .normal)
             }
             nicknameLabel.text = user.nickname
             receivedCountLabel.text = "\(user.receivedCount)"
