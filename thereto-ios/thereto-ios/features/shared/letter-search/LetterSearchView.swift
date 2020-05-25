@@ -94,9 +94,9 @@ class LetterSearchView: BaseView {
     
     func setType(type: String) {
         if type == "from" {
-            descLabel.text = "보내는 사람의 이름으로 검색할 수 있습니다."
-        } else {
             descLabel.text = "받는 사람의 이름으로 검색할 수 있습니다."
+        } else {
+            descLabel.text = "보낸 사람의 이름으로 검색할 수 있습니다."
         }
     }
 }
