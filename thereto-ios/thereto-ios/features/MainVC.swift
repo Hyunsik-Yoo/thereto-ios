@@ -44,8 +44,16 @@ class MainVC: UITabBarController {
         UserService().fetchAlarm(userId: UserDefaultsUtil().getUserToken()) { [weak self] (alarmObservable) in
             guard let self = self else { return }
             alarmObservable.subscribe(onNext: { (alarm) in
-                //알림
-                AlertUtil.show(controller: self, title: alarm.title, message: alarm.message)
+                AlertUtil.showWithCancel(controller: self, title: alarm.title, message: alarm.message) {
+                    switch alarm.type {
+                    case .NEW_LETTER:
+                        self.selectedIndex = 0
+                    case .NEW_REQUEST:
+                        self.selectedIndex = 3
+                    default:
+                        self.selectedIndex = 0
+                    }
+                }
             }, onError: { (error) in
                 AlertUtil.show(controller: self, title: "알림 조회 오류", message: error.localizedDescription)
             }).disposed(by: self.disposeBag)
