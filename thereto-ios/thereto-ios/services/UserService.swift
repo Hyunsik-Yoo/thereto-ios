@@ -11,7 +11,7 @@ protocol UserServiceProtocol {
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
-    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
+    func requestFriend(id: String, friend: Friend, withAlarm: Bool, completion: @escaping (Observable<Void>) -> Void)
     func requestFriend(user: Friend, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
     func favoriteFriend(userId: String, friendId: String, isFavorite: Bool)
     func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void))
@@ -128,12 +128,12 @@ struct UserService: UserServiceProtocol{
         }
     }
     
-    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void) {
+    func requestFriend(id: String, friend: Friend, withAlarm: Bool, completion: @escaping (Observable<Void>) -> Void) {
         let db = Firestore.firestore()
         
         var friendDict = friend.toDict()
         friendDict["createdAt"] = DateUtil.date2String(date: Date())
-        db.document("user/\(id)").updateData(["newFriendRequest": true])
+        db.document("user/\(id)").updateData(["newFriendRequest": withAlarm])
         db.collection("user/\(id)/friends").document(friend.id).setData(friendDict) { (error) in
             if let error = error {
                 completion(Observable.error(error))
