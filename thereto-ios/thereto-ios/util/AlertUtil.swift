@@ -56,12 +56,12 @@ struct AlertUtil {
     }
     
     static func show(controller: UIViewController, title: String?, message: String?, _ actions: [UIAlertAction]) {
-        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alrtController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         for action in actions {
-            controller.addAction(action)
+            alrtController.addAction(action)
         }
-        controller.present(controller, animated: true)
+        controller.present(alrtController, animated: true)
     }
     
     static func showImagePicker(controller: UIViewController, picker: UIImagePickerController) {
