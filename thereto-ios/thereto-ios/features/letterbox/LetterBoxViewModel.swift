@@ -80,7 +80,7 @@ class LetterBoxViewModel: BaseViewModel {
                             userObservable.subscribe(onNext: { (user) in
                                 var letters = letters
                                 let tutorialLetter = self.createTutorialCard(user: user)
-                                letters.insert(tutorialLetter, at: 0)
+                                letters.append(tutorialLetter)
                                 self.lettersPublisher.onNext(letters)
                                 self.showLoadingPublisher.onNext(false)
                             }, onError: { (error) in
