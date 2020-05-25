@@ -75,7 +75,6 @@ class LetterSearchVC: BaseVC {
 extension LetterSearchVC: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffset = scrollView.contentOffset.y
-        
         if 129 - contentOffset > 0 && contentOffset > 0  {
             letterSearchView.backBtn.snp.remakeConstraints { (make) in
                 make.left.equalToSuperview().offset(24)
@@ -85,6 +84,24 @@ extension LetterSearchVC: UITableViewDelegate {
             
             letterSearchView.backBtn.alpha = (129 - contentOffset) / 129
             letterSearchView.titleLabel.alpha = (129 - contentOffset) / 129
+        } else if contentOffset > 129 {
+            letterSearchView.backBtn.snp.remakeConstraints { (make) in
+                make.left.equalToSuperview().offset(24)
+                make.top.equalTo(view.safeAreaLayoutGuide).offset(16 - 129)
+                make.width.height.equalTo(24)
+            }
+            
+            letterSearchView.backBtn.alpha = 0
+            letterSearchView.titleLabel.alpha = 0
+        } else if contentOffset <= 0 {
+            letterSearchView.backBtn.snp.remakeConstraints { (make) in
+                make.left.equalToSuperview().offset(24)
+                make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+                make.width.height.equalTo(24)
+            }
+            
+            letterSearchView.backBtn.alpha = 1
+            letterSearchView.titleLabel.alpha = 1
         }
     }
     
