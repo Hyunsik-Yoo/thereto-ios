@@ -11,10 +11,13 @@ class WriteVC: BaseVC {
     
     private var myInfo: User!
     
+    var targetUser: User? = nil
     
-    static func instance() -> UINavigationController {
+    
+    static func instance(user: User? = nil) -> UINavigationController {
         let controller = WriteVC.init(nibName: nil, bundle: nil)
         
+        controller.targetUser = user
         controller.tabBarItem = UITabBarItem.init(title: "엽서쓰기", image: UIImage.init(named: "ic_write"), selectedImage: UIImage.init(named: "ic_write"))
         
         return UINavigationController.init(rootViewController: controller).then {
@@ -36,6 +39,11 @@ class WriteVC: BaseVC {
         imagePicker.delegate = self
         getMyInfo()
         setupKeyboardEvent()
+        if let targetUser = targetUser {
+            let friend = Friend(user: targetUser)
+            
+            viewModel.friend.onNext(friend)
+        }
     }
     
     override func bindEvent() {

@@ -28,6 +28,13 @@ class LetterDetailVC: BaseVC {
             self?.navigationController?.popViewController(animated: true)
         }.disposed(by: disposeBag)
         
+        letterDetailView.replyBtn.rx.tap.bind { [weak self] (_) in
+            guard let self = self else { return }
+            let controller = WriteVC.instance(user: self.letter.from)
+            
+            self.present(controller, animated: true, completion: nil)
+        }.disposed(by: disposeBag)
+        
         letterDetailView.deleteBtn.rx.tap.bind { [weak self] in
             if let vc = self {
                 AlertUtil.showWithCancel(title: nil, message: "삭제하시겠습니까?") {

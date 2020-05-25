@@ -249,6 +249,7 @@ class LetterDetailView: BaseView {
     }
     
     func bind(letter: Letter, isSentMode: Bool) {
+        replyBtn.isHidden = isSentMode
         mainPhoto.kf.setImage(with: URL.init(string: letter.photo))
         dateLabel.text = String(letter.createdAt.prefix(10))
         
