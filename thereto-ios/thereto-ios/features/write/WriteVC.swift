@@ -160,6 +160,7 @@ class WriteVC: BaseVC {
                         LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
                         // 친구와 내 프로필에 각각 받은, 보낸편지 카운팅
                         LetterSerivce.increaseFriendCount(userId: try! vc.viewModel.friend.value()!.id)
+                        UserService().insertAlarm(userId: try! vc.viewModel.friend.value()!.id, type: .NEW_LETTER)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)
                     }

@@ -20,6 +20,7 @@ class MainVC: UITabBarController {
         delegate = self
         
         setupTabBar()
+        fetchAlarm()
     }
     
     private func setupTabBar() {
@@ -44,7 +45,7 @@ class MainVC: UITabBarController {
             guard let self = self else { return }
             alarmObservable.subscribe(onNext: { (alarm) in
                 //알림
-                AlertUtil.show(controller: self, title: "", message: alarm.message)
+                AlertUtil.show(controller: self, title: alarm.title, message: alarm.message)
             }, onError: { (error) in
                 AlertUtil.show(controller: self, title: "알림 조회 오류", message: error.localizedDescription)
             }).disposed(by: self.disposeBag)

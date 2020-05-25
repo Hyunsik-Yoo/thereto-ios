@@ -17,7 +17,7 @@ protocol UserServiceProtocol {
     func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void))
     func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void))
     func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void))
-    func insertAlarm(userId: String, type: String)
+    func insertAlarm(userId: String, type: AlarmType)
 }
 
 struct UserService: UserServiceProtocol{
@@ -209,18 +209,18 @@ struct UserService: UserServiceProtocol{
                     let alarm = Alarm(map: document.data())
                     
                     completion(Observable.just(alarm))
+                    db.collection("user").document(userId).collection("alarms").document(document.documentID).delete()
                     return
                 }
             }
         }
     }
     
-    func insertAlarm(userId: String, type: String) {
+    func insertAlarm(userId: String, type: AlarmType) {
         let db = Firestore.firestore()
         let alarm = Alarm(type: type)
         db.collection("user").document(userId).collection("alarms").addDocument(data: alarm.toDict())
     }
-    
     
     
     

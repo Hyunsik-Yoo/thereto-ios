@@ -101,6 +101,7 @@ class AddFriendViewModel: BaseViewModel {
                     userService.requestFriend(id: friend.id, friend: myInfo) { (observable) in
                         observable.subscribe(onNext: { (_) in
                             self.showAlertPublisher.onNext(("","친구 요청 성공"))
+                            self.userService.insertAlarm(userId: friend.id, type: .NEW_REQUEST)
                             self.nicknameTextPublisher.onNext("")
                             self.showLoadingPublisher.onNext(false)
                             self.dataModePublisher.onNext(.DEFAULT)
