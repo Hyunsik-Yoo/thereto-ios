@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>엽서에 들어갈 사진을 찾는데 앨범이 사용됩니다.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -55,6 +53,8 @@
 	<string>엽서가 저장될 장소를 확인하기 위해 사용자 위치가 사용됩니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>엽서가 저장될 장소를 확인하기 위해 사용자 위치가 사용됩니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>엽서에 들어갈 사진을 찾는데 앨범이 사용됩니다.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SpoqaHanSans-Light.ttf</string>
