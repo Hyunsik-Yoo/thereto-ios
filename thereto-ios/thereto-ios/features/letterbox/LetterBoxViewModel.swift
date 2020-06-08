@@ -104,16 +104,22 @@ class LetterBoxViewModel: BaseViewModel {
         selectItemPublisher.withLatestFrom(Observable.combineLatest(selectItemPublisher, lettersPublisher, myLocationPublisher))
             .bind(onNext: { [weak self] (index, letters, myLocation) in
                 guard let self = self else { return }
-                let letter = letters[index]
                 
-                if letter.id == "tutorial" || letter.isRead {
-                    self.goToLetterDetailPublisher.onNext(letter)
+                // 위,경도 0,0 일경우는 권한문제이므로 에러 표시
+                if myLocation.coordinate.latitude == 0 && myLocation.coordinate.longitude == 0 {
+                    self.showLocationErrorPublisher.onNext(())
                 } else {
-                    // 거리 계산해서 300 안에 있으면 들어가고 아니면 오류창 출력
-                    if self.getDistance(location: letter.location, location2: myLocation) <= 300 {
+                    let letter = letters[index]
+                    
+                    if letter.id == "tutorial" || letter.isRead {
                         self.goToLetterDetailPublisher.onNext(letter)
                     } else {
-                        self.showFarAwayPublisher.onNext((letter, myLocation))
+                        // 거리 계산해서 300 안에 있으면 들어가고 아니면 오류창 출력
+                        if self.getDistance(location: letter.location, location2: myLocation) <= 300 {
+                            self.goToLetterDetailPublisher.onNext(letter)
+                        } else {
+                            self.showFarAwayPublisher.onNext((letter, myLocation))
+                        }
                     }
                 }
             }).disposed(by: disposeBag)
@@ -152,6 +158,7 @@ extension LetterBoxViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if (error as NSError).code == 1 {
             self.showLocationErrorPublisher.onNext(())
+            self.myLocationPublisher.onNext(CLLocation(latitude: 0, longitude: 0))
         } else {
             self.showAlertsPublisher.onNext(("LocationManager error", error.localizedDescription))
         }
