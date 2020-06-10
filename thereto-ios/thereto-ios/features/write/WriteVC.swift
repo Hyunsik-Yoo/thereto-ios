@@ -11,10 +11,13 @@ class WriteVC: BaseVC {
     
     private var myInfo: User!
     
+    var targetUser: User? = nil
     
-    static func instance() -> UINavigationController {
+    
+    static func instance(user: User? = nil) -> UINavigationController {
         let controller = WriteVC.init(nibName: nil, bundle: nil)
         
+        controller.targetUser = user
         controller.tabBarItem = UITabBarItem.init(title: "엽서쓰기", image: UIImage.init(named: "ic_write"), selectedImage: UIImage.init(named: "ic_write"))
         
         return UINavigationController.init(rootViewController: controller).then {
@@ -36,6 +39,11 @@ class WriteVC: BaseVC {
         imagePicker.delegate = self
         getMyInfo()
         setupKeyboardEvent()
+        if let targetUser = targetUser {
+            let friend = Friend(user: targetUser)
+            
+            viewModel.friend.onNext(friend)
+        }
     }
     
     override func bindEvent() {
@@ -85,7 +93,7 @@ class WriteVC: BaseVC {
     override func bindViewModel() {
         viewModel.friend.bind { [weak self] (friend) in
             if let friend = friend {
-                self?.writeView.friendBtn.setTitle("\(friend.nickname) (friend.name)", for: .normal)
+                self?.writeView.friendBtn.setTitle("\(friend.nickname)", for: .normal)
             }
         }.disposed(by: disposeBag)
         
@@ -160,6 +168,7 @@ class WriteVC: BaseVC {
                         LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
                         // 친구와 내 프로필에 각각 받은, 보낸편지 카운팅
                         LetterSerivce.increaseFriendCount(userId: try! vc.viewModel.friend.value()!.id)
+                        UserService().insertAlarm(userId: try! vc.viewModel.friend.value()!.id, type: .NEW_LETTER)
                         vc.writeView.stopLoading()
                         vc.dismiss(animated: true, completion: nil)
                     }

@@ -177,9 +177,9 @@ extension SelectLocationVC: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if (error as NSError).code == 1 {
+        if (error as NSError).code == 1 { // 위치 권한 오류
             AlertUtil.showWithCancel(title: "위치 권한 오류", message: "설정 > thereto > 위치 > 앱을 사용하는 동안으로 선택해주세요.") {
-                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+//                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
             }
         } else {
             AlertUtil.show("error locationManager", message: error.localizedDescription)

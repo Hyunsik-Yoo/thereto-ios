@@ -30,6 +30,7 @@ class LetterSearchView: BaseView {
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.tableFooterView = UIView()
+        $0.alwaysBounceVertical = false
     }
     
     let descLabel = UILabel().then {
@@ -89,5 +90,13 @@ class LetterSearchView: BaseView {
         tableView.isHidden = isEmpty
         descLabel.isHidden = !isEmpty
         descLabel.text = "일치하는 검색 결과가 없습니다."
+    }
+    
+    func setType(type: String) {
+        if type == "from" {
+            descLabel.text = "받는 사람의 이름으로 검색할 수 있습니다."
+        } else {
+            descLabel.text = "보낸 사람의 이름으로 검색할 수 있습니다."
+        }
     }
 }

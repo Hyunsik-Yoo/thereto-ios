@@ -94,13 +94,14 @@ class AddFriendViewModel: BaseViewModel {
             friend.sentCount = 0
             
             self.showLoadingPublisher.onNext(true)
-            userService.requestFriend(id: self.userDefaults.getUserToken(), friend: friend) { (observable) in
+            userService.requestFriend(id: self.userDefaults.getUserToken(), friend: friend, withAlarm: false) { (observable) in
                 observable.subscribe(onNext: { (_) in
                     // 내 친구가 추가되었을때, 친구 필드에도 나를 WAIT 상태로 추가해야합니다.
                     // 친구 요청 완료한 뒤, 앱 화면 초기화 시켜야합니다.
-                    userService.requestFriend(id: friend.id, friend: myInfo) { (observable) in
+                    userService.requestFriend(id: friend.id, friend: myInfo, withAlarm: true) { (observable) in
                         observable.subscribe(onNext: { (_) in
                             self.showAlertPublisher.onNext(("","친구 요청 성공"))
+                            self.userService.insertAlarm(userId: friend.id, type: .NEW_REQUEST)
                             self.nicknameTextPublisher.onNext("")
                             self.showLoadingPublisher.onNext(false)
                             self.dataModePublisher.onNext(.DEFAULT)

@@ -11,14 +11,45 @@ protocol UserServiceProtocol {
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
-    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
+    func requestFriend(id: String, friend: Friend, withAlarm: Bool, completion: @escaping (Observable<Void>) -> Void)
     func requestFriend(user: Friend, friend: Friend, completion: @escaping (Observable<Void>) -> Void)
     func favoriteFriend(userId: String, friendId: String, isFavorite: Bool)
     func findFriend(userId: String, friendId: String, completion: @escaping ((Observable<Friend>) -> Void))
     func deleteFriend(userId: String, friendId: String, completion: @escaping ((Observable<Void>) -> Void))
+    func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void))
+    func insertAlarm(userId: String, type: AlarmType)
+    func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void))
 }
 
 struct UserService: UserServiceProtocol{
+    func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void)) {
+        let storageRef = Storage.storage().reference()
+        let imagesRef = storageRef.child("profile/\(userId).jpg")
+        
+        if let data = image.pngData() {
+            let _ = imagesRef.putData(data, metadata: nil) { (metadata, error) in
+                guard let _ = metadata else {
+                    let error = CommonError(desc: "metadata is nil")
+                    completion(Observable.error(error))
+                    return
+                }
+                
+                imagesRef.downloadURL { (url, error) in
+                    guard let downloadURL = url else {
+                        let error = CommonError(desc: "downloadURL is nil")
+                        completion(Observable.error(error))
+                        return
+                    }
+                    completion(Observable.just(downloadURL.absoluteString))
+                    Firestore.firestore().collection("user").document(userId).updateData(["profileURL" : downloadURL.absoluteString])
+                }
+            }
+        } else {
+            let error = CommonError(desc: "image.pngData() is nil")
+            completion(Observable.error(error))
+        }
+    }
+    
     
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
         let url = "\(HTTPUtils.url)/signUp"
@@ -126,12 +157,12 @@ struct UserService: UserServiceProtocol{
         }
     }
     
-    func requestFriend(id: String, friend: Friend, completion: @escaping (Observable<Void>) -> Void) {
+    func requestFriend(id: String, friend: Friend, withAlarm: Bool, completion: @escaping (Observable<Void>) -> Void) {
         let db = Firestore.firestore()
         
         var friendDict = friend.toDict()
         friendDict["createdAt"] = DateUtil.date2String(date: Date())
-        db.document("user/\(id)").updateData(["newFriendRequest": true])
+        db.document("user/\(id)").updateData(["newFriendRequest": withAlarm])
         db.collection("user/\(id)/friends").document(friend.id).setData(friendDict) { (error) in
             if let error = error {
                 completion(Observable.error(error))
@@ -189,6 +220,38 @@ struct UserService: UserServiceProtocol{
             }
         }
     }
+    
+    func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void)) {
+        let db = Firestore.firestore()
+        
+        db.collection("user").document(userId).collection("alarms").getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(Observable.error(error))
+            } else {
+                guard let snapshot = snapshot else {
+                    let error = CommonError(desc: "Snapshot is nil")
+                    completion(Observable.error(error))
+                    return
+                }
+                
+                for document in snapshot.documents {
+                    let alarm = Alarm(map: document.data())
+                    
+                    completion(Observable.just(alarm))
+                    db.collection("user").document(userId).collection("alarms").document(document.documentID).delete()
+                    return
+                }
+            }
+        }
+    }
+    
+    func insertAlarm(userId: String, type: AlarmType) {
+        let db = Firestore.firestore()
+        let alarm = Alarm(type: type)
+        db.collection("user").document(userId).collection("alarms").addDocument(data: alarm.toDict())
+    }
+    
+    
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
         Firestore.firestore().collection("user").document("\(user.id)").setData(user.toDict()) { (error) in

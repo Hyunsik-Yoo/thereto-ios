@@ -39,7 +39,7 @@ class LetterBoxVC: BaseVC {
         
         // Bind output
         viewModel.output.letters.bind(to: letterBoxView.tableView.rx.items(cellIdentifier: LetterCell.registerId, cellType: LetterCell.self)) { row, letter, cell in
-            cell.bind(letter: letter)
+            cell.bind(letter: letter, isSentMode: false)
         }.disposed(by: disposeBag)
         viewModel.output.showAlerts.bind(onNext: showAlerts)
             .disposed(by: disposeBag)
@@ -74,8 +74,8 @@ class LetterBoxVC: BaseVC {
     }
     
     private func showLocationError() {
-        AlertUtil.showWithCancel(title: "위치 권한 오류", message: "") {
-            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+        AlertUtil.showWithAction(title: "위치 권한 오류", message: "설정 > thereto > 위치 설정을 활성화시켜주세요.\n편지의 작성이와 동일한 장소에서만 편지를 열 수 있습니다.") {
+//            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
         }
     }
     

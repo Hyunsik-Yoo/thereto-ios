@@ -1,12 +1,16 @@
 import UIKit
 import FBSDKLoginKit
 import FBSDKCoreKit
+import CropViewController
 
 class SetupVC: BaseVC {
     
     private lazy var setupView = SetupView.init(frame: self.view.frame)
     
-    private var viewModel = SetupViewModel()
+    private var viewModel = SetupViewModel(userService: UserService(),
+                                           userDefaults: UserDefaultsUtil())
+    
+    private let imagePicker = UIImagePickerController()
     
     static func instance() -> UINavigationController {
         let controller = SetupVC.init(nibName: nil, bundle: nil)
@@ -18,20 +22,43 @@ class SetupVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.isNavigationBarHidden = true
         view = setupView
+        setupNavigation()
         setupTableView()
+        imagePicker.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getMyInfo()
+        viewModel.fetchMyInfo()
     }
     
     override func bindViewModel() {
-        viewModel.user.bind { [weak self] (user) in
-            self?.setupView.bind(user: user)
+        viewModel.output.profile.bind { [weak self] (profileURL) in
+            guard let self = self else { return }
+            self.setupView.profileImg.kf.setImage(with: URL(string: profileURL)!, for: .normal)
         }.disposed(by: disposeBag)
+        viewModel.output.userInfo.bind(onNext: setupView.bind(user:))
+            .disposed(by: disposeBag)
+        viewModel.output.showLoading.bind(onNext: setupView.showLoading(isShow:))
+            .disposed(by: disposeBag)
+        viewModel.output.showAlert.bind { [weak self] (title, message) in
+            guard let self = self else { return }
+            AlertUtil.show(controller: self, title: title, message: message)
+        }.disposed(by: disposeBag)
+        viewModel.output.goToSignIn.bind(onNext: goToSignIn)
+            .disposed(by: disposeBag)
+    }
+    
+    override func bindEvent() {
+        setupView.profileImg.rx.tap.bind { [weak self] (_) in
+            guard let self = self else { return }
+            AlertUtil.showImagePicker(controller: self, picker: self.imagePicker)
+        }.disposed(by: disposeBag)
+    }
+    
+    private func setupNavigation() {
+        navigationController?.isNavigationBarHidden = true
     }
     
     private func setupTableView() {
@@ -40,18 +67,23 @@ class SetupVC: BaseVC {
         setupView.tableView.register(SetupCell.self, forCellReuseIdentifier: SetupCell.registerId)
     }
     
-    private func getMyInfo() {
-        setupView.startLoading()
-        UserService.getMyUser { [weak self] (user) in
-            self?.viewModel.user.onNext(user)
-            self?.setupView.stopLoading()
-        }
-    }
-    
     private func goToSignIn() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             delegate.goToSignIn()
         }
+    }
+    
+    private func presentCropViewController(image: UIImage) {
+        let cropViewController = CropViewController.init(croppingStyle: .default, image: image)
+        
+        cropViewController.delegate = self
+        cropViewController.aspectRatioLockDimensionSwapEnabled = false
+        cropViewController.aspectRatioPreset = .presetSquare
+        cropViewController.aspectRatioPickerButtonHidden = true
+        cropViewController.aspectRatioLockEnabled = true
+        cropViewController.resetButtonHidden = true
+        
+        present(cropViewController, animated: true, completion: nil)
     }
 }
 
@@ -78,19 +110,28 @@ extension SetupVC: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: // 로그아웃
             AlertUtil.showWithCancel(title: "로그아웃", message: "로그아웃하시겠습니까?") { [weak self] in
-                UserDefaultsUtil.clearUserToken()
-                FirebaseUtil.signOut()
-                
-                if let vc = self {
-                    if let user = try! vc.viewModel.user.value(),
-                        user.social == .FACEBOOK {
-                        LoginManager().logOut()
-                    }
-                }
-                self?.goToSignIn()
+                self?.viewModel.input.logout.onNext(())
             }
         default:
             break
         }
     }
 }
+
+extension SetupVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[.originalImage] as? UIImage {
+            self.presentCropViewController(image: image)
+        }
+    }
+}
+
+extension SetupVC: CropViewControllerDelegate {
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true) {
+            self.viewModel.input.profileImage.onNext(image)
+        }
+    }
+}
+

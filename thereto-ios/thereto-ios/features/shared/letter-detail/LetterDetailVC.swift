@@ -18,7 +18,7 @@ class LetterDetailVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = letterDetailView
-        letterDetailView.bind(letter: letter)
+        letterDetailView.bind(letter: letter, isSentMode: isSentMode)
         letterDetailView.replyBtn.isHidden = isSentMode
         setRead()
     }
@@ -26,6 +26,13 @@ class LetterDetailVC: BaseVC {
     override func bindEvent() {
         letterDetailView.backBtn.rx.tap.bind { [weak self] in
             self?.navigationController?.popViewController(animated: true)
+        }.disposed(by: disposeBag)
+        
+        letterDetailView.replyBtn.rx.tap.bind { [weak self] (_) in
+            guard let self = self else { return }
+            let controller = WriteVC.instance(user: self.letter.from)
+            
+            self.present(controller, animated: true, completion: nil)
         }.disposed(by: disposeBag)
         
         letterDetailView.deleteBtn.rx.tap.bind { [weak self] in

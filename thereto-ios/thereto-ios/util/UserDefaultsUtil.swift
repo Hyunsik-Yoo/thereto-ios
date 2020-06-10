@@ -15,6 +15,7 @@ protocol UserDefaultsProtocol {
     func getUserToken() -> String
     func isTutorialFinished() -> Bool
     func setTutorialFinish()
+    func clearUserToken()
 }
 
 struct UserDefaultsUtil: UserDefaultsProtocol {
@@ -72,5 +73,9 @@ struct UserDefaultsUtil: UserDefaultsProtocol {
     
     func setTutorialFinish() {
         UserDefaults.standard.set(true, forKey: UserDefaultsUtil.KEY_TUTORIAL_CARD)
+    }
+    
+    func clearUserToken() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultsUtil.KEY_TOKEN)
     }
 }

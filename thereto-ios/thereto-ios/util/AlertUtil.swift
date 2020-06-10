@@ -17,6 +17,15 @@ struct AlertUtil {
         show(title: title, message: message, [okAction, cancelAction])
     }
     
+    static func showWithAction(title: String? = nil, message: String? = nil, onTapOk: @escaping () -> Void) {
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            onTapOk()
+        }
+        
+        show(title: title, message: message, [okAction])
+    }
+    
+    
     static func showWithCancel(controller: UIViewController, title: String? = nil, message: String? = nil, onTapOk: @escaping () -> Void) {
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
             onTapOk()
@@ -38,7 +47,7 @@ struct AlertUtil {
         }
     }
     
-    static func show(controller: UIViewController, title: String, message: String) {
+    static func show(controller: UIViewController, title: String?, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default)
         
@@ -47,12 +56,12 @@ struct AlertUtil {
     }
     
     static func show(controller: UIViewController, title: String?, message: String?, _ actions: [UIAlertAction]) {
-        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alrtController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         for action in actions {
-            controller.addAction(action)
+            alrtController.addAction(action)
         }
-        controller.present(controller, animated: true)
+        controller.present(alrtController, animated: true)
     }
     
     static func showImagePicker(controller: UIViewController, picker: UIImagePickerController) {

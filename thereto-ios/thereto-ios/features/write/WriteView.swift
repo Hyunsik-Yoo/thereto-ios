@@ -233,4 +233,10 @@ class WriteView: BaseView {
             self?.toastLabel.removeFromSuperview()
         }
     }
+    
+    func bind(user: User?) {
+        if user != nil {
+            
+        }
+    }
 }
