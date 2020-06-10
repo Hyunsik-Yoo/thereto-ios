@@ -16,27 +16,54 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
+	<key>CFBundleURLTypes</key>
+	<array>
 		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
+			<key>CFBundleURLSchemes</key>
 			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-				</dict>
+				<string>fb440287443560450</string>
 			</array>
 		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>440287443560450</string>
+	<key>FacebookDisplayName</key>
+	<string>There-to</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NMFClientId</key>
+	<string>b7agu1h5c2</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>엽서에 들어갈 사진을 촬영하는데 카메라가 사용됩니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>엽서가 저장될 장소를 확인하기 위해 사용자 위치가 사용됩니다.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>엽서가 저장될 장소를 확인하기 위해 사용자 위치가 사용됩니다.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>엽서에 들어갈 사진을 찾는데 앨범이 사용됩니다.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SpoqaHanSans-Light.ttf</string>
+		<string>FrankRuhlLibre-Black.ttf</string>
+		<string>SpoqaHanSans-Bold.ttf</string>
+		<string>SpoqaHanSans-Regular.ttf</string>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -52,5 +79,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 </dict>
 </plist>

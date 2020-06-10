@@ -7,8 +7,28 @@ target 'thereto-ios' do
 
   pod 'SnapKit', '~> 5.0.0'
 
-  pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
-  # Pods for thereto-ios
-
+  pod 'RxSwift', '~> 5.1.1'
+  pod 'RxCocoa', '~> 5.1.1'
+  
+  # Firebase
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  
+  # Facebook auth
+  pod 'FBSDKLoginKit'
+  
+  # Kingfisher
+  pod 'Kingfisher', '~> 5.0'
+  
+  pod 'NMapsMap'
+  
+  pod 'Alamofire', '~> 4.9.1'
+  pod 'AlamofireNetworkActivityLogger', '~> 2.4'
+  
+  pod 'CropViewController'
+  
+  # Then
+  pod 'Then'
 end
