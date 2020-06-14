@@ -96,12 +96,14 @@ class LetterCell: BaseTableViewCell {
         if isSentMode { // 보낸 편지함일 경우
             if let profileURL = letter.to.profileURL,
                 !profileURL.isEmpty {
+                profileImage.kf.indicatorType = .activity
                 profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
             }
             fromLabel.text = "To. \(letter.to.nickname)"
         } else {
             if let profileURL = letter.from.profileURL,
                 !profileURL.isEmpty {
+                profileImage.kf.indicatorType = .activity
                 profileImage.kf.setImage(with: URL.init(string: profileURL)!, placeholder: UIImage.init(named: "image_profile_default"))
             }
             fromLabel.text = "From. \(letter.from.nickname)"
@@ -109,6 +111,7 @@ class LetterCell: BaseTableViewCell {
         addressLabel.text = letter.location.addr
         
         if letter.isRead {
+            cardImage.kf.indicatorType = .activity
             cardImage.kf.setImage(with: URL.init(string: letter.photo))
         } else {
             cardImage.image = UIImage.init(named: "image_default_card")
