@@ -47,6 +47,11 @@ class LetterCell: BaseTableViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImage.image = UIImage.init(named: "image_profile_default")
+    }
+    
     
     override func setup() {
         backgroundColor = .clear
