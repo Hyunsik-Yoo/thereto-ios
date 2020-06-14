@@ -1,5 +1,6 @@
 import UIKit
 import RxSwift
+import CoreLocation
 
 
 class MainVC: UITabBarController {
@@ -77,7 +78,14 @@ extension MainVC: UITabBarControllerDelegate {
         if let navi = viewController as? UINavigationController,
             let rootVC = navi.viewControllers.first {
             if rootVC is WriteVC {
-                self.present(WriteVC.instance(), animated: true)
+                switch CLLocationManager.authorizationStatus() {
+                case .authorizedWhenInUse:
+                    self.present(WriteVC.instance(), animated: true)
+                case .denied, .restricted, .notDetermined:
+                    AlertUtil.show(controller: self, title: "위치 권한 오류", message: "설정 > thereto > 위치 > 앱을 사용하는 동안으로 선택해주세요.\n권한 허용 후, 편지를 작성할 수 있습니다.")
+                default:
+                    break
+                }
                 return false
             }
             if rootVC is LetterBoxVC {
