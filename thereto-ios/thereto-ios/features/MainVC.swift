@@ -84,7 +84,7 @@ extension MainVC: UITabBarControllerDelegate {
                 self.controllers[0].tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_letter_box_off"), selectedImage: UIImage.init(named: "ic_letter_box_on"))
             }
             if rootVC is FriendListVC {
-                self.controllers[3].tabBarItem = UITabBarItem.init(title: "수신함", image: UIImage.init(named: "ic_friend_off"), selectedImage: UIImage.init(named: "ic_friend_on"))
+                self.controllers[3].tabBarItem = UITabBarItem.init(title: "친구관리", image: UIImage.init(named: "ic_friend_off"), selectedImage: UIImage.init(named: "ic_friend_on"))
 
             }
         }
