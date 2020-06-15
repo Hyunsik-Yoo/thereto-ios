@@ -29,6 +29,12 @@ class AddFriendCell: BaseTableViewCell {
         $0.isHidden = true
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        waitingLabel.isHidden = true
+        addBtn.isHidden = false
+    }
+    
     
     override func setup() {
         backgroundColor = .clear
