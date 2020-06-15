@@ -33,6 +33,8 @@ class FriendDetailVC: BaseVC {
         // Bind input
         friendDetailView.favoriteBtn.rx.tap.bind(to: viewModel.input.tapFavorite)
             .disposed(by: disposeBag)
+        friendDetailView.writeBtn.rx.tap.bind(to: viewModel.input.tapWrite)
+            .disposed(by: disposeBag)
         
         // Bind output
         viewModel.output.enableFavorite.bind { [weak self] (isFavorite) in
@@ -57,6 +59,8 @@ class FriendDetailVC: BaseVC {
             guard let self = self else { return }
             AlertUtil.show(controller: self, title: title, message: message)
         }.disposed(by: disposeBag)
+        viewModel.output.goToWrite.bind(onNext: presentWriteVC(friend:))
+            .disposed(by: disposeBag)
     }
     
     override func bindEvent() {
@@ -77,12 +81,9 @@ class FriendDetailVC: BaseVC {
                 self.viewModel.input.tapDelete.onNext(())
             }
         }.disposed(by: disposeBag)
-        
-        friendDetailView.writeBtn.rx.tap.bind(onNext: presentWriteVC)
-            .disposed(by: disposeBag)
     }
     
-    private func presentWriteVC() {
-        present(WriteVC.instance(), animated: true, completion: nil)
+    private func presentWriteVC(friend: Friend) {
+        present(WriteVC.instance(user: User(friend: friend)), animated: true, completion: nil)
     }
 }

@@ -2,6 +2,9 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import AlamofireNetworkActivityLogger
+import SwiftyBeaver
+
+typealias Log = SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize facebook
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        //
+        // Initialize AlmofireNetworkActivityLogger
         NetworkActivityLogger.shared.startLogging()
         NetworkActivityLogger.shared.level = .debug
+        
+        initilizeSwiftyBeaver()
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.themeColor
@@ -57,6 +62,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func goToMain() {
         window?.rootViewController = MainVC.instance()
         window?.makeKeyAndVisible()
+    }
+    
+    private func initilizeSwiftyBeaver() {
+        // add log destinations. at least one is needed!
+        let console = ConsoleDestination()  // log to Xcode Console
+        let cloud = SBPlatformDestination(appID: "bJPO03",
+                                          appSecret: "4f8tnYymJhvze9hvJc50irhwzmnlablw",
+                                          encryptionKey: "oltisgoyhfZvnqxQo7xvjgbupcKxdqwy")
+        cloud.minLevel = .debug
+        
+        console.format = "$DHH:mm:ss$d $N.$F():$l $L: $M"
+        // or use this for JSON output: console.format = "$J"
+
+        // add the destinations to SwiftyBeaver
+        Log.addDestination(console)
+        Log.addDestination(cloud)
     }
 }
 

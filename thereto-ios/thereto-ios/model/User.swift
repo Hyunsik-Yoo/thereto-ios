@@ -18,6 +18,16 @@ struct User: Codable {
         self.createdAt = DateUtil.date2String(date: Date.init())
     }
     
+    init(friend: Friend) {
+        self.nickname = friend.nickname
+        self.social = friend.social
+        self.profileURL = friend.profileURL
+        self.receivedCount = friend.receivedCount
+        self.sentCount = friend.sentCount
+        self.id = friend.id
+        self.createdAt = friend.createdAt!
+    }
+    
     init(map: [String: Any]) {
         self.nickname = map["nickname"] as! String
         self.social = SocialType(rawValue: map["social"] as! String)!

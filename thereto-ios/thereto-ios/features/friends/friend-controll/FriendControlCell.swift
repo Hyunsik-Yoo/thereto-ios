@@ -42,6 +42,14 @@ class FriendControlCell: BaseTableViewCell {
         $0.isHidden = true
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImg.image = UIImage.init(named: "image_profile_default")
+        waitingLabel.isHidden = true
+        leftBtn.isHidden = false
+        rightBtn.isHidden = false
+    }
+    
     
     override func setup() {
         backgroundColor = .clear
