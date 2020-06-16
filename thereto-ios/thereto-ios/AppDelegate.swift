@@ -3,6 +3,7 @@ import Firebase
 import FBSDKCoreKit
 import AlamofireNetworkActivityLogger
 import SwiftyBeaver
+import FirebaseMessaging
 
 typealias Log = SwiftyBeaver
 
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkActivityLogger.shared.level = .debug
         
         initilizeSwiftyBeaver()
+        initilizeFCM(application: application)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.themeColor
@@ -79,5 +81,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.addDestination(console)
         Log.addDestination(cloud)
     }
+    
+    private func initilizeFCM(application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+                                                                completionHandler: {_, _ in })
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+    }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        Log.debug("fcmToken: \(fcmToken)")
+    }
+}
