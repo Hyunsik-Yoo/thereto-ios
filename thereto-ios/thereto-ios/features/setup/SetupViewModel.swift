@@ -47,7 +47,7 @@ class SetupViewModel: BaseViewModel {
         profileImagePublisher.bind { [weak self] (profileImage) in
             guard let self = self else { return }
             self.showLoadingPublisher.onNext(true)
-            self.userService.updateProfileURL(userId: userDefaults.getUserToken(), image: profileImage) { (urlObservable) in
+            self.userService.updateProfileURL(userId: userDefaults.getUserToken()!, image: profileImage) { (urlObservable) in
                 urlObservable.subscribe(onNext: { (profileURL) in
                     self.profilePublisher.onNext(profileURL)
                     self.showLoadingPublisher.onNext(false)
@@ -64,7 +64,8 @@ class SetupViewModel: BaseViewModel {
         
         logoutPublisher.withLatestFrom(userInfoPublisher).bind { [weak self] (user) in
             guard let self = self else { return }
-            userDefaults.clearUserToken()
+            self.userService.deleteFCMToken(userId: user.id)
+            self.userDefaults.clearUserToken()
             FirebaseUtil.signOut()
             
             if user.social == .FACEBOOK {
@@ -76,7 +77,7 @@ class SetupViewModel: BaseViewModel {
     
     func fetchMyInfo() {
         showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()) { [weak self] (userObservable) in
+        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
             guard let self = self else { return }
             userObservable.subscribe(onNext: { (user) in
                 self.userInfoPublisher.onNext(user)

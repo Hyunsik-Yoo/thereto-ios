@@ -43,7 +43,7 @@ class FriendControlVC: BaseVC {
     }
     
     private func fetchRedDot() {
-        UserService.fetchRedDot(token: UserDefaultsUtil().getUserToken())
+        UserService.fetchRedDot(token: UserDefaultsUtil().getUserToken()!)
     }
 }
 

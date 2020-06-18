@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
+    
     private func initilizeSwiftyBeaver() {
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
@@ -96,6 +97,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        UserDefaultsUtil().setFCMToken(token: fcmToken)
+        UserDefaultsUtil().enableLetterNoti(isEnable: false)
+        if let userID = UserDefaultsUtil().getUserToken() {
+            UserService().updateFCMToken(userId: userID, fcmToken: fcmToken)
+        }
         Log.debug("fcmToken: \(fcmToken)")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+
+        Log.debug(userInfo)
+        completionHandler([[.alert, .sound]])
     }
 }

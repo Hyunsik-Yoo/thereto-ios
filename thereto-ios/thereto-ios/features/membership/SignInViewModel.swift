@@ -44,6 +44,9 @@ class SignInViewModel: BaseViewModel {
                 if isValidated {
                     self.userDefaults.setUserToken(token: userToken)
                     self.userDefaults.setNormalLaunch(isNormal: true)
+                    if let fcmToken = self.userDefaults.getFCMToken() {
+                        self.service.updateFCMToken(userId: userToken, fcmToken: fcmToken)
+                    }
                     self.goToMainPublisher.onNext(())
                 } else {
                     self.goToProfilePublisher.onNext((userToken, social))

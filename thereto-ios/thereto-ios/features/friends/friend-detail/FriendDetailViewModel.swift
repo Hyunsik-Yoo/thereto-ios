@@ -34,14 +34,14 @@ class FriendDetailViewModel: BaseViewModel {
         
         input.tapFavorite.withLatestFrom(Observable.combineLatest(output.friend, output.enableFavorite)).bind {[weak self] (friend, isFavorite) in
             guard let self = self else { return }
-            self.userService.favoriteFriend(userId: self.userDefaults.getUserToken(), friendId: friend.id, isFavorite: !isFavorite)
+            self.userService.favoriteFriend(userId: self.userDefaults.getUserToken()!, friendId: friend.id, isFavorite: !isFavorite)
             self.output.enableFavorite.accept((!isFavorite))
         }.disposed(by: disposeBag)
         
         input.tapDelete.withLatestFrom(output.friend).bind { [weak self] (friend) in
             guard let self = self else { return }
             self.output.showLoading.accept(true)
-            self.userService.deleteFriend(userId: self.userDefaults.getUserToken(), friendId: friend.id) { (observable) in
+            self.userService.deleteFriend(userId: self.userDefaults.getUserToken()!, friendId: friend.id) { (observable) in
                 observable.subscribe(onNext: { (_) in
                     self.output.showLoading.accept(false)
                     self.output.popup.accept(())
@@ -58,7 +58,7 @@ class FriendDetailViewModel: BaseViewModel {
     
     func fetchFriend(friendId: String) {
         self.output.showLoading.accept(true)
-        userService.findFriend(userId: self.userDefaults.getUserToken(), friendId: friendId) { [weak self] (friendObservable) in
+        userService.findFriend(userId: self.userDefaults.getUserToken()!, friendId: friendId) { [weak self] (friendObservable) in
             guard let self = self else { return }
             friendObservable.subscribe(onNext: { (friend) in
                 self.output.friend.accept(friend)

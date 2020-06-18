@@ -68,14 +68,14 @@ class LetterBoxViewModel: BaseViewModel {
         
         getLettersPublisher.bind { [weak self] (_) in
             guard let self = self else { return }
-            let token = self.userDefaults.getUserToken()
+            let token = self.userDefaults.getUserToken()!
             
             self.showLoadingPublisher.onNext(true)
             letterService.getLetters(receiverId: token) { (lettersObservable) in
                 lettersObservable.subscribe(onNext: { (letters) in
                     // 튜토리얼카드 삭제하지 않았을 경우에는 튜토리얼 카드 추가
                     if !userDefaults.isTutorialFinished() {
-                        userService.getUserInfo(token: userDefaults.getUserToken()) { [weak self] (userObservable) in
+                        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
                             guard let self = self else { return }
                             userObservable.subscribe(onNext: { (user) in
                                 var letters = letters
