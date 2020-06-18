@@ -12,16 +12,23 @@ protocol UserDefaultsProtocol {
     func setNormalLaunch(isNormal: Bool)
     func isNormalLaunch() -> Bool
     func setUserToken(token: String)
-    func getUserToken() -> String
+    func getUserToken() -> String?
     func isTutorialFinished() -> Bool
     func setTutorialFinish()
     func clearUserToken()
+    func setFCMToken(token: String)
+    func getFCMToken() -> String?
+    func enableLetterNoti(isEnable: Bool)
+    func isEnableLetterNoti() -> Bool
 }
 
 struct UserDefaultsUtil: UserDefaultsProtocol {
+    
     static let KEY_TOKEN = "KEY_TOKEN"
     static let KEY_TUTORIAL_CARD = "KEY_TUTORIAL_CARD"
     static let KEY_IS_NORMAL_LAUNCH = "KEY_IS_NORMAL_LAUNCH"
+    static let KEY_FCM_TOKEN = "KEY_FC_TOKEN"
+    static let KEY_NOTI_LETTER = "KEY_PUSH_LETTER"
     
     static func setUserToken(token: String) {
         UserDefaults.standard.set(token, forKey: UserDefaultsUtil.KEY_TOKEN)
@@ -63,8 +70,8 @@ struct UserDefaultsUtil: UserDefaultsProtocol {
         UserDefaults.standard.set(token, forKey: UserDefaultsUtil.KEY_TOKEN)
     }
     
-    func getUserToken() -> String {
-        UserDefaults.standard.string(forKey: UserDefaultsUtil.KEY_TOKEN)!
+    func getUserToken() -> String? {
+        UserDefaults.standard.string(forKey: UserDefaultsUtil.KEY_TOKEN)
     }
     
     func isTutorialFinished() -> Bool {
@@ -77,5 +84,21 @@ struct UserDefaultsUtil: UserDefaultsProtocol {
     
     func clearUserToken() {
         UserDefaults.standard.removeObject(forKey: UserDefaultsUtil.KEY_TOKEN)
+    }
+    
+    func setFCMToken(token: String) {
+        UserDefaults.standard.set(token, forKey: UserDefaultsUtil.KEY_FCM_TOKEN)
+    }
+    
+    func getFCMToken() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultsUtil.KEY_FCM_TOKEN)
+    }
+    
+    func enableLetterNoti(isEnable: Bool) {
+        UserDefaults.standard.set(isEnable, forKey: UserDefaultsUtil.KEY_NOTI_LETTER)
+    }
+    
+    func isEnableLetterNoti() -> Bool {
+        UserDefaults.standard.bool(forKey: UserDefaultsUtil.KEY_NOTI_LETTER)
     }
 }

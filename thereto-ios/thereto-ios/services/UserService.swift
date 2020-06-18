@@ -19,9 +19,12 @@ protocol UserServiceProtocol {
     func fetchAlarm(userId: String, completion: @escaping ((Observable<Alarm>) -> Void))
     func insertAlarm(userId: String, type: AlarmType)
     func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void))
+    func updateFCMToken(userId: String, fcmToken: String)
+    func deleteFCMToken(userId: String)
 }
 
 struct UserService: UserServiceProtocol{
+    
     func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void)) {
         let storageRef = Storage.storage().reference()
         let imagesRef = storageRef.child("profile/\(userId).jpg")
@@ -251,7 +254,19 @@ struct UserService: UserServiceProtocol{
         db.collection("user").document(userId).collection("alarms").addDocument(data: alarm.toDict())
     }
     
+    func updateFCMToken(userId: String, fcmToken: String) {
+        Firestore.firestore()
+            .collection("user")
+            .document(userId)
+            .updateData(["fcmToken": fcmToken])
+    }
     
+    func deleteFCMToken(userId: String) {
+        Firestore.firestore()
+            .collection("user")
+            .document(userId)
+            .updateData(["fcmToken": ""])
+    }
     
     static func saveUser(user: User, completion: @escaping () -> Void) {
         Firestore.firestore().collection("user").document("\(user.id)").setData(user.toDict()) { (error) in

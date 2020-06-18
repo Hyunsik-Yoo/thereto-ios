@@ -94,7 +94,7 @@ class AddFriendViewModel: BaseViewModel {
             friend.sentCount = 0
             
             self.showLoadingPublisher.onNext(true)
-            userService.requestFriend(id: self.userDefaults.getUserToken(), friend: friend, withAlarm: false) { (observable) in
+            userService.requestFriend(id: self.userDefaults.getUserToken()!, friend: friend, withAlarm: false) { (observable) in
                 observable.subscribe(onNext: { (_) in
                     // 내 친구가 추가되었을때, 친구 필드에도 나를 WAIT 상태로 추가해야합니다.
                     // 친구 요청 완료한 뒤, 앱 화면 초기화 시켜야합니다.
@@ -121,7 +121,7 @@ class AddFriendViewModel: BaseViewModel {
         
     func fetchFriend() {
         self.showLoadingPublisher.onNext(true)
-        userService.getFriends(id: userDefaults.getUserToken()) { [weak self] (friendsObservable) in
+        userService.getFriends(id: userDefaults.getUserToken()!) { [weak self] (friendsObservable) in
             guard let self = self else { return }
             friendsObservable.subscribe(onNext: { (friendList) in
                 self.friendListPublisher.onNext(friendList)
@@ -139,7 +139,7 @@ class AddFriendViewModel: BaseViewModel {
     
     func fetchMyInfo() {
         self.showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()) { [weak self] (userObservable) in
+        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
             guard let self = self else { return }
             userObservable.subscribe(onNext: { (user) in
                 var my2Friend = Friend(user: user)

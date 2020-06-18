@@ -43,7 +43,7 @@ class MainVC: UITabBarController {
     }
     
     private func fetchAlarm() {
-        UserService().fetchAlarm(userId: UserDefaultsUtil().getUserToken()) { [weak self] (alarmObservable) in
+        UserService().fetchAlarm(userId: UserDefaultsUtil().getUserToken()!) { [weak self] (alarmObservable) in
             guard let self = self else { return }
             alarmObservable.subscribe(onNext: { (alarm) in
                 switch alarm.type {
