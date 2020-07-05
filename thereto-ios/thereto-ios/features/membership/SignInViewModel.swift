@@ -7,7 +7,7 @@ class SignInViewModel: BaseViewModel {
     var input: Input
     var output: Output
     var service: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     fileprivate var currentNonce: String?
     
@@ -27,7 +27,7 @@ class SignInViewModel: BaseViewModel {
     let goToProfilePublisher = PublishSubject<(String, String)>()
     
     
-    init(service: UserServiceProtocol, userDefaults: UserDefaultsProtocol) {
+    init(service: UserServiceProtocol, userDefaults: UserDefaultsUtil) {
         self.service = service
         self.userDefaults = userDefaults
         input = Input(userToken: userTokenPublisher.asObserver())

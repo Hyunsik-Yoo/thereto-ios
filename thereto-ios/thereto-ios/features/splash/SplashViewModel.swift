@@ -5,7 +5,7 @@ class SplashViewModel: BaseViewModel {
     var input: Input
     var output: Output
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     struct Input {
         var checkAuth: AnyObserver<Void>
@@ -20,7 +20,7 @@ class SplashViewModel: BaseViewModel {
     let goToSignInPublisher = PublishSubject<Void>()
     let goToMainPublisher = PublishSubject<Void>()
     
-    init(userDefaults: UserDefaultsProtocol,
+    init(userDefaults: UserDefaultsUtil,
          userService: UserServiceProtocol) {
         self.userDefaults = userDefaults
         self.userService = userService

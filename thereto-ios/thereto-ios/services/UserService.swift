@@ -298,7 +298,7 @@ struct UserService: UserServiceProtocol{
     static func findFriends(completion: @escaping ([Friend]) -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             }
@@ -320,7 +320,7 @@ struct UserService: UserServiceProtocol{
     static func findFriend(id: String, completion: @escaping ((Result<Friend>) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -371,7 +371,7 @@ struct UserService: UserServiceProtocol{
     
     static func getMyUser(completion: @escaping (User) -> Void) {
         let db = Firestore.firestore()
-        let token = UserDefaultsUtil.getUserToken()!
+        let token = UserDefaultsUtil().getUserToken()!
         
         db.collection("user").document(token).getDocument { (snapshot, error) in
             if let error = error {
@@ -400,7 +400,7 @@ struct UserService: UserServiceProtocol{
     static func getReceivedFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 print(error.localizedDescription)
@@ -423,7 +423,7 @@ struct UserService: UserServiceProtocol{
     static func getSentFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
             } else {
@@ -445,7 +445,7 @@ struct UserService: UserServiceProtocol{
     static func updateRequest(friendToken: String, completion: @escaping ((Bool) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(friendToken).updateData(["createAt" : Date()]) { error in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").document(friendToken).updateData(["createAt" : Date()]) { error in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 completion(false)

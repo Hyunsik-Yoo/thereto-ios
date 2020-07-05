@@ -12,7 +12,7 @@ class ProfileViewModel: BaseViewModel {
     
     var facebookManager: FaceboookManagerProtocol
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     struct Input {
         var nicknameText: AnyObserver<String>
@@ -43,7 +43,7 @@ class ProfileViewModel: BaseViewModel {
     init(id: String, social: String,
          facebookManager: FaceboookManagerProtocol,
          userService: UserServiceProtocol,
-         userDefaults: UserDefaultsProtocol) {
+         userDefaults: UserDefaultsUtil) {
         self.id = id
         self.social = social
         self.facebookManager = facebookManager

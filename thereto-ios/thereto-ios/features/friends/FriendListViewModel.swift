@@ -5,7 +5,7 @@ class FriendListViewModel: BaseViewModel {
     
     var output: Output
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     struct Output {
         var friends: Observable<(User, [Friend])>
@@ -19,7 +19,7 @@ class FriendListViewModel: BaseViewModel {
     
     
     init(userService: UserServiceProtocol,
-         userDefaults: UserDefaultsProtocol) {
+         userDefaults: UserDefaultsUtil) {
         self.userService = userService
         self.userDefaults = userDefaults
         
