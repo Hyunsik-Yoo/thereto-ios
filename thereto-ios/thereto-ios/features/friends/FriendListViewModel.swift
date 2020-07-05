@@ -30,10 +30,10 @@ class FriendListViewModel: BaseViewModel {
     
     func fetchFriends() {
         self.showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()) { [weak self] (userObservable) in
+        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
             guard let self = self else { return }
             userObservable.subscribe(onNext: { (user) in
-                self.userService.getFriends(id: self.userDefaults.getUserToken()) { (friendsObservable) in
+                self.userService.getFriends(id: self.userDefaults.getUserToken()!) { (friendsObservable) in
                     friendsObservable.subscribe(onNext: { (friends) in
                         let filterFriends = friends.filter { $0.requestState == .FRIEND }.sorted { (friend1, friend2) -> Bool in
                             friend1.favorite && !friend2.favorite

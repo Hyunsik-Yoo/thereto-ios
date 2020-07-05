@@ -91,6 +91,9 @@ class ProfileViewModel: BaseViewModel {
                             // 메인 화면으로 이동
                             self.userDefaults.setUserToken(token: user.id)
                             self.userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
+                            if let fcmToken = self.userDefaults.getFCMToken() {
+                                self.userService.updateFCMToken(userId: user.id, fcmToken: fcmToken)
+                            }
                             self.goToMainPublisher.onNext(())
                             self.showLoadingPublisher.onNext(false)
                         }, onError: { (error) in

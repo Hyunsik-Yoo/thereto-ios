@@ -3,6 +3,7 @@ import Firebase
 import FBSDKCoreKit
 import AlamofireNetworkActivityLogger
 import SwiftyBeaver
+import FirebaseMessaging
 
 typealias Log = SwiftyBeaver
 
@@ -25,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NetworkActivityLogger.shared.level = .debug
         
         initilizeSwiftyBeaver()
+        initilizeFCM(application: application)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.themeColor
@@ -64,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
+    
     private func initilizeSwiftyBeaver() {
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
@@ -79,5 +82,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.addDestination(console)
         Log.addDestination(cloud)
     }
+    
+    private func initilizeFCM(application: UIApplication) {
+        UNUserNotificationCenter.current().delegate = self
+
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions,
+                                                                completionHandler: {_, _ in })
+        application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+    }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        UserDefaultsUtil().setFCMToken(token: fcmToken)
+        UserDefaultsUtil().enableLetterNoti(isEnable: false)
+        if let userID = UserDefaultsUtil().getUserToken() {
+            UserService().updateFCMToken(userId: userID, fcmToken: fcmToken)
+        }
+        Log.debug("fcmToken: \(fcmToken)")
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+
+        Log.debug(userInfo)
+        completionHandler([[.alert, .sound]])
+    }
+}
