@@ -4,6 +4,7 @@ import RxCocoa
 @testable import thereto
 
 struct UserMockService: UserServiceProtocol {
+    
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
         
     }
@@ -14,6 +15,14 @@ struct UserMockService: UserServiceProtocol {
     
     func validateUser(token: String, completion: @escaping (Bool) -> Void) {
         
+    }
+    
+    func validateUser(token: String) -> Observable<Bool> {
+        if token.isEmpty {
+            return Observable.just(false)
+        } else {
+            return Observable.just(true)
+        }
     }
     
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void) {

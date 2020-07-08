@@ -8,6 +8,7 @@ protocol UserServiceProtocol {
     func signUp(user: User, completion: @escaping ((Observable<User>) -> Void))
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
+    func validateUser(token: String) -> Observable<Bool>
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
@@ -97,6 +98,23 @@ struct UserService: UserServiceProtocol{
             } else {
                 completion(true)
             }
+        }
+    }
+    
+    func validateUser(token: String) -> Observable<Bool> {
+        return Observable<Bool>.create { (observer) -> Disposable in
+            Firestore.firestore()
+                .collection("user")
+                .document(token)
+                .getDocument { (snapshot, error) in
+                    if snapshot?.data() == nil {
+                        observer.onNext(false)
+                    } else {
+                        observer.onNext(true)
+                    }
+                    observer.onCompleted()
+            }
+            return Disposables.create()
         }
     }
     
