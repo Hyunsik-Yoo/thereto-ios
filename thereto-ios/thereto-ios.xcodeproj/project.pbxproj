@@ -113,6 +113,7 @@
 		6EC5DC6823FD1548008AB915 /* FarAwayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5DC6723FD1548008AB915 /* FarAwayView.swift */; };
 		6EC5DC6A23FD1949008AB915 /* FarAwayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC5DC6923FD1949008AB915 /* FarAwayVC.swift */; };
 		6ECCFA9F23EA7EBC001A565E /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */; };
+		6EDAF17924B6066200BFA770 /* UserMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDAF17824B6066200BFA770 /* UserMockService.swift */; };
 		6EE72F63239236AD00C4CFA7 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F62239236AD00C4CFA7 /* BaseView.swift */; };
 		6EE72F652392372D00C4CFA7 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F642392372D00C4CFA7 /* BaseVC.swift */; };
 		6EE72F68239237BD00C4CFA7 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */; };
@@ -246,6 +247,7 @@
 		6EC5DC6723FD1548008AB915 /* FarAwayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarAwayView.swift; sourceTree = "<group>"; };
 		6EC5DC6923FD1949008AB915 /* FarAwayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarAwayVC.swift; sourceTree = "<group>"; };
 		6ECCFA9E23EA7EBC001A565E /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		6EDAF17824B6066200BFA770 /* UserMockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMockService.swift; sourceTree = "<group>"; };
 		6EE72F62239236AD00C4CFA7 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6EE72F642392372D00C4CFA7 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 		6EB13D5D24B1ADE600923402 /* theretoTests */ = {
 			isa = PBXGroup;
 			children = (
+				6EDAF17724B6061C00BFA770 /* mock-service */,
 				6EB13D5E24B1ADE600923402 /* SplashTests.swift */,
 				6EB13D6024B1ADE600923402 /* Info.plist */,
 			);
@@ -561,6 +564,14 @@
 				6EC5DC6923FD1949008AB915 /* FarAwayVC.swift */,
 			);
 			path = "far-away";
+			sourceTree = "<group>";
+		};
+		6EDAF17724B6061C00BFA770 /* mock-service */ = {
+			isa = PBXGroup;
+			children = (
+				6EDAF17824B6066200BFA770 /* UserMockService.swift */,
+			);
+			path = "mock-service";
 			sourceTree = "<group>";
 		};
 		6EE72F602392369000C4CFA7 /* features */ = {
@@ -877,6 +888,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EDAF17924B6066200BFA770 /* UserMockService.swift in Sources */,
 				6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
