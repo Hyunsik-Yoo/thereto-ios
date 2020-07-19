@@ -41,7 +41,7 @@ class LetterDetailVC: BaseVC {
                     if vc.letter.id != "tutorial" {
                         vc.deleteLetter(letterId: vc.letter.id)
                     } else {
-                        UserDefaultsUtil.setTutorialFinish()
+                        UserDefaultsUtil().setTutorialFinish()
                         vc.navigationController?.popViewController(animated: true)
                     }
                 }

@@ -3,7 +3,7 @@ import RxSwift
 class AddFriendViewModel: BaseViewModel {
     
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     var input: Input
     var output: Output
     
@@ -32,7 +32,7 @@ class AddFriendViewModel: BaseViewModel {
     let showAlertPublisher = PublishSubject<(String, String)>()
     
     init(userService: UserServiceProtocol,
-         userDefaults: UserDefaultsProtocol) {
+         userDefaults: UserDefaultsUtil) {
         self.userService = userService
         self.userDefaults = userDefaults
         input = Input(nicknameText: nicknameTextPublisher.asObserver(),

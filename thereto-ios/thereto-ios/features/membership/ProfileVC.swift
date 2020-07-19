@@ -5,18 +5,15 @@ import RxSwift
 class ProfileVC: BaseVC {
     
     private lazy var profileView = ProfileView(frame: self.view.frame)
-    var viewModel: ProfileViewModel!
+    private let viewModel = ProfileViewModel(facebookManager: FacebookManager(),
+                                             userService: UserService(),
+                                             userDefaults: UserDefaultsUtil())
     
     
     static func instance(id: String, social: String) -> ProfileVC {
-        let controller = ProfileVC(nibName: nil, bundle: nil).then {
-            $0.viewModel = ProfileViewModel(id: id, social: social,
-                                            facebookManager: FacebookManager(),
-                                            userService: UserService(),
-                                            userDefaults: UserDefaultsUtil())
+        return ProfileVC(nibName: nil, bundle: nil).then {
+            $0.viewModel.idSocialPublisher.onNext((id, social))
         }
-        
-        return controller
     }
     
     override func viewDidLoad() {

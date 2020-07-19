@@ -5,9 +5,10 @@ import Firebase
 import Alamofire
 
 protocol UserServiceProtocol {
-    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void))
+    func signUp(user: User) -> Observable<User>
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
+    func validateUser(token: String) -> Observable<Bool>
     func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
@@ -24,6 +25,39 @@ protocol UserServiceProtocol {
 }
 
 struct UserService: UserServiceProtocol{
+    
+    func signUp(user: User) -> Observable<User> {
+        return Observable.create { (observer) -> Disposable in
+            let url = "\(HTTPUtils.url)/signUp"
+            let headers = HTTPUtils.jsonHeader()
+            let params = user.toDict()
+            
+            Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+                if let value = response.value {
+                    if let commonResponse: CommonResponse<User> = JsonUtils.toJson(object: value) {
+                        if commonResponse.error.isEmpty {
+                            observer.onNext(commonResponse.data)
+                            observer.onCompleted()
+                        } else {
+                            let error = CommonError(desc: commonResponse.error)
+                            
+                            observer.onError(error)
+                        }
+                    } else {
+                        let error = CommonError(desc: "Error in serilization.")
+                        
+                        observer.onError(error)
+                    }
+                } else {
+                    let error = CommonError(desc: "데이터가 비어있습니다.")
+                    
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     
     func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void)) {
         let storageRef = Storage.storage().reference()
@@ -53,32 +87,6 @@ struct UserService: UserServiceProtocol{
         }
     }
     
-    
-    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
-        let url = "\(HTTPUtils.url)/signUp"
-        let headers = HTTPUtils.jsonHeader()
-        let params = user.toDict()
-        
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            if let value = response.value {
-                if let commonResponse: CommonResponse<User> = JsonUtils.toJson(object: value) {
-                    if commonResponse.error.isEmpty {
-                        completion(Observable.just(commonResponse.data))
-                    } else {
-                        let error = CommonError(desc: commonResponse.error)
-                        completion(Observable.error(error))
-                    }
-                } else {
-                    let error = CommonError(desc: "Error in serilization.")
-                    completion(Observable.error(error))
-                }
-            } else {
-                let error = CommonError(desc: "데이터가 비어있습니다.")
-                completion(Observable.error(error))
-            }
-        }
-    }
-    
     func isSessionExisted() -> Bool {
         if let _ = Auth.auth().currentUser {
             return true
@@ -97,6 +105,23 @@ struct UserService: UserServiceProtocol{
             } else {
                 completion(true)
             }
+        }
+    }
+    
+    func validateUser(token: String) -> Observable<Bool> {
+        return Observable<Bool>.create { (observer) -> Disposable in
+            Firestore.firestore()
+                .collection("user")
+                .document(token)
+                .getDocument { (snapshot, error) in
+                    if snapshot?.data() == nil {
+                        observer.onNext(false)
+                    } else {
+                        observer.onNext(true)
+                    }
+                    observer.onCompleted()
+            }
+            return Disposables.create()
         }
     }
     
@@ -298,7 +323,7 @@ struct UserService: UserServiceProtocol{
     static func findFriends(completion: @escaping ([Friend]) -> Void) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "friend").limit(to: 20).getDocuments { (snapshot, error) in
             if let error = error {
                 AlertUtil.show(message: error.localizedDescription)
             }
@@ -320,7 +345,7 @@ struct UserService: UserServiceProtocol{
     static func findFriend(id: String, completion: @escaping ((Result<Friend>) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").document(id).getDocument { (snapShot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -371,7 +396,7 @@ struct UserService: UserServiceProtocol{
     
     static func getMyUser(completion: @escaping (User) -> Void) {
         let db = Firestore.firestore()
-        let token = UserDefaultsUtil.getUserToken()!
+        let token = UserDefaultsUtil().getUserToken()!
         
         db.collection("user").document(token).getDocument { (snapshot, error) in
             if let error = error {
@@ -400,7 +425,7 @@ struct UserService: UserServiceProtocol{
     static func getReceivedFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "wait").getDocuments { (snapShot, error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 print(error.localizedDescription)
@@ -423,7 +448,7 @@ struct UserService: UserServiceProtocol{
     static func getSentFriends(completion: @escaping (([Friend]) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").whereField("request_state", isEqualTo: "request_sent").getDocuments { (snapShot, error) in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
             } else {
@@ -445,7 +470,7 @@ struct UserService: UserServiceProtocol{
     static func updateRequest(friendToken: String, completion: @escaping ((Bool) -> Void)) {
         let db = Firestore.firestore()
         
-        db.collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(friendToken).updateData(["createAt" : Date()]) { error in
+        db.collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").document(friendToken).updateData(["createAt" : Date()]) { error in
             if let error = error {
                 AlertUtil.show("error", message: error.localizedDescription)
                 completion(false)

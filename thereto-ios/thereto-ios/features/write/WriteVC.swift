@@ -150,7 +150,7 @@ class WriteVC: BaseVC {
     private func sendLetter() {
         writeView.startLoading()
         let photo = try! viewModel.mainImg.value()
-        let fileName = "\(UserDefaultsUtil.getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
+        let fileName = "\(UserDefaultsUtil().getUserToken()!)\(DateUtil.date2String(date: Date.init()))"
         
         LetterSerivce.saveLetterPhoto(image: photo!, name: fileName) { [weak self] (result) in
             if let vc = self {
@@ -163,7 +163,7 @@ class WriteVC: BaseVC {
                                              message: vc.writeView.textField.text!)
                     LetterSerivce.sendLetter(letter: letter) {
                         // 보낸 편지 카운팅
-                        LetterSerivce.increaseSentCount(userId: UserDefaultsUtil.getUserToken()!)
+                        LetterSerivce.increaseSentCount(userId: UserDefaultsUtil().getUserToken()!)
                         // 친구의 받은편지 카운팅
                         LetterSerivce.increaseReceiveCount(userId: try! vc.viewModel.friend.value()!.id)
                         // 친구와 내 프로필에 각각 받은, 보낸편지 카운팅

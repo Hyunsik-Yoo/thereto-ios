@@ -7,7 +7,7 @@ class FriendDetailViewModel: BaseViewModel {
     let input = Input()
     let output = Output()
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     struct Input {
         let tapFavorite = PublishSubject<Void>()
@@ -26,7 +26,7 @@ class FriendDetailViewModel: BaseViewModel {
     
     
     init(userService: UserServiceProtocol,
-         userDefaults: UserDefaultsProtocol) {
+         userDefaults: UserDefaultsUtil) {
         self.userService = userService
         self.userDefaults = userDefaults
         

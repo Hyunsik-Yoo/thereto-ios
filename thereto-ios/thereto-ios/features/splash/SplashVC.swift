@@ -1,12 +1,10 @@
 import UIKit
-import SnapKit
 import RxSwift
-import Firebase
 
 class SplashVC: BaseVC {
     
     private lazy var splashView = SplashView(frame: self.view.frame)
-    private var viewModel = SplashViewModel(userDefaults: UserDefaultsUtil(),
+    private let viewModel = SplashViewModel(userDefaults: UserDefaultsUtil(),
                                             userService: UserService())
     
     static func instance() -> SplashVC {
