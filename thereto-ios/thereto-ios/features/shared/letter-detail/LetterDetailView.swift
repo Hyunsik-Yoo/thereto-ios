@@ -62,6 +62,7 @@ class LetterDetailView: BaseView {
     let messageLabel = UITextView().then {
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 19)
         $0.textColor = .greyishBrownTwo
+        $0.isUserInteractionEnabled = false
         $0.text = "강릉에 여행왔는데,\n너 생각이 나서 편지썼어\n잘 지내고 있지? 옛날에 나랑 너랑 안목해변에서 맨발로 놀았던거 기억나? 그때 너무 재밌었는데\n다시 오면 좋겠다~\n다시 오면 좋겠다~\n다시 오면 좋겠다~"
     }
     
