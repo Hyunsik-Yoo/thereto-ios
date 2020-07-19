@@ -4,9 +4,14 @@ import RxCocoa
 @testable import thereto
 
 struct UserMockService: UserServiceProtocol {
-    
-    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
-        
+    func signUp(user: User) -> Observable<User> {
+        if user.nickname == "error" {
+            let error = CommonError(desc: "error")
+            
+            return Observable.error(error)
+        } else {
+            return Observable.just(user)
+        }
     }
     
     func isSessionExisted() -> Bool {

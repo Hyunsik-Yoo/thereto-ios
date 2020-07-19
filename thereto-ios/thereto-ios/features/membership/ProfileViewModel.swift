@@ -21,7 +21,7 @@ class ProfileViewModel: BaseViewModel {
         let showLoading = PublishRelay<Bool>()
         let socialNickname = PublishRelay<String>()
         let errorMsg = PublishRelay<String>()
-        let profileImage = PublishRelay<String?>()
+        let profileImage = PublishSubject<String?>()
         let showAlert = PublishRelay<String>()
         let goToMain = PublishRelay<Void>()
     }
@@ -46,12 +46,12 @@ class ProfileViewModel: BaseViewModel {
                 if social == "facebook" { // 애플로그인으로 접근할 경우에는 사진이 제공되지 않음
                     self.facebookManager.getFBProfile(id: id).subscribe(onNext: { (name, profileURL) in
                         self.output.socialNickname.accept(name)
-                        self.output.profileImage.accept(profileURL)
+                        self.output.profileImage.onNext(profileURL)
                     }, onError: { (error) in
                         self.output.showAlert.accept(error.localizedDescription)
                     }).disposed(by: self.disposeBag)
                 } else {
-                    self.output.profileImage.accept("")
+                    self.output.profileImage.onNext("")
                 }
         }.disposed(by: disposeBag)
         
