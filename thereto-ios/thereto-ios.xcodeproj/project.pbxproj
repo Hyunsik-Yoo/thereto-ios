@@ -123,6 +123,7 @@
 		6EE72F6F23923CB000C4CFA7 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE72F6E23923CB000C4CFA7 /* SplashVC.swift */; };
 		6EE8DFD32392325C00BF2E59 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */; };
 		6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8DFD82392325D00BF2E59 /* Assets.xcassets */; };
+		6EF1130424C3EB4900F7B8D2 /* ProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1130324C3EB4900F7B8D2 /* ProfileTests.swift */; };
 		6EFE3CB823A4D18500C32992 /* FirebaseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */; };
 		BCF7E6708DF85F95637D23DE /* Pods_theretoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D12633299BC676C71D39C8DB /* Pods_theretoTests.framework */; };
 /* End PBXBuildFile section */
@@ -260,6 +261,7 @@
 		6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EE8DFD82392325D00BF2E59 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EE8DFE02392325D00BF2E59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EF1130324C3EB4900F7B8D2 /* ProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTests.swift; sourceTree = "<group>"; };
 		6EFE3CB723A4D18500C32992 /* FirebaseUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUtil.swift; sourceTree = "<group>"; };
 		A62EBC9CFAB1561824DC8EBE /* Pods-thereto-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thereto-ios.debug.xcconfig"; path = "Target Support Files/Pods-thereto-ios/Pods-thereto-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		D12633299BC676C71D39C8DB /* Pods_theretoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_theretoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -522,10 +524,9 @@
 		6EB13D5D24B1ADE600923402 /* theretoTests */ = {
 			isa = PBXGroup;
 			children = (
+				6EF1130224C3EAE900F7B8D2 /* membership */,
 				6EDAF17724B6061C00BFA770 /* mock-service */,
-				6EB13D5E24B1ADE600923402 /* SplashTests.swift */,
 				6EB13D6024B1ADE600923402 /* Info.plist */,
-				6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */,
 			);
 			path = theretoTests;
 			sourceTree = "<group>";
@@ -662,6 +663,16 @@
 				6EE8DFE02392325D00BF2E59 /* Info.plist */,
 			);
 			path = "thereto-ios";
+			sourceTree = "<group>";
+		};
+		6EF1130224C3EAE900F7B8D2 /* membership */ = {
+			isa = PBXGroup;
+			children = (
+				6EB13D5E24B1ADE600923402 /* SplashTests.swift */,
+				6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */,
+				6EF1130324C3EB4900F7B8D2 /* ProfileTests.swift */,
+			);
+			path = membership;
 			sourceTree = "<group>";
 		};
 		84CA88D1F6DA64F9D9F77448 /* Pods */ = {
@@ -892,6 +903,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */,
+				6EF1130424C3EB4900F7B8D2 /* ProfileTests.swift in Sources */,
 				6EDAF17924B6066200BFA770 /* UserMockService.swift in Sources */,
 				6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */,
 			);

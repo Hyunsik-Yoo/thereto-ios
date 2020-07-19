@@ -5,7 +5,7 @@ import Firebase
 import Alamofire
 
 protocol UserServiceProtocol {
-    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void))
+    func signUp(user: User) -> Observable<User>
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
     func validateUser(token: String) -> Observable<Bool>
@@ -25,6 +25,39 @@ protocol UserServiceProtocol {
 }
 
 struct UserService: UserServiceProtocol{
+    
+    func signUp(user: User) -> Observable<User> {
+        return Observable.create { (observer) -> Disposable in
+            let url = "\(HTTPUtils.url)/signUp"
+            let headers = HTTPUtils.jsonHeader()
+            let params = user.toDict()
+            
+            Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+                if let value = response.value {
+                    if let commonResponse: CommonResponse<User> = JsonUtils.toJson(object: value) {
+                        if commonResponse.error.isEmpty {
+                            observer.onNext(commonResponse.data)
+                            observer.onCompleted()
+                        } else {
+                            let error = CommonError(desc: commonResponse.error)
+                            
+                            observer.onError(error)
+                        }
+                    } else {
+                        let error = CommonError(desc: "Error in serilization.")
+                        
+                        observer.onError(error)
+                    }
+                } else {
+                    let error = CommonError(desc: "데이터가 비어있습니다.")
+                    
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     
     func updateProfileURL(userId: String, image: UIImage, completion: @escaping ((Observable<String>) -> Void)) {
         let storageRef = Storage.storage().reference()
@@ -51,32 +84,6 @@ struct UserService: UserServiceProtocol{
         } else {
             let error = CommonError(desc: "image.pngData() is nil")
             completion(Observable.error(error))
-        }
-    }
-    
-    
-    func signUp(user: User, completion: @escaping ((Observable<User>) -> Void)) {
-        let url = "\(HTTPUtils.url)/signUp"
-        let headers = HTTPUtils.jsonHeader()
-        let params = user.toDict()
-        
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            if let value = response.value {
-                if let commonResponse: CommonResponse<User> = JsonUtils.toJson(object: value) {
-                    if commonResponse.error.isEmpty {
-                        completion(Observable.just(commonResponse.data))
-                    } else {
-                        let error = CommonError(desc: commonResponse.error)
-                        completion(Observable.error(error))
-                    }
-                } else {
-                    let error = CommonError(desc: "Error in serilization.")
-                    completion(Observable.error(error))
-                }
-            } else {
-                let error = CommonError(desc: "데이터가 비어있습니다.")
-                completion(Observable.error(error))
-            }
         }
     }
     
