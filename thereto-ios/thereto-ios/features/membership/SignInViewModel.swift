@@ -48,6 +48,7 @@ class SignInViewModel: BaseViewModel {
                     self.output.showLoading.accept(false)
                 }, onError: { (error) in
                     self.output.showAlert.accept(("유효성 검사 오류", error.localizedDescription))
+                    self.output.showLoading.accept(false)
                 }).disposed(by: self.disposeBag)
         }.disposed(by: disposeBag)
     }

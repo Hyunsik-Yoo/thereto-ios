@@ -101,6 +101,7 @@
 		6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA0725323B76E1400D59079 /* UserDefaultsUtil.swift */; };
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
+		6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */; };
 		6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB13D5E24B1ADE600923402 /* SplashTests.swift */; };
 		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
 		6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */; };
@@ -233,6 +234,7 @@
 		6EA738CD2393947B002176F6 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
+		6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		6EB13D5C24B1ADE600923402 /* theretoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = theretoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB13D5E24B1ADE600923402 /* SplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTests.swift; sourceTree = "<group>"; };
 		6EB13D6024B1ADE600923402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				6EDAF17724B6061C00BFA770 /* mock-service */,
 				6EB13D5E24B1ADE600923402 /* SplashTests.swift */,
 				6EB13D6024B1ADE600923402 /* Info.plist */,
+				6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */,
 			);
 			path = theretoTests;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */,
 				6EDAF17924B6066200BFA770 /* UserMockService.swift in Sources */,
 				6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */,
 			);
