@@ -63,23 +63,25 @@ class ProfileViewModel: BaseViewModel {
                     let user = User(nickname: nickname, social: idSocial.1, id: idSocial.0, profileURL: profileURL)
                     
                     self.output.showLoading.accept(true)
-                    self.userService.signUp(user: user).subscribe(onNext: { (user) in
-                        // 메인 화면으로 이동
-                        self.userDefaults.setUserToken(token: user.id)
-                        self.userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
-                        if let fcmToken = self.userDefaults.getFCMToken() {
-                            self.userService.updateFCMToken(userId: user.id, fcmToken: fcmToken)
-                        }
-                        self.output.goToMain.accept(())
-                        self.output.showLoading.accept(false)
-                    }, onError: { (error) in
-                        if let error = error as? CommonError {
-                            self.output.showAlert.accept(error.description)
-                        } else {
-                            self.output.showAlert.accept(error.localizedDescription)
-                        }
-                        self.output.showLoading.accept(false)
-                    }).disposed(by: self.disposeBag)
+                    self.userService
+                        .signUp(user: user)
+                        .subscribe(onNext: { (user) in
+                            // 메인 화면으로 이동
+                            self.userDefaults.setUserToken(token: user.id)
+                            self.userDefaults.setNormalLaunch(isNormal: true) // 다시 로그인할때는 메인으로 돌아가도록
+                            if let fcmToken = self.userDefaults.getFCMToken() {
+                                self.userService.updateFCMToken(userId: user.id, fcmToken: fcmToken)
+                            }
+                            self.output.goToMain.accept(())
+                            self.output.showLoading.accept(false)
+                        }, onError: { (error) in
+                            if let error = error as? CommonError {
+                                self.output.showAlert.accept(error.description)
+                            } else {
+                                self.output.showAlert.accept(error.localizedDescription)
+                            }
+                            self.output.showLoading.accept(false)
+                        }).disposed(by: self.disposeBag)
                 } else {
                     self.output.errorMsg.accept("닉네임을 설정해주세요.")
                 }
