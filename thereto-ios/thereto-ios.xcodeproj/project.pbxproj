@@ -66,6 +66,8 @@
 		6E644FBA2400ED37002292FC /* LetterSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB92400ED37002292FC /* LetterSearchVC.swift */; };
 		6E6587E624663EE8001D9C8E /* HTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6587E524663EE8001D9C8E /* HTTPUtils.swift */; };
 		6E6CEE1E24CC1ABD00489532 /* LetterBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CEE1D24CC1ABD00489532 /* LetterBoxViewModel.swift */; };
+		6E6CEE2024CC28CD00489532 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E6CEE1F24CC28CD00489532 /* Localization.strings */; };
+		6E6CEE2224CC28EE00489532 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CEE2124CC28EE00489532 /* StringExt.swift */; };
 		6E6F0E8F2439CBFD00FD3F08 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */; };
 		6E6F0E912439D1D300FD3F08 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */; };
 		6E6F0E932439D95900FD3F08 /* CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E922439D95900FD3F08 /* CommonResponse.swift */; };
@@ -201,6 +203,8 @@
 		6E644FB92400ED37002292FC /* LetterSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchVC.swift; sourceTree = "<group>"; };
 		6E6587E524663EE8001D9C8E /* HTTPUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUtils.swift; sourceTree = "<group>"; };
 		6E6CEE1D24CC1ABD00489532 /* LetterBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxViewModel.swift; sourceTree = "<group>"; };
+		6E6CEE1F24CC28CD00489532 /* Localization.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localization.strings; sourceTree = "<group>"; };
+		6E6CEE2124CC28EE00489532 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		6E6F0E922439D95900FD3F08 /* CommonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonResponse.swift; sourceTree = "<group>"; };
@@ -636,6 +640,7 @@
 				6EE72F67239237BD00C4CFA7 /* UIViewExt.swift */,
 				6EE72F6C239239FA00C4CFA7 /* UIColorExt.swift */,
 				6E2A08A023A74C3100A13F92 /* UIImageViewExt.swift */,
+				6E6CEE2124CC28EE00489532 /* StringExt.swift */,
 			);
 			path = extension;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
 				6EE8DFD82392325D00BF2E59 /* Assets.xcassets */,
 				6EE8DFE02392325D00BF2E59 /* Info.plist */,
+				6E6CEE1F24CC28CD00489532 /* Localization.strings */,
 			);
 			path = "thereto-ios";
 			sourceTree = "<group>";
@@ -812,6 +818,7 @@
 			files = (
 				6EC1025523A8E7D400328C08 /* SpoqaHanSans-Bold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
+				6E6CEE2024CC28CD00489532 /* Localization.strings in Resources */,
 				6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */,
 				6EC1025723A8E84900328C08 /* SpoqaHanSans-Regular.ttf in Resources */,
 				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
@@ -959,6 +966,7 @@
 				6E804B3C23ADF4ED009574CD /* AddFriendVC.swift in Sources */,
 				6E127E8623E3FFA100EE6126 /* FriendTableVC.swift in Sources */,
 				6E1404D823F0E51900E954BD /* MainVC.swift in Sources */,
+				6E6CEE2224CC28EE00489532 /* StringExt.swift in Sources */,
 				6E33759323ECF38F00C3128E /* FindFriendVC.swift in Sources */,
 				6EA0725423B76E1400D59079 /* UserDefaultsUtil.swift in Sources */,
 				6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */,
