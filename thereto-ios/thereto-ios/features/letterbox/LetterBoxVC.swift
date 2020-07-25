@@ -4,7 +4,7 @@ import CoreLocation
 class LetterBoxVC: BaseVC {
     
     private lazy var letterBoxView = LetterBoxView(frame: self.view.frame)
-    private var viewModel = LetterBoxViewModel(userDefaults: UserDefaultsUtil(),
+    private let viewModel = LetterBoxViewModel(userDefaults: UserDefaultsUtil(),
                                                letterService: LetterSerivce(),
                                                userService: UserService())
     
@@ -26,12 +26,12 @@ class LetterBoxVC: BaseVC {
         setupNavigation()
         letterBoxView.topBar.setLetterBoxMode()
         setupTableView()
-        viewModel.input.setupLocationManager.onNext(())
+        viewModel.setupLocationManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.input.getLetters.onNext(())
+        viewModel.fetchLetters()
     }
     
     override func bindViewModel() {

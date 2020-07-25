@@ -29,35 +29,33 @@ class FriendListViewModel: BaseViewModel {
     }
     
     func fetchFriends() {
-        self.showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
+        showLoadingPublisher.onNext(true)
+        userService.getUserInfo(token: userDefaults.getUserToken()!).subscribe(onNext: { [weak self] (user) in
             guard let self = self else { return }
-            userObservable.subscribe(onNext: { (user) in
-                self.userService.getFriends(id: self.userDefaults.getUserToken()!) { (friendsObservable) in
-                    friendsObservable.subscribe(onNext: { (friends) in
-                        let filterFriends = friends.filter { $0.requestState == .FRIEND }.sorted { (friend1, friend2) -> Bool in
-                            friend1.favorite && !friend2.favorite
-                        }
-                        self.friendsPublisher.onNext((user, filterFriends))
-                        self.showLoadingPublisher.onNext(false)
-                    }, onError: { (error) in
-                        if let error = error as? CommonError {
-                            self.showAlertPublisher.onNext(("친구 조회 오류", error.description))
-                        } else {
-                            self.showAlertPublisher.onNext(("친구 조회 오류", error.localizedDescription))
-                        }
-                        self.showLoadingPublisher.onNext(false)
-                    }).disposed(by: self.disposeBag)
-                }
-            }, onError: { (error) in
+            self.userService.getFriends(id: self.userDefaults.getUserToken()!) { (friendsObservable) in
+                friendsObservable.subscribe(onNext: { (friends) in
+                    let filterFriends = friends.filter { $0.requestState == .FRIEND }.sorted { (friend1, friend2) -> Bool in
+                        friend1.favorite && !friend2.favorite
+                    }
+                    self.friendsPublisher.onNext((user, filterFriends))
+                    self.showLoadingPublisher.onNext(false)
+                }, onError: { (error) in
+                    if let error = error as? CommonError {
+                        self.showAlertPublisher.onNext(("친구 조회 오류", error.description))
+                    } else {
+                        self.showAlertPublisher.onNext(("친구 조회 오류", error.localizedDescription))
+                    }
+                    self.showLoadingPublisher.onNext(false)
+                }).disposed(by: self.disposeBag)
+            }
+            }, onError: { [weak self] (error) in
+                guard let self = self else { return }
                 if let error = error as? CommonError {
                     self.showAlertPublisher.onNext(("내 정보 조회 오류", error.description))
                 } else {
                     self.showAlertPublisher.onNext(("내 정보 조회 오류", error.localizedDescription))
                 }
                 self.showLoadingPublisher.onNext(false)
-            }).disposed(by: self.disposeBag)
-        }
-        
+        }).disposed(by: disposeBag)
     }
 }
