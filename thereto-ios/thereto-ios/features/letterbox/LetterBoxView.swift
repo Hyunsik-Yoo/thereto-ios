@@ -17,7 +17,7 @@ class LetterBoxView: BaseView {
     }
     
     let emptyLabel = UILabel().then {
-        $0.text = "받은 엽서가 없습니다."
+        $0.text = "letterbox_empty".localized
         $0.font = UIFont.init(name: "SpoqaHanSans-Regular", size: 14)
         $0.textColor = .brownishGrey
         $0.isHidden = true
