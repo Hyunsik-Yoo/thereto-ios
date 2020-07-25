@@ -92,9 +92,9 @@ class FriendTableVC: BaseVC {
     
     private func acceptFriendRequest(friendId: String) {
         friendTableView.startLoading()
-        UserService.acceptRequest(token: UserDefaultsUtil.getUserToken()!, friendToken: friendId) { [weak self] (isSuccess) in
+        UserService.acceptRequest(token: UserDefaultsUtil().getUserToken()!, friendToken: friendId) { [weak self] (isSuccess) in
             if isSuccess {
-                UserService.acceptRequest(token: friendId, friendToken: UserDefaultsUtil.getUserToken()!) { (isSuccess) in
+                UserService.acceptRequest(token: friendId, friendToken: UserDefaultsUtil().getUserToken()!) { (isSuccess) in
                     if isSuccess {
                         AlertUtil.show(message: "친구요청을 수락하였습니다.")
                         self?.getFriends()
@@ -109,9 +109,9 @@ class FriendTableVC: BaseVC {
     
     private func cancelFriendRequest(friendId: String) {
         friendTableView.startLoading()
-        UserService.deleteFriend(token: UserDefaultsUtil.getUserToken()!, friendId: friendId) { [weak self] isSuccess in
+        UserService.deleteFriend(token: UserDefaultsUtil().getUserToken()!, friendId: friendId) { [weak self] isSuccess in
             if isSuccess {
-                UserService.deleteFriend(token: friendId, friendId: UserDefaultsUtil.getUserToken()!) { isSuccess in
+                UserService.deleteFriend(token: friendId, friendId: UserDefaultsUtil().getUserToken()!) { isSuccess in
                     if isSuccess {
                         AlertUtil.show(message: "삭제하였습니다.")
                         self?.getFriends()

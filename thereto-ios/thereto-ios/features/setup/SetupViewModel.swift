@@ -5,7 +5,7 @@ import FBSDKCoreKit
 class SetupViewModel: BaseViewModel {
     
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     var input: Input
     var output: Output
     
@@ -32,7 +32,7 @@ class SetupViewModel: BaseViewModel {
     
     
     init(userService: UserServiceProtocol,
-         userDefaults: UserDefaultsProtocol) {
+         userDefaults: UserDefaultsUtil) {
         self.userService = userService
         self.userDefaults = userDefaults
         input = Input(profileImage: profileImagePublisher.asObserver(),

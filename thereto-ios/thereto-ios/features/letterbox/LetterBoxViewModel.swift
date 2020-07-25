@@ -4,7 +4,7 @@ import CoreLocation
 class LetterBoxViewModel: BaseViewModel {
     var input: Input
     var output: Output
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     var letterService: LetterServiceProtocol
     var userService: UserServiceProtocol
     
@@ -39,7 +39,7 @@ class LetterBoxViewModel: BaseViewModel {
     // 위치 관련 변수
     private var locationManager = CLLocationManager()
     
-    init(userDefaults: UserDefaultsProtocol,
+    init(userDefaults: UserDefaultsUtil,
          letterService: LetterServiceProtocol,
          userService: UserServiceProtocol) {
         self.userDefaults = userDefaults

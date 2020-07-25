@@ -65,7 +65,7 @@ struct LetterSerivce: LetterServiceProtocol {
     }
     
     static func getSentLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
-        let senderId = UserDefaultsUtil.getUserToken()!
+        let senderId = UserDefaultsUtil().getUserToken()!
         Firestore.firestore().collection("letter")
             .whereField("from.id", isEqualTo: senderId)
             .order(by: "timestamp", descending: true)
@@ -85,7 +85,7 @@ struct LetterSerivce: LetterServiceProtocol {
     }
     
     static func getLetters(completion: @escaping ((Result<[Letter]>) -> Void)) {
-        let receiverId = UserDefaultsUtil.getUserToken()!
+        let receiverId = UserDefaultsUtil().getUserToken()!
         
         Firestore.firestore().collection("letter")
             .whereField("to.id", isEqualTo: receiverId)
@@ -109,7 +109,7 @@ struct LetterSerivce: LetterServiceProtocol {
         let oppose = type == "from" ? "to" : "from"
         
         Firestore.firestore().collection("letter")
-            .whereField("\(type).id", isEqualTo: UserDefaultsUtil.getUserToken()!)
+            .whereField("\(type).id", isEqualTo: UserDefaultsUtil().getUserToken()!)
             .whereField("\(oppose).nickname", isEqualTo: keyword)
             .order(by: "timestamp", descending: true)
             .getDocuments { (snapShot, error) in
@@ -147,8 +147,8 @@ struct LetterSerivce: LetterServiceProtocol {
     }
     
     static func increaseFriendCount(userId: String) {
-        Firestore.firestore().collection("user").document(UserDefaultsUtil.getUserToken()!).collection("friends").document(userId).updateData(["sentCount": FieldValue.increment(Int64(1))])
-        Firestore.firestore().collection("user").document(userId).collection("friends").document(UserDefaultsUtil.getUserToken()!).updateData(["receivedCount": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(UserDefaultsUtil().getUserToken()!).collection("friends").document(userId).updateData(["sentCount": FieldValue.increment(Int64(1))])
+        Firestore.firestore().collection("user").document(userId).collection("friends").document(UserDefaultsUtil().getUserToken()!).updateData(["receivedCount": FieldValue.increment(Int64(1))])
     }
     
     static func setRead(letterId: String) {

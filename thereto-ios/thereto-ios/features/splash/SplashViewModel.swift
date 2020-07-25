@@ -1,41 +1,36 @@
 import RxSwift
+import RxCocoa
 
 class SplashViewModel: BaseViewModel {
     
-    var input: Input
-    var output: Output
+    var input = Input()
+    var output = Output()
     var userService: UserServiceProtocol
-    var userDefaults: UserDefaultsProtocol
+    var userDefaults: UserDefaultsUtil
     
     struct Input {
-        var checkAuth: AnyObserver<Void>
+        let checkAuth = PublishSubject<Void>()
     }
     
     struct Output {
-        var goToSignIn: Observable<Void>
-        var goToMain: Observable<Void>
+        let goToSignIn = PublishRelay<Void>()
+        let goToMain = PublishRelay<Void>()
     }
     
-    let checkAuthPublisher = PublishSubject<Void>()
-    let goToSignInPublisher = PublishSubject<Void>()
-    let goToMainPublisher = PublishSubject<Void>()
     
-    init(userDefaults: UserDefaultsProtocol,
+    init(userDefaults: UserDefaultsUtil,
          userService: UserServiceProtocol) {
         self.userDefaults = userDefaults
         self.userService = userService
-        input = Input(checkAuth: checkAuthPublisher.asObserver())
-        output = Output(goToSignIn: goToSignInPublisher.asObservable(),
-                        goToMain: goToMainPublisher.asObservable())
         
         super.init()
-        checkAuthPublisher.bind { [weak self] (_) in
+        input.checkAuth.bind { [weak self] (_) in
             guard let self = self else { return }
             
             if !self.userDefaults.isNormalLaunch() || !self.userService.isSessionExisted(){
-                self.goToSignInPublisher.onNext(())
+                self.output.goToSignIn.accept(())
             } else {
-                self.goToMainPublisher.onNext(())
+                self.output.goToMain.accept(())
             }
         }.disposed(by: disposeBag)
     }

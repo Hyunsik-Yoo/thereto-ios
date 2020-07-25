@@ -15,16 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        // Initialize firebase
-        FirebaseApp.configure()
-        
         // Initialize facebook
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        // Initialize AlmofireNetworkActivityLogger
-        NetworkActivityLogger.shared.startLogging()
-        NetworkActivityLogger.shared.level = .debug
-        
+        initilizeFirebase()
+        initilizeNetworkActivityLogger()
         initilizeSwiftyBeaver()
         initilizeFCM(application: application)
         
@@ -66,19 +61,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     }
     
+    private func initilizeFirebase() {
+        FirebaseApp.configure()
+    }
     
+    private func initilizeFacebook() {
+        
+    }
     private func initilizeSwiftyBeaver() {
         // add log destinations. at least one is needed!
         let console = ConsoleDestination()  // log to Xcode Console
         let cloud = SBPlatformDestination(appID: "bJPO03",
                                           appSecret: "4f8tnYymJhvze9hvJc50irhwzmnlablw",
                                           encryptionKey: "oltisgoyhfZvnqxQo7xvjgbupcKxdqwy")
-        cloud.minLevel = .debug
         
-        console.format = "$DHH:mm:ss$d $N.$F():$l $L: $M"
-        // or use this for JSON output: console.format = "$J"
-
-        // add the destinations to SwiftyBeaver
+        cloud.minLevel = .debug
+        console.format = "$DHH:mm:ss.SSS$d $C$L$c $N.$F:$l - $M"
         Log.addDestination(console)
         Log.addDestination(cloud)
     }
@@ -92,6 +90,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                                 completionHandler: {_, _ in })
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
+    }
+    
+    private func initilizeNetworkActivityLogger() {
+        NetworkActivityLogger.shared.startLogging()
+        NetworkActivityLogger.shared.level = .debug
     }
 }
 

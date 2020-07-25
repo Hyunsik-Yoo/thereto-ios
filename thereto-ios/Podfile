@@ -1,10 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'thereto-ios' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
 
+def main_pods
   pod 'SnapKit', '~> 5.0.0'
 
   pod 'RxSwift', '~> 5.1.1'
@@ -16,10 +14,6 @@ target 'thereto-ios' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
-
-  # Crashlytics
-  pod 'Fabric', '~> 1.10.2'
-  pod 'Crashlytics', '~> 3.14.0'
   
   # Facebook auth
   pod 'FBSDKLoginKit'
@@ -38,4 +32,22 @@ target 'thereto-ios' do
   
   # Then
   pod 'Then'
+end
+
+target 'thereto-ios' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  main_pods
+  
+  # Crashlytics
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
+end
+
+target 'theretoTests' do
+  use_frameworks!
+  main_pods
+  
+  pod 'RxBlocking', '~> 5'
+  pod 'RxTest', '~> 5'
 end
