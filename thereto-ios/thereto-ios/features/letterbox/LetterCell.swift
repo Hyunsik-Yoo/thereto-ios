@@ -31,7 +31,7 @@ class LetterCell: BaseTableViewCell {
         return label
     }()
     
-    let cardImage = UIImageView().then {
+    private let cardImage = UIImageView().then {
         $0.image = UIImage.init(named: "image_card")
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true

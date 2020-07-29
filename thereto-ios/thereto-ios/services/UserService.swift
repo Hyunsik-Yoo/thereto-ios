@@ -9,7 +9,7 @@ protocol UserServiceProtocol {
     func isSessionExisted() -> Bool
     func validateUser(token: String, completion: @escaping (Bool) -> Void)
     func validateUser(token: String) -> Observable<Bool>
-    func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void)
+    func getUserInfo(token: String) -> Observable<User>
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void)
     func getFriends(id: String, completion: @escaping (Observable<[Friend]>) -> Void)
     func requestFriend(id: String, friend: Friend, withAlarm: Bool, completion: @escaping (Observable<Void>) -> Void)
@@ -125,18 +125,27 @@ struct UserService: UserServiceProtocol{
         }
     }
     
-    func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void) {
-        let db = Firestore.firestore()
-        
-        db.collection("user").document(token).getDocument { (snapshot, error) in
-            if let error = error {
-                completion(Observable.error(error))
-            } else {
-                if let data = snapshot?.data() {
-                    let user = User(map: data)
-                    completion(Observable.just(user))
-                }
+    func getUserInfo(token: String) -> Observable<User> {
+        return Observable.create { (observer) -> Disposable in
+            Firestore.firestore()
+                .collection("user")
+                .document(token).getDocument { (snapshot, error) in
+                    if let error = error {
+                        observer.onError(error)
+                    } else {
+                        if let data = snapshot?.data() {
+                            let user = User(map: data)
+                            
+                            observer.onNext(user)
+                            observer.onCompleted()
+                        } else {
+                            let error = CommonError(desc: "데이터가 비었습니다.")
+                            
+                            observer.onError(error)
+                        }
+                    }
             }
+            return Disposables.create()
         }
     }
     

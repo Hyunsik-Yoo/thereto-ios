@@ -138,24 +138,23 @@ class AddFriendViewModel: BaseViewModel {
     }
     
     func fetchMyInfo() {
-        self.showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
+        showLoadingPublisher.onNext(true)
+        userService.getUserInfo(token: userDefaults.getUserToken()!).subscribe(onNext: { [weak self] (user) in
             guard let self = self else { return }
-            userObservable.subscribe(onNext: { (user) in
-                var my2Friend = Friend(user: user)
-                my2Friend.receivedCount = 0
-                my2Friend.sentCount = 0
-                my2Friend.requestState = .WAIT
-                self.myInfoPublisher.onNext(my2Friend)
-                self.showLoadingPublisher.onNext(false)
-            }, onError: { (error) in
+            var my2Friend = Friend(user: user)
+            my2Friend.receivedCount = 0
+            my2Friend.sentCount = 0
+            my2Friend.requestState = .WAIT
+            self.myInfoPublisher.onNext(my2Friend)
+            self.showLoadingPublisher.onNext(false)
+            }, onError: { [weak self ] (error) in
+                guard let self = self else { return }
                 if let error = error as? CommonError {
                     self.showAlertPublisher.onNext(("내정보 조회 오류", error.description))
                 } else {
                     self.showAlertPublisher.onNext(("내정보 조회 오류", error.localizedDescription))
                 }
                 self.showLoadingPublisher.onNext(false)
-            }).disposed(by: self.disposeBag)
-        }
+        }).disposed(by: disposeBag)
     }
 }

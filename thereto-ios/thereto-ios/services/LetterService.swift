@@ -3,26 +3,31 @@ import FirebaseFirestore
 import RxSwift
 
 protocol LetterServiceProtocol {
-    func getLetters(receiverId: String, completion: @escaping ((Observable<[Letter]>) -> Void))
+    func fetchLetters(receiverId: String) -> (Observable<[Letter]>)
 }
 
 struct LetterSerivce: LetterServiceProtocol {
-    func getLetters(receiverId: String, completion: @escaping ((Observable<[Letter]>) -> Void)) {
-        Firestore.firestore().collection("letter")
-            .whereField("to.id", isEqualTo: receiverId)
-            .order(by: "createdAt", descending: true)
-            .getDocuments { (snapShot, error) in
-            if let error = error {
-                completion(Observable.error(error))
-            } else {
-                var letters: [Letter] = []
-                if let documents = snapShot?.documents {
-                    for document in documents {
-                        letters.append(Letter.init(map: document.data()))
+    func fetchLetters(receiverId: String) -> (Observable<[Letter]>) {
+        return Observable.create { (observer) -> Disposable in
+            Firestore.firestore()
+                .collection("letter")
+                .whereField("to.id", isEqualTo: receiverId)
+                .order(by: "createdAt", descending: true)
+                .getDocuments { (snapShot, error) in
+                    if let error = error {
+                        observer.onError(error)
                     }
-                }
-                completion(Observable.just(letters))
+                    
+                    var letters: [Letter] = []
+                    if let documents = snapShot?.documents {
+                        for document in documents {
+                            letters.append(Letter.init(map: document.data()))
+                        }
+                    }
+                    observer.onNext(letters)
+                    observer.onCompleted()
             }
+            return Disposables.create()
         }
     }
     

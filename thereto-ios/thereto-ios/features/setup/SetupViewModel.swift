@@ -77,20 +77,19 @@ class SetupViewModel: BaseViewModel {
     
     func fetchMyInfo() {
         showLoadingPublisher.onNext(true)
-        userService.getUserInfo(token: userDefaults.getUserToken()!) { [weak self] (userObservable) in
+        userService.getUserInfo(token: userDefaults.getUserToken()!).subscribe(onNext: { [weak self] (user) in
             guard let self = self else { return }
-            userObservable.subscribe(onNext: { (user) in
-                self.userInfoPublisher.onNext(user)
-                self.showLoadingPublisher.onNext(false)
-            }, onError: { (error) in
+            self.userInfoPublisher.onNext(user)
+            self.showLoadingPublisher.onNext(false)
+            }, onError: { [weak self] (error) in
+                guard let self = self else { return }
                 if let error = error as? CommonError {
                     self.showAlertPublisher.onNext(("유저 조회 오류", error.description))
                 } else {
                     self.showAlertPublisher.onNext(("유저 조회 오류", error.localizedDescription))
                 }
                 self.showLoadingPublisher.onNext(false)
-            }).disposed(by: self.disposeBag)
-        }
+        }).disposed(by: disposeBag)
     }
     
 }

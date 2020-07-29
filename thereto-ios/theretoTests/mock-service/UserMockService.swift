@@ -4,6 +4,7 @@ import RxCocoa
 @testable import thereto
 
 struct UserMockService: UserServiceProtocol {
+    
     func signUp(user: User) -> Observable<User> {
         if user.nickname == "error" {
             let error = CommonError(desc: "error")
@@ -30,8 +31,12 @@ struct UserMockService: UserServiceProtocol {
         }
     }
     
-    func getUserInfo(token: String, completion: @escaping (Observable<User>) -> Void) {
-        
+    func getUserInfo(token: String) -> Observable<User> {
+        if token == "error" {
+            return Observable.error(CommonError(desc: "error"))
+        } else {
+            return Observable.just(User(nickname: "닉네임", social: "apple", id: "id", profileURL: ""))
+        }
     }
     
     func findUser(nickname: String, completion: @escaping (Observable<[User]>) -> Void) {
