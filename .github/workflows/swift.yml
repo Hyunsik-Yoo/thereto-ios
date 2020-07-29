@@ -15,6 +15,5 @@ jobs:
     - uses: actions/checkout@v2
     - name: Run tests
       run:|
-        cd thereto-ios
-        pod install --repo-update --clean-install
+        pod install --repo-update --clean-install --project-directory=thereto-ios/
         xcodebuild test -workspace thereto-ios/thereto-ios.xcworkspace -scheme thereto-ios -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.6'
