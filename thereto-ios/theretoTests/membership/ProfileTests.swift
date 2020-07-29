@@ -88,16 +88,79 @@ class ProfileTests: XCTestCase {
         schedular.createColdObservable([.next(210, "")])
             .bind(to: viewModel.input.nicknameText)
             .disposed(by: disposeBag)
-        schedular.createColdObservable([.next(220, "312")])
-            .bind(to: viewModel.output.profileImage)
-            .disposed(by: disposeBag)
-        schedular.createColdObservable([.next(230, ("id", "facebook"))])
+        schedular.createColdObservable([.next(210, ("id", "facebook"))])
             .bind(to: viewModel.idSocialPublisher)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(210, "")])
+            .bind(to: viewModel.output.profileImage)
             .disposed(by: disposeBag)
         schedular.createColdObservable([.next(240, ())])
             .bind(to: viewModel.input.tapConfirm)
             .disposed(by: disposeBag)
+        schedular.start()
         
         XCTAssertRecordedElements(errorMsgExpectation.events, ["닉네임을 설정해주세요."])
+    }
+    
+    func testSignUpWithoutProfile() {
+        let showLoadingExpectation = schedular.createObserver(Bool.self)
+        let goToMainExpectation = schedular.createObserver(Void.self)
+        
+        viewModel.output.showLoading
+            .bind(to: showLoadingExpectation)
+            .disposed(by: disposeBag)
+        viewModel.output.goToMain
+            .bind(to: goToMainExpectation)
+            .disposed(by: disposeBag)
+        
+        // Input 추가
+        // 닉네임, 이미지, socialID 추가
+        schedular.createColdObservable([.next(210, "nickname")])
+            .bind(to: viewModel.input.nicknameText)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(210, ("id","facebook"))])
+            .bind(to: viewModel.idSocialPublisher)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(210, "")])
+            .bind(to: viewModel.output.profileImage)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(220, ())])
+            .bind(to: viewModel.input.tapConfirm)
+            .disposed(by: disposeBag)
+        schedular.start()
+        
+        XCTAssertRecordedElements(showLoadingExpectation.events, [true, false])
+        XCTAssertEqual(goToMainExpectation.events.count, 1)
+    }
+    
+    func testSignUpWithProfile() {
+        let showLoadingExpectation = schedular.createObserver(Bool.self)
+        let goToMainExpectation = schedular.createObserver(Void.self)
+        
+        viewModel.output.showLoading
+            .bind(to: showLoadingExpectation)
+            .disposed(by: disposeBag)
+        viewModel.output.goToMain
+            .bind(to: goToMainExpectation)
+            .disposed(by: disposeBag)
+        
+        // Input 추가
+        // 닉네임, 이미지, socialID 추가
+        schedular.createColdObservable([.next(210, "nickname")])
+            .bind(to: viewModel.input.nicknameText)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(210, ("id","facebook"))])
+            .bind(to: viewModel.idSocialPublisher)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(210, "profileImageURL")])
+            .bind(to: viewModel.output.profileImage)
+            .disposed(by: disposeBag)
+        schedular.createColdObservable([.next(220, ())])
+            .bind(to: viewModel.input.tapConfirm)
+            .disposed(by: disposeBag)
+        schedular.start()
+        
+        XCTAssertRecordedElements(showLoadingExpectation.events, [true, false])
+        XCTAssertEqual(goToMainExpectation.events.count, 1)
     }
 }
