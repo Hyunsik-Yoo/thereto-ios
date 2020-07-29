@@ -65,7 +65,6 @@
 		6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB72400E961002292FC /* LetterSearchView.swift */; };
 		6E644FBA2400ED37002292FC /* LetterSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB92400ED37002292FC /* LetterSearchVC.swift */; };
 		6E6587E624663EE8001D9C8E /* HTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6587E524663EE8001D9C8E /* HTTPUtils.swift */; };
-		6E6CEE1E24CC1ABD00489532 /* LetterBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CEE1D24CC1ABD00489532 /* LetterBoxViewModel.swift */; };
 		6E6CEE2024CC28CD00489532 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E6CEE1F24CC28CD00489532 /* Localization.strings */; };
 		6E6CEE2224CC28EE00489532 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CEE2124CC28EE00489532 /* StringExt.swift */; };
 		6E6F0E8F2439CBFD00FD3F08 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */; };
@@ -106,6 +105,8 @@
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */; };
 		6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB13D5E24B1ADE600923402 /* SplashTests.swift */; };
+		6EB1960124CC55B300327287 /* LetterboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960024CC55B300327287 /* LetterboxTests.swift */; };
+		6EB1960324CC568200327287 /* LetterMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960224CC568200327287 /* LetterMockService.swift */; };
 		6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */; };
 		6EBF6BEA23A89B8C00182078 /* BoxNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */; };
 		6EC1025123A8E61D00328C08 /* LetterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1025023A8E61D00328C08 /* LetterCell.swift */; };
@@ -202,7 +203,6 @@
 		6E644FB72400E961002292FC /* LetterSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchView.swift; sourceTree = "<group>"; };
 		6E644FB92400ED37002292FC /* LetterSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchVC.swift; sourceTree = "<group>"; };
 		6E6587E524663EE8001D9C8E /* HTTPUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUtils.swift; sourceTree = "<group>"; };
-		6E6CEE1D24CC1ABD00489532 /* LetterBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterBoxViewModel.swift; sourceTree = "<group>"; };
 		6E6CEE1F24CC28CD00489532 /* Localization.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localization.strings; sourceTree = "<group>"; };
 		6E6CEE2124CC28EE00489532 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
@@ -246,6 +246,8 @@
 		6EB13D5C24B1ADE600923402 /* theretoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = theretoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB13D5E24B1ADE600923402 /* SplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTests.swift; sourceTree = "<group>"; };
 		6EB13D6024B1ADE600923402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EB1960024CC55B300327287 /* LetterboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxTests.swift; sourceTree = "<group>"; };
+		6EB1960224CC568200327287 /* LetterMockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterMockService.swift; sourceTree = "<group>"; };
 		6EBF6BE523A8922D00182078 /* FrankRuhlLibre-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FrankRuhlLibre-Black.ttf"; sourceTree = "<group>"; };
 		6EBF6BE923A89B8C00182078 /* BoxNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxNavigationBar.swift; sourceTree = "<group>"; };
 		6EC1025023A8E61D00328C08 /* LetterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterCell.swift; sourceTree = "<group>"; };
@@ -495,7 +497,7 @@
 		6E6CEE1C24CC1A9400489532 /* letterbox */ = {
 			isa = PBXGroup;
 			children = (
-				6E6CEE1D24CC1ABD00489532 /* LetterBoxViewModel.swift */,
+				6EB1960024CC55B300327287 /* LetterboxTests.swift */,
 			);
 			path = letterbox;
 			sourceTree = "<group>";
@@ -601,6 +603,7 @@
 			children = (
 				6EDAF17824B6066200BFA770 /* UserMockService.swift */,
 				6EF1130524C3F67F00F7B8D2 /* FacebookMockManager.swift */,
+				6EB1960224CC568200327287 /* LetterMockService.swift */,
 			);
 			path = "mock-service";
 			sourceTree = "<group>";
@@ -932,10 +935,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF1130624C3F67F00F7B8D2 /* FacebookMockManager.swift in Sources */,
+				6EB1960124CC55B300327287 /* LetterboxTests.swift in Sources */,
 				6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */,
+				6EB1960324CC568200327287 /* LetterMockService.swift in Sources */,
 				6EF1130424C3EB4900F7B8D2 /* ProfileTests.swift in Sources */,
 				6EDAF17924B6066200BFA770 /* UserMockService.swift in Sources */,
-				6E6CEE1E24CC1ABD00489532 /* LetterBoxViewModel.swift in Sources */,
 				6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

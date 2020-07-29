@@ -25,7 +25,7 @@ class LetterBoxViewModel: BaseViewModel {
     
     // 위치 관련 변수
     private var locationManager = CLLocationManager()
-    private let myLocationPublisher = PublishSubject<CLLocation>()
+    let myLocationPublisher = PublishSubject<CLLocation>()
     
     
     deinit {

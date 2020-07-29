@@ -1,6 +1,7 @@
 import Foundation
 
-struct Letter {
+struct Letter: Equatable {
+    
     var id: String
     var from: User
     var to: Friend
@@ -58,5 +59,9 @@ struct Letter {
         letter.id = "tutorial"
         
         return letter
+    }
+    
+    static func == (lhs: Letter, rhs: Letter) -> Bool {
+        return lhs.id == rhs.id
     }
 }
