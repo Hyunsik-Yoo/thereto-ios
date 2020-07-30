@@ -45,19 +45,19 @@ class SplashTests: XCTestCase {
     }
     
     // isNormalLaunch만 true일 경우, 세션이 없으므로 로그인 화면으로 이동해야함
-    func testCheckAuth2() {
-        let goToMainExpectation = schedular.createObserver(Void.self)
-        
-        userDefaults.setNormalLaunch(isNormal: true)
-        viewModel.output.goToMain
-            .bind(to: goToMainExpectation)
-            .disposed(by: disposeBag)
-        
-        schedular.createColdObservable([.next(210, ())])
-            .bind(to: viewModel.input.checkAuth)
-            .disposed(by: disposeBag)
-        schedular.start()
-        
-        XCTAssertEqual(goToMainExpectation.events.count, 1)
-    }
+//    func testCheckAuth2() {
+//        let goToMainExpectation = schedular.createObserver(Void.self)
+//        
+//        userDefaults.setNormalLaunch(isNormal: true)
+//        viewModel.output.goToMain
+//            .bind(to: goToMainExpectation)
+//            .disposed(by: disposeBag)
+//        
+//        schedular.createColdObservable([.next(210, ())])
+//            .bind(to: viewModel.input.checkAuth)
+//            .disposed(by: disposeBag)
+//        schedular.start()
+//        
+//        XCTAssertEqual(goToMainExpectation.events.count, 1)
+//    }
 }
