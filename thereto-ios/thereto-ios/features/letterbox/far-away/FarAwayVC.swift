@@ -34,7 +34,7 @@ class FarAwayVC: BaseVC {
     }
     
     override func bindEvent() {
-        farAwayView.confirmBtn.rx.tap.bind { [weak self] in
+        farAwayView.confirmButton.rx.tap.bind { [weak self] in
             self?.delegate?.onClose()
             self?.dismiss(animated: true, completion: nil)
         }.disposed(by: disposeBag)
