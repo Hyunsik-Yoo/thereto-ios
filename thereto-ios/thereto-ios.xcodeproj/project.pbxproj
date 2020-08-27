@@ -104,6 +104,7 @@
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */; };
 		6EAEAF7B24F78AB200DEEDC6 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEAF7D24F78AB200DEEDC6 /* Localization.strings */; };
+		6EAEAF8024F7959D00DEEDC6 /* AlertContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEAF7F24F7959D00DEEDC6 /* AlertContents.swift */; };
 		6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB13D5E24B1ADE600923402 /* SplashTests.swift */; };
 		6EB1960124CC55B300327287 /* LetterboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960024CC55B300327287 /* LetterboxTests.swift */; };
 		6EB1960324CC568200327287 /* LetterMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960224CC568200327287 /* LetterMockService.swift */; };
@@ -243,6 +244,7 @@
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
 		6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
 		6EAEAF7C24F78AB200DEEDC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
+		6EAEAF7F24F7959D00DEEDC6 /* AlertContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContents.swift; sourceTree = "<group>"; };
 		6EB13D5C24B1ADE600923402 /* theretoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = theretoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB13D5E24B1ADE600923402 /* SplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTests.swift; sourceTree = "<group>"; };
 		6EB13D6024B1ADE600923402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				6E3B20D9247252E000E8F7EA /* Land.swift */,
 				6E3B20DB247257AD00E8F7EA /* Addition.swift */,
 				6E9EC3FA247A6F68008459DC /* Alarm.swift */,
+				6EAEAF7F24F7959D00DEEDC6 /* AlertContents.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				6E01EA3923FBCD5C00C85607 /* LetterDetailView.swift in Sources */,
 				6E1EBD9823A4A06E0062C2F9 /* AlertUtil.swift in Sources */,
 				6E9F9EF023F3C42C00A14C40 /* Area.swift in Sources */,
+				6EAEAF8024F7959D00DEEDC6 /* AlertContents.swift in Sources */,
 				6E0A654923E92D4400FC1DB7 /* FriendControlViewModel.swift in Sources */,
 				6E6443E123EBCDC600254331 /* FriendDetailViewModel.swift in Sources */,
 				6E7041E623F6558500843A37 /* Location.swift in Sources */,

@@ -1,4 +1,5 @@
 "letterbox_empty" = "받은 엽서가 없습니다.";
 "letterbox_location_error" = "설정 > thereto > 위치 설정을 활성화시켜주세요.\n편지의 작성이와 동일한 장소에서만 편지를 열 수 있습니다.";
+"letterbox_tab_title" = "수신함";
 "far_away_confirm_button" = "확인";
 "far_away_description" = "엽서가 저장된 장소에서 반경 300m 안에 위치해야 엽서를 읽을 수 있습니다.\n위치 이동 후 다시 시도해주세요.";
