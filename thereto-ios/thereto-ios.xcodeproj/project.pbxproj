@@ -65,7 +65,6 @@
 		6E644FB82400E961002292FC /* LetterSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB72400E961002292FC /* LetterSearchView.swift */; };
 		6E644FBA2400ED37002292FC /* LetterSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E644FB92400ED37002292FC /* LetterSearchVC.swift */; };
 		6E6587E624663EE8001D9C8E /* HTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6587E524663EE8001D9C8E /* HTTPUtils.swift */; };
-		6E6CEE2024CC28CD00489532 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E6CEE1F24CC28CD00489532 /* Localization.strings */; };
 		6E6CEE2224CC28EE00489532 /* StringExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CEE2124CC28EE00489532 /* StringExt.swift */; };
 		6E6F0E8F2439CBFD00FD3F08 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */; };
 		6E6F0E912439D1D300FD3F08 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */; };
@@ -104,6 +103,7 @@
 		6EA738CE2393947B002176F6 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CD2393947B002176F6 /* SignInView.swift */; };
 		6EA738D02393982F002176F6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA738CF2393982F002176F6 /* SignInVC.swift */; };
 		6EAB3A8524C1F00800D1AF50 /* SignInTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */; };
+		6EAEAF7B24F78AB200DEEDC6 /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EAEAF7D24F78AB200DEEDC6 /* Localization.strings */; };
 		6EB13D5F24B1ADE600923402 /* SplashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB13D5E24B1ADE600923402 /* SplashTests.swift */; };
 		6EB1960124CC55B300327287 /* LetterboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960024CC55B300327287 /* LetterboxTests.swift */; };
 		6EB1960324CC568200327287 /* LetterMockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB1960224CC568200327287 /* LetterMockService.swift */; };
@@ -203,7 +203,6 @@
 		6E644FB72400E961002292FC /* LetterSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchView.swift; sourceTree = "<group>"; };
 		6E644FB92400ED37002292FC /* LetterSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSearchVC.swift; sourceTree = "<group>"; };
 		6E6587E524663EE8001D9C8E /* HTTPUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPUtils.swift; sourceTree = "<group>"; };
-		6E6CEE1F24CC28CD00489532 /* Localization.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localization.strings; sourceTree = "<group>"; };
 		6E6CEE2124CC28EE00489532 /* StringExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExt.swift; sourceTree = "<group>"; };
 		6E6F0E8E2439CBFD00FD3F08 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		6E6F0E902439D1D300FD3F08 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
@@ -243,6 +242,7 @@
 		6EA738CF2393982F002176F6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		6EA738D12393A573002176F6 /* thereto-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "thereto-ios.entitlements"; sourceTree = "<group>"; };
 		6EAB3A8424C1F00800D1AF50 /* SignInTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTests.swift; sourceTree = "<group>"; };
+		6EAEAF7C24F78AB200DEEDC6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		6EB13D5C24B1ADE600923402 /* theretoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = theretoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EB13D5E24B1ADE600923402 /* SplashTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTests.swift; sourceTree = "<group>"; };
 		6EB13D6024B1ADE600923402 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -692,7 +692,7 @@
 				6EE8DFD22392325C00BF2E59 /* AppDelegate.swift */,
 				6EE8DFD82392325D00BF2E59 /* Assets.xcassets */,
 				6EE8DFE02392325D00BF2E59 /* Info.plist */,
-				6E6CEE1F24CC28CD00489532 /* Localization.strings */,
+				6EAEAF7D24F78AB200DEEDC6 /* Localization.strings */,
 			);
 			path = "thereto-ios";
 			sourceTree = "<group>";
@@ -759,6 +759,7 @@
 				6EE8DFCD2392325B00BF2E59 /* Resources */,
 				B3B007B6FEF0B7873A22F127 /* [CP] Embed Pods Frameworks */,
 				6E10142E2495ED3C002DF14A /* ShellScript */,
+				6EAEAF7E24F78BB200DEEDC6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -821,7 +822,7 @@
 			files = (
 				6EC1025523A8E7D400328C08 /* SpoqaHanSans-Bold.ttf in Resources */,
 				6EE8DFD92392325D00BF2E59 /* Assets.xcassets in Resources */,
-				6E6CEE2024CC28CD00489532 /* Localization.strings in Resources */,
+				6EAEAF7B24F78AB200DEEDC6 /* Localization.strings in Resources */,
 				6E804B3A23ADF179009574CD /* SpoqaHanSans-Light.ttf in Resources */,
 				6EC1025723A8E84900328C08 /* SpoqaHanSans-Regular.ttf in Resources */,
 				6EBF6BE623A8922D00182078 /* FrankRuhlLibre-Black.ttf in Resources */,
@@ -870,6 +871,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\"\n";
+		};
+		6EAEAF7E24F78BB200DEEDC6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\npython $TARGET_NAME/script/string_resource.py $TARGET_NAME\n";
 		};
 		85E9BCBC03D3902FF93ABF66 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1068,6 +1086,17 @@
 			targetProxy = 6EB13D6124B1ADE600923402 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6EAEAF7D24F78AB200DEEDC6 /* Localization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EAEAF7C24F78AB200DEEDC6 /* en */,
+			);
+			name = Localization.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6EB13D6324B1ADE600923402 /* Debug */ = {
