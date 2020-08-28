@@ -1,10 +1,13 @@
 import UIKit
+import RxSwift
 
 class SentLetterVC: BaseVC {
   
   private lazy var sentLetterView = SentLetterView.init(frame: self.view.frame)
-  
-  private var viewModel = SentLetterViewModel()
+  private let viewModel = SentLetterViewModel(
+    userDefaults: UserDefaultsUtil(),
+    letterService: LetterSerivce()
+  )
   
   
   static func instance() -> UINavigationController {
@@ -32,16 +35,31 @@ class SentLetterVC: BaseVC {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    getSentLetters()
+    self.viewModel.getSentLetters()
   }
   
   override func bindViewModel() {
-    viewModel.letters.bind(to: sentLetterView.tableView.rx.items(
+    viewModel.output.letters.bind(to: sentLetterView.tableView.rx.items(
       cellIdentifier: LetterCell.registerId,
       cellType: LetterCell.self
     )) { row, letter, cell in
       cell.bind(letter: letter, isSentMode: true)
     }.disposed(by: disposeBag)
+    
+    viewModel.output.showLoading
+      .observeOn(MainScheduler.instance)
+      .bind(onNext: self.sentLetterView.showLoading)
+      .disposed(by: disposeBag)
+    
+    viewModel.output.showAlert
+      .observeOn(MainScheduler.instance)
+      .bind(onNext: self.showAlert)
+      .disposed(by: disposeBag)
+    
+    viewModel.output.goToLetterDetail
+      .observeOn(MainScheduler.instance)
+      .bind(onNext: self.goToLetterDetail)
+      .disposed(by: disposeBag)
   }
   
   override func bindEvent() {
@@ -72,35 +90,15 @@ class SentLetterVC: BaseVC {
     )
   }
   
-  private func getSentLetters() {
-    sentLetterView.startLoading()
-    LetterSerivce.getSentLetters { [weak self] (result) in
-      switch result {
-      case .success(let letters):
-        self?.sentLetterView.setEmpty(isEmpty: letters.isEmpty)
-        self?.viewModel.letters.onNext(letters)
-      case .failure(let error):
-        if let vc = self {
-          AlertUtil.show(controller: vc, title: "error", message: error.localizedDescription)
-        }
-      }
-      self?.sentLetterView.stopLoading()
-    }
+  private func goToLetterDetail(letter: Letter) {
+    let letterDetailController = LetterDetailVC.instance(letter: letter, isSentMode: true)
+    
+    self.navigationController?.pushViewController(letterDetailController, animated: true)
   }
 }
 
 extension SentLetterVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let letters = try? self.viewModel.letters.value() {
-      let letter = letters[indexPath.row]
-      if letter.isRead {
-        self.navigationController?.pushViewController(
-          LetterDetailVC.instance(letter: letters[indexPath.row], isSentMode: true),
-          animated: true
-        )
-      } else {
-        AlertUtil.show("편지 읽기 안됩니다!", message: "수신인이 편지를 읽은 후에 해당 편지를 열람할 수 있습니다.")
-      }
-    }
+    self.viewModel.input.tapLetter.onNext(indexPath.row)
   }
 }

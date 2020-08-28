@@ -3,3 +3,7 @@
 "letterbox_tab_title" = "수신함";
 "far_away_confirm_button" = "확인";
 "far_away_description" = "엽서가 저장된 장소에서 반경 300m 안에 위치해야 엽서를 읽을 수 있습니다.\n위치 이동 후 다시 시도해주세요.";
+"sent_letter_empty" = "보낸 엽서가 없습니다.\n친구에게 엽서를 남겨보세요!";
+"sent_letter_empty_button" = "엽서 쓰기";
+"sent_letter_tab_title" = "발신함";
+"sent_letter_not_read_message" = "수신인이 편지를 읽은 후에 해당 편지를 열람할 수 있습니다.";
