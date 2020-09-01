@@ -43,7 +43,7 @@ class SentLetterViewModel: BaseViewModel {
       .disposed(by: disposeBag)
   }
   
-  func getSentLetters() {
+  func fetchSentLetters() {
     let senderId = self.userDefaults.getUserToken()!
     
     self.output.showLoading.accept(true)

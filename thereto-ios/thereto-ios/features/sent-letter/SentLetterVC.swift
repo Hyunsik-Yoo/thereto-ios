@@ -35,7 +35,7 @@ class SentLetterVC: BaseVC {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    self.viewModel.getSentLetters()
+    self.viewModel.fetchSentLetters()
   }
   
   override func bindViewModel() {
