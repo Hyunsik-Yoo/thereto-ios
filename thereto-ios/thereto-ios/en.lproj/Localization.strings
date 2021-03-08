@@ -7,3 +7,12 @@
 "sent_letter_empty_button" = "엽서 쓰기";
 "sent_letter_tab_title" = "발신함";
 "sent_letter_not_read_message" = "수신인이 편지를 읽은 후에 해당 편지를 열람할 수 있습니다.";
+"write_friend_button" = "보낼 친구를 선택해주세요.";
+"write_location_button" = "장소를 선택해주세요.";
+"write_picture_button" = "사진을 선택해주세요.";
+"write_text_field" = "내용을 입력해주세요.";
+"write_tab_title" = "엽서쓰기";
+"write_toast_friend" = "보낼 친구를 선택해주세요.";
+"write_toast_location" = "장소를 선택해주세요.";
+"write_toast_image" = "사진을 선택해주세요.";
+"write_placeholder_message" = "내용을 입력해주세요.";

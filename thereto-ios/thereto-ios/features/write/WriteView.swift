@@ -237,7 +237,7 @@ class WriteView: BaseView {
   }
   
   func bind(user: User?) {
-    if user != nil { 
+    if user != nil {
     }
   }
 }
